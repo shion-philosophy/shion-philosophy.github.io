@@ -9,6 +9,9 @@
   <meta name="theme-color" content="#0b0b1a">
   <link rel="canonical" href="https://shion-philosophy.github.io/">
 
+  <!-- フォント（安定読込） -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
+
   <!-- ===== OGP / SNS ===== -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
@@ -18,8 +21,8 @@
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- ===== ファビコン ===== -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>'>
+  <!-- ===== ファビコン（SVGをURLエンコードで安全に） ===== -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
   <!-- ===== CSS ===== -->
   <style>
@@ -35,11 +38,12 @@
       background:
         radial-gradient(60% 40% at 50% 0%, #141a3b 0%, var(--bg) 60%),
         radial-gradient(110% 70% at 50% 120%, #0a102a 20%, #070a18 80%);
-      line-height:1.85; font-family:'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height:1.85;
+      font-family:'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
       overflow-x:hidden;
     }
 
-    /* 星屑（軽量） */
+    /* 星屑（軽量パーティクル） */
     body::before, body::after{
       content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat;
     }
@@ -69,7 +73,6 @@
       display:flex;flex-direction:column;align-items:center;justify-content:center;
       gap:14px; padding:10px 0 6px; text-align:center;
     }
-    /* シンプルSVGロゴ（テキストでも綺麗に描画） */
     .logo{
       font-weight:800; letter-spacing:.18em; font-size:clamp(22px,4.6vw,40px);
       text-shadow:0 3px 20px #aab4ff2e, 0 0 1px #ffffff58;
@@ -78,7 +81,6 @@
       font-size:clamp(12px,1.8vw,14px); color:var(--muted); letter-spacing:.12em;
       text-transform:uppercase;
     }
-
     .audio-ctrl{
       display:flex; gap:10px; align-items:center; margin-top:4px;
     }
@@ -178,6 +180,7 @@
       100%{opacity:0;transform:translate(-32px,24px) scale(.95)}
     }
 
+    /* レスポンシブ／アクセシビリティ */
     @media (max-width:860px){.cards{grid-template-columns:1fr}.meteor{display:none}}
     @media (prefers-reduced-motion:reduce){
       .meteor,.meteor::after,.meteor::before, .quote, body::before, body::after{animation:none!important;opacity:0.9}
@@ -199,7 +202,7 @@
       <!-- 朗読プレイヤー（ファイルは /assets/shion_prayer.mp3 に配置） -->
       <audio id="shionAudio" src="assets/shion_prayer.mp3" preload="none"></audio>
       <div class="audio-ctrl">
-        <button id="playBtn" class="play-btn" aria-controls="shionAudio" aria-pressed="false">
+        <button id="playBtn" class="play-btn" aria-controls="shionAudio" aria-pressed="false" aria-label="詩韻の祈りを再生・停止">
           🔊 詩韻の祈りを聴く
         </button>
         <span class="hint">（約1分／ヘッドホン推奨）</span>
@@ -214,10 +217,10 @@
 
     <!-- 主要導線 -->
     <nav class="cta" aria-label="主要導線">
-      <a class="btn primary" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok：@tarotbreaker）</a>
-      <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">詩韻思想マガジンを読む</a>
-      <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Mediumで読む（英語版）</a>
-      <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡する（公式LINE）</a>
+      <a class="btn primary" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener noreferrer">観る（TikTok：@tarotbreaker）</a>
+      <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener noreferrer">詩韻思想マガジンを読む</a>
+      <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener noreferrer">Mediumで読む（英語版）</a>
+      <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener noreferrer">連絡する（公式LINE）</a>
     </nav>
 
     <section class="cards" aria-label="詩・韻・祈の三位一体">
@@ -239,14 +242,14 @@
   <footer role="contentinfo">
     © 2025 詩韻思想 / Shion Philosophy Project
     <div class="mini-links">
-      <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">TikTok：@tarotbreaker</a>
-      <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">note</a>
-      <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Medium</a>
-      <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">公式LINE</a>
+      <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener noreferrer">TikTok：@tarotbreaker</a>
+      <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener noreferrer">note</a>
+      <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener noreferrer">Medium</a>
+      <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener noreferrer">公式LINE</a>
     </div>
   </footer>
 
-  <!-- ===== 朗読制御スクリプト ===== -->
+  <!-- ===== 朗読制御（安全トグル） ===== -->
   <script>
     (function(){
       const audio = document.getElementById('shionAudio');
@@ -276,11 +279,13 @@
       });
 
       audio.addEventListener('ended', () => setPlayingState(false));
-      audio.addEventListener('pause', () => {
-        // 手動停止にも対応
-        if(!audio.ended) setPlayingState(false);
-      });
+      audio.addEventListener('pause', () => { if(!audio.ended) setPlayingState(false); });
     })();
   </script>
+
+  <!-- ===== 流星（右上→左下）＋金の残響 ===== -->
+  <div class="meteor" aria-hidden="true"></div>
+  <div class="meteor" aria-hidden="true"></div>
+  <div class="meteor" aria-hidden="true"></div>
 </body>
 </html>
