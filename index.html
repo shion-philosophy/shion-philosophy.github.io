@@ -229,6 +229,59 @@ body::after{
     @media (prefers-reduced-motion: reduce){
       .nebula,.stars,.stars:before,.stars:after,.meteor{ animation:none !important }
     }
+    /* タイトルの読みやすさ少しUP（行間＆文字間隔） */
+.title{
+  letter-spacing:.16em;
+  line-height:1.25;
+  text-shadow:0 3px 20px rgba(170,180,255,.18), 0 0 1px rgba(255,255,255,.35);
+}
+
+/* サブコピーを少し大きく＆透明度微増 */
+.lead, .subtag{ font-size:clamp(14px, 2vw, 17px); opacity:.95 }
+
+/* キャッチの金色フレーズを柔らかく発光 */
+.catch{
+  color:#ffd76f;
+  text-shadow:0 0 18px rgba(255,215,111,.25), 0 1px 0 rgba(0,0,0,.4);
+}
+
+/* CTA：primaryの陰影を自然に、他は少し濃く */
+.cta a{ border:1px solid rgba(156,199,255,.24) }
+.cta a:hover{ transform:translateY(-1px) }
+.cta a.primary{
+  box-shadow:
+    0 10px 26px rgba(212,175,55,.35),
+    inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+/* カード：本文サイズ＆行間を読みやすく */
+.card p{ font-size:14.8px; line-height:1.9; opacity:.92 }
+
+/* AIブロック：見出しにアクセント下線 */
+.ai-block h2, .ai-block h3{
+  position:relative; padding-bottom:.35rem;
+}
+.ai-block h2::after, .ai-block h3::after{
+  content:""; position:absolute; left:0; bottom:0; height:2px; width:72px;
+  background:linear-gradient(90deg, #9ecbff, transparent);
+  opacity:.7;
+}
+
+/* 背景の星屑をほんの少し増やす（軽い処理） */
+.stars::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 12% 24%, rgba(255,255,255,.38), transparent 50%),
+    radial-gradient(1px 1px at 78% 32%, rgba(255,255,255,.28), transparent 50%),
+    radial-gradient(1px 1px at 44% 68%, rgba(255,255,255,.32), transparent 50%),
+    radial-gradient(1px 1px at 20% 86%, rgba(255,255,255,.22), transparent 50%);
+  animation: starTwinkle 7s ease-in-out infinite alternate;
+  opacity:.7;
+}
+@keyframes starTwinkle { to { opacity:.35; transform:translateY(-.6px) } }
+
+/* セクション上下の余白を整えて、ファーストビューを引き締め */
+section{ margin-block: clamp(28px, 5vw, 44px) }
   </style>
 
   <!-- 構造化データ（Website） -->
@@ -272,7 +325,7 @@ body::after{
 
     <nav class="cta" aria-label="主要導線">
       <a class="primary" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">📖 詩韻思想マガジンを読む</a>
-      <a href="https://www.tiktok.com/" target="_blank" rel="noopener">🎥 観る（TikTok）</a>
+      <a href="https://www.tiktok.com/@shion_369?_t=ZS-90uGYJ6llon&_r=1" target="_blank" rel="noopener">🎥 観る（TikTok）</a>
       <a href="https://shion-philosophy.github.io/books/">📚 全書リスト</a>
       <a href="mailto:shion@poem.com">✉️ 連絡する</a>
     </nav>
