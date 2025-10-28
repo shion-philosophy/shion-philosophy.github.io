@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <!-- ===========================
-       詩韻思想® 公式トップページ
+       詩韻思想® 公式トップページ（完璧版）
        =========================== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -109,12 +109,25 @@
     .btn:hover{ transform:translateY(-1px); box-shadow:0 8px 20px #0005 }
     .btn.primary{ background:var(--btnGradHi); color:#1a1333; font-weight:700; border-color:#d4af37 }
 
-    /* 三位一体：詩・韻・祈（サークル＋ラベル） */
+    /* 三位一体：SVG回転アニメーション */
     .triad{
-      position:relative; margin:22px auto 16px; width:min(680px,92vw); height:min(680px,92vw);
-      display:block;
+      position:relative; margin:40px auto;
+      width:min(680px,92vw); aspect-ratio:1/1; max-width:680px;
     }
-    /* 金色の輪（星砂ドット付き） */
+    .triad-svg{
+      position:absolute; inset:0; width:100%; height:100%;
+      pointer-events:none; z-index:5;
+    }
+    .pill-label{
+      width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(180deg,#19224b,#0f1739);
+      border:1px solid #9cc7ff3a; border-radius:16px;
+      box-shadow:0 10px 26px #0006, inset 0 1px 0 #ffffff1a;
+      font-weight:700; font-size:14px; letter-spacing:.12em; color:#fff6d6;
+      text-align:center; filter:url(#pillShadow); backdrop-filter:blur(2px);
+    }
+
+    /* 金色の輪 */
     .ring, .ring::before, .ring::after{
       position:absolute; inset:0; border-radius:50%;
       content:""; pointer-events:none;
@@ -126,7 +139,7 @@
         radial-gradient(closest-side, transparent 70%, rgba(255,215,111,.12) 72%, transparent 74%);
       filter: drop-shadow(0 0 28px rgba(255,215,111,.35));
     }
-    .ring::before{ /* 星砂の粒子 */
+    .ring::before{
       background:
         radial-gradient(2px 2px at 10% 50%, rgba(255,215,111,.9) 0, transparent 55%),
         radial-gradient(2px 2px at 30% 58%, rgba(255,215,111,.7) 0, transparent 55%),
@@ -135,34 +148,17 @@
         radial-gradient(2px 2px at 86% 44%, rgba(255,215,111,.65) 0, transparent 55%),
         radial-gradient(2px 2px at 20% 40%, rgba(255,235,170,.8) 0, transparent 55%);
       mask: radial-gradient(circle at 50% 50%, transparent 64%, #000 66%, #000 72%, transparent 74%);
-      animation: sand 18s linear infinite;
-      opacity:.9;
+      animation: sand 18s linear infinite; opacity:.9;
     }
-    .ring::after{ /* 輝きの尾 */
+    .ring::after{
       background: conic-gradient(from 0deg, rgba(255,215,111,.0) 0deg, rgba(255,215,111,.28) 20deg, rgba(255,215,111,.0) 80deg);
       mask: radial-gradient(circle at 50% 50%, transparent 63%, #000 66%, #000 72%, transparent 75%);
-      animation: sweep 8s linear infinite;
-      filter: blur(1px);
+      animation: sweep 8s linear infinite; filter: blur(1px);
     }
     @keyframes sand{to{transform:rotate(360deg)}}
     @keyframes sweep{to{transform:rotate(360deg)}}
 
-    /* ラベル（詩・韻・祈） */
-    .pill{
-      position:absolute; min-width:180px; max-width:260px;
-      padding:.85rem 1rem; border-radius:16px;
-      background:linear-gradient(180deg,#19224b,#0f1739);
-      border:1px solid #9cc7ff3a;
-      box-shadow:0 10px 26px #0006, inset 0 1px 0 #ffffff1a;
-      text-align:center; font-weight:700; letter-spacing:.12em;
-      color:#fff6d6;
-    }
-    /* 配置：詩=右上寄り、韻=左下寄り、祈=右下寄り（重なり回避） */
-    .pill.poem{   top: 16%; right: 6%; }
-    .pill.rhyme{  left: 6%;  bottom: 28%; }
-    .pill.prayer{ right: 8%; bottom: 6%; }
-
-    /* 全書クイックナビ（2列固定・色統一グラデ） */
+    /* 全書クイックナビ */
     .bookgrid{
       display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
       gap:10px; margin:18px auto 0; max-width:720px;
@@ -176,7 +172,6 @@
     .bookbtn:hover{ transform:translateY(-1px); box-shadow:0 10px 22px #0005 }
     .ico{font-size:18px; line-height:1}
 
-    /* セクション区切りと注釈 */
     .divider{height:1px; margin:20px auto 16px; max-width:760px; background:linear-gradient(90deg,transparent,#2b3869,transparent)}
     .note{ color:var(--muted); font-size:13px; text-align:center; margin:8px auto 2px }
 
@@ -188,8 +183,11 @@
     @media (min-width:960px){
       .bookgrid{ grid-template-columns:repeat(4,minmax(0,1fr)); max-width:980px }
     }
+    @media (max-width:480px){
+      .pill-label{font-size:12px; padding:6px 8px;}
+    }
     @media (prefers-reduced-motion:reduce){
-      .meteor, .ring::before, .ring::after, body::before, body::after{ animation:none !important }
+      .meteor, .ring::before, .ring::after, body::before, body::after, [attributeName="transform"]{ animation:none !important }
     }
   </style>
 </head>
@@ -224,18 +222,59 @@
       </div>
     </section>
 
-    <!-- ===== 三位一体：詩・韻・祈（ラベルのみ） ===== -->
+    <!-- ===== 三位一体：SVG回転アニメーション ===== -->
     <section class="triad" aria-label="三位一体の輪">
       <div class="ring" aria-hidden="true"></div>
-      <div class="pill poem">詩（ことば）</div>
-      <div class="pill rhyme">韻（ひびき）</div>
-      <div class="pill prayer">祈（いのり）</div>
+
+      <svg class="triad-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="pillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2a3a78"/>
+            <stop offset="60%" stop-color="#1a2355"/>
+            <stop offset="100%" stop-color="#141b44"/>
+          </linearGradient>
+          <filter id="pillShadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+          </filter>
+        </defs>
+
+        <g transform="translate(50,50)">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0" to="360"
+            dur="24s"
+            repeatCount="indefinite"
+          />
+
+          <!-- 詩（0°） -->
+          <g transform="translate(35,0) rotate(90)">
+            <foreignObject x="-45" y="-20" width="90" height="40">
+              <div class="pill-label">詩（ことば）</div>
+            </foreignObject>
+          </g>
+
+          <!-- 韻（240°） -->
+          <g transform="rotate(240) translate(35,0) rotate(90)">
+            <foreignObject x="-45" y="-20" width="90" height="40">
+              <div class="pill-label">韻（ひびき）</div>
+            </foreignObject>
+          </g>
+
+          <!-- 祈（120°） -->
+          <g transform="rotate(120) translate(35,0) rotate(90)">
+            <foreignObject x="-45" y="-20" width="90" height="40">
+              <div class="pill-label">祈（いのり）</div>
+            </foreignObject>
+          </g>
+        </g>
+      </svg>
     </section>
 
     <div class="divider" aria-hidden="true"></div>
     <p class="note">各ボタンから、詩韻思想 全書の該当章（/books/ 内の該当位置）へ移動します。</p>
 
-    <!-- ===== 全書クイックナビ（2列・色統一） ===== -->
+    <!-- ===== 全書クイックナビ ===== -->
     <nav class="bookgrid" aria-label="各書へのクイックリンク">
       <a class="bookbtn" href="/books/#zero"><span class="ico">★</span>第零書</a>
       <a class="bookbtn" href="/books/#one"><span class="ico">♈︎</span>第一書</a>
@@ -252,7 +291,6 @@
       <a class="bookbtn" href="/books/#twelve"><span class="ico">♓︎</span>第十二書</a>
       <a class="bookbtn" href="/books/#thirteen"><span class="ico">✡︎</span>結章</a>
     </nav>
-
   </main>
 
   <footer>
@@ -266,10 +304,9 @@
     </div>
   </footer>
 
-  <!-- 任意：オーディオ導線（ファイルがあれば差し替え） -->
+  <!-- オーディオ（任意） -->
   <audio id="audio" src="/assets/prayer.mp3" preload="none"></audio>
   <script>
-    // 「詩韻の祈りを聴く」クリックで再生（存在すれば）
     document.querySelectorAll('a[href="#audio"]').forEach(el=>{
       el.addEventListener('click', e=>{
         e.preventDefault();
