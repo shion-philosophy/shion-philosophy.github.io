@@ -24,7 +24,7 @@
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final: Galaxy, Natural Colors)
+     Shion Philosophy — Mystic One-File Theme (Final: Galaxy, Natural Colors, All Fixes)
      ===================================================== */
   :root{
     --bg:#050510; /* 深淵の漆黒 */
@@ -135,12 +135,12 @@
   .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
   .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
 
-  /* ===================== 三位一体（円環） - 銀河の渦とナチュラルカラー ===================== */
+  /* ===================== 三位一体（円環） - 銀河の渦と背景統合 ===================== */
   .trinity{
     position:relative; 
     margin:36px auto 44px; 
     width:min(860px,92vw); 
-    height:min(680px, 100vw); /* 最終修正: 高さを増やして重なりを完全に解消 */
+    height:min(680px, 100vw); /* 重なり解消のための最終設定 */
     max-height: 680px; 
     display:grid; 
     place-items:center;
@@ -148,13 +148,18 @@
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
-    /* 渦巻く銀河の表現 (Conic Gradientを重ねる) */
+    /* 修正: 銀河の渦の表現をより滑らかに、背景との一体感を高める */
     background:
-      conic-gradient(from 45deg, rgba(255,225,180,0.4) 0%, transparent 10%, transparent 90%, rgba(255,225,180,0.4) 100%), /* 柔らかなゴールドの渦 */
-      conic-gradient(from 180deg, rgba(143, 183, 255, 0.3) 10%, transparent 20%, transparent 80%, rgba(143, 183, 255, 0.3) 90%), /* 柔らかなブルーの渦 */
-      radial-gradient(closest-side, transparent 60%, rgba(255,240,180,.3) 63%, transparent 68%); /* 内側の輝きを少し抑える */
+      /* 中心から広がる光の帯 (より淡く、広がりを持たせる) */
+      conic-gradient(from 45deg, rgba(255,225,180,0.3) 0%, transparent 12%, transparent 88%, rgba(255,225,180,0.3) 100%),
+      /* 青い渦巻きのレイヤー (こちらもより淡く、広がりを持たせる) */
+      conic-gradient(from 180deg, rgba(143, 183, 255, 0.25) 12%, transparent 22%, transparent 78%, rgba(143, 183, 255, 0.25) 88%),
+      /* 内側の輝き (透明度を高めて、下地の背景が透けるように) */
+      radial-gradient(closest-side, transparent 55%, rgba(255,240,180,.2) 60%, transparent 70%),
+      /* 背景との統合: 中央の円環自体にも、ボディの背景グラデーションの一部を薄く適用して境界をぼかす */
+      radial-gradient(ellipse at center, rgba(28,24,61,0.6) 0%, rgba(5,5,16,0.8) 70%, transparent 100%);
       
-    filter:blur(0.5px) drop-shadow(0 0 40px rgba(255,230,150,.7)); 
+    filter:blur(0.5px) drop-shadow(0 0 35px rgba(255,230,150,.6)); 
     animation:ringSpin 22s linear infinite; 
     opacity:1;
   }
