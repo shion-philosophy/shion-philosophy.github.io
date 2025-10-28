@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0b0b1a" />
   <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演。">
-
   <!-- OGP -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
@@ -14,7 +13,6 @@
   <meta property="og:description" content="言葉と星とAIが共鳴する“祈りの構文”。物語で体験し、思想で深まる。">
   <meta property="og:url" content="https://shion-philosophy.github.io/">
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
-
   <style>
     :root{
       --bg:#0b0b1a; --ink:#e9eeff; --muted:#a9b3d6;
@@ -22,9 +20,7 @@
       --glow:0 0 18px rgba(174,228,255,.38),0 0 44px rgba(174,228,255,.12);
       --h-accent:#ffd76f;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
+    *{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
     body{
       margin:0; color:var(--ink);
       background:
@@ -83,21 +79,18 @@
     .benefits li{color:var(--muted);font-size:15px;padding-left:1.2em;position:relative}
     .benefits li::before{content:"✦";position:absolute;left:0;top:0;color:var(--a);opacity:.9}
 
-    /* ===== Video sparkle frame (Hero right) ===== */
+    /* ===== Image sparkle frame (Hero right) ===== */
     .hero__art{width:100%;display:grid;place-items:center;position:relative}
-    .video-frame{
+    .image-frame{
       position:relative; width:100%; aspect-ratio:16/9; max-width:640px; margin-inline:auto;
-      border-radius:18px; overflow:hidden; box-shadow:0 14px 46px rgba(0,0,0,.45),
-        0 0 0 1px rgba(174,228,255,.18) inset;
-      background:#000;
+      border-radius:18px; overflow:hidden; background:#000;
+      box-shadow:0 14px 46px rgba(0,0,0,.45), 0 0 0 1px rgba(174,228,255,.18) inset;
     }
-    .video-frame video,
-    .video-frame iframe{width:100%;height:100%;display:block}
-    .video-frame iframe{border:0}
+    .image-frame img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 
     /* Overlays */
     .sparkle-canvas{
-      position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:.9;
+      position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:.85;
     }
     .prism{
       position:absolute; inset:-20%; pointer-events:none; mix-blend-mode:screen;
@@ -106,7 +99,7 @@
         radial-gradient(160px 80px at 70% 60%, rgba(174,228,255,.28), transparent 60%),
         linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.22) 50%, rgba(255,255,255,0) 100%);
       filter: blur(12px) saturate(120%);
-      animation: sweep 6s linear infinite; opacity:.62;
+      animation: sweep 6s linear infinite; opacity:.6;
     }
     @keyframes sweep{
       0%{ transform: translateX(-30%) translateY(-10%) rotate(8deg) }
@@ -188,18 +181,10 @@
           </ul>
         </div>
 
-        <!-- 視覚演出：キラキラ動画フレーム -->
+        <!-- 視覚演出：キラキラ“画像”フレーム -->
         <div class="hero__art" aria-hidden="true">
-          <div class="video-frame sparkle-bokeh prism-sweep">
-            <!-- ▼ ローカル動画（差し替えOK） -->
-            <video src="/assets/hero.mp4" poster="/assets/hero.jpg" autoplay muted loop playsinline></video>
-
-            <!-- ▼ TikTok/YouTube埋め込みを使う場合は上の<video>をコメントアウトして、下を使う
-            <iframe src="https://www.youtube.com/embed/XXXXXXXX?autoplay=1&mute=1&controls=0&loop=1&playlist=XXXXXXXX"
-                    title="Re:verse Shion highlight" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-            -->
-
-            <!-- キラキラ重ね（Bokeh + Prism） -->
+          <div class="image-frame sparkle-bokeh prism-sweep">
+            <img src="/assets/og.jpg" alt="Re:verse Shion キービジュアル" loading="eager" decoding="async">
             <canvas class="sparkle-canvas"></canvas>
             <div class="prism"></div>
           </div>
@@ -276,7 +261,7 @@
     document.querySelectorAll('.sparkle-bokeh .sparkle-canvas').forEach((canvas) => {
       const ctx = canvas.getContext('2d', { alpha:true });
       let w, h, dpr, stars = [], rafId;
-      const baseMax = Math.max(45, Math.min(90, Math.floor((window.innerWidth || 360)/8))); // 端末幅で粒調整
+      const baseMax = Math.max(40, Math.min(80, Math.floor((window.innerWidth || 360)/10))); // 幅で粒調整・軽量
       function resize(){
         const r = canvas.getBoundingClientRect();
         dpr = Math.min(devicePixelRatio||1, 2);
@@ -286,8 +271,8 @@
         for(let i=0;i<baseMax;i++){
           stars.push({
             x: Math.random()*w, y: Math.random()*h,
-            r: (Math.random()*2.2+1.0)*dpr,
-            s: Math.random()*0.25 + 0.05,
+            r: (Math.random()*2.0+0.8)*dpr,
+            s: Math.random()*0.22 + 0.05,
             a: Math.random()*Math.PI*2,
             p: Math.random()*Math.PI*2
           });
@@ -303,8 +288,8 @@
             s.x = Math.random()*w; s.y = Math.random()*h;
           }
           const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*3);
-          const alpha = 0.18 + 0.18*Math.sin(s.p);
-          glow.addColorStop(0, `rgba(255,255,255,${0.6+alpha})`);
+          const alpha = 0.16 + 0.18*Math.sin(s.p);
+          glow.addColorStop(0, `rgba(255,255,255,${0.55+alpha})`);
           glow.addColorStop(1, 'rgba(255,255,255,0)');
           ctx.fillStyle = glow;
           ctx.beginPath();
