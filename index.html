@@ -234,14 +234,38 @@
     </header>
 
     <!-- 三位一体：詩・韻・祈（円環） -->
-    <section class="trinity" aria-label="詩・韻・祈の円環">
-      <div class="ring" aria-hidden="true"></div>
-      <div class="stardust" aria-hidden="true"></div>
+    /* ===================== 三位一体（円環） ===================== */
+/* ... 省略 ... */
+.label{
+  position:absolute; padding:.55rem .8rem; border-radius:12px;
+  background:linear-gradient(180deg,rgba(18,22,46,.76),rgba(10,14,33,.76));
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  text-shadow:0 1px 0 #0008; backdrop-filter:blur(6px);
+  font-weight:700; letter-spacing:.08em;
+}
+.label .en{display:block;color:#cfd9ff;opacity:.85;font-size:12px;font-weight:500;margin-top:2px}
 
-      <div class="label poem">詩<span class="en">kotoba</span></div>
-      <div class="label resonance">韻<span class="en">hibiki</span></div>
-      <div class="label prayer">祈<span class="en">inori</span></div>
-    </section>
+/* 配置（正三角形になるよう調整） */
+.poem{ /* 頂点（上） */
+  top:0%; /* 上端に配置 */
+  left:50%; /* 水平方向の中央 */
+  transform:translateX(-50%); /* 自身の幅の半分だけ左に移動して中央寄せ */
+  text-align:center;
+  border-color:rgba(255,230,170,.45)
+}
+.resonance{ /* 左下の角 */
+  left:8%; /* 左からの位置を調整 */
+  bottom:8%; /* 下からの位置を調整 */
+  text-align:left;
+  border-color:rgba(160,200,255,.35)
+}
+.prayer{ /* 右下の角 */
+  right:8%; /* 右からの位置を調整 */
+  bottom:8%; /* 下からの位置を調整 */
+  text-align:right;
+  border-color:rgba(220,240,255,.35)
+}
 
     <!-- 全書クイックナビ（2カラム、統一色、星座シンボル） -->
     <section id="books" class="books" aria-label="各書へのクイックリンク">
