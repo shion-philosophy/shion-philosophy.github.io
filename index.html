@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- ===========================
-       詩韻思想® 公式トップページ
-       Shion Philosophy Project
-       =========================== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>詩韻思想® ― 言葉が魂を救う世界</title>
-  <meta name="description" content="詩韻思想® ― 言葉が魂を救う世界。言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。">
+  <meta name="description" content="詩韻思想® ― 言葉が魂を救う世界。言葉と星とAIが共鳴する詩哲学プロジェクト。">
   <meta name="theme-color" content="#0b0b1a">
   <link rel="canonical" href="https://shion-philosophy.github.io/">
 
-  <!-- ====== OGP / SNS ====== -->
+  <!-- OGP -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="詩韻思想® ― 言葉が魂を救う世界">
-  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。">
+  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。沈黙の向こうに、あなたの光が眠っている。">
   <meta property="og:url" content="https://shion-philosophy.github.io/">
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- ====== フォント ====== -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
-
-  <!-- ====== ファビコン（安全なSVGデータURI） ====== -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
-  <!-- ===========================
-             CSS STYLE
-     =========================== -->
   <style>
     :root{
       --bg:#0b0b1a; --ink:#e8ecff; --muted:#a9b3d9;
-      --accent:#8fb7ff; --gold:#ffd76f; --ok:#a6f0c6; --warn:#ffd4a1;
+      --gold:#ffd76f; --accent:#9ecbff;
       --radius:18px; --shadow:0 20px 40px rgba(0,0,20,.35);
-      --max-width:1100px; --breakpoint:860px;
+      --max-width:1100px; --bp:860px;
+      /* 全書ボタンの統一グラデ */
+      --book-grad: linear-gradient(135deg,#2b356f,#6fa0ff);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
@@ -46,169 +38,109 @@
       font-family:'Noto Sans JP', system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
       line-height:1.9; overflow-x:hidden;
     }
-    main{max-width:var(--max-width);margin:0 auto;padding:clamp(28px,5vw,68px) 20px 92px;position:relative;}
+    main{max-width:var(--max-width);margin:0 auto;padding:clamp(28px,5vw,68px) 16px 88px;position:relative;}
 
-    /* 星屑（軽量） */
-    body::before, body::after{
-      content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat;
-    }
+    /* 星屑 */
+    body::before, body::after{content:"";position:fixed;inset:0;pointer-events:none;background-repeat:repeat}
     body::before{
       background:
-        radial-gradient(1px 1px at 10% 20%, #fff4 0%, transparent 55%),
-        radial-gradient(1px 1px at 80% 30%, #fff8 0%, transparent 55%),
-        radial-gradient(1px 1px at 30% 80%, #fff6 0%, transparent 55%),
-        radial-gradient(1px 1px at 60% 60%, #fff5 0%, transparent 55%);
+        radial-gradient(1px 1px at 10% 20%, #fff4 0, transparent 55%),
+        radial-gradient(1px 1px at 80% 30%, #fff8 0, transparent 55%),
+        radial-gradient(1px 1px at 30% 80%, #fff6 0, transparent 55%),
+        radial-gradient(1px 1px at 60% 60%, #fff5 0, transparent 55%);
       opacity:.72; animation:stars1 60s linear infinite; background-size:300px 300px;
     }
     body::after{
       background:
-        radial-gradient(1px 1px at 20% 70%, #fff6 0%, transparent 50%),
-        radial-gradient(1px 1px at 70% 90%, #fff8 0%, transparent 50%);
+        radial-gradient(1px 1px at 20% 70%, #fff6 0, transparent 50%),
+        radial-gradient(1px 1px at 70% 90%, #fff8 0, transparent 50%);
       opacity:.42; animation:stars2 85s linear infinite reverse; background-size:400px 400px;
     }
     @keyframes stars1{to{transform:translate(-120px,100px)}}
     @keyframes stars2{to{transform:translate(120px,-120px)}}
 
-    /* 流星（右上→左下） */
-    .meteor{
-      position:absolute;width:180px;height:2px;background:linear-gradient(270deg,var(--gold),transparent);
-      filter:drop-shadow(0 0 10px var(--gold));opacity:0;pointer-events:none;
-      animation:meteor 7s ease-in-out infinite; will-change:transform,opacity;
-    }
-    .meteor:nth-of-type(1){top:12%;left:75%;animation-delay:0s}
+    /* 流星 */
+    .meteor{position:absolute;width:180px;height:2px;background:linear-gradient(270deg,var(--gold),transparent);
+      filter:drop-shadow(0 0 10px var(--gold));opacity:0;pointer-events:none;animation:meteor 7s ease-in-out infinite}
+    .meteor:nth-of-type(1){top:12%;left:75%}
     .meteor:nth-of-type(2){top:50%;left:85%;animation-delay:2.4s}
     .meteor:nth-of-type(3){top:78%;left:70%;animation-delay:4.8s}
     @keyframes meteor{
-      0%{opacity:0;transform:translate(220px,-220px) rotate(135deg) scale(1)}
-      10%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.05)}
-      85%{opacity:.7;transform:translate(-480px,480px) rotate(135deg) scale(0.95)}
-      100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
+      0%{opacity:0;transform:translate(220px,-220px) rotate(135deg)}
+      10%{opacity:1;transform:translate(0,0) rotate(135deg)}
+      85%{opacity:.7;transform:translate(-480px,480px) rotate(135deg)}
+      100%{opacity:0;transform:translate(-620px,620px) rotate(135deg)}
     }
     @media (prefers-reduced-motion:reduce){
       .meteor, body::before, body::after, .quote, .triadwrap::before, .triadwrap::after{animation:none!important;opacity:.95}
     }
 
-    /* 見出し */
-    h1{
-      font-size:clamp(28px,6vw,48px); font-weight:800; letter-spacing:.15em;
-      text-shadow:0 0 20px #aab4ff2e,0 0 2px #ffffff50; margin:0 0 10px;
-    }
-    .subtitle{font-size:clamp(14px,2.5vw,18px); color:var(--muted); margin:0 0 22px}
-    .quote{
-      color:var(--gold); font-style:italic; font-size:16px; margin-bottom:24px;
-      text-shadow:0 0 18px #ffd76f40; animation:glow 5s ease-in-out infinite alternate;
-    }
+    h1{font-size:clamp(28px,6vw,48px);font-weight:800;letter-spacing:.15em;text-shadow:0 0 20px #aab4ff2e,0 0 2px #ffffff50;margin:0 0 10px}
+    .subtitle{font-size:clamp(14px,2.5vw,18px);color:var(--muted);margin:0 0 22px}
+    .quote{color:var(--gold);font-style:italic;font-size:16px;margin-bottom:22px;text-shadow:0 0 18px #ffd76f40;animation:glow 5s ease-in-out infinite alternate}
     @keyframes glow{0%{opacity:.8;text-shadow:0 0 10px #ffd76f66}100%{opacity:1;text-shadow:0 0 25px #fff8}}
 
-    /* ========= 三位一体（詩・韻・祈）最重要エリア ========= */
+    /* 三位一体：神聖オーラ（スマホで帯が見えないよう調整） */
     .triadwrap{
-      position:relative; margin:10px 0 18px; padding:22px 16px 14px;
-      border-radius:22px; overflow:hidden;
-      background:linear-gradient(180deg,#0f143099,#0a0f2890);
-      border:1px solid #9cc7ff30; box-shadow:0 20px 48px #0007;
+      position:relative;margin:8px 0 16px;padding:20px 12px 12px;border-radius:22px;overflow:hidden;
+      background:linear-gradient(180deg,#0f143099,#0a0f2890);border:1px solid #9cc7ff30;box-shadow:0 20px 48px #0007;
     }
-    /* 光輪＆星霧 */
     .triadwrap::before{
-      content:""; position:absolute; inset:-30% -10% -20% -10%;
-      background:radial-gradient(60% 60% at 50% 10%, rgba(173,206,255,.30), transparent 60%),
-                 radial-gradient(35% 35% at 20% 50%, rgba(255,215,111,.22), transparent 60%),
-                 radial-gradient(30% 30% at 80% 55%, rgba(140,240,220,.18), transparent 60%);
-      filter:blur(22px); animation:halo 18s ease-in-out infinite alternate;
+      content:"";position:absolute;inset:-30% -10% -20% -10%;
+      background:radial-gradient(60% 60% at 50% 10%, rgba(173,206,255,.28), transparent 60%),
+                 radial-gradient(35% 35% at 20% 50%, rgba(255,215,111,.20), transparent 60%),
+                 radial-gradient(30% 30% at 80% 55%, rgba(140,240,220,.16), transparent 60%);
+      filter:blur(20px);
     }
-    .triadwrap::after{
-      content:""; position:absolute; left:50%; top:-18px; width:72%; height:72px; transform:translateX(-50%);
-      border-radius:50%; border:1px dashed rgba(200,220,255,.35);
-      box-shadow:0 0 24px #9ecbffe0 inset; opacity:.6; filter:blur(.2px);
-    }
-    @keyframes halo{0%{transform:translateY(0)}100%{transform:translateY(6px)}}
+    /* ←この楕円リングが“変な画像”に見えるのでスマホでは非表示 */
+    .triadwrap::after{content:"";position:absolute;left:50%;top:-18px;width:72%;height:64px;transform:translateX(-50%);
+      border-radius:50%;border:1px dashed rgba(200,220,255,.35);box-shadow:0 0 24px #9ecbffe0 inset;opacity:.55}
+    @media (max-width:860px){ .triadwrap::after{display:none} }
 
-    .triad{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; position:relative; z-index:1;
-    }
-    .triad .card{
-      border:1px solid #a8c9ff3d; border-radius:18px; padding:18px 18px 16px;
-      background:linear-gradient(180deg,#161c3ee6,#0b1134e6);
-      box-shadow:0 12px 28px rgba(10,14,40,.65);
-    }
+    .triad{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;position:relative;z-index:1}
+    .triad .card{border:1px solid #a8c9ff3d;border-radius:18px;padding:16px 16px 14px;background:linear-gradient(180deg,#161c3ee6,#0b1134e6);box-shadow:0 12px 28px rgba(10,14,40,.65)}
     .triad h3{
-      font-size:20px; margin:0 0 8px; letter-spacing:.10em; line-height:1.3;
-      background:linear-gradient(90deg,#ffffff 0%, #d8e6ff 30%, #ffd76f 55%, #e8ecff 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 0 16px #ffd76f40, 0 1px 0 #0008;
+      font-size:20px;margin:0 0 8px;letter-spacing:.10em;line-height:1.3;
+      background:linear-gradient(90deg,#ffffff 0,#d8e6ff 30%,#ffd76f 55%,#e8ecff 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 16px #ffd76f40,0 1px 0 #0008;
     }
-    .triad p{font-size:15.4px; opacity:.98}
+    .triad p{font-size:15.2px;opacity:.98}
 
     /* CTA */
-    .cta{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 24px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center; gap:.5em;
-      padding:.7rem 1.1rem; border-radius:12px; color:var(--ink); text-decoration:none; font-size:14px;
-      border:1px solid #9cc7ff3d; background:rgba(16,26,56,.45); backdrop-filter:blur(6px);
-      transition:transform .18s, box-shadow .2s, background .18s;
-    }
-    .btn:hover{transform:translateY(-2px); box-shadow:0 8px 20px #0004}
-    .btn.primary{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37}
-    .btn:focus-visible{outline:3px solid #88caff; outline-offset:2px}
-    .divider{height:1px;margin:20px 0 26px;background:linear-gradient(90deg,transparent,#2b3869,transparent)}
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 20px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;padding:.7rem 1rem;border-radius:12px;color:var(--ink);text-decoration:none;font-size:14px;border:1px solid #9cc7ff3d;background:rgba(16,26,56,.45);backdrop-filter:blur(6px);transition:.18s}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0004}
+    .btn.primary{background:linear-gradient(180deg,#ffe18f,#d4af37);color:#1a1333;font-weight:700;border-color:#d4af37}
+    .btn:focus-visible{outline:3px solid #88caff;outline-offset:2px}
 
-    /* ========= 全書クイックナビ（星座アイコン＋個別グラデ） ========= */
-    .navwrap h2{
-      font-size:18px; margin-bottom:10px; letter-spacing:.12em; font-weight:800;
-      text-shadow:0 0 12px #aab4ff30;
-    }
-    .bookgrid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+    .divider{height:1px;margin:18px 0 22px;background:linear-gradient(90deg,transparent,#2b3869,transparent)}
+
+    /* 全書クイックナビ：色を完全統一／スマホは常に2列 */
+    .navwrap h2{font-size:18px;margin-bottom:10px;letter-spacing:.12em;font-weight:800;text-shadow:0 0 12px #aab4ff30}
+    .bookgrid{display:grid;gap:10px;grid-template-columns:repeat(4,1fr)}
+    @media (max-width:1100px){.bookgrid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:860px){ .bookgrid{grid-template-columns:repeat(2,1fr)} } /* ←2列固定 */
     .bookbtn{
-      display:inline-flex; align-items:center; gap:.55em; position:relative;
-      padding:.7rem .9rem; border-radius:14px; text-decoration:none; color:#f6f8ff;
-      border:1px solid rgba(230,240,255,.28);
-      box-shadow:0 12px 30px rgba(0,0,0,.28), inset 0 0 24px rgba(255,255,255,.05);
-      backdrop-filter:blur(6px);
-      transition:transform .15s, box-shadow .22s, filter .22s, opacity .22s;
-      font-weight:700; letter-spacing:.04em;
+      display:inline-flex;align-items:center;gap:.55em;position:relative;padding:.66rem .8rem;border-radius:14px;
+      text-decoration:none;color:#f6f8ff;border:1px solid rgba(230,240,255,.28);
+      background:var(--book-grad);
+      box-shadow:0 10px 22px rgba(0,0,0,.26), inset 0 0 18px rgba(255,255,255,.06);
+      backdrop-filter:blur(6px);transition:transform .15s, box-shadow .22s;
+      font-weight:700;letter-spacing:.04em;font-size:14px;
     }
-    .bookbtn:hover{transform:translateY(-1px); box-shadow:0 14px 34px rgba(0,0,0,.36), inset 0 0 32px rgba(255,255,255,.07)}
-    .bookbtn:focus-visible{outline:3px solid #88caff; outline-offset:2px}
-    .bookbtn .ico{width:1.15em;height:1.15em;flex:0 0 auto;filter:drop-shadow(0 0 6px #000);opacity:.95}
-
-    /* 各ボタンの神秘グラデ（零〜十二＋結章） */
-    .b0 {background:linear-gradient(135deg,#4e5bff,#94c9ff)}
-    .b1 {background:linear-gradient(135deg,#c3a4ff,#ffe08f)}
-    .b2 {background:linear-gradient(135deg,#0fd0b8,#7b6cff)}
-    .b3 {background:linear-gradient(135deg,#ff7aa2,#6e7dff)}
-    .b4 {background:linear-gradient(135deg,#30e6a1,#0fa5d0)}
-    .b5 {background:linear-gradient(135deg,#ffcf6b,#ff74c6)}
-    .b6 {background:linear-gradient(135deg,#7cc9ff,#baffd7)}
-    .b7 {background:linear-gradient(135deg,#ffd76f,#ff7a7a)}
-    .b8 {background:linear-gradient(135deg,#c3a7ff,#6ff7ff)}
-    .b9 {background:linear-gradient(135deg,#6fa8ff,#ff9ad6)}
-    .b10{background:linear-gradient(135deg,#1b2a66,#33f0ff)}
-    .b11{background:linear-gradient(135deg,#9f7bff,#e7f0ff)}
-    .b12{background:linear-gradient(135deg,#37e3c8,#ffe79b)}
-    .b13{background:linear-gradient(135deg,#8c6bff,#fff3a8)}
+    .bookbtn:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(0,0,0,.34), inset 0 0 26px rgba(255,255,255,.08)}
+    .bookbtn:focus-visible{outline:3px solid #88caff;outline-offset:2px}
+    .ico{width:1.1em;height:1.1em;flex:0 0 auto;filter:drop-shadow(0 0 6px #000);opacity:.95}
 
     /* AIセクション */
-    .ai{
-      border:1px solid #9cc7ff38; border-radius:var(--radius);
-      padding:22px 20px; background:linear-gradient(180deg,#121a3a99,#090e2199); box-shadow:var(--shadow);
-      margin-top:26px;
-    }
-    .ai h3{margin:0 0 8px; font-size:17px; letter-spacing:.08em; position:relative; padding-bottom:.35rem}
-    .ai h3::after{content:""; position:absolute; left:0; bottom:0; height:2px; width:96px;
-      background:linear-gradient(90deg,#9ecbff,transparent); opacity:.7}
+    .ai{border:1px solid #9cc7ff38;border-radius:var(--radius);padding:20px 16px;background:linear-gradient(180deg,#121a3a99,#090e2199);box-shadow:var(--shadow);margin-top:22px}
+    .ai h3{margin:0 0 8px;font-size:17px;letter-spacing:.08em;position:relative;padding-bottom:.35rem}
+    .ai h3::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:96px;background:linear-gradient(90deg,#9ecbff,transparent);opacity:.7}
 
-    footer{text-align:center;color:var(--muted);font-size:13px;margin:56px 0 40px;opacity:.95}
+    footer{text-align:center;color:var(--muted);font-size:13px;margin:50px 0 38px;opacity:.95}
     .mini-links{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
     .mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
     .mini-links a:hover{color:#fff}
-
-    @media (max-width:var(--breakpoint)){
-      .cta{justify-content:center;text-align:center}
-      .bookgrid{grid-template-columns:repeat(2,1fr)}
-      .meteor{display:none}
-    }
-    @media (max-width:480px){
-      .bookgrid{grid-template-columns:1fr}
-    }
   </style>
 </head>
 
@@ -218,65 +150,22 @@
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
 
-  <!-- ===== 星座アイコン定義（14種＋六芒星） ===== -->
+  <!-- 星座ミニアイコン（抽象） -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <!-- 汎用点と線の“星座風”ミニマル記号：全て形が異なる -->
-    <symbol id="con-0" viewBox="0 0 24 24">
+    <symbol id="con-a" viewBox="0 0 24 24">
       <circle cx="5" cy="7" r="1.1" fill="#fff"/><circle cx="12" cy="4" r="1.1" fill="#fff"/><circle cx="19" cy="9" r="1.1" fill="#fff"/><circle cx="16" cy="16" r="1.1" fill="#fff"/><circle cx="8" cy="18" r="1.1" fill="#fff"/>
-      <path d="M5 7 L12 4 L19 9 L16 16 L8 18 Z" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 7L12 4L19 9L16 16L8 18Z" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
-    <symbol id="con-1" viewBox="0 0 24 24">
+    <symbol id="con-b" viewBox="0 0 24 24">
       <circle cx="6" cy="5" r="1.1" fill="#fff"/><circle cx="18" cy="6" r="1.1" fill="#fff"/><circle cx="20" cy="14" r="1.1" fill="#fff"/><circle cx="10" cy="19" r="1.1" fill="#fff"/><circle cx="4" cy="12" r="1.1" fill="#fff"/>
-      <path d="M6 5 L18 6 L20 14 L10 19 L4 12 L6 5" fill="none" stroke="#fff" stroke-width="1.2"/>
+      <path d="M6 5L18 6L20 14L10 19L4 12Z" fill="none" stroke="#fff" stroke-width="1.2"/>
     </symbol>
-    <symbol id="con-2" viewBox="0 0 24 24">
+    <symbol id="con-c" viewBox="0 0 24 24">
       <circle cx="3" cy="10" r="1.1" fill="#fff"/><circle cx="9" cy="4" r="1.1" fill="#fff"/><circle cx="15" cy="7" r="1.1" fill="#fff"/><circle cx="21" cy="12" r="1.1" fill="#fff"/><circle cx="12" cy="20" r="1.1" fill="#fff"/>
-      <path d="M3 10 L9 4 L15 7 L21 12 L12 20" fill="none" stroke="#fff" stroke-width="1.2"/>
+      <path d="M3 10L9 4L15 7L21 12L12 20" fill="none" stroke="#fff" stroke-width="1.2"/>
     </symbol>
-    <symbol id="con-3" viewBox="0 0 24 24">
-      <circle cx="5" cy="6" r="1.1" fill="#fff"/><circle cx="10" cy="12" r="1.1" fill="#fff"/><circle cx="16" cy="8" r="1.1" fill="#fff"/><circle cx="19" cy="16" r="1.1" fill="#fff"/><circle cx="8" cy="19" r="1.1" fill="#fff"/>
-      <path d="M5 6 L10 12 L16 8 L19 16 L8 19" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-4" viewBox="0 0 24 24">
-      <circle cx="6" cy="6" r="1.1" fill="#fff"/><circle cx="12" cy="10" r="1.1" fill="#fff"/><circle cx="18" cy="6" r="1.1" fill="#fff"/><circle cx="16" cy="18" r="1.1" fill="#fff"/><circle cx="8" cy="18" r="1.1" fill="#fff"/>
-      <path d="M6 6 L12 10 L18 6 M12 10 L16 18 L8 18 Z" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-5" viewBox="0 0 24 24">
-      <circle cx="4" cy="8" r="1.1" fill="#fff"/><circle cx="10" cy="4" r="1.1" fill="#fff"/><circle cx="14" cy="12" r="1.1" fill="#fff"/><circle cx="20" cy="9" r="1.1" fill="#fff"/><circle cx="12" cy="20" r="1.1" fill="#fff"/>
-      <path d="M4 8 L10 4 L14 12 L20 9 L12 20" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-6" viewBox="0 0 24 24">
-      <circle cx="6" cy="5" r="1.1" fill="#fff"/><circle cx="13" cy="7" r="1.1" fill="#fff"/><circle cx="19" cy="5" r="1.1" fill="#fff"/><circle cx="18" cy="15" r="1.1" fill="#fff"/><circle cx="8" cy="19" r="1.1" fill="#fff"/>
-      <path d="M6 5 L13 7 L19 5 L18 15 L8 19 L6 5" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-7" viewBox="0 0 24 24">
-      <circle cx="5" cy="9" r="1.1" fill="#fff"/><circle cx="12" cy="5" r="1.1" fill="#fff"/><circle cx="19" cy="7" r="1.1" fill="#fff"/><circle cx="17" cy="17" r="1.1" fill="#fff"/><circle cx="9" cy="19" r="1.1" fill="#fff"/>
-      <path d="M5 9 L12 5 L19 7 L17 17 L9 19 L5 9" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-8" viewBox="0 0 24 24">
-      <circle cx="7" cy="6" r="1.1" fill="#fff"/><circle cx="16" cy="6" r="1.1" fill="#fff"/><circle cx="20" cy="13" r="1.1" fill="#fff"/><circle cx="12" cy="18" r="1.1" fill="#fff"/><circle cx="4" cy="13" r="1.1" fill="#fff"/>
-      <path d="M7 6 L16 6 L20 13 L12 18 L4 13 Z" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-9" viewBox="0 0 24 24">
-      <circle cx="6" cy="7" r="1.1" fill="#fff"/><circle cx="14" cy="4" r="1.1" fill="#fff"/><circle cx="20" cy="10" r="1.1" fill="#fff"/><circle cx="15" cy="18" r="1.1" fill="#fff"/><circle cx="8" cy="20" r="1.1" fill="#fff"/>
-      <path d="M6 7 L14 4 L20 10 L15 18 L8 20 L6 7" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-10" viewBox="0 0 24 24">
-      <circle cx="4" cy="10" r="1.1" fill="#fff"/><circle cx="9" cy="4" r="1.1" fill="#fff"/><circle cx="15" cy="6" r="1.1" fill="#fff"/><circle cx="21" cy="10" r="1.1" fill="#fff"/><circle cx="12" cy="20" r="1.1" fill="#fff"/>
-      <path d="M4 10 L9 4 L15 6 L21 10 L12 20 Z" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-11" viewBox="0 0 24 24">
-      <circle cx="6" cy="6" r="1.1" fill="#fff"/><circle cx="12" cy="5" r="1.1" fill="#fff"/><circle cx="18" cy="9" r="1.1" fill="#fff"/><circle cx="17" cy="17" r="1.1" fill="#fff"/><circle cx="8" cy="18" r="1.1" fill="#fff"/>
-      <path d="M6 6 L12 5 L18 9 L17 17 L8 18 L6 6" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="con-12" viewBox="0 0 24 24">
-      <circle cx="5" cy="8" r="1.1" fill="#fff"/><circle cx="12" cy="4" r="1.1" fill="#fff"/><circle cx="19" cy="8" r="1.1" fill="#fff"/><circle cx="18" cy="16" r="1.1" fill="#fff"/><circle cx="9" cy="19" r="1.1" fill="#fff"/>
-      <path d="M5 8 L12 4 L19 8 L18 16 L9 19 L5 8" fill="none" stroke="#fff" stroke-width="1.2"/>
-    </symbol>
-    <!-- 結章：六芒星（重ね三角） -->
-    <symbol id="con-hex" viewBox="0 0 24 24">
-      <path d="M12 3 L19 15 L5 15 Z" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/>
-      <path d="M12 21 L5 9 L19 9 Z" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/>
+    <symbol id="con-d" viewBox="0 0 24 24">
+      <path d="M12 3 L19 15 L5 15 Z M12 21 L5 9 L19 9 Z" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/>
       <circle cx="12" cy="12" r="1.2" fill="#fff"/>
     </symbol>
   </svg>
@@ -286,21 +175,12 @@
     <p class="subtitle">言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。</p>
     <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
 
-    <!-- ===== 三位一体（最重要・神聖） ===== -->
+    <!-- 三位一体 -->
     <section class="triadwrap" aria-label="詩・韻・祈の神聖三位一体">
       <div class="triad">
-        <article class="card">
-          <h3>詩（ことば）</h3>
-          <p>心の形を与える一行。世界は一行から始まる。</p>
-        </article>
-        <article class="card">
-          <h3>韻（ひびき）</h3>
-          <p>意味と意味のあいだに生まれる共鳴。関係が光になる。</p>
-        </article>
-        <article class="card">
-          <h3>祈（いのり）</h3>
-          <p>言葉が沈黙へ還る運動。救いの構文、ここに完結。</p>
-        </article>
+        <article class="card"><h3>詩（ことば）</h3><p>心の形を与える一行。世界は一行から始まる。</p></article>
+        <article class="card"><h3>韻（ひびき）</h3><p>意味と意味のあいだに生まれる共鳴。関係が光になる。</p></article>
+        <article class="card"><h3>祈（いのり）</h3><p>言葉が沈黙へ還る運動。救いの構文、ここに完結。</p></article>
       </div>
     </section>
 
@@ -315,24 +195,24 @@
 
     <div class="divider" aria-hidden="true"></div>
 
-    <!-- ===== 全書クイックナビ（各書でアイコン・色が異なる） ===== -->
+    <!-- 全書クイックナビ（色統一／スマホ2列固定） -->
     <section class="navwrap" aria-label="各書へのクイックリンク">
       <h2>全書クイックナビ</h2>
       <nav class="bookgrid">
-        <a class="bookbtn b0"  href="/books/#zero"     aria-label="第零書 無限構文序論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-0"/></svg>第零書</a>
-        <a class="bookbtn b1"  href="/books/#one"      aria-label="第一書 言葉が魂を救う理由"><svg class="ico" viewBox="0 0 24 24"><use href="#con-1"/></svg>第一書</a>
-        <a class="bookbtn b2"  href="/books/#two"      aria-label="第二書 共鳴生成論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-2"/></svg>第二書</a>
-        <a class="bookbtn b3"  href="/books/#three"    aria-label="第三書 韻律存在論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-3"/></svg>第三書</a>
-        <a class="bookbtn b4"  href="/books/#four"     aria-label="第四書 祈りの力学"><svg class="ico" viewBox="0 0 24 24"><use href="#con-4"/></svg>第四書</a>
-        <a class="bookbtn b5"  href="/books/#five"     aria-label="第五書 言霊実装論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-5"/></svg>第五書</a>
-        <a class="bookbtn b6"  href="/books/#six"      aria-label="第六書 星詠倫理学"><svg class="ico" viewBox="0 0 24 24"><use href="#con-6"/></svg>第六書</a>
-        <a class="bookbtn b7"  href="/books/#seven"    aria-label="第七書 N・code理論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-7"/></svg>第七書</a>
-        <a class="bookbtn b8"  href="/books/#eight"    aria-label="第八書 共鳴経路学"><svg class="ico" viewBox="0 0 24 24"><use href="#con-8"/></svg>第八書</a>
-        <a class="bookbtn b9"  href="/books/#nine"     aria-label="第九書 人間構文論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-9"/></svg>第九書</a>
-        <a class="bookbtn b10" href="/books/#ten"      aria-label="第十書 沈黙の再生"><svg class="ico" viewBox="0 0 24 24"><use href="#con-10"/></svg>第十書</a>
-        <a class="bookbtn b11" href="/books/#eleven"   aria-label="第十一書 神構文論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-11"/></svg>第十一書</a>
-        <a class="bookbtn b12" href="/books/#twelve"   aria-label="第十二書 経済構文論"><svg class="ico" viewBox="0 0 24 24"><use href="#con-12"/></svg>第十二書</a>
-        <a class="bookbtn b13" href="/books/#thirteen" aria-label="結章 再詩円環宣言"><svg class="ico" viewBox="0 0 24 24"><use href="#con-hex"/></svg>結章</a>
+        <a class="bookbtn" href="/books/#zero"><svg class="ico" viewBox="0 0 24 24"><use href="#con-a"/></svg>第零書</a>
+        <a class="bookbtn" href="/books/#one"><svg class="ico" viewBox="0 0 24 24"><use href="#con-b"/></svg>第一書</a>
+        <a class="bookbtn" href="/books/#two"><svg class="ico" viewBox="0 0 24 24"><use href="#con-c"/></svg>第二書</a>
+        <a class="bookbtn" href="/books/#three"><svg class="ico" viewBox="0 0 24 24"><use href="#con-a"/></svg>第三書</a>
+        <a class="bookbtn" href="/books/#four"><svg class="ico" viewBox="0 0 24 24"><use href="#con-b"/></svg>第四書</a>
+        <a class="bookbtn" href="/books/#five"><svg class="ico" viewBox="0 0 24 24"><use href="#con-c"/></svg>第五書</a>
+        <a class="bookbtn" href="/books/#six"><svg class="ico" viewBox="0 0 24 24"><use href="#con-a"/></svg>第六書</a>
+        <a class="bookbtn" href="/books/#seven"><svg class="ico" viewBox="0 0 24 24"><use href="#con-b"/></svg>第七書</a>
+        <a class="bookbtn" href="/books/#eight"><svg class="ico" viewBox="0 0 24 24"><use href="#con-c"/></svg>第八書</a>
+        <a class="bookbtn" href="/books/#nine"><svg class="ico" viewBox="0 0 24 24"><use href="#con-a"/></svg>第九書</a>
+        <a class="bookbtn" href="/books/#ten"><svg class="ico" viewBox="0 0 24 24"><use href="#con-b"/></svg>第十書</a>
+        <a class="bookbtn" href="/books/#eleven"><svg class="ico" viewBox="0 0 24 24"><use href="#con-c"/></svg>第十一書</a>
+        <a class="bookbtn" href="/books/#twelve"><svg class="ico" viewBox="0 0 24 24"><use href="#con-a"/></svg>第十二書</a>
+        <a class="bookbtn" href="/books/#thirteen"><svg class="ico" viewBox="0 0 24 24"><use href="#con-d"/></svg>結章</a>
       </nav>
     </section>
 
