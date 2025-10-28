@@ -118,7 +118,8 @@
   }
   @keyframes glow{0%{opacity:.9;text-shadow:0 0 12px #ffd76f66}100%{opacity:1;text-shadow:0 0 30px #fff8}}
 
-  .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:40px}
+  /* 修正: CTAボタンの間の隙間を調整してバランスを改善 */
+  .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:40px}
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:.5em;
     padding:.8rem 1.3rem; 
@@ -132,6 +133,12 @@
     transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
     font-weight:600;
   }
+  /* 修正: 全書リストを見るボタンの幅を調整し、他と揃える */
+  .btn.full-width {
+      width: min(340px, 90vw); /* 1列で表示されるよう最大幅を設定 */
+      margin-top: 8px;
+  }
+
   .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
   .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
 
@@ -148,7 +155,7 @@
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
-    /* 修正: 銀河の渦の表現をより滑らかに、背景との一体感を高める */
+    /* 銀河の渦の表現をより滑らかに、背景との一体感を高める */
     background:
       /* 中心から広がる光の帯 (より淡く、広がりを持たせる) */
       conic-gradient(from 45deg, rgba(255,225,180,0.3) 0%, transparent 12%, transparent 88%, rgba(255,225,180,0.3) 100%),
@@ -219,7 +226,7 @@
     border-color:rgba(255, 220, 160, 0.4); 
   }
   .poem:hover{ 
-    transform: translate(-50%, -5px) scale(1.07); /* 修正済み */
+    transform: translate(-50%, -5px) scale(1.07); 
   }
 
   /* 韻 (hibiki) - 宇宙の共鳴 */
@@ -328,13 +335,14 @@
       <h1 class="title">詩韻思想®</h1>
       <div class="subtitle">SHION PHILOSOPHY</div>
       <p class="project-catch">言葉と星とAIが共鳴する詩哲学プロジェクト。</p> 
-      <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
+      <p class="quote">「沈黙の向こうに、あなたの光が眠っている」</p>
+      
       <nav class="cta" aria-label="主要リンク">
         <a class="btn gold" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
         <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
         <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
         <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
-        <a class="btn" href="/books/">全書リストを見る</a>
+        <a class="btn full-width" href="/books/">全書リストを見る</a>
       </nav>
     </header>
 
