@@ -24,7 +24,7 @@
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final: Perfect Balance)
+     Shion Philosophy — Mystic One-File Theme (Final: Perfect Balance + Hero Image)
      ===================================================== */
   :root{
     --bg:#050510; /* 深淵の漆黒 */
@@ -89,7 +89,33 @@
     100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
   }
 
-  .hero{text-align:center;margin-bottom:24px}
+  .hero{
+    text-align:center;
+    margin-bottom:24px;
+    position:relative; /* 画像の絶対位置の基準点とする */
+    z-index: 1; /* テキストを画像の上に配置する */
+  }
+
+  /* 💡 新規CSS: ヘッダー画像のスタイル */
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(0%);
+    width: min(700px, 100vw); /* 画面幅に合わせて調整 */
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    
+    /* 背景に馴染ませるための調整 */
+    filter: brightness(1.5) opacity(0.2); /* 明るくして透明度を低くする */
+    mix-blend-mode: screen; /* 画面を重ねるようにブレンド */
+    z-index: -1; /* テキストの背後に配置 */
+    pointer-events: none; /* クリック不可にする */
+    margin-top: -30px; /* 少し上部に調整 */
+  }
+  /* ここまで新規CSS */
+
   .title{
     font-size:clamp(32px,7vw,54px); 
     font-weight:800; 
@@ -118,7 +144,7 @@
   }
   @keyframes glow{0%{opacity:.9;text-shadow:0 0 12px #ffd76f66}100%{opacity:1;text-shadow:0 0 30px #fff8}}
 
-  /* 修正: CTAボタンのバランスと幅調整 */
+  /* CTAボタンのバランスと幅調整 */
   .cta{
       display:flex;
       flex-wrap:wrap;
@@ -139,13 +165,13 @@
     transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
     font-weight:600;
   }
-  /* 新規CSS: 左右に並ぶボタンの幅を揃える */
+  /* 左右に並ぶボタンの幅を揃える */
   .btn.pair-btn {
-      width: min(160px, 45vw); /* 左右の幅を揃えるための固定幅 (スマホ最適化) */
+      width: min(160px, 45vw); 
   }
   /* 全書リストボタンの幅を調整し、他と揃える */
   .btn.full-width {
-      width: min(332px, 90vw); /* 1列で表示されるよう最大幅を設定 (pair-btnの合計+隙間) */
+      width: min(332px, 90vw); 
       margin-top: 8px;
   }
 
@@ -157,7 +183,7 @@
     position:relative; 
     margin:36px auto 44px; 
     width:min(860px,92vw); 
-    height:min(680px, 100vw); /* 重なり解消のための最終設定 */
+    height:min(680px, 100vw); 
     max-height: 680px; 
     display:grid; 
     place-items:center;
@@ -165,7 +191,7 @@
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
-    /* 銀河の渦の表現をより滑らかに、背景との一体感を高める */
+    /* 背景との滑らかな統合 */
     background:
       conic-gradient(from 45deg, rgba(255,225,180,0.3) 0%, transparent 12%, transparent 88%, rgba(255,225,180,0.3) 100%),
       conic-gradient(from 180deg, rgba(143, 183, 255, 0.25) 12%, transparent 22%, transparent 78%, rgba(143, 183, 255, 0.25) 88%),
@@ -345,6 +371,8 @@
 
   <main class="main">
     <header class="hero">
+      <img src="/assets/og.jpg" class="hero-image" alt="詩韻思想の幾何学模様">
+      
       <h1 class="title">詩韻思想®</h1>
       <div class="subtitle">SHION PHILOSOPHY</div>
       <p class="project-catch">言葉と星とAIが共鳴する詩哲学プロジェクト。</p> 
@@ -385,7 +413,7 @@
       <a class="bookbtn" data-symbol="♑" href="/books/#ten">第十書</a>
       <a class="bookbtn" data-symbol="♒" href="/books/#eleven">第十一書</a>
       <a class="bookbtn" data-symbol="♓" href="/books/#twelve">第十二書</a>
-      <a class="bookbtn final" data-symbol="★" href="/books/#thirteen">結章</a>
+      <a class="bookbtn final" data-symbol="✡" href="/books/#thirteen">結章</a>
     </section>
 
     <footer>
