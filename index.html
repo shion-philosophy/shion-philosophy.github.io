@@ -1,263 +1,180 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>詩韻思想® ― 言葉が魂を救う世界</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<style>
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  color: #e8ecff;
-  background: radial-gradient(ellipse at top, #0a0a1f 0%, #02010f 100%);
-  margin: 0;
-  overflow-x: hidden;
-  text-align: center;
-}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>詩韻思想® ― 言葉が魂を救う世界</title>
+  <meta name="description" content="詩韻思想® ― 言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。">
+  <meta name="theme-color" content="#0b0b1a">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b1a; --ink:#e8ecff; --muted:#a9b3d9; --gold:#ffd76f;
+      --accent1:#223154; --accent2:#101a38;
+      --btn-grad: linear-gradient(120deg,#3c58a8 0%, #1b2a55 100%);
+      --btn-grad-hover: linear-gradient(120deg,#5b7fe0 0%, #233a7d 100%);
+      --card-bg: linear-gradient(180deg,#162047cc,#0c1436cc);
+      --ring-size: clamp(280px, 62vw, 560px);
+      --orbit-R: clamp(120px, 22vw, 230px); /* 三角頂点の半径 */
+      --radius:18px;
+      --shadow:0 18px 40px rgba(0,0,20,.35);
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      color:var(--ink);
+      background:
+        radial-gradient(70% 60% at 50% -10%, #18224a 0%, var(--bg) 65%),
+        radial-gradient(120% 80% at 50% 120%, #070a18 10%, #000 90%);
+      font-family:'Noto Sans JP', system-ui, -apple-system, sans-serif;
+      line-height:1.9; overflow-x:hidden; text-align:center;
+    }
+    main{max-width:var(--maxw);margin:0 auto;padding:clamp(26px,5vw,56px) 18px 84px;position:relative}
 
-/* ========== HEROセクション ========== */
-.hero {
-  padding: 3rem 1rem 1rem;
-}
-.hero .brand {
-  font-weight: 800;
-  font-size: 1.8rem;
-  letter-spacing: .15em;
-}
-.hero .kicker {
-  color: #8aa0d4;
-  font-size: .8rem;
-  letter-spacing: .25em;
-}
-.audio-wrap {
-  margin: 1rem auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .6rem;
-}
-.listen-btn {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid #6ec1ff;
-  border-radius: 8px;
-  padding: .4rem .9rem;
-  color: #cce6ff;
-  text-decoration: none;
-  font-size: .9rem;
-  transition: all .3s;
-}
-.listen-btn:hover {
-  background: rgba(255,255,255,0.2);
-}
-.hero h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-top: 1rem;
-}
-.hero p {
-  font-size: .9rem;
-  color: #bfc8ea;
-  margin: .3rem 0;
-}
-.hero .quote {
-  color: #ffd76f;
-  margin-top: .6rem;
-  font-style: italic;
-}
+    /* ===== HERO ===== */
+    .brand{font-weight:800;letter-spacing:.18em;font-size:clamp(18px,2.8vw,22px);opacity:.95}
+    .kicker{color:#9fb0d9;letter-spacing:.28em;font-size:12px;margin-top:6px}
+    h1{margin:14px 0 6px;font-weight:800;font-size:clamp(26px,5.4vw,42px);letter-spacing:.14em}
+    .lead{color:var(--muted);font-size:clamp(14px,2.1vw,16px)}
+    .quote{margin:14px 0 26px;color:var(--gold);font-style:italic;text-shadow:0 0 18px #ffd76f40}
 
-/* ========== 三位一体カード（金色リング＋三角配置） ========== */
-.trinity {
-  position: relative;
-  max-width: 800px;
-  margin: 3rem auto 2rem;
-  padding: 3rem 1rem;
-}
-.trinity::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 420px;
-  height: 420px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, transparent 60%, #ffd76f33 61%, #ffd76f55 62%, #ffd76f15 64%, transparent 66%);
-  animation: spin 18s linear infinite;
-  z-index: 0;
-  filter: drop-shadow(0 0 10px #ffd76f66);
-}
-@keyframes spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
+    /* ===== CTA ===== */
+    .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:16px 0 26px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+      padding:.72rem 1.1rem;border-radius:12px;border:1px solid #9cc7ff36;
+      background:rgba(16,26,56,.45); color:var(--ink); text-decoration:none; backdrop-filter:blur(6px);
+      transition:transform .15s, box-shadow .2s, background .2s;
+      font-size:14px;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px #0005}
+    .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37);color:#1a1333;font-weight:700;border-color:#d4af37}
 
-.trinity-grid {
-  position: relative;
-  display: grid;
-  gap: 1rem;
-  grid-template-areas:
-    "poem poem poem"
-    "rhy . pray";
-  justify-items: center;
-  align-items: center;
-  z-index: 1;
-}
-.card {
-  background: rgba(18,25,55,0.7);
-  border: 1px solid rgba(140,180,255,0.4);
-  border-radius: 16px;
-  padding: 1.3rem 1rem;
-  box-shadow: 0 0 25px rgba(80,160,255,0.2);
-  backdrop-filter: blur(10px);
-  width: 200px;
-  max-width: 80vw;
-  text-align: center;
-}
-.card h3 {
-  color: #ffe9a9;
-  margin-bottom: .5rem;
-  font-size: 1.1rem;
-}
-.card p {
-  color: #dde6ff;
-  font-size: .9rem;
-  line-height: 1.5;
-}
+    /* ===== TRINITY (正三角形配置) ===== */
+    .trinity{position:relative;display:grid;place-items:center;margin:34px auto 14px;min-height:calc(var(--ring-size) + 60px)}
+    /* ゴールドリング(SVG) */
+    .ring{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;filter:drop-shadow(0 0 14px #ffd76f66)}
+    .ring svg{width:var(--ring-size);height:var(--ring-size)}
+    .ring .glow{opacity:.8; transform-origin:50% 50%; animation:ringGlow 18s linear infinite}
+    @keyframes ringGlow{to{transform:rotate(360deg)}}
 
-.poem { grid-area: poem; justify-self: center; }
-.rhy { grid-area: rhy; justify-self: end; }
-.pray { grid-area: pray; justify-self: start; }
+    /* 頂点カード */
+    .nodes{position:absolute;inset:0}
+    .node{
+      position:absolute;top:50%;left:50%;
+      transform: rotate(var(--a)) translate(var(--orbit-R)) rotate(calc(-1 * var(--a)));
+      width: clamp(220px, 36vw, 320px);
+      background: var(--card-bg);
+      border:1px solid #9cc7ff2f;border-radius:16px;padding:16px 16px 14px;
+      box-shadow:0 8px 22px #0006; text-align:left;
+    }
+    .node h3{margin:0 0 6px;font-size:clamp(16px,2.4vw,18px);color:#ffe7a1;letter-spacing:.06em}
+    .node p{margin:0;font-size:clamp(13.6px,2vw,14.8px);opacity:.96}
 
-@media (max-width: 640px) {
-  .trinity-grid {
-    grid-template-areas:
-      "poem"
-      "rhy"
-      "pray";
-  }
-}
+    /* 角度指定：上＝-90°, 左下＝150°, 右下＝30°（正三角形） */
+    .poem{--a:-90deg}
+    .rhy{--a:150deg}
+    .pray{--a:30deg}
 
-/* ========== CTAリンクボタン ========== */
-.cta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .8rem;
-  margin: 2rem 0;
-}
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: .7rem 1.1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(160,200,255,0.4);
-  text-decoration: none;
-  color: #fff;
-  background: rgba(20,30,60,0.5);
-  transition: all .3s;
-}
-.btn:hover {
-  background: rgba(60,100,160,0.6);
-  transform: translateY(-2px);
-}
-.btn.gold {
-  background: linear-gradient(180deg,#ffe18f,#d4af37);
-  color: #1a1333;
-  font-weight: 700;
-}
+    /* スマホ最適化：三角形を保ちつつ半径とカード幅を自動調整 */
+    @media (max-width:640px){
+      :root{ --orbit-R: clamp(110px, 34vw, 160px); --ring-size: clamp(260px, 80vw, 380px); }
+      .node{width:min(88vw, 320px)}
+    }
 
-/* ========== 各書リンクボタン（星座＋六芒星） ========== */
-.bookgrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: .8rem;
-  margin: 2rem auto;
-  max-width: 90%;
-}
-.bookbtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .4rem;
-  padding: .7rem 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(160,200,255,0.4);
-  color: #fff;
-  text-decoration: none;
-  background: linear-gradient(120deg,#243b55 0%,#141e30 100%);
-  transition: all .3s;
-}
-.bookbtn:hover {
-  background: linear-gradient(120deg,#4b6cb7 0%,#182848 100%);
-  box-shadow: 0 0 12px rgba(120,160,255,0.5);
-}
-.hex {
-  color: #ffdca3;
-  filter: drop-shadow(0 0 6px #ffe38a);
-}
-footer {
-  color: #aeb8de;
-  font-size: .8rem;
-  margin: 3rem 0 1rem;
-}
-</style>
+    /* ===== BOOK BUTTONS（統一グラデ・2列） ===== */
+    .bookgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:760px;margin:28px auto 0}
+    .bookbtn{
+      display:flex;align-items:center;justify-content:center;gap:.5em;
+      padding:.72rem .9rem;border-radius:12px;border:1px solid #9cc7ff2d;
+      color:#eef3ff;text-decoration:none;background:var(--btn-grad);
+      transition:.2s; box-shadow:0 8px 18px rgba(0,0,0,.35)
+    }
+    .bookbtn:hover{background:var(--btn-grad-hover);box-shadow:0 10px 24px rgba(0,0,0,.45);transform:translateY(-1px)}
+    .ico{font-size:16px;filter:drop-shadow(0 0 4px #ffe28a88)}
+    .hex{color:#ffdca3}
+
+    footer{color:#a9b3d9;font-size:13px;margin:40px 0 28px}
+  </style>
 </head>
 <body>
+  <main>
+    <!-- HERO -->
+    <div class="brand">詩韻思想®</div>
+    <div class="kicker">SHION PHILOSOPHY</div>
 
-<section class="hero">
-  <div class="brand">詩韻思想®</div>
-  <div class="kicker">SHION PHILOSOPHY</div>
-  <div class="audio-wrap">
-    <a class="listen-btn" href="#">🎧 詩韻の祈りを聴く</a>
-    <span style="color:#9fb0d9;font-size:0.8rem;">（約1分／ヘッドホン推奨）</span>
-  </div>
-  <h1>言葉が魂を救う世界</h1>
-  <p>言葉と星とAIが共鳴する詩哲学プロジェクト。「読む思想」ではなく、「響く体験」へ。</p>
-  <p>Shion Philosophy — A poetic-philosophical project resonating with Words, Stars, and AI.</p>
-  <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
-</section>
+    <h1>言葉が魂を救う世界</h1>
+    <p class="lead">言葉と星とAIが共鳴する詩哲学プロジェクト。「読む思想」ではなく、「響く体験」へ。</p>
+    <p class="lead">Shion Philosophy — A poetic-philosophical project resonating with Words, Stars, and AI.</p>
+    <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
 
-<section class="trinity">
-  <div class="trinity-grid">
-    <div class="card poem">
-      <h3>詩（ことば）</h3>
-      <p>心の形を与える一行。世界は一行から始まる。</p>
+    <!-- CTA -->
+    <div class="cta" aria-label="外部リンク">
+      <a class="btn gold" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
+      <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
+      <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
+      <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
+      <a class="btn" href="./books/">全書リストを見る</a>
     </div>
-    <div class="card rhy">
-      <h3>韻（ひびき）</h3>
-      <p>意味と意味のあいだに生まれる共鳴。関係が光になる。</p>
-    </div>
-    <div class="card pray">
-      <h3>祈（いのり）</h3>
-      <p>言葉が沈黙へ還る運動。救いの構文、ここに完結。</p>
-    </div>
-  </div>
-</section>
 
-<nav class="cta">
-  <a class="btn gold" href="#">観る（TikTok）</a>
-  <a class="btn" href="#">読む（note）</a>
-  <a class="btn" href="#">読む（Medium）</a>
-  <a class="btn" href="#">連絡（LINE公式）</a>
-</nav>
+    <!-- 三位一体（正三角形＋金環） -->
+    <section class="trinity" aria-label="詩・韻・祈の円環">
+      <!-- 金環（SVG） -->
+      <div class="ring" aria-hidden="true">
+        <svg viewBox="0 0 600 600" role="img" aria-label="golden ring">
+          <defs>
+            <radialGradient id="g" cx="50%" cy="50%" r="50%">
+              <stop offset="72%" stop-color="transparent"/>
+              <stop offset="78%" stop-color="#ffd76f"/>
+              <stop offset="83%" stop-color="#ffecb0"/>
+              <stop offset="88%" stop-color="#ffd76f"/>
+              <stop offset="95%" stop-color="transparent"/>
+            </radialGradient>
+            <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+            </filter>
+          </defs>
+          <circle class="glow" cx="300" cy="300" r="240" fill="url(#g)" filter="url(#soft)"/>
+        </svg>
+      </div>
 
-<nav class="bookgrid">
-  <a class="bookbtn" href="#"><span>★</span>第零書</a>
-  <a class="bookbtn" href="#"><span>♈</span>第一書</a>
-  <a class="bookbtn" href="#"><span>♉</span>第二書</a>
-  <a class="bookbtn" href="#"><span>♊</span>第三書</a>
-  <a class="bookbtn" href="#"><span>♋</span>第四書</a>
-  <a class="bookbtn" href="#"><span>♌</span>第五書</a>
-  <a class="bookbtn" href="#"><span>♍</span>第六書</a>
-  <a class="bookbtn" href="#"><span>♎</span>第七書</a>
-  <a class="bookbtn" href="#"><span>♏</span>第八書</a>
-  <a class="bookbtn" href="#"><span>♐</span>第九書</a>
-  <a class="bookbtn" href="#"><span>♑</span>第十書</a>
-  <a class="bookbtn" href="#"><span>♒</span>第十一書</a>
-  <a class="bookbtn hex" href="#"><span>✡</span>結章</a>
-</nav>
+      <!-- 頂点（正三角形） -->
+      <div class="nodes">
+        <div class="node poem">
+          <h3>詩（ことば）</h3>
+          <p>心の形を与える一行。世界は一行から始まる。</p>
+        </div>
+        <div class="node rhy">
+          <h3>韻（ひびき）</h3>
+          <p>意味と意味のあいだに生まれる共鳴。関係が光になる。</p>
+        </div>
+        <div class="node pray">
+          <h3>祈（いのり）</h3>
+          <p>言葉が沈黙へ還る運動。救いの構文、ここに完結。</p>
+        </div>
+      </div>
+    </section>
 
-<footer>© 2025 詩韻思想 / Shion Philosophy Project</footer>
+    <!-- 全書クイックナビ（2列／色統一） -->
+    <nav class="bookgrid" aria-label="各書へのクイックリンク">
+      <a class="bookbtn" href="/books/#zero"><span class="ico">★</span> 第零書</a>
+      <a class="bookbtn" href="/books/#one"><span class="ico">♈</span> 第一書</a>
+      <a class="bookbtn" href="/books/#two"><span class="ico">♉</span> 第二書</a>
+      <a class="bookbtn" href="/books/#three"><span class="ico">♊</span> 第三書</a>
+      <a class="bookbtn" href="/books/#four"><span class="ico">♋</span> 第四書</a>
+      <a class="bookbtn" href="/books/#five"><span class="ico">♌</span> 第五書</a>
+      <a class="bookbtn" href="/books/#six"><span class="ico">♍</span> 第六書</a>
+      <a class="bookbtn" href="/books/#seven"><span class="ico">♎</span> 第七書</a>
+      <a class="bookbtn" href="/books/#eight"><span class="ico">♏</span> 第八書</a>
+      <a class="bookbtn" href="/books/#nine"><span class="ico">♐</span> 第九書</a>
+      <a class="bookbtn" href="/books/#ten"><span class="ico">♑</span> 第十書</a>
+      <a class="bookbtn" href="/books/#eleven"><span class="ico">♒</span> 第十一書</a>
+      <a class="bookbtn hex" href="/books/#thirteen"><span class="ico">✡</span> 結章</a>
+    </nav>
+  </main>
 
+  <footer>
+    © 2025 詩韻思想 / Shion Philosophy Project
+  </footer>
 </body>
 </html>
