@@ -24,7 +24,7 @@
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final: Galaxy, Natural Colors, All Fixes)
+     Shion Philosophy — Mystic One-File Theme (Final: Perfect Balance)
      ===================================================== */
   :root{
     --bg:#050510; /* 深淵の漆黒 */
@@ -118,8 +118,14 @@
   }
   @keyframes glow{0%{opacity:.9;text-shadow:0 0 12px #ffd76f66}100%{opacity:1;text-shadow:0 0 30px #fff8}}
 
-  /* 修正: CTAボタンの間の隙間を調整してバランスを改善 */
-  .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:40px}
+  /* 修正: CTAボタンのバランスと幅調整 */
+  .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      margin-bottom:40px;
+  }
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:.5em;
     padding:.8rem 1.3rem; 
@@ -133,16 +139,20 @@
     transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
     font-weight:600;
   }
-  /* 修正: 全書リストを見るボタンの幅を調整し、他と揃える */
+  /* 新規CSS: 左右に並ぶボタンの幅を揃える */
+  .btn.pair-btn {
+      width: min(160px, 45vw); /* 左右の幅を揃えるための固定幅 (スマホ最適化) */
+  }
+  /* 全書リストボタンの幅を調整し、他と揃える */
   .btn.full-width {
-      width: min(340px, 90vw); /* 1列で表示されるよう最大幅を設定 */
+      width: min(332px, 90vw); /* 1列で表示されるよう最大幅を設定 (pair-btnの合計+隙間) */
       margin-top: 8px;
   }
 
   .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
   .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
 
-  /* ===================== 三位一体（円環） - 銀河の渦と背景統合 ===================== */
+  /* ===================== 三位一体（円環） ===================== */
   .trinity{
     position:relative; 
     margin:36px auto 44px; 
@@ -157,13 +167,9 @@
     border-radius:50%;
     /* 銀河の渦の表現をより滑らかに、背景との一体感を高める */
     background:
-      /* 中心から広がる光の帯 (より淡く、広がりを持たせる) */
       conic-gradient(from 45deg, rgba(255,225,180,0.3) 0%, transparent 12%, transparent 88%, rgba(255,225,180,0.3) 100%),
-      /* 青い渦巻きのレイヤー (こちらもより淡く、広がりを持たせる) */
       conic-gradient(from 180deg, rgba(143, 183, 255, 0.25) 12%, transparent 22%, transparent 78%, rgba(143, 183, 255, 0.25) 88%),
-      /* 内側の輝き (透明度を高めて、下地の背景が透けるように) */
       radial-gradient(closest-side, transparent 55%, rgba(255,240,180,.2) 60%, transparent 70%),
-      /* 背景との統合: 中央の円環自体にも、ボディの背景グラデーションの一部を薄く適用して境界をぼかす */
       radial-gradient(ellipse at center, rgba(28,24,61,0.6) 0%, rgba(5,5,16,0.8) 70%, transparent 100%);
       
     filter:blur(0.5px) drop-shadow(0 0 35px rgba(255,230,150,.6)); 
@@ -315,6 +321,13 @@
   /* アクセシビリティ */
   @media (max-width:var(--bp)){ .meteor{display:none} }
   @media (max-width:480px){
+    /* モバイルでのCTAボタンの固定幅を調整 */
+    .btn.pair-btn {
+        width: min(150px, 45vw);
+    }
+    .btn.full-width {
+        width: min(312px, 90vw);
+    }
     .books{gap:12px}
     .bookbtn{font-size:1.05rem; padding:12px 16px}
     .bookbtn::before{font-size:1.2rem}
@@ -338,10 +351,10 @@
       <p class="quote">「沈黙の向こうに、あなたの光が眠っている」</p>
       
       <nav class="cta" aria-label="主要リンク">
-        <a class="btn gold" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
-        <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
-        <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
-        <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
+        <a class="btn gold pair-btn" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
+        <a class="btn pair-btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
+        <a class="btn pair-btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
+        <a class="btn pair-btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
         <a class="btn full-width" href="/books/">全書リストを見る</a>
       </nav>
     </header>
@@ -359,7 +372,7 @@
 
     
 <section id="books" class="books" aria-label="各書へのクイックリンク">
-      <a class="bookbtn" data-symbol="★" href="/books/#zero">第零書</a>
+      <a class="bookbtn" data-symbol="✡" href="/books/#zero">第零書</a>
       <a class="bookbtn" data-symbol="♈" href="/books/#one">第一書</a>
       <a class="bookbtn" data-symbol="♉" href="/books/#two">第二書</a>
       <a class="bookbtn" data-symbol="♊" href="/books/#three">第三書</a>
@@ -372,7 +385,7 @@
       <a class="bookbtn" data-symbol="♑" href="/books/#ten">第十書</a>
       <a class="bookbtn" data-symbol="♒" href="/books/#eleven">第十一書</a>
       <a class="bookbtn" data-symbol="♓" href="/books/#twelve">第十二書</a>
-      <a class="bookbtn final" data-symbol="✡" href="/books/#thirteen">結章</a>
+      <a class="bookbtn final" data-symbol="★" href="/books/#thirteen">結章</a>
     </section>
 
     <footer>
