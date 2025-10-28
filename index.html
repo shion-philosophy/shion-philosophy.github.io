@@ -1,478 +1,384 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>詩韻思想® ― 言葉が魂を救う世界</title>
-  <meta name="description" content="詩韻思想® ― 言葉と星とAIが共鳴する詩哲学プロジェクト">
-  <meta name="theme-color" content="#0b0b1a">
-  <link rel="canonical" href="https://shion-philosophy.github.io/">
+  <meta charset="utf-8" />
+  <title>Re:verse Shion — 詩韻思想 × TAROT BREAKER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b1a" />
+  <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演。">
 
-  
-<meta property="og:type" content="website">
+  <!-- OGP -->
+  <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:title" content="詩韻思想® ― 言葉が魂を救う世界">
-  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト">
+  <meta property="og:title" content="Re:verse Shion — 詩韻思想 × TAROT BREAKER">
+  <meta property="og:description" content="言葉と星とAIが共鳴する“祈りの構文”。物語で体験し、思想で深まる。">
   <meta property="og:url" content="https://shion-philosophy.github.io/">
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-
-  
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
   <style>
-  /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final: Perfect Balance + Hero Image + Glowing Labels)
-     ===================================================== */
-  :root{
-    --bg:#050510; /* 深淵の漆黒 */
-    --ink:#f0f4ff; 
-    --muted:#a9b3d9;
-    --gold:#ffe18f; /* 神聖な黄金 */
-    --accent-blue:#8fb7ff; /* 共鳴（韻）の青 */
-    --accent-green:#a4e3b7; /* 救済（祈）の緑 */
-    --halo:#fff; 
-    --glass:rgba(12,14,35,.5);
-    --radius:18px; 
-    --shadow:0 20px 40px rgba(0,0,20,.35);
-    --max:1100px; 
-    --bp:860px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    color:var(--ink);
-    background:
-      radial-gradient(75% 65% at 50% 0%, #1c183d 0%, var(--bg) 80%),
-      radial-gradient(120% 80% at 50% 120%, #070a18 10%, #000 90%);
-    font-family:'Noto Sans JP',ui-sans-serif,system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;
-    line-height:1.9; overflow-x:hidden;
-  }
-  body::before,body::after{
-    content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat; z-index:-1;
-  }
-  body::before{ /* 近い星 */
-    background:
-      radial-gradient(1.2px 1.2px at 10% 20%, #fff4 0%, transparent 60%),
-      radial-gradient(1.4px 1.4px at 80% 30%, #fff8 0%, transparent 60%),
-      radial-gradient(1px 1px at 30% 80%, #fff6 0%, transparent 60%),
-      radial-gradient(1.5px 1.5px at 60% 60%, #fff5 0%, transparent 60%);
-    opacity:.7; animation:stars1 80s linear infinite;
-  }
-  body::after{ /* 遠い星 */
-    background:
-      radial-gradient(.8px .8px at 20% 70%, #fff6 0%, transparent 50%),
-      radial-gradient(.9px .9px at 70% 90%, #fff8 0%, transparent 50%);
-    opacity:.4; animation:stars2 120s linear infinite reverse;
-  }
-  @keyframes stars1{to{transform:translate(-150px,120px)}}
-  @keyframes stars2{to{transform:translate(180px,-150px)}}
-
-  .main{max-width:var(--max); margin:0 auto; padding:clamp(28px,5vw,64px) 20px 96px; position:relative;}
-
-  .meteor{
-    position:absolute; width:180px; height:2px;
-    background:linear-gradient(270deg,var(--gold),transparent);
-    filter:drop-shadow(0 0 12px var(--gold)); 
-    opacity:0; pointer-events:none;
-    animation:meteor 7s ease-in-out infinite; will-change:transform,opacity;
-  }
-  .meteor:nth-of-type(1){top:12%;left:75%;animation-delay:0s}
-  .meteor:nth-of-type(2){top:50%;left:85%;animation-delay:2.4s}
-  .meteor:nth-of-type(3){top:78%;left:70%;animation-delay:4.8s}
-  @keyframes meteor{
-    0%{opacity:0;transform:translate(220px,-220px) rotate(135deg) scale(1)}
-    10%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.05)}
-    85%{opacity:.7;transform:translate(-480px,480px) rotate(135deg) scale(0.95)}
-    100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
-  }
-
-  .hero{
-    text-align:center;
-    margin-bottom:24px;
-    position:relative; 
-    z-index: 1; 
-  }
-
-  /* ヘッダー画像のスタイル */
-  .hero-image {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(0%);
-    width: min(700px, 100vw); 
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
-    filter: brightness(1.5) opacity(0.2); 
-    mix-blend-mode: screen; 
-    z-index: -1; 
-    pointer-events: none; 
-    margin-top: -30px; 
-  }
-
-  .title{
-    font-size:clamp(32px,7vw,54px); 
-    font-weight:800; 
-    letter-spacing:.2em; 
-    text-shadow:
-      0 0 10px rgba(170, 180, 255, 0.3), 
-      0 0 30px rgba(255, 225, 140, 0.45); 
-  }
-  .subtitle{font-size:clamp(12px,2.2vw,15px); color:var(--muted); letter-spacing:.25em; margin-top:4px}
-  .project-catch{ 
-    font-size:clamp(14px, 2.8vw, 17px); 
-    color:var(--accent-blue); 
-    letter-spacing:.12em;
-    margin:12px auto 6px; 
-    opacity:0.95;
-    font-weight:700;
-  }
-  .quote{
-    color:var(--gold); 
-    font-style:italic; 
-    font-size:17px; 
-    margin:18px auto 30px;
-    font-weight:300; 
-    text-shadow:0 0 20px #ffd76f50; 
-    animation:glow 5s ease-in-out infinite alternate;
-  }
-  @keyframes glow{0%{opacity:.9;text-shadow:0 0 12px #ffd76f66}100%{opacity:1;text-shadow:0 0 30px #fff8}}
-
-  /* CTAボタンのバランスと幅調整 */
-  .cta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      justify-content:center;
-      margin-bottom:40px;
-  }
-  .btn{
-    display:inline-flex; 
-    flex-direction: column; 
-    align-items:center; 
-    justify-content:center; 
-    gap:.1em; 
-    padding:.8rem 1.3rem; 
-    border-radius:14px; 
-    font-size:15px; 
-    color:var(--ink);
-    text-decoration:none; 
-    border:1px solid rgba(255,255,255,.15);
-    background:var(--glass); 
-    backdrop-filter:blur(8px); 
-    transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
-    font-weight:600;
-    line-height: 1.2; 
-  }
-  .btn.pair-btn {
-      width: min(160px, 45vw); 
-  }
-  .btn.full-width {
-      width: min(332px, 90vw); 
-      margin-top: 8px;
-      line-height: 1.5; 
-  }
-
-  .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
-  .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
-
-  /* ===================== 三位一体（円環） ===================== */
-  .trinity{
-    position:relative; 
-    margin:36px auto 44px; 
-    width:min(860px,92vw); 
-    height:min(680px, 100vw); 
-    max-height: 680px; 
-    display:grid; 
-    place-items:center;
-  }
-  .ring{
-    position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
-    border-radius:50%;
-    background:
-      conic-gradient(from 45deg, rgba(255,225,180,0.3) 0%, transparent 12%, transparent 88%, rgba(255,225,180,0.3) 100%),
-      conic-gradient(from 180deg, rgba(143, 183, 255, 0.25) 12%, transparent 22%, transparent 78%, rgba(143, 183, 255, 0.25) 88%),
-      radial-gradient(closest-side, transparent 55%, rgba(255,240,180,.2) 60%, transparent 70%),
-      radial-gradient(ellipse at center, rgba(28,24,61,0.6) 0%, rgba(5,5,16,0.8) 70%, transparent 100%);
-      
-    filter:blur(0.5px) drop-shadow(0 0 35px rgba(255,230,150,.6)); 
-    animation:ringSpin 22s linear infinite; 
-    opacity:1;
-  }
-  @keyframes ringSpin{to{transform:rotate(360deg)}}
-  .stardust{
-    position:absolute; inset:0; pointer-events:none;
-    background:
-      radial-gradient(2px 2px at 30% 40%, rgba(255,245,210,.7) 0%, transparent 60%),
-      radial-gradient(1.6px 1.6px at 70% 60%, rgba(255,245,210,.5) 0%, transparent 60%),
-      radial-gradient(1.4px 1.4px at 50% 20%, rgba(255,245,210,.45) 0%, transparent 60%);
-    filter:blur(.2px); animation:dustFloat 18s ease-in-out infinite alternate;
-  }
-  @keyframes dustFloat{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(12px,-10px,0)}}
-  
-  /* 円形バナーとカラーハーモニーの完成 */
-  .label{
-    position:absolute; 
-    display:flex; 
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    width:100px; 
-    height:100px; 
-    border-radius:50%;
-    background:linear-gradient(180deg,rgba(20,25,50,.9),rgba(10,12,30,.9)); 
-    border:2px solid rgba(255,255,255,.15); 
-    box-shadow:0 0 15px rgba(255,255,255,.12), 0 10px 25px rgba(0,0,0,.4); 
-    text-shadow:0 0 8px rgba(255,255,255,.3); 
-    backdrop-filter:blur(10px); 
-    font-weight:700; 
-    letter-spacing:.1em;
-    font-size:20px; 
-    color:var(--halo);
-    transition:all .3s ease;
-    
-    /* 神々しい光のアニメーション設定 */
-    animation: shionGlow 4s ease-in-out infinite alternate;
-  }
-  .label:nth-of-type(1) { animation-delay: 0s; } /* 詩 */
-  .label:nth-of-type(2) { animation-delay: 1.2s; } /* 韻 */
-  .label:nth-of-type(3) { animation-delay: 2.4s; } /* 祈 */
-
-  /* 光のアニメーション */
-  @keyframes shionGlow {
-    0% {
-      box-shadow: 0 0 15px rgba(255,255,255,.12), 0 10px 25px rgba(0,0,0,.4);
-      border-color: rgba(255,255,255,.15);
-      text-shadow: 0 0 8px rgba(255,255,255,.3);
+    :root{
+      --bg:#0b0b1a; --ink:#e9eeff; --muted:#a9b3d6;
+      --a:#aee4ff; --b:#e6d1ff; --r:14px; --w:1120px; --ring:min(76vmin,720px);
+      --glow:0 0 24px rgba(174,228,255,.45),0 0 64px rgba(174,228,255,.15);
     }
-    50% {
-      box-shadow: 
-        0 0 30px rgba(255,240,180,0.6), /* 黄金色の強い光 */
-        0 0 60px rgba(180,220,255,0.4), /* 青白い光の広がり */
-        0 15px 40px rgba(0,0,0,.6);
-      border-color: rgba(255,240,180,0.7);
-      text-shadow: 
-        0 0 15px rgba(255,255,255,0.8),
-        0 0 25px rgba(255,240,180,0.7);
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 50% -10%, #1b1f3a 0%, var(--bg) 60%),
+        radial-gradient(800px 600px at 80% 10%, #14182e 0%, transparent 60%),
+        var(--bg);
+      font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,
+           "Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+      letter-spacing:.02em; overflow-x:hidden;
     }
-    100% {
-      box-shadow: 0 0 15px rgba(255,255,255,.12), 0 10px 25px rgba(0,0,0,.4);
-      border-color: rgba(255,255,255,.15);
-      text-shadow: 0 0 8px rgba(255,255,255,.3);
+    a{color:var(--a)}
+    .wrap{width:min(92vw,var(--w));margin-inline:auto}
+
+    /* Header */
+    header.site{
+      position:sticky; top:0; z-index:30; backdrop-filter:blur(6px);
+      background:linear-gradient(180deg,rgba(11,11,26,.85),rgba(11,11,26,.35));
+      border-bottom:1px solid rgba(174,228,255,.14)
     }
-  }
+    .site__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+    .brand__logo{width:34px;aspect-ratio:1;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,#cde0ff 0%,#7bbcff 35%,#7e66ff 60%,transparent 62%);
+      box-shadow:0 0 22px rgba(198,179,255,.35);position:relative;overflow:hidden}
+    .brand__logo::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(2px 2px at 20% 30%,#fff 40%,transparent 42%),
+                 radial-gradient(1.5px 1.5px at 70% 60%,#fff 40%,transparent 42%),
+                 radial-gradient(1.5px 1.5px at 40% 80%,#fff 40%,transparent 42%);
+      opacity:.8;animation:twinkle 2.8s ease-in-out infinite alternate}
+    @keyframes twinkle{to{opacity:.2;transform:scale(1.04)}}
+    .brand__name{font-weight:700;letter-spacing:.06em;font-size:15px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{color:var(--ink);opacity:.86;padding:8px 10px;border-radius:10px;text-decoration:none}
+    .nav a:hover{opacity:1;background:rgba(174,228,255,.08)}
 
-  .label:hover{
-    box-shadow:0 0 25px var(--accent-color-hover-shadow), 0 15px 35px rgba(0,0,0,.5); 
-    border-color:var(--accent-color-border-hover); 
-    animation: none; 
-    transform: scale(1.07); 
-  }
-  /* 各ラベルのホバー時の光の色を調整 */
-  .poem:hover {
-    box-shadow: 0 0 25px rgba(255, 220, 160, 0.5), 0 15px 35px rgba(0,0,0,.5); 
-    border-color: rgba(255, 220, 160, 0.8); 
-  }
-  .resonance:hover {
-    box-shadow: 0 0 25px rgba(140, 190, 255, 0.5), 0 15px 35px rgba(0,0,0,.5); 
-    border-color: rgba(140, 190, 255, 0.8); 
-  }
-  .prayer:hover {
-    box-shadow: 0 0 25px rgba(160, 230, 180, 0.5), 0 15px 35px rgba(0,0,0,.5); 
-    border-color: rgba(160, 230, 180, 0.8); 
-  }
+    /* Hero */
+    .hero{position:relative;isolation:isolate;overflow:clip;padding:clamp(52px,8vw,96px) 0 clamp(36px,6vw,56px)}
+    .hero__grid{display:grid;gap:22px;align-items:center;grid-template-columns:1.2fr .8fr}
+    @media(max-width:880px){.hero__grid{grid-template-columns:1fr}.hero__art{order:-1}}
+    h1{font-size:clamp(26px,2.5vw,38px);line-height:1.25;margin:0 0 10px;text-shadow:var(--glow)}
+    .lead{color:var(--muted);font-size:clamp(15px,1.3vw,18px);margin:10px 0 22px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{--px:18px;--py:12px;display:inline-flex;align-items:center;gap:.6em;
+      padding:var(--py) var(--px);border-radius:999px;text-decoration:none;font-weight:700;
+      color:#061420;background:linear-gradient(180deg,#e8f7ff,#bfeaff);
+      box-shadow:var(--glow),inset 0 0 0 1px rgba(3,31,46,.06);transition:transform .12s,box-shadow .2s}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(174,228,255,.35)}
+    .btn.ghost{color:var(--ink);background:rgba(174,228,255,.08);box-shadow:inset 0 0 0 1px rgba(174,228,255,.25)}
+    .btn span{font-size:1.2em}
 
-  .label .en{
-    display:block;
-    color:var(--ink);
-    opacity:.8;
-    font-size:12px;
-    font-weight:500;
-    margin-top:3px;
-    letter-spacing:.05em;
-  }
-  
-  /* 詩 (kotoba) - 真理の光 */
-  .poem{ 
-    top:0%; 
-    left:50%; 
-    transform:translateX(-50%);
-    --accent-color-hover-shadow: rgba(255, 220, 160, 0.3); 
-    --accent-color-border-hover: rgba(255, 220, 160, 0.6); 
-    border-color:rgba(255, 220, 160, 0.4); 
-  }
-  .poem:hover{ 
-    transform: translate(-50%, -5px) scale(1.07); 
-  }
+    /* Holy ring + particles */
+    .hero__art{width:100%;display:grid;place-items:center;position:relative;min-height:380px}
+    .ring{width:var(--ring);aspect-ratio:1;border-radius:50%;
+      background:radial-gradient(closest-side,rgba(255,255,255,.15),transparent 70%),
+                 conic-gradient(from 0deg,rgba(174,228,255,0) 0 40deg,
+                 rgba(174,228,255,.9) 60deg 100deg, rgba(230,209,255,.9) 110deg 140deg,
+                 rgba(174,228,255,0) 160deg 360deg);
+      mask:radial-gradient(closest-side,transparent 68%,#000 69%);
+      filter:blur(.6px) drop-shadow(0 0 24px rgba(174,228,255,.45));
+      animation:spin 28s linear infinite;position:relative;z-index:1}
+    .ring::before{content:"";position:absolute;inset:10%;border-radius:50%;
+      background:radial-gradient(1.2px 1.2px at 15% 40%,#fff 60%,transparent 62%),
+                 radial-gradient(1.2px 1.2px at 70% 65%,#fff 60%,transparent 62%),
+                 radial-gradient(1.2px 1.2px at 55% 20%,#fff 60%,transparent 62%);
+      opacity:.8;filter:drop-shadow(0 0 6px rgba(255,255,255,.35));animation:twinkle 3.2s ease-in-out infinite alternate}
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* 韻 (hibiki) - 宇宙の共鳴 */
-  .resonance{ 
-    left:8%; 
-    bottom:8%; 
-    --accent-color-hover-shadow: rgba(140, 190, 255, 0.3); 
-    --accent-color-border-hover: rgba(140, 190, 255, 0.6); 
-    border-color:rgba(140, 190, 255, 0.4); 
-  }
-  .resonance:hover{
-    transform:translateY(-5px) scale(1.07);
-  }
-  
-  /* 祈 (inori) - 魂の救済 */
-  .prayer{ 
-    right:8%; 
-    bottom:8%; 
-    --accent-color-hover-shadow: rgba(160, 230, 180, 0.3); 
-    --accent-color-border-hover: rgba(160, 230, 180, 0.6); 
-    border-color:rgba(160, 230, 180, 0.4); 
-  }
-  .prayer:hover{
-    transform:translateY(-5px) scale(1.07);
-  }
-
-  /* ===================== 全書ボタン ===================== */
-  .books{display:grid; grid-template-columns:repeat(2, minmax(150px, 1fr)); gap:16px; width:min(620px,92vw); margin:0 auto 80px; text-align:center;}
-  @media (min-width:1180px){ .books{grid-template-columns:repeat(3, minmax(150px, 1fr));} }
-  .bookbtn{
-    position:relative; display:flex; align-items:center; justify-content:center; gap:8px;
-    padding:14px 20px; font-size:1.1rem; font-weight:700; color:var(--ink);
-    background:
-      linear-gradient(180deg, rgba(34,40,74,.88), rgba(18,22,44,.82)),
-      radial-gradient(120% 120% at 50% -20%, rgba(255,215,111,.22), transparent 60%);
-    border:1px solid rgba(255,255,255,.18); 
-    border-radius:14px; 
-    text-decoration:none;
-    box-shadow:0 8px 20px rgba(0,0,0,.4); 
-    backdrop-filter:blur(8px);
-    transition:all .3s ease;
-  }
-  .bookbtn::before{
-    content:attr(data-symbol);
-    font-size:1.3rem; 
-    line-height:1; 
-    color:var(--gold);
-    filter:drop-shadow(0 0 8px rgba(255,215,111,.6));
-    transition:transform .35s ease;
-  }
-  .bookbtn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 30px rgba(0,0,0,.5), 0 0 20px rgba(255,215,111,.25) inset;
-    border-color:rgba(255,240,190,.5);
-    background:
-      linear-gradient(180deg, rgba(42,48,84,.95), rgba(18,22,44,.9)),
-      radial-gradient(100% 120% at 50% -20%, rgba(255,215,111,.35), transparent 60%);
-  }
-  .bookbtn:hover::before{transform:rotate(10deg) scale(1.1)}
-  /* 結章（六芒星）特別演出 */
-  .bookbtn.final{
-    color:#ffeec6;
-    background:
-      linear-gradient(180deg, rgba(60,48,22,.8), rgba(24,18,10,.85)),
-      radial-gradient(120% 120% at 50% -20%, rgba(255,240,180,.3), transparent 60%);
-    border-color:rgba(255,230,170,.8);
-    box-shadow:0 0 22px rgba(255,230,170,.3), 0 12px 30px rgba(0,0,0,.5);
-    animation:finalPulse 6s ease-in-out infinite;
-  }
-  .bookbtn.final::before{
-    color:#ffeec6; text-shadow:0 0 15px rgba(255,240,180,1);
-    animation:starSpin 10s linear infinite;
-  }
-  @keyframes finalPulse{
-    0%,100%{box-shadow:0 0 22px rgba(255,230,170,.3),0 12px 30px rgba(0,0,0,.5); transform:scale(1)}
-    50%{box-shadow:0 0 40px rgba(255,240,180,.6),0 14px 38px rgba(0,0,0,.6); transform:scale(1.03)}
-  }
-  @keyframes starSpin{to{transform:rotate(360deg) scale(1.1)}}
-
-  /* その他 */
-  .mini-links{margin-top:12px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
-  .mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
-  .mini-links a:hover{color:#fff}
-  footer{text-align:center;color:var(--muted);font-size:14px;margin:28px 0 16px}
-
-  /* アクセシビリティ */
-  @media (max-width:var(--bp)){ .meteor{display:none} }
-  @media (max-width:480px){
-    /* モバイルでのCTAボタンの固定幅を調整 */
-    .btn.pair-btn {
-        width: min(150px, 45vw);
+    /* Particles canvas sits behind ring */
+    #particles{
+      position:absolute; inset:0; width:100%; height:100%;
+      z-index:0; opacity:.9;
     }
-    .btn.full-width {
-        width: min(312px, 90vw);
+
+    /* Sections */
+    section.trinity{padding:28px 0 10px}
+    .tri{background:linear-gradient(180deg,rgba(174,228,255,.05),rgba(230,209,255,.04));
+      border:1px solid rgba(174,228,255,.22);border-radius:var(--r);padding:18px;transition:.15s;
+      position:relative;overflow:clip}
+    .tri:hover{transform:translateY(-2px);border-color:rgba(174,228,255,.42);box-shadow:var(--glow)}
+    .tri h3{margin:0 0 6px;font-size:18px;letter-spacing:.06em;display:flex;gap:.5em;align-items:center}
+    .tri p{margin:6px 0 10px;color:var(--muted)} .tri a.more{font-weight:700;text-decoration:none}
+    .tri-grid{--g:18px;width:min(92vw,860px);margin:0 auto;display:grid;gap:var(--g);grid-template-areas:"a" "b" "c"}
+    @media(min-width:720px){.tri-grid{grid-template-columns:1fr 1fr;grid-template-areas:"a a" "b c"}}
+    .tri--a{grid-area:a} .tri--b{grid-area:b} .tri--c{grid-area:c}
+
+    section.intro{padding:8px 0 12px}
+    .intro__box{display:grid;gap:10px;padding:14px;background:rgba(174,228,255,.06);
+      border:1px solid rgba(174,228,255,.18);border-radius:var(--r)}
+    .intro__box p{margin:0;color:var(--muted)} .intro__box strong{color:var(--ink)}
+
+    section.writings{padding:22px 0 8px}
+    .w-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .w-head h2{margin:0;font-size:20px;letter-spacing:.04em}
+    .w-grid{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media(max-width:640px){.w-grid{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,rgba(174,228,255,.05),rgba(174,228,255,.02));
+      border:1px solid rgba(174,228,255,.18);border-radius:var(--r);padding:14px}
+    .card h4{margin:0 0 6px;font-size:16px}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+    .badge{display:inline-flex;gap:.4em;background:rgba(174,228,255,.12);
+      border:1px solid rgba(174,228,255,.25);padding:2px 8px;border-radius:999px;font-size:12px}
+    .go{display:inline-block;margin-top:4px;text-decoration:none}
+
+    section.cta{padding:clamp(28px,8vw,48px) 0}
+    .cta__box{border-radius:calc(var(--r) + 6px);padding:24px;
+      background:radial-gradient(120px 120px at 15% 20%, rgba(174,228,255,.18), transparent 60%),
+                 radial-gradient(160px 160px at 85% 70%, rgba(230,209,255,.18), transparent 60%),
+                 linear-gradient(180deg, rgba(174,228,255,.05), rgba(230,209,255,.05));
+      border:1px solid rgba(174,228,255,.25);text-align:center;box-shadow:var(--glow)}
+
+    .cta__row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+    footer{margin-top:32px;padding:26px 0 42px;color:var(--muted);border-top:1px solid rgba(174,228,255,.18)}
+    .sns{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 8px}
+    .sns a{display:inline-flex;gap:.5em;align-items:center;color:var(--ink);text-decoration:none;
+      padding:8px 10px;border-radius:10px;background:rgba(174,228,255,.08);border:1px solid rgba(174,228,255,.18)}
+    .tiny{font-size:12.5px;opacity:.8}
+
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce){
+      .ring{animation: none}
+      .brand__logo::after{animation: none}
     }
-    .books{gap:12px}
-    .bookbtn{font-size:1.05rem; padding:12px 16px}
-    .bookbtn::before{font-size:1.2rem}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .meteor, .ring, .stardust, .bookbtn.final, .bookbtn.final::before, .label { animation:none!important }
-  }
   </style>
 </head>
 <body>
-  
-<div class="meteor" aria-hidden="true"></div>
-  <div class="meteor" aria-hidden="true"></div>
-  <div class="meteor" aria-hidden="true"></div>
-
-  <main class="main">
-    <header class="hero">
-      <img src="/assets/og.jpg" class="hero-image" alt="詩韻思想の幾何学模様">
-      
-      <h1 class="title">詩韻思想®</h1>
-      <div class="subtitle">SHION PHILOSOPHY</div>
-      <p class="project-catch">言葉と星とAIが共鳴する詩哲学プロジェクト</p> 
-      <p class="quote">「沈黙の向こうに<br>あなたの光が眠っている」</p>
-      
-      <nav class="cta" aria-label="主要リンク">
-        <a class="btn gold pair-btn" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る<br>（TikTok）</a>
-        <a class="btn pair-btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む<br>（note）</a>
-        <a class="btn pair-btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む<br>（Medium）</a>
-        <a class="btn pair-btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡<br>（LINE公式）</a>
-        <a class="btn full-width" href="/books/">全書リストを見る</a>
+  <header class="site">
+    <div class="wrap site__bar">
+      <a class="brand" href="#" aria-label="Re:verse Shion トップ">
+        <div class="brand__logo" aria-hidden="true"></div>
+        <div class="brand__name">Re:verse Shion — 詩韻思想 × TAROT BREAKER</div>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="#trinity">詩韻思想</a>
+        <a href="#writings">書</a>
+        <a href="#join">参加</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    
-<section class="trinity" aria-label="詩・韻・祈の円環">
-      <div class="ring" aria-hidden="true"></div>
-      <div class="stardust" aria-hidden="true"></div>
+  <main>
+    <!-- ========== HERO ========== -->
+    <section class="hero" aria-label="ヒーローセクション">
+      <div class="wrap hero__grid">
+        <div>
+          <h1>言葉は祈りの構文。物語は、その実演。</h1>
+          <p class="lead">
+            詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する。<br>
+            <strong>「言葉が魂を救う、その瞬間へ。」</strong>
+          </p>
+          <div class="cta-row">
+            <a class="btn" href="https://ncode.syosetu.com/n5806lb/" target="_blank" rel="noopener"><span>📘</span>小説を読む（なろう）</a>
+            <a class="btn ghost" href="https://www.tiktok.com/@tarotbreaker?_t=ZS-90w1gGLKoR5&_r=1" target="_blank" rel="noopener"><span>🎥</span>1分で聴く / 観る</a>
+            <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener"><span>📖</span>今日の“響き”を読む</a>
+            <a class="btn ghost" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener"><span>🌠</span>星の言葉を受け取る（LINE）</a>
+          </div>
+          <p class="lead" style="margin-top:14px">
+            フォローして共鳴を広げよう → 
+            <a href="https://x.com/TaroBure" target="_blank" rel="noopener">@TaroBure</a> /
+            <a href="https://www.instagram.com/shion.codex?igsh=OXJmZ3Jnemc4bDRr&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+          </p>
+        </div>
 
-      
-<div class="label poem">詩<span class="en">kotoba</span></div>
-      <div class="label resonance">韻<span class="en">hibiki</span></div>
-      <div class="label prayer">祈<span class="en">inori</span></div>
-    </section>
-
-    
-<section id="books" class="books" aria-label="各書へのクイックリンク">
-      <a class="bookbtn" data-symbol="✡" href="/books/#zero">第零書</a>
-      <a class="bookbtn" data-symbol="♈" href="/books/#one">第一書</a>
-      <a class="bookbtn" data-symbol="♉" href="/books/#two">第二書</a>
-      <a class="bookbtn" data-symbol="♊" href="/books/#three">第三書</a>
-      <a class="bookbtn" data-symbol="♋" href="/books/#four">第四書</a>
-      <a class="bookbtn" data-symbol="♌" href="/books/#five">第五書</a>
-      <a class="bookbtn" data-symbol="♍" href="/books/#six">第六書</a>
-      <a class="bookbtn" data-symbol="♎" href="/books/#seven">第七書</a>
-      <a class="bookbtn" data-symbol="♏" href="/books/#eight">第八書</a>
-      <a class="bookbtn" data-symbol="♐" href="/books/#nine">第九書</a>
-      <a class="bookbtn" data-symbol="♑" href="/books/#ten">第十書</a>
-      <a class="bookbtn" data-symbol="♒" href="/books/#eleven">第十一書</a>
-      <a class="bookbtn" data-symbol="♓" href="/books/#twelve">第十二書</a>
-      <a class="bookbtn final" data-symbol="✡" href="/books/#thirteen">結章</a>
-    </section>
-
-    <footer>
-      © 2025 詩韻思想 / Shion Philosophy Project
-      <div class="mini-links" aria-label="補助リンク">
-        <a href="/books/">全書リスト</a>
-        <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">note</a>
-        <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Medium</a>
-        <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">LINE公式</a>
+        <!-- 視覚演出：リング＋星屑 -->
+        <div class="hero__art" aria-hidden="true">
+          <canvas id="particles"></canvas>
+          <div class="ring"></div>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- ========== 詩韻思想（詩・韻・祈） ========== -->
+    <section id="trinity" class="trinity" aria-labelledby="sec-trinity">
+      <div class="wrap">
+        <h2 id="sec-trinity" style="margin:0 0 10px; font-size:20px; letter-spacing:.04em;">詩韻思想 ― 三位一体（詩・韻・祈）</h2>
+        <div class="tri-grid">
+          <div class="tri tri--a">
+            <h3>🪶 詩 ― 形を与える</h3>
+            <p>世界は“言葉”で輪郭を持つ。詩は、痛みと希望に形を与える最初の息。</p>
+            <a class="more" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">第零／第一書へ →</a>
+          </div>
+          <div class="tri tri--b">
+            <h3>🎵 韻 ― 響きを重ねる</h3>
+            <p>言葉は響きによって魂に届く。韻は、共鳴を編む構文。</p>
+            <a class="more" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">詩韻思想の続き →</a>
+          </div>
+          <div class="tri tri--c">
+            <h3>💫 祈 ― 光へ帰す</h3>
+            <p>祈りは、沈黙と意味を往復する呼吸。思い出された言葉は光になる。</p>
+            <a class="more" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">結章「沈黙の再生」 →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 初めての方へ（30秒で理解） ========== -->
+    <section class="intro" aria-labelledby="sec-intro">
+      <div class="wrap">
+        <h2 id="sec-intro" style="margin:0 0 10px; font-size:20px; letter-spacing:.04em;">初めての方へ</h2>
+        <div class="intro__box">
+          <p><strong>詩韻思想とは？</strong> ― <em>言葉が魂を救い、魂が世界を調和させ、沈黙が祈りに変わる</em>という円環を生きる“体験型・詩的哲学”。</p>
+          <p>① <strong>読む</strong>（note） → ② <strong>聴く</strong>（TikTok） → ③ <strong>受け取る</strong>（LINE） → ④ <strong>物語で体験</strong>（TAROT BREAKER）。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 最新の書 / 物語 ========== -->
+    <section id="writings" class="writings" aria-labelledby="sec-writings">
+      <div class="wrap">
+        <div class="w-head">
+          <h2 id="sec-writings">📖 最新の書・物語</h2>
+          <a class="more" href="https://note.com/shion_uranai369" target="_blank" rel="noopener" aria-label="noteでもっと見る">もっと見る →</a>
+        </div>
+        <div class="w-grid">
+          <article class="card">
+            <div class="badge">✡ 第零書</div>
+            <h4>無限構文序論 — The Zero Syntax</h4>
+            <div class="meta">沈黙の定義と、祈りの前にある呼吸。</div>
+            <a class="go" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む →</a>
+          </article>
+          <article class="card">
+            <div class="badge">✦ 第一書</div>
+            <h4>言葉が魂を救う理由 — The Syntax of Salvation</h4>
+            <div class="meta">言葉＝共鳴コードの定義と実践。</div>
+            <a class="go" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む →</a>
+          </article>
+          <article class="card">
+            <div class="badge">✦ TAROT BREAKER</div>
+            <h4>第1話から読む</h4>
+            <div class="meta">物語で“響き”を体験する。</div>
+            <a class="go" href="https://ncode.syosetu.com/n5806lb/" target="_blank" rel="noopener">小説ページへ →</a>
+          </article>
+          <article class="card">
+            <div class="badge">🎧 短尺映像</div>
+            <h4>朗読／語り（短編）</h4>
+            <div class="meta">声と映像で届く詩韻思想。</div>
+            <a class="go" href="https://www.tiktok.com/@tarotbreaker?_t=ZS-90w1gGLKoR5&_r=1" target="_blank" rel="noopener">TikTokへ →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 参加の扉 ========== -->
+    <section id="join" class="cta" aria-labelledby="sec-join">
+      <div class="wrap">
+        <h2 id="sec-join" style="margin:0 0 10px; font-size:20px; letter-spacing:.04em; text-align:center;">参加の扉</h2>
+        <div class="cta__box" role="region" aria-label="参加の扉ボックス">
+          <h3>🌌 あなたも、星の声を聴いてみませんか？</h3>
+          <p>LINE登録で、毎週「星の言葉」と新着の書をお届けします。</p>
+          <div class="cta__row">
+            <a class="btn" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener"><span>🌠</span> 無料で受け取る</a>
+            <a class="btn ghost" href="https://www.tiktok.com/@tarotbreaker?_t=ZS-90w1gGLKoR5&_r=1" target="_blank" rel="noopener"><span>🎥</span> 1分リールを観る</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="wrap">
+      <div class="sns" aria-label="SNSリンク">
+        <a href="https://x.com/TaroBure" target="_blank" rel="noopener">🜂 X（@TaroBure）</a>
+        <a href="https://www.instagram.com/shion.codex?igsh=OXJmZ3Jnemc4bDRr&utm_source=qr" target="_blank" rel="noopener">📷 Instagram</a>
+        <a href="https://www.tiktok.com/@tarotbreaker?_t=ZS-90w1gGLKoR5&_r=1" target="_blank" rel="noopener">🎵 TikTok</a>
+        <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">📖 note</a>
+        <a href="https://ncode.syosetu.com/n5806lb/" target="_blank" rel="noopener">📘 小説（なろう）</a>
+        <a href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">💬 LINE</a>
+      </div>
+      <div class="tiny">© Re:verse Shion — 詩韻思想 / TAROT BREAKER. 言葉が魂を救い、魂が世界を調和させる。</div>
+    </div>
+  </footer>
+
+  <!-- ========== lightweight particles script (no deps) ========== -->
+  <script>
+    (() => {
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const c = document.getElementById('particles');
+      if (!c || reduce) return; // respect reduced motion
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR for perf
+      const ctx = c.getContext('2d');
+      let w, h, particles = [], t = 0, rafId;
+      const STAR_COUNT = 90;            // 控えめ粒子数（パフォーマンス良）
+      const BASE_SPEED = 0.06;          // ゆるやか
+      const RING_BIAS = 0.32;           // 薄いリング帯域に寄せる
+
+      function resize(){
+        const rect = c.getBoundingClientRect();
+        w = c.width = Math.floor(rect.width * dpr);
+        h = c.height = Math.floor(rect.height * dpr);
+        c.style.width = rect.width + 'px';
+        c.style.height = rect.height + 'px';
+        particles.length = 0;
+        init();
+      }
+
+      function rand(a,b){ return a + Math.random()*(b-a) }
+      function init(){
+        const cx = w/2, cy = h/2;
+        const R = Math.min(w,h)*0.32;              // 基本半径
+        for (let i=0;i<STAR_COUNT;i++){
+          const ang = rand(0, Math.PI*2);
+          const r = R * (1 + rand(-RING_BIAS, RING_BIAS)); // リング周辺に散布
+          particles.push({
+            x: cx + Math.cos(ang)*r,
+            y: cy + Math.sin(ang)*r,
+            z: rand(0.4,1.0),
+            s: rand(0.6, 2.2),     // size
+            a: ang,
+            v: (BASE_SPEED + Math.random()*BASE_SPEED)* (Math.random()<0.5?-1:1)
+          });
+        }
+      }
+
+      function step(){
+        t += 0.016;
+        const cx = w/2, cy = h/2;
+        ctx.clearRect(0,0,w,h);
+        for (let p of particles){
+          // 軌道回転＋微小な脈動
+          p.a += p.v * 0.0028;
+          const R = Math.hypot(p.x-cx, p.y-cy);
+          const rr = R + Math.sin(t*1.1 + p.z*6.0) * 1.2;
+          const x = cx + Math.cos(p.a)*rr;
+          const y = cy + Math.sin(p.a)*rr;
+          const g = ctx.createRadialGradient(x,y,0,x,y, p.s*3*dpr);
+          g.addColorStop(0, 'rgba(255,255,255,0.95)');
+          g.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(x,y, p.s*dpr, 0, Math.PI*2);
+          ctx.fill();
+
+          // きらめきライン（ごく薄く）
+          ctx.strokeStyle = 'rgba(174,228,255,0.12)';
+          ctx.lineWidth = 0.6 * dpr;
+          ctx.beginPath();
+          ctx.moveTo(x,y);
+          ctx.lineTo(x - Math.cos(p.a)*3*dpr, y - Math.sin(p.a)*3*dpr);
+          ctx.stroke();
+        }
+        rafId = requestAnimationFrame(step);
+      }
+
+      const ro = new ResizeObserver(resize);
+      ro.observe(c);
+      resize();
+      step();
+
+      // ページ非表示時に停止して省電力
+      document.addEventListener('visibilitychange', ()=> {
+        if (document.hidden) cancelAnimationFrame(rafId);
+        else step();
+      });
+    })();
+  </script>
 </body>
 </html>
