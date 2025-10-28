@@ -1,10 +1,11 @@
-/* ========== Global ========== */
+/* ===========================
+   Global
+   =========================== */
 :root{
   --bg:#0b0b1a; --ink:#e8ecff; --muted:#a9b3d9;
   --accent:#8fb7ff; --gold:#ffd76f;
-  --ok:#a6f0c6; --warn:#ffd4a1;
   --radius:18px; --shadow:0 20px 40px rgba(0,0,20,.35);
-  --maxw:1100px; --bp:860px;
+  --max:1100px; --bp:860px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -12,207 +13,195 @@ html,body{height:100%}
 body{
   color:var(--ink);
   background:
-    radial-gradient(70% 60% at 50% 0%, #181d3b 0%, var(--bg) 70%),
-    radial-gradient(120% 80% at 50% 120%, #070a18 10%, #000 90%);
-  font-family:'Noto Sans JP', system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
-  line-height:1.9; overflow-x:hidden;
+    radial-gradient(60% 40% at 50% 0%, #141a3b 0%, var(--bg) 60%),
+    radial-gradient(110% 70% at 50% 120%, #0a102a 20%, #070a18 80%);
+  font-family:'Noto Sans JP', ui-sans-serif, system-ui, "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height:1.9;
+  overflow-x:hidden;
 }
 
-/* 星屑（CSSのみ） */
+/* 星屑エフェクト */
 body::before, body::after{
   content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat;
 }
 body::before{
   background:
-    radial-gradient(1px 1px at 10% 20%, #fff4 0%, transparent 55%),
-    radial-gradient(1px 1px at 80% 30%, #fff8 0%, transparent 55%),
-    radial-gradient(1px 1px at 30% 80%, #fff6 0%, transparent 55%),
-    radial-gradient(1px 1px at 60% 60%, #fff5 0%, transparent 55%);
-  opacity:.7; animation:stars1 60s linear infinite; background-size:320px 320px;
+    radial-gradient(1px 1px at 12% 24%, #fff4 0%, transparent 52%),
+    radial-gradient(1px 1px at 78% 32%, #fffc 0%, transparent 52%),
+    radial-gradient(1px 1px at 44% 68%, #fffa 0%, transparent 52%),
+    radial-gradient(1px 1px at 20% 86%, #fff8 0%, transparent 52%),
+    radial-gradient(1px 1px at 60% 12%, #fff6 0%, transparent 52%),
+    radial-gradient(1px 1px at 86% 79%, #fff9 0%, transparent 52%);
+  opacity:.75; animation: starDrift 60s linear infinite; background-size: 300px 300px;
 }
 body::after{
   background:
-    radial-gradient(1px 1px at 20% 70%, #fff6 0%, transparent 50%),
-    radial-gradient(1px 1px at 70% 90%, #fff8 0%, transparent 50%);
-  opacity:.4; animation:stars2 80s linear infinite reverse; background-size:420px 420px;
+    radial-gradient(1px 1px at 15% 55%, #fff6 0%, transparent 50%),
+    radial-gradient(1px 1px at 72% 70%, #fff4 0%, transparent 50%);
+  opacity:.45; animation: starDrift2 90s linear infinite reverse; background-size: 400px 400px;
 }
-@keyframes stars1{to{transform:translate(-120px,100px)}}
-@keyframes stars2{to{transform:translate(120px,-120px)}}
+@keyframes starDrift{to{transform:translate3d(-120px,140px,0)}}
+@keyframes starDrift2{to{transform:translate3d(120px,-120px,0)}}
 
-.main{max-width:var(--maxw); margin:0 auto; padding:clamp(28px,5vw,64px) 20px 90px; position:relative}
+.main{max-width:var(--max); margin:0 auto; padding:clamp(20px,4vw,40px) 20px 80px; position:relative}
 
 /* 流星（右上→左下） */
 .meteor{
-  position:absolute;width:180px;height:2px;
-  background:linear-gradient(270deg,var(--gold),transparent);
-  filter:drop-shadow(0 0 10px var(--gold));opacity:0;pointer-events:none;
-  animation:meteor 7s ease-in-out infinite;will-change:transform,opacity;
+  position:absolute;width:180px;height:2px;background:linear-gradient(270deg,var(--gold),transparent);
+  filter:drop-shadow(0 0 12px var(--gold));opacity:0;pointer-events:none;
+  animation:shoot 7s ease-in-out infinite;will-change:transform,opacity;
 }
-.meteor:nth-of-type(1){top:12%;left:75%;animation-delay:0s}
-.meteor:nth-of-type(2){top:50%;left:85%;animation-delay:2.4s}
-.meteor:nth-of-type(3){top:78%;left:70%;animation-delay:4.8s}
-@keyframes meteor{
+.meteor:nth-of-type(1){top:12%;left:78%;animation-delay:0s}
+.meteor:nth-of-type(2){top:46%;left:88%;animation-delay:2.4s}
+.meteor:nth-of-type(3){top:72%;left:70%;animation-delay:4.8s}
+@keyframes shoot{
   0%{opacity:0;transform:translate(220px,-220px) rotate(135deg) scale(1)}
-  10%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.05)}
-  85%{opacity:.7;transform:translate(-480px,480px) rotate(135deg) scale(0.95)}
+  8%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.04)}
+  85%{opacity:.75;transform:translate(-420px,420px) rotate(135deg) scale(0.96)}
   100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
 }
 
-/* ========== HERO ========== */
-.hero{ text-align:center; margin-bottom:24px }
-.title{
-  font-weight:800; letter-spacing:.16em; font-size:clamp(28px,6vw,48px);
-  text-shadow:0 0 20px #aab4ff2e, 0 0 2px #ffffff50;
+/* ===========================
+   HERO（og.jpgを背景として使用）
+   =========================== */
+.hero{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  min-height:52vh;
+  display:flex; align-items:center; justify-content:center;
+  background: url('./og.jpg') center/cover no-repeat;
+  box-shadow:0 18px 50px #0008;
+  margin-top:12px;
 }
-.subtitle{
-  color:var(--muted); letter-spacing:.12em; font-size:clamp(12px,2vw,14px);
-  margin-top:2px; text-transform:uppercase;
+.hero__veil{
+  position:absolute; inset:0;
+  background: radial-gradient(60% 50% at 50% 40%, rgba(0,0,0,.25), rgba(0,0,0,.65));
+  backdrop-filter: blur(2px);
 }
-.catch{
-  color:var(--gold); font-style:italic; margin:16px auto 18px;
-  text-shadow:0 0 18px #ffd76f40; animation:glow 5s ease-in-out infinite alternate;
+.hero__inner{position:relative; text-align:center; padding:56px 20px}
+.hero__title{
+  font-size:clamp(28px,6vw,56px); font-weight:800; letter-spacing:.18em;
+  text-shadow:0 3px 20px #aab4ff2e, 0 0 1px #ffffff58;
 }
-@keyframes glow{0%{opacity:.82;text-shadow:0 0 10px #ffd76f66}100%{opacity:1;text-shadow:0 0 25px #fff8}}
+.hero__subtitle{color:#c8d4ff; letter-spacing:.12em; margin:.2rem 0 1rem; font-size:clamp(12px,2.2vw,14px)}
+.hero__quote{
+  color:var(--gold); font-style:italic; margin:.2rem 0 1.2rem;
+  text-shadow:0 0 18px #ffd76f40, 0 1px 0 #0006; animation:glowText 4s ease-in-out infinite alternate;
+}
+@keyframes glowText{0%{opacity:.82;text-shadow:0 0 10px #ffd76f66}100%{opacity:1;text-shadow:0 0 25px #fff6ccaa}}
 
-.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0 8px}
+/* CTA */
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:4px}
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5em;
-  padding:.7rem 1.1rem;border-radius:12px;text-decoration:none;font-size:14px;
-  color:var(--ink); border:1px solid #9cc7ff3d; background:rgba(16,26,56,.45);
-  backdrop-filter:blur(6px); transition:transform .15s, box-shadow .2s, background .2s;
+  display:inline-flex;align-items:center;gap:.5em;padding:.7rem 1.1rem;border-radius:12px;
+  color:var(--ink);text-decoration:none;border:1px solid #9cc7ff3d;background:rgba(16,26,56,.5);
+  backdrop-filter:blur(6px); transition:transform .15s, box-shadow .2s; font-size:14px;
 }
-.btn:hover{ transform:translateY(-1px); box-shadow:0 8px 20px #0005 }
-.btn.gold{ background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37 }
-.btn.outline{ background:transparent }
+.btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px #00000059}
+.btn.primary{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37}
 
-/* ========== TRINITY ========== */
+/* ===========================
+   三位一体（詩・韻・祈）
+   =========================== */
 .trinity{
-  --size: min(76vw, 560px); /* ビューに応じて自動縮尺 */
-  --radius: calc(var(--size) * 0.38); /* ノード半径（中心からの距離） */
-  position:relative; width:var(--size); aspect-ratio:1; margin:20px auto 18px;
+  position:relative; margin:36px auto 22px; max-width:900px; min-height:260px;
 }
-
-/* 回転円環（ハロ） */
-.halo{
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:92%; aspect-ratio:1; border-radius:50%;
+.ring{
+  position:absolute; inset:0; margin:auto; width:min(72vmin,500px); height:min(72vmin,500px);
+  border-radius:50%;
   background:
-    conic-gradient(from 0deg,
-      rgba(255,215,111,.00),
-      rgba(255,215,111,.35) 12%,
-      rgba(255,215,111,.00) 24%,
-      rgba(180,210,255,.30) 36%,
-      rgba(255,215,111,.00) 48%,
-      rgba(180,210,255,.28) 60%,
-      rgba(255,215,111,.00) 72%,
-      rgba(255,215,111,.35) 84%,
-      rgba(255,215,111,.00) 100%);
-  filter:blur(0.6px) drop-shadow(0 0 12px rgba(255,215,111,.45));
-  /* 中抜き（リング化） */
-  -webkit-mask:
-    radial-gradient(closest-side, transparent 64%, #000 65%);
-          mask:
-    radial-gradient(closest-side, transparent 64%, #000 65%);
-  animation:spin 22s linear infinite;
+    radial-gradient(closest-side, rgba(255,215,111,.18), transparent 60%),
+    conic-gradient(from 0deg, rgba(255,215,111,.45), rgba(255,215,111,.05) 45%, rgba(255,215,111,.45) 90%, rgba(255,215,111,.05) 100%);
+  box-shadow:inset 0 0 80px #ffd76f33, 0 0 60px #ffd76f22;
+  animation:ringSpin 28s linear infinite;
 }
-@keyframes spin{ to{ transform:translate(-50%,-50%) rotate(360deg) } }
-
-/* コア（神々しい中心） */
-.core{
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:70%; aspect-ratio:1; border-radius:50%;
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+.sparks{
+  position:absolute; inset:0; margin:auto; width:min(76vmin,540px); height:min(76vmin,540px);
   background:
-    radial-gradient(circle at 50% 40%, rgba(255,230,160,.9), rgba(255,215,111,.35) 48%, rgba(255,215,111,.08) 68%, transparent 72%),
-    radial-gradient(closest-side, rgba(255,255,255,.35), transparent 70%);
-  box-shadow:
-    0 0 28px rgba(255,215,111,.35),
-    inset 0 0 24px rgba(255,255,255,.28);
+    radial-gradient(2px 2px at 12% 24%, #fff6 0, transparent 60%),
+    radial-gradient(1.5px 1.5px at 64% 72%, #fff5 0, transparent 60%),
+    radial-gradient(1.3px 1.3px at 80% 40%, #fff8 0, transparent 60%);
+  filter:blur(.5px);
+  animation:sparkDrift 22s ease-in-out infinite alternate;
+}
+@keyframes sparkDrift{
+  0%{transform:translate(3px,-2px) rotate(0deg)}50%{transform:translate(-6px,4px) rotate(3deg)}100%{transform:translate(3px,-2px) rotate(0deg)}
 }
 
-/* 星砂（粒子の輪） */
-.stardust{
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:86%; aspect-ratio:1; border-radius:50%;
-  background:
-    radial-gradient(1.5px 1.5px at 10% 40%, #fff9 0, transparent 55%),
-    radial-gradient(1.2px 1.2px at 78% 65%, #fff7 0, transparent 55%),
-    radial-gradient(1px 1px at 56% 20%, #fff6 0, transparent 55%),
-    radial-gradient(1px 1px at 28% 78%, #fff6 0, transparent 55%);
-  -webkit-mask: radial-gradient(closest-side, transparent 52%, #000 53%, #000 72%, transparent 73%);
-          mask: radial-gradient(closest-side, transparent 52%, #000 53%, #000 72%, transparent 73%);
-  opacity:.8; animation:dust 14s ease-in-out infinite alternate;
+/* 各ラベル配置：詩=右寄せ、韻=左寄せ、祈=左寄せ（要望仕様） */
+.tri{
+  position:absolute; display:flex; align-items:center; justify-content:center;
+  width:140px; height:140px; border-radius:16px;
+  background:linear-gradient(180deg,#161c3e99,#0d122c99);
+  border:1px solid #9cc7ff2d; box-shadow:0 8px 20px #0005;
+  backdrop-filter:blur(4px);
 }
-@keyframes dust{
-  0%{ filter:blur(.0px); transform:translate(-50%,-50%) rotate(0deg) }
-  100%{ filter:blur(.3px); transform:translate(-50%,-50%) rotate(12deg) }
+.tri__label{
+  font-size:34px; letter-spacing:.2em; text-shadow:0 2px 16px #aab4ff33, 0 0 1px #ffffff40;
 }
 
-/* 三位一体ノード（極座標で厳密三角） */
-.node{
-  --angle: 0deg; /* inlineで与える */
-  position:absolute; left:50%; top:50%;
-  transform:
-    rotate(var(--angle))
-    translate(var(--radius))
-    rotate(calc(-1 * var(--angle)));
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-width:86px; padding:.6rem .9rem; border-radius:14px;
-  background:linear-gradient(180deg,#212a58cc,#12183dcc);
-  border:1px solid #9cc7ff3d; box-shadow:0 10px 24px #0005;
-  backdrop-filter:blur(6px);
-  text-align:center;
+/* 配置（中央の黄金円を基準） */
+.tri--poem{  /* 詩（右寄せ・右上） */
+  top:6%; right:6%;
 }
-.node .kanji{ font-size:26px; letter-spacing:.06em; text-shadow:0 2px 12px #0008 }
-.node .roma{ font-size:12px; color:#cbd7ff; letter-spacing:.08em; opacity:.95 }
-
-/* 役割ごとの色ニュアンス（微差） */
-.poem{    background:linear-gradient(180deg,#272f66cc,#141a44cc) }
-.resonance{background:linear-gradient(180deg,#23365ccc,#111a3dcc) }
-.prayer{  background:linear-gradient(180deg,#2a2f5ecc,#151947cc) }
-
-/* バナー（神秘グラデ） */
-.trinity-banner{
-  position:absolute; left:50%; bottom:-46px; transform:translateX(-50%);
-  padding:.5rem 1rem; border-radius:999px;
-  border:1px solid #ffffff24;
-  background:linear-gradient(90deg, rgba(138,168,255,.28), rgba(255,215,111,.28));
-  color:#e8ecff; font-size:13px; letter-spacing:.08em;
-  backdrop-filter:blur(6px);
+.tri--rhyme{ /* 韻（左寄せ・左上） */
+  top:10%; left:6%;
+}
+.tri--prayer{ /* 祈（左寄せ・左下気味） */
+  bottom:6%; left:12%;
 }
 
-/* ========== BOOK LIST（2列固定） ========== */
-.booklist{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 32px auto 0;
-  max-width: 760px;
+/* ===========================
+   クイックナビ（各書ボタン）
+   =========================== */
+.bookgrid{
+  margin:18px auto 6px; max-width:900px;
+  display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px;
 }
-.book-btn{
+.bookbtn{
   display:flex; align-items:center; justify-content:center; gap:.6em;
-  width:100%; padding:.85rem .9rem; border-radius:12px; text-decoration:none;
-  font-size:14px; color:var(--ink);
-  border:1px solid #9cc7ff2d;
-  background:linear-gradient(180deg,#1a2148cc,#0d1333cc);
-  backdrop-filter:blur(6px);
-  transition:transform .15s, box-shadow .2s, background .2s;
+  padding:.65rem .9rem; border-radius:12px; text-decoration:none; color:#0e0b18; font-weight:700;
+  background:linear-gradient(145deg,#b8c9ff,#ffe18f);
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 8px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
 }
-.book-btn:hover{ transform:translateY(-1px); box-shadow:0 8px 20px #0005 }
-.book-btn .ico{ font-size:15px; opacity:.92 }
+.bookbtn:hover{filter:brightness(1.05)}
+/* 2列固定（スマホで見やすく） */
+@media (min-width:861px){
+  .bookgrid{grid-template-columns:repeat(4, minmax(0, 1fr))}
+}
 
-/* ========== FOOTER ========== */
-.foot{ text-align:center; color:var(--muted); font-size:13px; margin:46px 0 30px }
-.mini-links{ margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
-.mini-links a{ color:#c7d8ff; text-decoration:none; border-bottom:1px dashed #c7d8ff73 }
-.mini-links a:hover{ color:#fff }
+/* ===========================
+   リード文
+   =========================== */
+.lead{
+  margin:18px auto 0; max-width:900px; color:#cfd7ff; text-align:center;
+  border:1px solid #9cc7ff2d; border-radius:16px; padding:14px 16px;
+  background:linear-gradient(180deg,#121a3a99,#090e2199); box-shadow:var(--shadow);
+}
 
-/* ========== Responsive / A11y ========== */
-@media (max-width: 400px){
-  .booklist{ grid-template-columns: 1fr; } /* 超狭幅のみ1列 */
+/* ===========================
+   フッター
+   =========================== */
+.footer{
+  text-align:center; color:#a9b3d9; font-size:13px; margin:40px 0 30px;
 }
-@media (max-width: var(--bp)){
-  .meteor{ display:none } /* 端末省電力 */
+.mini-links{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
+.mini-links a:hover{color:#fff}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion:reduce){
+  .meteor, .ring, .sparks, body::before, body::after{animation:none!important; opacity:.9}
 }
-@media (prefers-reduced-motion: reduce){
-  .meteor, .halo, .stardust, body::before, body::after{ animation:none !important; opacity:.95 }
+
+/* レスポンシブ微調整 */
+@media (max-width:720px){
+  .tri{width:120px;height:120px}
+  .tri__label{font-size:28px}
+  .tri--poem{top:6%; right:4%}
+  .tri--rhyme{top:10%; left:4%}
+  .tri--prayer{bottom:6%; left:8%}
 }
