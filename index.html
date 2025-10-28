@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
+  
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>詩韻思想® ― 言葉が魂を救う世界</title>
   <meta name="description" content="詩韻思想® ― 言葉と星とAIが共鳴する詩哲学プロジェクト。沈黙の向こうに、あなたの光が眠っている。">
   <meta name="theme-color" content="#0b0b1a">
   <link rel="canonical" href="https://shion-philosophy.github.io/">
 
-  <meta property="og:type" content="website">
+  
+<meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="詩韻思想® ― 言葉が魂を救う世界">
   <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。沈黙の向こうに、あなたの光が眠っている。">
@@ -16,59 +18,68 @@
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
+  
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Complete)
+     Shion Philosophy — Mystic One-File Theme (Final)
      ===================================================== */
   :root{
-    --bg:#0b0b1a; --ink:#e8ecff; --muted:#a9b3d9;
-    --gold:#ffd76f; --accent:#8fb7ff; --halo:#fff2c0;
-    --glass:rgba(16,26,56,.45);
-    --radius:18px; --shadow:0 20px 40px rgba(0,0,20,.35);
-    --max:1100px; --bp:860px;
+    --bg:#050510; /* 深淵の漆黒 */
+    --ink:#f0f4ff; 
+    --muted:#a9b3d9;
+    --gold:#ffe18f; /* 神聖な黄金 */
+    --accent-blue:#8fb7ff; /* 共鳴（韻）の青 */
+    --accent-green:#a4e3b7; /* 救済（祈）の緑 */
+    --halo:#fff; 
+    --glass:rgba(12,14,35,.5);
+    --radius:18px; 
+    --shadow:0 20px 40px rgba(0,0,20,.35);
+    --max:1100px; 
+    --bp:860px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
     color:var(--ink);
+    /* 背景をより深く、星雲のようなグラデーションに */
     background:
-      radial-gradient(70% 60% at 50% 0%, #181d3b 0%, var(--bg) 70%),
+      radial-gradient(75% 65% at 50% 0%, #1c183d 0%, var(--bg) 80%),
       radial-gradient(120% 80% at 50% 120%, #070a18 10%, #000 90%);
     font-family:'Noto Sans JP',ui-sans-serif,system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;
     line-height:1.9; overflow-x:hidden;
   }
-  /* 星屑（軽量） */
+  /* 星屑（立体感を出すためにレイヤーを追加） */
   body::before,body::after{
     content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat; z-index:-1;
   }
-  body::before{
+  body::before{ /* 近い星 */
     background:
-      radial-gradient(1px 1px at 10% 20%, #fff4 0%, transparent 55%),
-      radial-gradient(1px 1px at 80% 30%, #fff8 0%, transparent 55%),
-      radial-gradient(1px 1px at 30% 80%, #fff6 0%, transparent 55%),
-      radial-gradient(1px 1px at 60% 60%, #fff5 0%, transparent 55%);
-    opacity:.7; animation:stars1 60s linear infinite;
+      radial-gradient(1.2px 1.2px at 10% 20%, #fff4 0%, transparent 60%),
+      radial-gradient(1.4px 1.4px at 80% 30%, #fff8 0%, transparent 60%),
+      radial-gradient(1px 1px at 30% 80%, #fff6 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 60% 60%, #fff5 0%, transparent 60%);
+    opacity:.7; animation:stars1 80s linear infinite;
   }
-  body::after{
+  body::after{ /* 遠い星 */
     background:
-      radial-gradient(1px 1px at 20% 70%, #fff6 0%, transparent 50%),
-      radial-gradient(1px 1px at 70% 90%, #fff8 0%, transparent 50%);
-    opacity:.4; animation:stars2 80s linear infinite reverse;
+      radial-gradient(.8px .8px at 20% 70%, #fff6 0%, transparent 50%),
+      radial-gradient(.9px .9px at 70% 90%, #fff8 0%, transparent 50%);
+    opacity:.4; animation:stars2 120s linear infinite reverse;
   }
-  @keyframes stars1{to{transform:translate(-120px,100px)}}
-  @keyframes stars2{to{transform:translate(120px,-120px)}}
+  @keyframes stars1{to{transform:translate(-150px,120px)}}
+  @keyframes stars2{to{transform:translate(180px,-150px)}}
 
   /* メイン枠 */
   .main{max-width:var(--max); margin:0 auto; padding:clamp(28px,5vw,64px) 20px 96px; position:relative;}
 
-  /* 流星（右上→左下） */
+  /* 流星 */
   .meteor{
     position:absolute; width:180px; height:2px;
     background:linear-gradient(270deg,var(--gold),transparent);
-    filter:drop-shadow(0 0 10px var(--gold));
+    filter:drop-shadow(0 0 12px var(--gold)); /* 光を強く */
     opacity:0; pointer-events:none;
     animation:meteor 7s ease-in-out infinite; will-change:transform,opacity;
   }
@@ -85,48 +96,64 @@
   /* ヒーロー */
   .hero{text-align:center;margin-bottom:24px}
   .title{
-    font-size:clamp(28px,6vw,48px); font-weight:800; letter-spacing:.15em;
-    text-shadow:0 0 20px #aab4ff2e,0 0 2px #ffffff50;
+    font-size:clamp(32px,7vw,54px); /* サイズを少し大きく */
+    font-weight:800; 
+    letter-spacing:.2em; /* 文字間隔を広げ重厚に */
+    /* 二層の光でタイトルを神聖に演出 */
+    text-shadow:
+      0 0 10px rgba(170, 180, 255, 0.3), /* 弱い青白い光 */
+      0 0 30px rgba(255, 225, 140, 0.45); /* 強い黄金の光 */
   }
-  .subtitle{font-size:clamp(12px,2.2vw,14px); color:var(--muted); letter-spacing:.2em; margin-top:4px}
-  .project-catch{ /* 追加したキャッチコピーのスタイル */
-    font-size:clamp(13px, 2.5vw, 16px); 
-    color:var(--accent); /* 明るい青系統の色 */
-    letter-spacing:.1em;
-    margin:10px auto 4px; /* タイトルと引用句の間のスペースを調整 */
-    opacity:0.9;
-    font-weight:600;
+  .subtitle{font-size:clamp(12px,2.2vw,15px); color:var(--muted); letter-spacing:.25em; margin-top:4px}
+  .project-catch{ /* キャッチコピー */
+    font-size:clamp(14px, 2.8vw, 17px); 
+    color:var(--accent-blue); 
+    letter-spacing:.12em;
+    margin:12px auto 6px; 
+    opacity:0.95;
+    font-weight:700;
   }
   .quote{
-    color:var(--gold); font-style:italic; font-size:16px; margin:16px auto 26px;
-    text-shadow:0 0 18px #ffd76f40; animation:glow 5s ease-in-out infinite alternate;
+    color:var(--gold); 
+    font-style:italic; 
+    font-size:17px; /* サイズを調整 */
+    margin:18px auto 30px;
+    font-weight:300; /* 詩的なフォントに近づけるためウェイトを下げる */
+    text-shadow:0 0 20px #ffd76f50; 
+    animation:glow 5s ease-in-out infinite alternate;
   }
-  @keyframes glow{0%{opacity:.85;text-shadow:0 0 10px #ffd76f66}100%{opacity:1;text-shadow:0 0 25px #fff8}}
+  @keyframes glow{0%{opacity:.9;text-shadow:0 0 12px #ffd76f66}100%{opacity:1;text-shadow:0 0 30px #fff8}}
 
   /* CTA */
-  .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
+  .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:40px}
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:.5em;
-    padding:.7rem 1.1rem; border-radius:12px; font-size:14px; color:var(--ink);
-    text-decoration:none; border:1px solid rgba(255,255,255,.12);
-    background:var(--glass); backdrop-filter:blur(6px);
+    padding:.8rem 1.3rem; /* サイズを大きく */
+    border-radius:14px; 
+    font-size:15px; /* サイズを調整 */
+    color:var(--ink);
+    text-decoration:none; 
+    border:1px solid rgba(255,255,255,.15);
+    background:var(--glass); 
+    backdrop-filter:blur(8px); /* ブラーを強調 */
     transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
+    font-weight:600;
   }
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0004}
-  .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
+  .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
 
-  /* ===================== 三位一体（円環） - 修正箇所 ===================== */
-  .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:400px; display:grid; place-items:center;} /* heightを調整 */
+  /* ===================== 三位一体（円環） - 最終調整 ===================== */
+  .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:400px; display:grid; place-items:center;}
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
-    /* 光を放つようなグラデーションとシャドウに調整 */
+    /* 光の強度を上げ、神々しさを演出 */
     background:
-      radial-gradient(closest-side, transparent 60%, rgba(255,230,150,.35) 63%, transparent 68%), /* 内側光 */
-      conic-gradient(from 0deg, rgba(255,215,111,.85), rgba(255,215,111,.2), rgba(255,215,111,.85)); /* 円環の輝きを強調 */
-    filter:blur(.5px) drop-shadow(0 0 35px rgba(255,230,150,.6)); /* より強い光のシャドウ */
-    animation:ringSpin 20s linear infinite; /* 回転速度調整 */
-    opacity:.95; /* 透明度を少し下げる */
+      radial-gradient(closest-side, transparent 60%, rgba(255,240,180,.4) 63%, transparent 68%), 
+      conic-gradient(from 0deg, rgba(255,230,150,.9), rgba(255,215,111,.25), rgba(255,230,150,.9)); 
+    filter:blur(0.5px) drop-shadow(0 0 45px rgba(255,230,150,.8)); /* 最強の光 */
+    animation:ringSpin 18s linear infinite; 
+    opacity:1;
   }
   @keyframes ringSpin{to{transform:rotate(360deg)}}
   .stardust{
@@ -139,119 +166,133 @@
   }
   @keyframes dustFloat{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(12px,-10px,0)}}
   
-  /* 円形バナーと文字バランスの調整 */
+  /* 円形バナーとカラーハーモニーの完成 */
   .label{
     position:absolute; 
-    display:flex; /* フレックスボックスで子要素を中央寄せ */
+    display:flex; 
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    width:90px; /* 円形バナーの幅 */
-    height:90px; /* 円形バナーの高さ */
-    border-radius:50%; /* 円形にする */
-    background:linear-gradient(180deg,rgba(25,35,60,.85),rgba(15,20,40,.85)); /* 円形バナーの背景色 */
-    border:2px solid rgba(255,255,255,.2); /* ボーダーを少し太く */
-    box-shadow:0 0 15px rgba(255,255,255,.15), 0 10px 25px rgba(0,0,0,.4); /* シャドウを強調 */
-    text-shadow:0 0 8px rgba(255,255,255,.3); /* 文字にも光のシャドウ */
-    backdrop-filter:blur(8px); /* ブラーを強調 */
+    width:100px; /* サイズを少し大きく */
+    height:100px; 
+    border-radius:50%;
+    background:linear-gradient(180deg,rgba(20,25,50,.9),rgba(10,12,30,.9)); 
+    border:2px solid rgba(255,255,255,.2); 
+    box-shadow:0 0 18px rgba(255,255,255,.18), 0 12px 30px rgba(0,0,0,.5);
+    text-shadow:0 0 10px rgba(255,255,255,.4); 
+    backdrop-filter:blur(10px); 
     font-weight:700; 
-    letter-spacing:.08em;
-    font-size:18px; /* メイン文字のサイズ調整 */
-    color:var(--halo); /* 輝くような色に */
-    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; /* ホバーアニメーション */
+    letter-spacing:.1em;
+    font-size:20px; /* メイン文字のサイズ調整 */
+    color:var(--halo);
+    transition:all .3s ease;
   }
   .label:hover{
-    transform:translateY(-4px) scale(1.05); /* ホバーで少し浮き上がる */
-    box-shadow:0 0 25px rgba(255,255,255,.25), 0 15px 35px rgba(0,0,0,.5);
-    border-color:rgba(255,240,180,.6);
+    transform:translateY(-5px) scale(1.07); /* よりダイナミックな浮き上がり */
+    box-shadow:0 0 30px var(--accent-color-hover), 0 18px 40px rgba(0,0,0,.6);
+    border-color:var(--accent-color-border);
   }
   .label .en{
     display:block;
-    color:var(--ink); /* 英語は少し落ち着いた色に */
-    opacity:.7;
-    font-size:11px; /* 英語のサイズ調整 */
+    color:var(--ink);
+    opacity:.8;
+    font-size:12px;
     font-weight:500;
-    margin-top:2px;
+    margin-top:3px;
     letter-spacing:.05em;
   }
-  /* 配置（正三角形になるよう調整） */
-  .poem{ /* 頂点（上） */
+  
+  /* 詩 (kotoba) - 真理の光 */
+  .poem{ 
     top:0%; 
     left:50%; 
     transform:translateX(-50%);
-    border-color:rgba(255,230,170,.6); /* 各ラベルのボーダー色も調整 */
+    --accent-color-hover: rgba(255, 225, 120, 0.5); 
+    --accent-color-border: var(--gold);
+    border-color:var(--gold);
   }
-  .resonance{ /* 左下の角 */
+  /* 韻 (hibiki) - 宇宙の共鳴 */
+  .resonance{ 
     left:8%; 
     bottom:8%; 
-    border-color:rgba(160,200,255,.5);
+    --accent-color-hover: rgba(143, 183, 255, 0.5);
+    --accent-color-border: var(--accent-blue);
+    border-color:var(--accent-blue);
   }
-  .prayer{ /* 右下の角 */
+  /* 祈 (inori) - 魂の救済 */
+  .prayer{ 
     right:8%; 
     bottom:8%; 
-    border-color:rgba(220,240,255,.5);
+    --accent-color-hover: rgba(164, 227, 183, 0.5);
+    --accent-color-border: var(--accent-green);
+    border-color:var(--accent-green);
   }
 
   /* ===================== 全書ボタン ===================== */
-  .books{display:grid; grid-template-columns:repeat(2, minmax(150px, 1fr)); gap:14px; width:min(620px,92vw); margin:0 auto 80px; text-align:center;}
+  .books{display:grid; grid-template-columns:repeat(2, minmax(150px, 1fr)); gap:16px; width:min(620px,92vw); margin:0 auto 80px; text-align:center;}
   @media (min-width:1180px){ .books{grid-template-columns:repeat(3, minmax(150px, 1fr));} }
   .bookbtn{
-    position:relative; display:flex; align-items:center; justify-content:center; gap:6px;
-    padding:12px 18px; font-size:1.06rem; font-weight:600; color:#fff;
+    position:relative; display:flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 20px; font-size:1.1rem; font-weight:700; color:var(--ink);
     background:
       linear-gradient(180deg, rgba(34,40,74,.88), rgba(18,22,44,.82)),
       radial-gradient(120% 120% at 50% -20%, rgba(255,215,111,.22), transparent 60%);
-    border:1px solid rgba(255,255,255,.14); border-radius:12px; text-decoration:none;
-    box-shadow:0 6px 18px rgba(0,0,0,.35); backdrop-filter:blur(6px);
-    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    border:1px solid rgba(255,255,255,.18); 
+    border-radius:14px; 
+    text-decoration:none;
+    box-shadow:0 8px 20px rgba(0,0,0,.4); 
+    backdrop-filter:blur(8px);
+    transition:all .3s ease;
   }
   .bookbtn::before{
     content:attr(data-symbol);
-    font-size:1.2rem; line-height:1; color:var(--gold);
-    filter:drop-shadow(0 0 6px rgba(255,215,111,.4));
+    font-size:1.3rem; 
+    line-height:1; 
+    color:var(--gold);
+    filter:drop-shadow(0 0 8px rgba(255,215,111,.6));
     transition:transform .35s ease;
   }
   .bookbtn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 26px rgba(0,0,0,.45), 0 0 16px rgba(255,215,111,.18) inset;
-    border-color:rgba(255,225,160,.45);
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(0,0,0,.5), 0 0 20px rgba(255,215,111,.25) inset;
+    border-color:rgba(255,240,190,.5);
     background:
-      linear-gradient(180deg, rgba(42,48,84,.9), rgba(18,22,44,.86)),
-      radial-gradient(100% 120% at 50% -20%, rgba(255,215,111,.28), transparent 60%);
+      linear-gradient(180deg, rgba(42,48,84,.95), rgba(18,22,44,.9)),
+      radial-gradient(100% 120% at 50% -20%, rgba(255,215,111,.35), transparent 60%);
   }
-  .bookbtn:hover::before{transform:rotate(8deg) scale(1.08)}
+  .bookbtn:hover::before{transform:rotate(10deg) scale(1.1)}
   /* 結章（六芒星）特別演出 */
   .bookbtn.final{
     color:#ffeec6;
     background:
-      linear-gradient(180deg, rgba(60,48,22,.75), rgba(24,18,10,.78)),
-      radial-gradient(120% 120% at 50% -20%, rgba(255,240,180,.26), transparent 60%);
-    border-color:rgba(255,230,170,.65);
-    box-shadow:0 0 18px rgba(255,230,170,.25), 0 10px 28px rgba(0,0,0,.45);
+      linear-gradient(180deg, rgba(60,48,22,.8), rgba(24,18,10,.85)),
+      radial-gradient(120% 120% at 50% -20%, rgba(255,240,180,.3), transparent 60%);
+    border-color:rgba(255,230,170,.8);
+    box-shadow:0 0 22px rgba(255,230,170,.3), 0 12px 30px rgba(0,0,0,.5);
     animation:finalPulse 6s ease-in-out infinite;
   }
   .bookbtn.final::before{
-    color:#ffeec6; text-shadow:0 0 12px rgba(255,240,180,.9);
-    animation:starSpin 12s linear infinite;
+    color:#ffeec6; text-shadow:0 0 15px rgba(255,240,180,1);
+    animation:starSpin 10s linear infinite;
   }
   @keyframes finalPulse{
-    0%,100%{box-shadow:0 0 18px rgba(255,230,170,.25),0 10px 28px rgba(0,0,0,.45); transform:scale(1)}
-    50%{box-shadow:0 0 30px rgba(255,240,180,.5),0 12px 34px rgba(0,0,0,.5); transform:scale(1.02)}
+    0%,100%{box-shadow:0 0 22px rgba(255,230,170,.3),0 12px 30px rgba(0,0,0,.5); transform:scale(1)}
+    50%{box-shadow:0 0 40px rgba(255,240,180,.6),0 14px 38px rgba(0,0,0,.6); transform:scale(1.03)}
   }
-  @keyframes starSpin{to{transform:rotate(360deg) scale(1.05)}}
+  @keyframes starSpin{to{transform:rotate(360deg) scale(1.1)}}
 
   /* その他 */
-  .mini-links{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .mini-links{margin-top:12px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
   .mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
   .mini-links a:hover{color:#fff}
-  footer{text-align:center;color:var(--muted);font-size:13px;margin:24px 0 12px}
+  footer{text-align:center;color:var(--muted);font-size:14px;margin:28px 0 16px}
 
   /* アクセシビリティ */
   @media (max-width:var(--bp)){ .meteor{display:none} }
   @media (max-width:480px){
-    .books{gap:10px}
-    .bookbtn{font-size:1rem; padding:10px 14px}
-    .bookbtn::before{font-size:1.05rem}
+    .books{gap:12px}
+    .bookbtn{font-size:1.05rem; padding:12px 16px}
+    .bookbtn::before{font-size:1.2rem}
   }
   @media (prefers-reduced-motion:reduce){
     .meteor, .ring, .stardust, .bookbtn.final, .bookbtn.final::before { animation:none!important }
@@ -259,7 +300,8 @@
   </style>
 </head>
 <body>
-  <div class="meteor" aria-hidden="true"></div>
+  
+<div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
 
@@ -278,16 +320,19 @@
       </nav>
     </header>
 
-    <section class="trinity" aria-label="詩・韻・祈の円環">
+    
+<section class="trinity" aria-label="詩・韻・祈の円環">
       <div class="ring" aria-hidden="true"></div>
       <div class="stardust" aria-hidden="true"></div>
 
-      <div class="label poem">詩<span class="en">kotoba</span></div>
+      
+<div class="label poem">詩<span class="en">kotoba</span></div>
       <div class="label resonance">韻<span class="en">hibiki</span></div>
       <div class="label prayer">祈<span class="en">inori</span></div>
     </section>
 
-    <section id="books" class="books" aria-label="各書へのクイックリンク">
+    
+<section id="books" class="books" aria-label="各書へのクイックリンク">
       <a class="bookbtn" data-symbol="★" href="/books/#zero">第零書</a>
       <a class="bookbtn" data-symbol="♈" href="/books/#one">第一書</a>
       <a class="bookbtn" data-symbol="♉" href="/books/#two">第二書</a>
