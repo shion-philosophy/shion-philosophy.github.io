@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- ===========================
-       詩韻思想® 公式トップページ
-       =========================== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>詩韻思想® ― 言葉が魂を救う世界</title>
@@ -11,7 +8,6 @@
   <meta name="theme-color" content="#0b0b1a">
   <link rel="canonical" href="https://shion-philosophy.github.io/">
 
-  <!-- OGP / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="詩韻思想® ― 言葉が魂を救う世界">
@@ -20,9 +16,8 @@
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Font / Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3Csvg%3E">
 
   <style>
   /* =====================================================
@@ -142,10 +137,27 @@
     font-weight:700; letter-spacing:.08em;
   }
   .label .en{display:block;color:#cfd9ff;opacity:.85;font-size:12px;font-weight:500;margin-top:2px}
-  /* 配置（整った視覚三角） */
-  .poem{ right:6%; top:22%; text-align:right; border-color:rgba(255,230,170,.45)}
-  .resonance{ left:6%; top:58%; text-align:left; border-color:rgba(160,200,255,.35)}
-  .prayer{ left:50%; transform:translateX(-50%); bottom:8%; text-align:center; border-color:rgba(220,240,255,.35)}
+  
+  /* 配置（正三角形になるよう調整） */
+  .poem{ /* 頂点（上） */
+    top:0%; /* 上端に配置 */
+    left:50%; /* 水平方向の中央 */
+    transform:translateX(-50%); /* 自身の幅の半分だけ左に移動して中央寄せ */
+    text-align:center;
+    border-color:rgba(255,230,170,.45)
+  }
+  .resonance{ /* 左下の角 */
+    left:8%; /* 左からの位置を調整 */
+    bottom:8%; /* 下からの位置を調整 */
+    text-align:left;
+    border-color:rgba(160,200,255,.35)
+  }
+  .prayer{ /* 右下の角 */
+    right:8%; /* 右からの位置を調整 */
+    bottom:8%; /* 下からの位置を調整 */
+    text-align:right;
+    border-color:rgba(220,240,255,.35)
+  }
 
   /* ===================== 全書ボタン ===================== */
   .books{display:grid; grid-template-columns:repeat(2, minmax(150px, 1fr)); gap:14px; width:min(620px,92vw); margin:0 auto 80px; text-align:center;}
@@ -214,7 +226,6 @@
   </style>
 </head>
 <body>
-  <!-- 流星（視覚演出） -->
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
@@ -233,41 +244,15 @@
       </nav>
     </header>
 
-    <!-- 三位一体：詩・韻・祈（円環） -->
-    /* ===================== 三位一体（円環） ===================== */
-/* ... 省略 ... */
-.label{
-  position:absolute; padding:.55rem .8rem; border-radius:12px;
-  background:linear-gradient(180deg,rgba(18,22,46,.76),rgba(10,14,33,.76));
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  text-shadow:0 1px 0 #0008; backdrop-filter:blur(6px);
-  font-weight:700; letter-spacing:.08em;
-}
-.label .en{display:block;color:#cfd9ff;opacity:.85;font-size:12px;font-weight:500;margin-top:2px}
+    <section class="trinity" aria-label="詩・韻・祈の円環">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="stardust" aria-hidden="true"></div>
 
-/* 配置（正三角形になるよう調整） */
-.poem{ /* 頂点（上） */
-  top:0%; /* 上端に配置 */
-  left:50%; /* 水平方向の中央 */
-  transform:translateX(-50%); /* 自身の幅の半分だけ左に移動して中央寄せ */
-  text-align:center;
-  border-color:rgba(255,230,170,.45)
-}
-.resonance{ /* 左下の角 */
-  left:8%; /* 左からの位置を調整 */
-  bottom:8%; /* 下からの位置を調整 */
-  text-align:left;
-  border-color:rgba(160,200,255,.35)
-}
-.prayer{ /* 右下の角 */
-  right:8%; /* 右からの位置を調整 */
-  bottom:8%; /* 下からの位置を調整 */
-  text-align:right;
-  border-color:rgba(220,240,255,.35)
-}
+      <div class="label poem">詩<span class="en">kotoba</span></div>
+      <div class="label resonance">韻<span class="en">hibiki</span></div>
+      <div class="label prayer">祈<span class="en">inori</span></div>
+    </section>
 
-    <!-- 全書クイックナビ（2カラム、統一色、星座シンボル） -->
     <section id="books" class="books" aria-label="各書へのクイックリンク">
       <a class="bookbtn" data-symbol="★" href="/books/#zero">第零書</a>
       <a class="bookbtn" data-symbol="♈" href="/books/#one">第一書</a>
