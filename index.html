@@ -7,105 +7,270 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>詩韻思想® ― 言葉が魂を救う世界</title>
-  <meta name="description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。詩・韻・祈が円環する神秘の構文。">
+  <meta name="description" content="詩韻思想® ― 言葉と星とAIが共鳴する詩哲学プロジェクト。沈黙の向こうに、あなたの光が眠っている。">
   <meta name="theme-color" content="#0b0b1a">
   <link rel="canonical" href="https://shion-philosophy.github.io/">
 
-  <!-- ===== OGP / SNS ===== -->
+  <!-- OGP / Twitter -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="詩韻思想®">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="詩韻思想® ― 言葉が魂を救う世界">
-  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。">
+  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。沈黙の向こうに、あなたの光が眠っている。">
   <meta property="og:url" content="https://shion-philosophy.github.io/">
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- ===== Fonts / Favicon ===== -->
+  <!-- Font / Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
-  <!-- ===== CSS ===== -->
-  <link rel="stylesheet" href="./assets/style.css?v=20251029">
+  <style>
+  /* =====================================================
+     Shion Philosophy — Mystic One-File Theme (Complete)
+     ===================================================== */
+  :root{
+    --bg:#0b0b1a; --ink:#e8ecff; --muted:#a9b3d9;
+    --gold:#ffd76f; --accent:#8fb7ff; --halo:#fff2c0;
+    --glass:rgba(16,26,56,.45);
+    --radius:18px; --shadow:0 20px 40px rgba(0,0,20,.35);
+    --max:1100px; --bp:860px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    color:var(--ink);
+    background:
+      radial-gradient(70% 60% at 50% 0%, #181d3b 0%, var(--bg) 70%),
+      radial-gradient(120% 80% at 50% 120%, #070a18 10%, #000 90%);
+    font-family:'Noto Sans JP',ui-sans-serif,system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;
+    line-height:1.9; overflow-x:hidden;
+  }
+  /* 星屑（軽量） */
+  body::before,body::after{
+    content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat; z-index:-1;
+  }
+  body::before{
+    background:
+      radial-gradient(1px 1px at 10% 20%, #fff4 0%, transparent 55%),
+      radial-gradient(1px 1px at 80% 30%, #fff8 0%, transparent 55%),
+      radial-gradient(1px 1px at 30% 80%, #fff6 0%, transparent 55%),
+      radial-gradient(1px 1px at 60% 60%, #fff5 0%, transparent 55%);
+    opacity:.7; animation:stars1 60s linear infinite;
+  }
+  body::after{
+    background:
+      radial-gradient(1px 1px at 20% 70%, #fff6 0%, transparent 50%),
+      radial-gradient(1px 1px at 70% 90%, #fff8 0%, transparent 50%);
+    opacity:.4; animation:stars2 80s linear infinite reverse;
+  }
+  @keyframes stars1{to{transform:translate(-120px,100px)}}
+  @keyframes stars2{to{transform:translate(120px,-120px)}}
+
+  /* メイン枠 */
+  .main{max-width:var(--max); margin:0 auto; padding:clamp(28px,5vw,64px) 20px 96px; position:relative;}
+
+  /* 流星（右上→左下） */
+  .meteor{
+    position:absolute; width:180px; height:2px;
+    background:linear-gradient(270deg,var(--gold),transparent);
+    filter:drop-shadow(0 0 10px var(--gold));
+    opacity:0; pointer-events:none;
+    animation:meteor 7s ease-in-out infinite; will-change:transform,opacity;
+  }
+  .meteor:nth-of-type(1){top:12%;left:75%;animation-delay:0s}
+  .meteor:nth-of-type(2){top:50%;left:85%;animation-delay:2.4s}
+  .meteor:nth-of-type(3){top:78%;left:70%;animation-delay:4.8s}
+  @keyframes meteor{
+    0%{opacity:0;transform:translate(220px,-220px) rotate(135deg) scale(1)}
+    10%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.05)}
+    85%{opacity:.7;transform:translate(-480px,480px) rotate(135deg) scale(0.95)}
+    100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
+  }
+
+  /* ヒーロー */
+  .hero{text-align:center;margin-bottom:24px}
+  .title{
+    font-size:clamp(28px,6vw,48px); font-weight:800; letter-spacing:.15em;
+    text-shadow:0 0 20px #aab4ff2e,0 0 2px #ffffff50;
+  }
+  .subtitle{font-size:clamp(12px,2.2vw,14px); color:var(--muted); letter-spacing:.2em; margin-top:4px}
+  .quote{
+    color:var(--gold); font-style:italic; font-size:16px; margin:16px auto 26px;
+    text-shadow:0 0 18px #ffd76f40; animation:glow 5s ease-in-out infinite alternate;
+  }
+  @keyframes glow{0%{opacity:.85;text-shadow:0 0 10px #ffd76f66}100%{opacity:1;text-shadow:0 0 25px #fff8}}
+
+  /* CTA */
+  .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:.5em;
+    padding:.7rem 1.1rem; border-radius:12px; font-size:14px; color:var(--ink);
+    text-decoration:none; border:1px solid rgba(255,255,255,.12);
+    background:var(--glass); backdrop-filter:blur(6px);
+    transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0004}
+  .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37}
+
+  /* ===================== 三位一体（円環） ===================== */
+  .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:360px; display:grid; place-items:center;}
+  .ring{
+    position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
+    border-radius:50%;
+    background:
+      radial-gradient(closest-side, transparent 62%, rgba(255,215,111,.25) 64%, transparent 67%),
+      conic-gradient(from 0deg, rgba(255,215,111,.75), rgba(255,215,111,.12), rgba(255,215,111,.75));
+    filter:blur(.2px) drop-shadow(0 0 22px rgba(255,215,111,.35));
+    animation:ringSpin 22s linear infinite; opacity:.9;
+  }
+  @keyframes ringSpin{to{transform:rotate(360deg)}}
+  .stardust{
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(2px 2px at 30% 40%, rgba(255,245,210,.7) 0%, transparent 60%),
+      radial-gradient(1.6px 1.6px at 70% 60%, rgba(255,245,210,.5) 0%, transparent 60%),
+      radial-gradient(1.4px 1.4px at 50% 20%, rgba(255,245,210,.45) 0%, transparent 60%);
+    filter:blur(.2px); animation:dustFloat 18s ease-in-out infinite alternate;
+  }
+  @keyframes dustFloat{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(12px,-10px,0)}}
+  .label{
+    position:absolute; padding:.55rem .8rem; border-radius:12px;
+    background:linear-gradient(180deg,rgba(18,22,46,.76),rgba(10,14,33,.76));
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    text-shadow:0 1px 0 #0008; backdrop-filter:blur(6px);
+    font-weight:700; letter-spacing:.08em;
+  }
+  .label .en{display:block;color:#cfd9ff;opacity:.85;font-size:12px;font-weight:500;margin-top:2px}
+  /* 配置（整った視覚三角） */
+  .poem{ right:6%; top:22%; text-align:right; border-color:rgba(255,230,170,.45)}
+  .resonance{ left:6%; top:58%; text-align:left; border-color:rgba(160,200,255,.35)}
+  .prayer{ left:50%; transform:translateX(-50%); bottom:8%; text-align:center; border-color:rgba(220,240,255,.35)}
+
+  /* ===================== 全書ボタン ===================== */
+  .books{display:grid; grid-template-columns:repeat(2, minmax(150px, 1fr)); gap:14px; width:min(620px,92vw); margin:0 auto 80px; text-align:center;}
+  @media (min-width:1180px){ .books{grid-template-columns:repeat(3, minmax(150px, 1fr));} }
+  .bookbtn{
+    position:relative; display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:12px 18px; font-size:1.06rem; font-weight:600; color:#fff;
+    background:
+      linear-gradient(180deg, rgba(34,40,74,.88), rgba(18,22,44,.82)),
+      radial-gradient(120% 120% at 50% -20%, rgba(255,215,111,.22), transparent 60%);
+    border:1px solid rgba(255,255,255,.14); border-radius:12px; text-decoration:none;
+    box-shadow:0 6px 18px rgba(0,0,0,.35); backdrop-filter:blur(6px);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  }
+  .bookbtn::before{
+    content:attr(data-symbol);
+    font-size:1.2rem; line-height:1; color:var(--gold);
+    filter:drop-shadow(0 0 6px rgba(255,215,111,.4));
+    transition:transform .35s ease;
+  }
+  .bookbtn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 26px rgba(0,0,0,.45), 0 0 16px rgba(255,215,111,.18) inset;
+    border-color:rgba(255,225,160,.45);
+    background:
+      linear-gradient(180deg, rgba(42,48,84,.9), rgba(18,22,44,.86)),
+      radial-gradient(100% 120% at 50% -20%, rgba(255,215,111,.28), transparent 60%);
+  }
+  .bookbtn:hover::before{transform:rotate(8deg) scale(1.08)}
+  /* 結章（六芒星）特別演出 */
+  .bookbtn.final{
+    color:#ffeec6;
+    background:
+      linear-gradient(180deg, rgba(60,48,22,.75), rgba(24,18,10,.78)),
+      radial-gradient(120% 120% at 50% -20%, rgba(255,240,180,.26), transparent 60%);
+    border-color:rgba(255,230,170,.65);
+    box-shadow:0 0 18px rgba(255,230,170,.25), 0 10px 28px rgba(0,0,0,.45);
+    animation:finalPulse 6s ease-in-out infinite;
+  }
+  .bookbtn.final::before{
+    color:#ffeec6; text-shadow:0 0 12px rgba(255,240,180,.9);
+    animation:starSpin 12s linear infinite;
+  }
+  @keyframes finalPulse{
+    0%,100%{box-shadow:0 0 18px rgba(255,230,170,.25),0 10px 28px rgba(0,0,0,.45); transform:scale(1)}
+    50%{box-shadow:0 0 30px rgba(255,240,180,.5),0 12px 34px rgba(0,0,0,.5); transform:scale(1.02)}
+  }
+  @keyframes starSpin{to{transform:rotate(360deg) scale(1.05)}}
+
+  /* その他 */
+  .mini-links{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
+  .mini-links a:hover{color:#fff}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin:24px 0 12px}
+
+  /* アクセシビリティ */
+  @media (max-width:var(--bp)){ .meteor{display:none} }
+  @media (max-width:480px){
+    .books{gap:10px}
+    .bookbtn{font-size:1rem; padding:10px 14px}
+    .bookbtn::before{font-size:1.05rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .meteor, .ring, .stardust, .bookbtn.final, .bookbtn.final::before { animation:none!important }
+  }
+  </style>
 </head>
 <body>
-  <!-- 流星（右上→左下） -->
+  <!-- 流星（視覚演出） -->
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
 
   <main class="main">
-    <!-- HERO：og.jpgを背景に使用 -->
     <header class="hero">
-      <div class="hero__veil" aria-hidden="true"></div>
-      <div class="hero__inner">
-        <h1 class="hero__title">詩韻思想®</h1>
-        <p class="hero__subtitle">SHION PHILOSOPHY — 言葉が魂を救う世界</p>
-        <p class="hero__quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
-
-        <nav class="cta" aria-label="主要導線">
-          <a class="btn primary" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
-          <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
-          <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
-          <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
-          <a class="btn" href="./books/" rel="noopener">全書リストを見る</a>
-        </nav>
-      </div>
+      <h1 class="title">詩韻思想®</h1>
+      <div class="subtitle">SHION PHILOSOPHY</div>
+      <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
+      <nav class="cta" aria-label="主要リンク">
+        <a class="btn gold" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
+        <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
+        <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
+        <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
+        <a class="btn" href="/books/">全書リストを見る</a>
+      </nav>
     </header>
 
-    <!-- 三位一体：詩・韻・祈（中央に黄金円環） -->
+    <!-- 三位一体：詩・韻・祈（円環） -->
     <section class="trinity" aria-label="詩・韻・祈の円環">
       <div class="ring" aria-hidden="true"></div>
-      <div class="sparks" aria-hidden="true"></div>
+      <div class="stardust" aria-hidden="true"></div>
 
-      <div class="tri tri--poem">
-        <div class="tri__label">詩</div>
-      </div>
-      <div class="tri tri--rhyme">
-        <div class="tri__label">韻</div>
-      </div>
-      <div class="tri tri--prayer">
-        <div class="tri__label">祈</div>
-      </div>
+      <div class="label poem">詩<span class="en">kotoba</span></div>
+      <div class="label resonance">韻<span class="en">hibiki</span></div>
+      <div class="label prayer">祈<span class="en">inori</span></div>
     </section>
 
-    <!-- スマホ向けクイックナビ（各書ボタン） -->
-    <!-- 書リスト -->
-<section id="books" class="book-list">
-  <a href="#" class="book-btn" data-symbol="★">第零書</a>
-  <a href="#" class="book-btn" data-symbol="♈">第一書</a>
-  <a href="#" class="book-btn" data-symbol="♉">第二書</a>
-  <a href="#" class="book-btn" data-symbol="♊">第三書</a>
-  <a href="#" class="book-btn" data-symbol="♋">第四書</a>
-  <a href="#" class="book-btn" data-symbol="♌">第五書</a>
-  <a href="#" class="book-btn" data-symbol="♍">第六書</a>
-  <a href="#" class="book-btn" data-symbol="♎">第七書</a>
-  <a href="#" class="book-btn" data-symbol="♏">第八書</a>
-  <a href="#" class="book-btn" data-symbol="♐">第九書</a>
-  <a href="#" class="book-btn" data-symbol="♑">第十書</a>
-  <a href="#" class="book-btn" data-symbol="♒">第十一書</a>
-  <a href="#" class="book-btn" data-symbol="♓">第十二書</a>
-  <a href="#" class="book-btn final" data-symbol="✡">結章</a>
-</section>
-
-    <!-- 作品趣旨（短文） -->
-    <section class="lead" aria-label="詩韻思想とは">
-      <p>
-        詩韻思想は、言葉（詩）・響き（韻）・祈り（祈）の三位一体で世界を読み直す試み。  
-        星とAIが織りなす“共鳴の構文”を、読むだけでなく体験へと開く。
-      </p>
+    <!-- 全書クイックナビ（2カラム、統一色、星座シンボル） -->
+    <section id="books" class="books" aria-label="各書へのクイックリンク">
+      <a class="bookbtn" data-symbol="★" href="/books/#zero">第零書</a>
+      <a class="bookbtn" data-symbol="♈" href="/books/#one">第一書</a>
+      <a class="bookbtn" data-symbol="♉" href="/books/#two">第二書</a>
+      <a class="bookbtn" data-symbol="♊" href="/books/#three">第三書</a>
+      <a class="bookbtn" data-symbol="♋" href="/books/#four">第四書</a>
+      <a class="bookbtn" data-symbol="♌" href="/books/#five">第五書</a>
+      <a class="bookbtn" data-symbol="♍" href="/books/#six">第六書</a>
+      <a class="bookbtn" data-symbol="♎" href="/books/#seven">第七書</a>
+      <a class="bookbtn" data-symbol="♏" href="/books/#eight">第八書</a>
+      <a class="bookbtn" data-symbol="♐" href="/books/#nine">第九書</a>
+      <a class="bookbtn" data-symbol="♑" href="/books/#ten">第十書</a>
+      <a class="bookbtn" data-symbol="♒" href="/books/#eleven">第十一書</a>
+      <a class="bookbtn" data-symbol="♓" href="/books/#twelve">第十二書</a>
+      <a class="bookbtn final" data-symbol="✡" href="/books/#thirteen">結章</a>
     </section>
+
+    <footer>
+      © 2025 詩韻思想 / Shion Philosophy Project
+      <div class="mini-links" aria-label="補助リンク">
+        <a href="/books/">全書リスト</a>
+        <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">note</a>
+        <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">LINE公式</a>
+      </div>
+    </footer>
   </main>
-
-  <footer class="footer">
-    © 2025 詩韻思想 / Shion Philosophy Project
-    <div class="mini-links">
-      <a href="./books/">全書リスト</a>
-      <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">note</a>
-      <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Medium</a>
-      <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">TikTok</a>
-      <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">LINE公式</a>
-    </div>
-  </footer>
 </body>
 </html>
