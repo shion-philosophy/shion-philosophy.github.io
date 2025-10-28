@@ -24,7 +24,7 @@
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final: Perfect Balance + Hero Image)
+     Shion Philosophy — Mystic One-File Theme (Final: Perfect Balance + Hero Image + Glowing Labels)
      ===================================================== */
   :root{
     --bg:#050510; /* 深淵の漆黒 */
@@ -92,29 +92,26 @@
   .hero{
     text-align:center;
     margin-bottom:24px;
-    position:relative; /* 画像の絶対位置の基準点とする */
-    z-index: 1; /* テキストを画像の上に配置する */
+    position:relative; 
+    z-index: 1; 
   }
 
-  /* 💡 新規CSS: ヘッダー画像のスタイル */
+  /* ヘッダー画像のスタイル */
   .hero-image {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%) translateY(0%);
-    width: min(700px, 100vw); /* 画面幅に合わせて調整 */
+    width: min(700px, 100vw); 
     height: auto;
     max-height: 400px;
     object-fit: contain;
-    
-    /* 背景に馴染ませるための調整 */
-    filter: brightness(1.5) opacity(0.2); /* 明るくして透明度を低くする */
-    mix-blend-mode: screen; /* 画面を重ねるようにブレンド */
-    z-index: -1; /* テキストの背後に配置 */
-    pointer-events: none; /* クリック不可にする */
-    margin-top: -30px; /* 少し上部に調整 */
+    filter: brightness(1.5) opacity(0.2); 
+    mix-blend-mode: screen; 
+    z-index: -1; 
+    pointer-events: none; 
+    margin-top: -30px; 
   }
-  /* ここまで新規CSS */
 
   .title{
     font-size:clamp(32px,7vw,54px); 
@@ -153,7 +150,11 @@
       margin-bottom:40px;
   }
   .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:.5em;
+    display:inline-flex; 
+    flex-direction: column; 
+    align-items:center; 
+    justify-content:center; 
+    gap:.1em; 
     padding:.8rem 1.3rem; 
     border-radius:14px; 
     font-size:15px; 
@@ -164,15 +165,15 @@
     backdrop-filter:blur(8px); 
     transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
     font-weight:600;
+    line-height: 1.2; 
   }
-  /* 左右に並ぶボタンの幅を揃える */
   .btn.pair-btn {
       width: min(160px, 45vw); 
   }
-  /* 全書リストボタンの幅を調整し、他と揃える */
   .btn.full-width {
       width: min(332px, 90vw); 
       margin-top: 8px;
+      line-height: 1.5; 
   }
 
   .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
@@ -191,7 +192,6 @@
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
-    /* 背景との滑らかな統合 */
     background:
       conic-gradient(from 45deg, rgba(255,225,180,0.3) 0%, transparent 12%, transparent 88%, rgba(255,225,180,0.3) 100%),
       conic-gradient(from 180deg, rgba(143, 183, 255, 0.25) 12%, transparent 22%, transparent 78%, rgba(143, 183, 255, 0.25) 88%),
@@ -233,11 +233,58 @@
     font-size:20px; 
     color:var(--halo);
     transition:all .3s ease;
+    
+    /* 💡 神々しい光のアニメーション設定 */
+    animation: shionGlow 4s ease-in-out infinite alternate;
   }
+  .label:nth-of-type(1) { animation-delay: 0s; } /* 詩 */
+  .label:nth-of-type(2) { animation-delay: 1.2s; } /* 韻 */
+  .label:nth-of-type(3) { animation-delay: 2.4s; } /* 祈 */
+
+  /* 💡 光のアニメーション */
+  @keyframes shionGlow {
+    0% {
+      box-shadow: 0 0 15px rgba(255,255,255,.12), 0 10px 25px rgba(0,0,0,.4);
+      border-color: rgba(255,255,255,.15);
+      text-shadow: 0 0 8px rgba(255,255,255,.3);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px rgba(255,240,180,0.6), /* 黄金色の強い光 */
+        0 0 60px rgba(180,220,255,0.4), /* 青白い光の広がり */
+        0 15px 40px rgba(0,0,0,.6);
+      border-color: rgba(255,240,180,0.7);
+      text-shadow: 
+        0 0 15px rgba(255,255,255,0.8),
+        0 0 25px rgba(255,240,180,0.7);
+    }
+    100% {
+      box-shadow: 0 0 15px rgba(255,255,255,.12), 0 10px 25px rgba(0,0,0,.4);
+      border-color: rgba(255,255,255,.15);
+      text-shadow: 0 0 8px rgba(255,255,255,.3);
+    }
+  }
+
   .label:hover{
     box-shadow:0 0 25px var(--accent-color-hover-shadow), 0 15px 35px rgba(0,0,0,.5); 
     border-color:var(--accent-color-border-hover); 
+    animation: none; /* ホバー時は通常のアニメーションを停止し、ホバーエフェクトを優先 */
+    transform: scale(1.07); /* ホバー時の拡大も維持 */
   }
+  /* 各ラベルのホバー時の光の色を調整 */
+  .poem:hover {
+    box-shadow: 0 0 25px rgba(255, 220, 160, 0.5), 0 15px 35px rgba(0,0,0,.5); 
+    border-color: rgba(255, 220, 160, 0.8); 
+  }
+  .resonance:hover {
+    box-shadow: 0 0 25px rgba(140, 190, 255, 0.5), 0 15px 35px rgba(0,0,0,.5); 
+    border-color: rgba(140, 190, 255, 0.8); 
+  }
+  .prayer:hover {
+    box-shadow: 0 0 25px rgba(160, 230, 180, 0.5), 0 15px 35px rgba(0,0,0,.5); 
+    border-color: rgba(160, 230, 180, 0.8); 
+  }
+
   .label .en{
     display:block;
     color:var(--ink);
@@ -359,7 +406,7 @@
     .bookbtn::before{font-size:1.2rem}
   }
   @media (prefers-reduced-motion:reduce){
-    .meteor, .ring, .stardust, .bookbtn.final, .bookbtn.final::before { animation:none!important }
+    .meteor, .ring, .stardust, .bookbtn.final, .bookbtn.final::before, .label { animation:none!important }
   }
   </style>
 </head>
@@ -379,10 +426,10 @@
       <p class="quote">「沈黙の向こうに、あなたの光が眠っている」</p>
       
       <nav class="cta" aria-label="主要リンク">
-        <a class="btn gold pair-btn" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
-        <a class="btn pair-btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
-        <a class="btn pair-btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
-        <a class="btn pair-btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
+        <a class="btn gold pair-btn" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る<br>（TikTok）</a>
+        <a class="btn pair-btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む<br>（note）</a>
+        <a class="btn pair-btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む<br>（Medium）</a>
+        <a class="btn pair-btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡<br>（LINE公式）</a>
         <a class="btn full-width" href="/books/">全書リストを見る</a>
       </nav>
     </header>
