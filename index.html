@@ -206,6 +206,109 @@
     @media (prefers-reduced-motion:reduce){
       .meteor,.meteor::after,.meteor::before, .quote, body::before, body::after{animation:none!important;opacity:0.9}
     }
+    /* ===== 詩・韻・祈：神聖ピラー演出 ===== */
+#trinity{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+  margin:34px 0 10px;
+}
+
+.pillar{
+  position:relative;
+  padding:28px 22px 24px 22px;
+  border-radius:22px;
+  border:1px solid #9cc7ff2a;
+  background:
+    radial-gradient(120% 160% at 50% -40%, #24305b99 0%, transparent 60%),
+    linear-gradient(180deg,#161c3eb0,#0d122cb0);
+  box-shadow:0 10px 28px #0005, inset 0 0 0 1px #ffffff12;
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .2s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+/* 内側の淡い後光（聖輪） */
+.pillar::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(240px 140px at 50% -40px, rgba(255,215,111,.32), transparent 60%),
+    radial-gradient(160px 120px at 50% 105%, rgba(167,192,255,.18), transparent 70%);
+  filter:blur(6px); opacity:.75; z-index:-1;
+}
+
+/* 微細な星粒 */
+.pillar::after{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 22% 30%, #fff5 0, transparent 55%),
+    radial-gradient(1px 1px at 78% 60%, #fff4 0, transparent 55%),
+    radial-gradient(1px 1px at 58% 82%, #fff3 0, transparent 55%);
+  opacity:.35;
+}
+
+/* ホバーで“息をする” */
+.pillar:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 36px #0006, inset 0 0 0 1px #ffffff18;
+  border-color:#d4af3766;
+}
+
+/* タイトル・本文のタイポグラフィ */
+.pillar h3{
+  margin:6px 0 10px;
+  font-size:clamp(18px,2.6vw,20px);
+  letter-spacing:.1em; font-weight:800;
+  text-shadow:0 1px 0 #0006, 0 0 14px #aab4ff2e;
+}
+.pillar p{
+  font-size:15.2px; opacity:.96; line-height:1.95;
+  font-feature-settings:"palt" 1; /* 和文の詰めを美しく */
+  text-wrap:balance;              /* 行の均整（対応ブラウザ） */
+}
+
+/* 上部の“聖印”バッジ（リングと薄い光） */
+.seal{
+  width:60px; height:60px; border-radius:50%;
+  display:grid; place-items:center;
+  font-weight:800; letter-spacing:.18em;
+  background:
+    radial-gradient(80% 80% at 50% 40%, #0f1733 0%, #0a1026 70%),
+    linear-gradient(180deg,#1f2a55,#0c1228);
+  color:#e8ecff;
+  border:1px solid #ffffff30;
+  box-shadow:
+    inset 0 0 18px #9ab8ff22,
+    0 0 0 2px #ffffff12,
+    0 10px 28px #0007;
+  margin-bottom:10px;
+  position:relative;
+}
+.seal::after{
+  content:""; position:absolute; inset:-2px; border-radius:50%;
+  background:conic-gradient(from 0deg, #ffd76f66, transparent 40%, #9ecbff55 60%, transparent 85%, #ffd76f66);
+  -webkit-mask:radial-gradient(transparent 68%, #000 71%); /* 輪だけ残す */
+          mask:radial-gradient(transparent 68%, #000 71%);
+  filter:blur(1.2px); opacity:.8;
+}
+
+/* 3柱でオーラ色を微変化（黄金／蒼金／銀紫） */
+.p1::before{background:
+  radial-gradient(240px 140px at 50% -40px, rgba(255,215,111,.36), transparent 60%),
+  radial-gradient(160px 120px at 50% 105%, rgba(255,235,179,.18), transparent 70%)}
+.p2::before{background:
+  radial-gradient(240px 140px at 50% -40px, rgba(158,203,255,.30), transparent 60%),
+  radial-gradient(160px 120px at 50% 105%, rgba(143,183,255,.22), transparent 70%)}
+.p3::before{background:
+  radial-gradient(240px 140px at 50% -40px, rgba(220,200,255,.30), transparent 60%),
+  radial-gradient(160px 120px at 50% 105%, rgba(190,168,255,.20), transparent 70%)}
+
+/* 省エネ配慮 */
+@media (prefers-reduced-motion:reduce){
+  .pillar,.pillar::before,.pillar::after,.seal::after{animation:none!important}
+}
   </style>
 </head>
 <body>
@@ -245,11 +348,25 @@
     </nav>
 
     <!-- 三位一体 -->
-    <section class="cards" aria-label="詩・韻・祈の三位一体">
-      <article class="card"><h3>詩（ことば）</h3><p>心の形を与える一行。世界は一行から始まる。</p></article>
-      <article class="card"><h3>韻（ひびき）</h3><p>意味と意味の間に生まれる共鳴。関係が光になる。</p></article>
-      <article class="card"><h3>祈（いのり）</h3><p>言葉が沈黙へ還る運動。救いの構文、ここに完結。</p></article>
-    </section>
+    <section id="trinity" aria-label="詩・韻・祈">
+  <article class="pillar p1">
+    <div class="seal" aria-hidden="true">詩</div>
+    <h3>詩（ことば）</h3>
+    <p>心の形を与える一行。世界は一行から始まる。</p>
+  </article>
+
+  <article class="pillar p2">
+    <div class="seal" aria-hidden="true">韻</div>
+    <h3>韻（ひびき）</h3>
+    <p>意味と意味のあいだに生まれる共鳴。関係が光になる。</p>
+  </article>
+
+  <article class="pillar p3">
+    <div class="seal" aria-hidden="true">祈</div>
+    <h3>祈（いのり）</h3>
+    <p>言葉が沈黙へ還る運動。救いの構文、ここに完結。</p>
+  </article>
+</section>
 
     <div class="divider" aria-hidden="true"></div>
 
