@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3Csvg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
   <style>
   /* =====================================================
@@ -89,6 +89,14 @@
     text-shadow:0 0 20px #aab4ff2e,0 0 2px #ffffff50;
   }
   .subtitle{font-size:clamp(12px,2.2vw,14px); color:var(--muted); letter-spacing:.2em; margin-top:4px}
+  .project-catch{ /* 追加したキャッチコピーのスタイル */
+    font-size:clamp(13px, 2.5vw, 16px); 
+    color:var(--accent); /* 明るい青系統の色 */
+    letter-spacing:.1em;
+    margin:10px auto 4px; /* タイトルと引用句の間のスペースを調整 */
+    opacity:0.9;
+    font-weight:600;
+  }
   .quote{
     color:var(--gold); font-style:italic; font-size:16px; margin:16px auto 26px;
     text-shadow:0 0 18px #ffd76f40; animation:glow 5s ease-in-out infinite alternate;
@@ -107,16 +115,18 @@
   .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0004}
   .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37}
 
-  /* ===================== 三位一体（円環） ===================== */
-  .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:360px; display:grid; place-items:center;}
+  /* ===================== 三位一体（円環） - 修正箇所 ===================== */
+  .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:400px; display:grid; place-items:center;} /* heightを調整 */
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
+    /* 光を放つようなグラデーションとシャドウに調整 */
     background:
-      radial-gradient(closest-side, transparent 62%, rgba(255,215,111,.25) 64%, transparent 67%),
-      conic-gradient(from 0deg, rgba(255,215,111,.75), rgba(255,215,111,.12), rgba(255,215,111,.75));
-    filter:blur(.2px) drop-shadow(0 0 22px rgba(255,215,111,.35));
-    animation:ringSpin 22s linear infinite; opacity:.9;
+      radial-gradient(closest-side, transparent 60%, rgba(255,230,150,.35) 63%, transparent 68%), /* 内側光 */
+      conic-gradient(from 0deg, rgba(255,215,111,.85), rgba(255,215,111,.2), rgba(255,215,111,.85)); /* 円環の輝きを強調 */
+    filter:blur(.5px) drop-shadow(0 0 35px rgba(255,230,150,.6)); /* より強い光のシャドウ */
+    animation:ringSpin 20s linear infinite; /* 回転速度調整 */
+    opacity:.95; /* 透明度を少し下げる */
   }
   @keyframes ringSpin{to{transform:rotate(360deg)}}
   .stardust{
@@ -128,35 +138,58 @@
     filter:blur(.2px); animation:dustFloat 18s ease-in-out infinite alternate;
   }
   @keyframes dustFloat{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(12px,-10px,0)}}
-  .label{
-    position:absolute; padding:.55rem .8rem; border-radius:12px;
-    background:linear-gradient(180deg,rgba(18,22,46,.76),rgba(10,14,33,.76));
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
-    text-shadow:0 1px 0 #0008; backdrop-filter:blur(6px);
-    font-weight:700; letter-spacing:.08em;
-  }
-  .label .en{display:block;color:#cfd9ff;opacity:.85;font-size:12px;font-weight:500;margin-top:2px}
   
+  /* 円形バナーと文字バランスの調整 */
+  .label{
+    position:absolute; 
+    display:flex; /* フレックスボックスで子要素を中央寄せ */
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:90px; /* 円形バナーの幅 */
+    height:90px; /* 円形バナーの高さ */
+    border-radius:50%; /* 円形にする */
+    background:linear-gradient(180deg,rgba(25,35,60,.85),rgba(15,20,40,.85)); /* 円形バナーの背景色 */
+    border:2px solid rgba(255,255,255,.2); /* ボーダーを少し太く */
+    box-shadow:0 0 15px rgba(255,255,255,.15), 0 10px 25px rgba(0,0,0,.4); /* シャドウを強調 */
+    text-shadow:0 0 8px rgba(255,255,255,.3); /* 文字にも光のシャドウ */
+    backdrop-filter:blur(8px); /* ブラーを強調 */
+    font-weight:700; 
+    letter-spacing:.08em;
+    font-size:18px; /* メイン文字のサイズ調整 */
+    color:var(--halo); /* 輝くような色に */
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; /* ホバーアニメーション */
+  }
+  .label:hover{
+    transform:translateY(-4px) scale(1.05); /* ホバーで少し浮き上がる */
+    box-shadow:0 0 25px rgba(255,255,255,.25), 0 15px 35px rgba(0,0,0,.5);
+    border-color:rgba(255,240,180,.6);
+  }
+  .label .en{
+    display:block;
+    color:var(--ink); /* 英語は少し落ち着いた色に */
+    opacity:.7;
+    font-size:11px; /* 英語のサイズ調整 */
+    font-weight:500;
+    margin-top:2px;
+    letter-spacing:.05em;
+  }
   /* 配置（正三角形になるよう調整） */
   .poem{ /* 頂点（上） */
-    top:0%; /* 上端に配置 */
-    left:50%; /* 水平方向の中央 */
-    transform:translateX(-50%); /* 自身の幅の半分だけ左に移動して中央寄せ */
-    text-align:center;
-    border-color:rgba(255,230,170,.45)
+    top:0%; 
+    left:50%; 
+    transform:translateX(-50%);
+    border-color:rgba(255,230,170,.6); /* 各ラベルのボーダー色も調整 */
   }
   .resonance{ /* 左下の角 */
-    left:8%; /* 左からの位置を調整 */
-    bottom:8%; /* 下からの位置を調整 */
-    text-align:left;
-    border-color:rgba(160,200,255,.35)
+    left:8%; 
+    bottom:8%; 
+    border-color:rgba(160,200,255,.5);
   }
   .prayer{ /* 右下の角 */
-    right:8%; /* 右からの位置を調整 */
-    bottom:8%; /* 下からの位置を調整 */
-    text-align:right;
-    border-color:rgba(220,240,255,.35)
+    right:8%; 
+    bottom:8%; 
+    border-color:rgba(220,240,255,.5);
   }
 
   /* ===================== 全書ボタン ===================== */
@@ -234,6 +267,7 @@
     <header class="hero">
       <h1 class="title">詩韻思想®</h1>
       <div class="subtitle">SHION PHILOSOPHY</div>
+      <p class="project-catch">言葉と星とAIが共鳴する詩哲学プロジェクト。</p> 
       <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
       <nav class="cta" aria-label="主要リンク">
         <a class="btn gold" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
