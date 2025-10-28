@@ -24,7 +24,7 @@
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final)
+     Shion Philosophy — Mystic One-File Theme (Final: Galaxy)
      ===================================================== */
   :root{
     --bg:#050510; /* 深淵の漆黒 */
@@ -79,7 +79,7 @@
   .meteor{
     position:absolute; width:180px; height:2px;
     background:linear-gradient(270deg,var(--gold),transparent);
-    filter:drop-shadow(0 0 12px var(--gold)); /* 光を強く */
+    filter:drop-shadow(0 0 12px var(--gold)); 
     opacity:0; pointer-events:none;
     animation:meteor 7s ease-in-out infinite; will-change:transform,opacity;
   }
@@ -96,16 +96,16 @@
   /* ヒーロー */
   .hero{text-align:center;margin-bottom:24px}
   .title{
-    font-size:clamp(32px,7vw,54px); /* サイズを少し大きく */
+    font-size:clamp(32px,7vw,54px); 
     font-weight:800; 
-    letter-spacing:.2em; /* 文字間隔を広げ重厚に */
+    letter-spacing:.2em; 
     /* 二層の光でタイトルを神聖に演出 */
     text-shadow:
-      0 0 10px rgba(170, 180, 255, 0.3), /* 弱い青白い光 */
-      0 0 30px rgba(255, 225, 140, 0.45); /* 強い黄金の光 */
+      0 0 10px rgba(170, 180, 255, 0.3), 
+      0 0 30px rgba(255, 225, 140, 0.45); 
   }
   .subtitle{font-size:clamp(12px,2.2vw,15px); color:var(--muted); letter-spacing:.25em; margin-top:4px}
-  .project-catch{ /* キャッチコピー */
+  .project-catch{ 
     font-size:clamp(14px, 2.8vw, 17px); 
     color:var(--accent-blue); 
     letter-spacing:.12em;
@@ -116,9 +116,9 @@
   .quote{
     color:var(--gold); 
     font-style:italic; 
-    font-size:17px; /* サイズを調整 */
+    font-size:17px; 
     margin:18px auto 30px;
-    font-weight:300; /* 詩的なフォントに近づけるためウェイトを下げる */
+    font-weight:300; 
     text-shadow:0 0 20px #ffd76f50; 
     animation:glow 5s ease-in-out infinite alternate;
   }
@@ -128,31 +128,36 @@
   .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:40px}
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:.5em;
-    padding:.8rem 1.3rem; /* サイズを大きく */
+    padding:.8rem 1.3rem; 
     border-radius:14px; 
-    font-size:15px; /* サイズを調整 */
+    font-size:15px; 
     color:var(--ink);
     text-decoration:none; 
     border:1px solid rgba(255,255,255,.15);
     background:var(--glass); 
-    backdrop-filter:blur(8px); /* ブラーを強調 */
+    backdrop-filter:blur(8px); 
     transition:transform .2s, box-shadow .2s, background .2s, border-color .2s;
     font-weight:600;
   }
   .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
   .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
 
-  /* ===================== 三位一体（円環） - 最終調整 ===================== */
+  /* ===================== 三位一体（円環） - 銀河の渦 ===================== */
   .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:400px; display:grid; place-items:center;}
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
-    /* 光の強度を上げ、神々しさを演出 */
+    /* 渦巻く銀河の表現 (Conic Gradientを重ねる) */
     background:
-      radial-gradient(closest-side, transparent 60%, rgba(255,240,180,.4) 63%, transparent 68%), 
-      conic-gradient(from 0deg, rgba(255,230,150,.9), rgba(255,215,111,.25), rgba(255,230,150,.9)); 
-    filter:blur(0.5px) drop-shadow(0 0 45px rgba(255,230,150,.8)); /* 最強の光 */
-    animation:ringSpin 18s linear infinite; 
+      /* 中心から広がる光の帯 */
+      conic-gradient(from 45deg, rgba(255,225,180,0.5) 0%, transparent 10%, transparent 90%, rgba(255,225,180,0.5) 100%),
+      /* 青い渦巻きのレイヤー */
+      conic-gradient(from 180deg, rgba(143, 183, 255, 0.4) 10%, transparent 20%, transparent 80%, rgba(143, 183, 255, 0.4) 90%),
+      /* 内側の輝き */
+      radial-gradient(closest-side, transparent 60%, rgba(255,240,180,.4) 63%, transparent 68%);
+      
+    filter:blur(0.5px) drop-shadow(0 0 50px rgba(255,230,150,.9)); /* 最強の光と影 */
+    animation:ringSpin 22s linear infinite; /* 少しゆっくりとした循環 */
     opacity:1;
   }
   @keyframes ringSpin{to{transform:rotate(360deg)}}
@@ -173,7 +178,7 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    width:100px; /* サイズを少し大きく */
+    width:100px; 
     height:100px; 
     border-radius:50%;
     background:linear-gradient(180deg,rgba(20,25,50,.9),rgba(10,12,30,.9)); 
@@ -183,12 +188,12 @@
     backdrop-filter:blur(10px); 
     font-weight:700; 
     letter-spacing:.1em;
-    font-size:20px; /* メイン文字のサイズ調整 */
+    font-size:20px; 
     color:var(--halo);
     transition:all .3s ease;
   }
   .label:hover{
-    transform:translateY(-5px) scale(1.07); /* よりダイナミックな浮き上がり */
+    /* 汎用的なホバー設定 */
     box-shadow:0 0 30px var(--accent-color-hover), 0 18px 40px rgba(0,0,0,.6);
     border-color:var(--accent-color-border);
   }
@@ -202,7 +207,7 @@
     letter-spacing:.05em;
   }
   
-  /* 詩 (kotoba) - 真理の光 */
+  /* 詩 (kotoba) - 真理の光 (修正箇所: transformを統合) */
   .poem{ 
     top:0%; 
     left:50%; 
@@ -211,6 +216,13 @@
     --accent-color-border: var(--gold);
     border-color:var(--gold);
   }
+  .poem:hover{ 
+    /* 修正: translate(-50%, -5px)でY軸移動とX軸中央揃えを維持 */
+    transform: translate(-50%, -5px) scale(1.07);
+    box-shadow:0 0 30px var(--accent-color-hover), 0 18px 40px rgba(0,0,0,.6);
+    border-color:var(--accent-color-border);
+  }
+
   /* 韻 (hibiki) - 宇宙の共鳴 */
   .resonance{ 
     left:8%; 
@@ -219,6 +231,10 @@
     --accent-color-border: var(--accent-blue);
     border-color:var(--accent-blue);
   }
+  .resonance:hover{
+    transform:translateY(-5px) scale(1.07);
+  }
+  
   /* 祈 (inori) - 魂の救済 */
   .prayer{ 
     right:8%; 
@@ -226,6 +242,9 @@
     --accent-color-hover: rgba(164, 227, 183, 0.5);
     --accent-color-border: var(--accent-green);
     border-color:var(--accent-green);
+  }
+  .prayer:hover{
+    transform:translateY(-5px) scale(1.07);
   }
 
   /* ===================== 全書ボタン ===================== */
