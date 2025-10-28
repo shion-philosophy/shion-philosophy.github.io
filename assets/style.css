@@ -1,0 +1,163 @@
+/* 🌕 Shion Philosophy - Style Sheet */
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  background: radial-gradient(circle at center, #0a0a20 0%, #020210 100%);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  text-align: center;
+  padding: 80px 20px 40px;
+}
+
+.project-title {
+  font-size: 2.4em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2em;
+}
+
+.subtitle {
+  color: #a8a8cc;
+  font-size: 1em;
+  letter-spacing: 0.2em;
+  margin-bottom: 1em;
+}
+
+.quote {
+  font-style: italic;
+  color: #ffd86f;
+  font-size: 1em;
+  margin-bottom: 2em;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  background: #1a1a3a;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn.gold {
+  background: linear-gradient(90deg, #ffcc66, #ffd86f);
+  color: #111;
+  font-weight: 700;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 216, 111, 0.6);
+}
+
+/* ===== 三位一体セクション ===== */
+.trinity {
+  position: relative;
+  height: 320px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 黄金サークル */
+.circle {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 215, 120, 0.4);
+  box-shadow: 0 0 40px rgba(255, 215, 120, 0.3);
+  animation: rotateCircle 20s linear infinite;
+}
+
+@keyframes rotateCircle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 星砂粒子 */
+.particle-layer::before, .particle-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
+  background-size: 5px 5px;
+  opacity: 0.25;
+  animation: twinkle 6s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; transform: scale(1); }
+  to { opacity: 0.4; transform: scale(1.05); }
+}
+
+/* 詩・韻・祈 */
+.element {
+  position: absolute;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: rgba(10, 10, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  transition: 0.3s;
+}
+
+.element span {
+  display: block;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+/* 三角配置 */
+.poem { top: 15%; right: 28%; color: #ffd86f; }
+.resonance { bottom: 18%; left: 28%; color: #88c8ff; }
+.prayer { bottom: 10%; right: 30%; color: #f9a8ff; }
+
+.element:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 215, 120, 0.3);
+}
+
+/* ===== 書リスト ===== */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 0 80px;
+}
+
+.book-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #14142a;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.book-btn:hover {
+  background: linear-gradient(90deg, #5f5fff, #ffd86f);
+  color: #000;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
