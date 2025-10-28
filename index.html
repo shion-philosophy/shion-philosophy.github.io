@@ -24,7 +24,7 @@
 
   <style>
   /* =====================================================
-     Shion Philosophy — Mystic One-File Theme (Final: Galaxy)
+     Shion Philosophy — Mystic One-File Theme (Final: Galaxy, Natural Colors)
      ===================================================== */
   :root{
     --bg:#050510; /* 深淵の漆黒 */
@@ -44,14 +44,12 @@
   html,body{height:100%}
   body{
     color:var(--ink);
-    /* 背景をより深く、星雲のようなグラデーションに */
     background:
       radial-gradient(75% 65% at 50% 0%, #1c183d 0%, var(--bg) 80%),
       radial-gradient(120% 80% at 50% 120%, #070a18 10%, #000 90%);
     font-family:'Noto Sans JP',ui-sans-serif,system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;
     line-height:1.9; overflow-x:hidden;
   }
-  /* 星屑（立体感を出すためにレイヤーを追加） */
   body::before,body::after{
     content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat; z-index:-1;
   }
@@ -72,10 +70,8 @@
   @keyframes stars1{to{transform:translate(-150px,120px)}}
   @keyframes stars2{to{transform:translate(180px,-150px)}}
 
-  /* メイン枠 */
   .main{max-width:var(--max); margin:0 auto; padding:clamp(28px,5vw,64px) 20px 96px; position:relative;}
 
-  /* 流星 */
   .meteor{
     position:absolute; width:180px; height:2px;
     background:linear-gradient(270deg,var(--gold),transparent);
@@ -93,13 +89,11 @@
     100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
   }
 
-  /* ヒーロー */
   .hero{text-align:center;margin-bottom:24px}
   .title{
     font-size:clamp(32px,7vw,54px); 
     font-weight:800; 
     letter-spacing:.2em; 
-    /* 二層の光でタイトルを神聖に演出 */
     text-shadow:
       0 0 10px rgba(170, 180, 255, 0.3), 
       0 0 30px rgba(255, 225, 140, 0.45); 
@@ -124,7 +118,6 @@
   }
   @keyframes glow{0%{opacity:.9;text-shadow:0 0 12px #ffd76f66}100%{opacity:1;text-shadow:0 0 30px #fff8}}
 
-  /* CTA */
   .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:40px}
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:.5em;
@@ -142,22 +135,27 @@
   .btn:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0006}
   .btn.gold{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:800; border-color:#d4af37}
 
-  /* ===================== 三位一体（円環） - 銀河の渦 ===================== */
-  .trinity{position:relative; margin:36px auto 44px; width:min(860px,92vw); height:400px; display:grid; place-items:center;}
+  /* ===================== 三位一体（円環） - 銀河の渦とナチュラルカラー ===================== */
+  .trinity{
+    position:relative; 
+    margin:36px auto 44px; 
+    width:min(860px,92vw); 
+    height:min(580px, 90vw); /* 重なり解消のための高さ設定 */
+    max-height: 580px; 
+    display:grid; 
+    place-items:center;
+  }
   .ring{
     position:absolute; inset:0; margin:auto; width:min(520px,82vw); height:min(520px,82vw);
     border-radius:50%;
     /* 渦巻く銀河の表現 (Conic Gradientを重ねる) */
     background:
-      /* 中心から広がる光の帯 */
-      conic-gradient(from 45deg, rgba(255,225,180,0.5) 0%, transparent 10%, transparent 90%, rgba(255,225,180,0.5) 100%),
-      /* 青い渦巻きのレイヤー */
-      conic-gradient(from 180deg, rgba(143, 183, 255, 0.4) 10%, transparent 20%, transparent 80%, rgba(143, 183, 255, 0.4) 90%),
-      /* 内側の輝き */
-      radial-gradient(closest-side, transparent 60%, rgba(255,240,180,.4) 63%, transparent 68%);
+      conic-gradient(from 45deg, rgba(255,225,180,0.4) 0%, transparent 10%, transparent 90%, rgba(255,225,180,0.4) 100%), /* 柔らかなゴールドの渦 */
+      conic-gradient(from 180deg, rgba(143, 183, 255, 0.3) 10%, transparent 20%, transparent 80%, rgba(143, 183, 255, 0.3) 90%), /* 柔らかなブルーの渦 */
+      radial-gradient(closest-side, transparent 60%, rgba(255,240,180,.3) 63%, transparent 68%); /* 内側の輝きを少し抑える */
       
-    filter:blur(0.5px) drop-shadow(0 0 50px rgba(255,230,150,.9)); /* 最強の光と影 */
-    animation:ringSpin 22s linear infinite; /* 少しゆっくりとした循環 */
+    filter:blur(0.5px) drop-shadow(0 0 40px rgba(255,230,150,.7)); /* 光のシャドウを少し抑え、より自然に */
+    animation:ringSpin 22s linear infinite; 
     opacity:1;
   }
   @keyframes ringSpin{to{transform:rotate(360deg)}}
@@ -182,9 +180,9 @@
     height:100px; 
     border-radius:50%;
     background:linear-gradient(180deg,rgba(20,25,50,.9),rgba(10,12,30,.9)); 
-    border:2px solid rgba(255,255,255,.2); 
-    box-shadow:0 0 18px rgba(255,255,255,.18), 0 12px 30px rgba(0,0,0,.5);
-    text-shadow:0 0 10px rgba(255,255,255,.4); 
+    border:2px solid rgba(255,255,255,.15); /* ボーダーを少し繊細に */
+    box-shadow:0 0 15px rgba(255,255,255,.12), 0 10px 25px rgba(0,0,0,.4); /* シャドウを少し抑える */
+    text-shadow:0 0 8px rgba(255,255,255,.3); 
     backdrop-filter:blur(10px); 
     font-weight:700; 
     letter-spacing:.1em;
@@ -193,9 +191,8 @@
     transition:all .3s ease;
   }
   .label:hover{
-    /* 汎用的なホバー設定 */
-    box-shadow:0 0 30px var(--accent-color-hover), 0 18px 40px rgba(0,0,0,.6);
-    border-color:var(--accent-color-border);
+    box-shadow:0 0 25px var(--accent-color-hover-shadow), 0 15px 35px rgba(0,0,0,.5); /* ホバーシャドウ調整 */
+    border-color:var(--accent-color-border-hover); /* ホバーボーダー調整 */
   }
   .label .en{
     display:block;
@@ -207,41 +204,41 @@
     letter-spacing:.05em;
   }
   
-  /* 詩 (kotoba) - 真理の光 (修正箇所: transformを統合) */
+  /* 詩 (kotoba) - 真理の光 (ナチュラルカラー調整) */
   .poem{ 
     top:0%; 
     left:50%; 
     transform:translateX(-50%);
-    --accent-color-hover: rgba(255, 225, 120, 0.5); 
-    --accent-color-border: var(--gold);
-    border-color:var(--gold);
+    /* ナチュラルカラー調整 */
+    --accent-color-hover-shadow: rgba(255, 220, 160, 0.3); /* 柔らかなゴールドの光 */
+    --accent-color-border-hover: rgba(255, 220, 160, 0.6); /* 柔らかなゴールドのボーダー */
+    border-color:rgba(255, 220, 160, 0.4); /* 通常時のボーダーもナチュラルに */
   }
   .poem:hover{ 
-    /* 修正: translate(-50%, -5px)でY軸移動とX軸中央揃えを維持 */
-    transform: translate(-50%, -5px) scale(1.07);
-    box-shadow:0 0 30px var(--accent-color-hover), 0 18px 40px rgba(0,0,0,.6);
-    border-color:var(--accent-color-border);
+    transform: translate(-50%, -5px) scale(1.07); /* 修正済み */
   }
 
-  /* 韻 (hibiki) - 宇宙の共鳴 */
+  /* 韻 (hibiki) - 宇宙の共鳴 (ナチュラルカラー調整) */
   .resonance{ 
     left:8%; 
     bottom:8%; 
-    --accent-color-hover: rgba(143, 183, 255, 0.5);
-    --accent-color-border: var(--accent-blue);
-    border-color:var(--accent-blue);
+    /* ナチュラルカラー調整 */
+    --accent-color-hover-shadow: rgba(140, 190, 255, 0.3); /* 柔らかなブルーの光 */
+    --accent-color-border-hover: rgba(140, 190, 255, 0.6); /* 柔らかなブルーのボーダー */
+    border-color:rgba(140, 190, 255, 0.4); /* 通常時のボーダーもナチュラルに */
   }
   .resonance:hover{
     transform:translateY(-5px) scale(1.07);
   }
   
-  /* 祈 (inori) - 魂の救済 */
+  /* 祈 (inori) - 魂の救済 (ナチュラルカラー調整) */
   .prayer{ 
     right:8%; 
     bottom:8%; 
-    --accent-color-hover: rgba(164, 227, 183, 0.5);
-    --accent-color-border: var(--accent-green);
-    border-color:var(--accent-green);
+    /* ナチュラルカラー調整 */
+    --accent-color-hover-shadow: rgba(160, 230, 180, 0.3); /* 柔らかなグリーンの光 */
+    --accent-color-border-hover: rgba(160, 230, 180, 0.6); /* 柔らかなグリーンのボーダー */
+    border-color:rgba(160, 230, 180, 0.4); /* 通常時のボーダーもナチュラルに */
   }
   .prayer:hover{
     transform:translateY(-5px) scale(1.07);
