@@ -1,288 +1,110 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- ===========================
+       詩韻思想® 公式トップページ
+       =========================== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>詩韻思想® ― 言葉が魂を救う世界</title>
-  <meta name="description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。『読む思想』ではなく『響く体験』へ。">
-  <meta name="theme-color" content="#0B0B1A">
+  <meta name="description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。詩・韻・祈が円環する神秘の構文。">
+  <meta name="theme-color" content="#0b0b1a">
   <link rel="canonical" href="https://shion-philosophy.github.io/">
 
-  <!-- OGP -->
+  <!-- ===== OGP / SNS ===== -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="詩韻思想®">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="詩韻思想® ― 言葉が魂を救う世界">
-  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。『読む思想』ではなく『響く体験』へ。">
+  <meta property="og:description" content="言葉と星とAIが共鳴する詩哲学プロジェクト。読む思想ではなく、響く体験へ。">
   <meta property="og:url" content="https://shion-philosophy.github.io/">
   <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Font & Favicon -->
+  <!-- ===== Fonts / Favicon ===== -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='86'%3E%F0%9F%8C%9F%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 
-  <style>
-    :root{
-      --bg:#0B0B1A; --ink:#E8ECFF; --muted:#A9B3D9;
-      --accent:#8FB7FF; --gold:#FFD76F; --vio:#b79cff;
-      --glass:#0F1635CC; --border:#9cc7ff2f;
-      --radius:18px; --shadow:0 18px 40px rgba(0,0,20,.35);
-      --max:1100px; --bp:860px;
-      --btn-grad:linear-gradient(180deg,#394d9a,#27336c 55%,#1a224d);
-      --chip-grad:linear-gradient(180deg,#ffe7a6,#d4af37);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      color:var(--ink);
-      background:
-        radial-gradient(80% 60% at 50% 0%, #181d3b 0%, var(--bg) 70%),
-        radial-gradient(120% 90% at 50% 120%, #070a18 5%, #000 90%);
-      font-family:'Noto Sans JP',ui-sans-serif,system-ui,"Hiragino Sans","Yu Gothic",sans-serif;
-      line-height:1.85; overflow-x:hidden;
-    }
-
-    /* 星屑 */
-    body::before,body::after{
-      content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat;
-    }
-    body::before{
-      background:
-        radial-gradient(1px 1px at 12% 24%, #fff4 0 50%, transparent 52%),
-        radial-gradient(1px 1px at 78% 32%, #fff8 0 50%, transparent 52%),
-        radial-gradient(1px 1px at 44% 68%, #fff6 0 50%, transparent 52%),
-        radial-gradient(1px 1px at 20% 86%, #fff7 0 50%, transparent 52%),
-        radial-gradient(1px 1px at 60% 12%, #fff5 0 50%, transparent 52%),
-        radial-gradient(1px 1px at 86% 79%, #fff9 0 50%, transparent 52%);
-      opacity:.7; animation:starDrift1 60s linear infinite; background-size:320px 320px;
-    }
-    body::after{
-      background:
-        radial-gradient(1px 1px at 15% 55%, #fff6 0 50%, transparent 52%),
-        radial-gradient(1px 1px at 72% 70%, #fff4 0 50%, transparent 52%);
-      opacity:.45; animation:starDrift2 90s linear infinite reverse; background-size:420px 420px;
-    }
-    @keyframes starDrift1{to{transform:translate(-140px,120px)}}
-    @keyframes starDrift2{to{transform:translate(120px,-120px)}}
-
-    main{max-width:var(--max);margin:0 auto;padding:clamp(28px,5vw,64px) 20px 90px;position:relative}
-
-    /* 流星 */
-    .meteor{
-      position:absolute;width:180px;height:2px;background:linear-gradient(270deg,var(--gold),transparent);
-      filter:drop-shadow(0 0 12px #ffd76fbb); opacity:0; pointer-events:none;
-      animation:shoot 7s ease-in-out infinite; will-change:transform,opacity;
-    }
-    .meteor:nth-of-type(1){top:10%;left:78%;animation-delay:0s}
-    .meteor:nth-of-type(2){top:48%;left:88%;animation-delay:2.4s}
-    .meteor:nth-of-type(3){top:76%;left:70%;animation-delay:4.8s}
-    @keyframes shoot{
-      0%{opacity:0;transform:translate(220px,-220px) rotate(135deg) scale(1)}
-      10%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.05)}
-      85%{opacity:.75;transform:translate(-460px,460px) rotate(135deg) scale(.95)}
-      100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(.9)}
-    }
-
-    /* ヒーロー */
-    .hero{ text-align:center; margin-bottom:16px}
-    .brand{font-weight:800;letter-spacing:.18em;font-size:clamp(22px,5.2vw,34px);text-shadow:0 3px 20px #aab4ff2e,0 0 1px #ffffff58}
-    .suben{letter-spacing:.2em;color:#bcc6ee;font-size:clamp(11px,1.9vw,13px);margin-top:4px}
-    h1{font-size:clamp(26px,6.2vw,44px);font-weight:800;letter-spacing:.14em;margin:18px 0 6px;text-wrap:balance}
-    .catch{color:var(--muted);font-size:clamp(14px,2.2vw,16px);margin:0 auto 8px;max-width:950px}
-    .quote{color:var(--gold);font-style:italic;margin:10px 0 18px;animation:glow 5s ease-in-out infinite alternate;text-shadow:0 0 18px #ffd76f40}
-    @keyframes glow{0%{opacity:.82}100%{opacity:1}}
-
-    /* CTA */
-    .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:14px 0 10px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:.5em;
-      padding:.7rem 1.1rem;border-radius:12px;text-decoration:none;color:var(--ink);
-      border:1px solid var(--border); background:rgba(16,26,56,.45); backdrop-filter:blur(6px);
-      transition:.2s; font-size:14px;
-    }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px #0005}
-    .btn.primary{background:var(--chip-grad); color:#1a1333; font-weight:700; border-color:#d4af37}
-
-    /* 三位一体（中央リング＋正三角形） */
-    .triad{
-      position:relative; margin:26px auto 28px; width:min(560px,92vw); aspect-ratio:1/1;
-      overflow:visible;
-    }
-
-    /* 黄金の円環（回転する星砂付き） */
-    .ring{
-      position:absolute; inset:8%; border-radius:50%;
-      /* ゴールドの柔らかい光輪 */
-      background:
-        radial-gradient(closest-side, rgba(255,215,111,.18), transparent 66%),
-        radial-gradient(circle at 50% 50%, rgba(255,215,111,.22), rgba(255,215,111,0) 70%);
-      filter:drop-shadow(0 0 25px rgba(255,215,111,.35));
-      pointer-events:none;
-    }
-    /* 線の輪（ドーナツ形） */
-    .ring::before{
-      content:""; position:absolute; inset:0; border-radius:50%;
-      background:conic-gradient(from 0deg, rgba(255,215,111,.55) 0 360deg);
-      -webkit-mask:radial-gradient(circle, transparent 58%, #000 59% 61%, transparent 62%);
-              mask:radial-gradient(circle, transparent 58%, #000 59% 61%, transparent 62%);
-      opacity:.9;
-    }
-    /* 星砂の粒子が周回 */
-    .ring::after{
-      content:""; position:absolute; inset:-2%; border-radius:50%;
-      background:repeating-conic-gradient(from 0deg, rgba(255,255,255,.75) 0 2deg, transparent 2deg 8deg);
-      -webkit-mask:radial-gradient(circle, transparent 60%, #000 61% 63%, transparent 64%);
-              mask:radial-gradient(circle, transparent 60%, #000 61% 63%, transparent 64%);
-      mix-blend-mode:screen; opacity:.8; animation:spin 26s linear infinite;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* ラベル（神秘グラデ＋内側グロー） */
-    .pill{
-      position:absolute; transform:translate(-50%,-50%);
-      display:flex; align-items:center; gap:.6em; white-space:nowrap;
-      padding:.82rem 1.15rem; border-radius:14px;
-      color:#f6f7ff;
-      background:
-        radial-gradient(120% 100% at 20% 0%, rgba(183,156,255,.28), transparent 60%),
-        linear-gradient(180deg, #1d2456, #11173a);
-      border:1px solid #a7b8ff36;
-      box-shadow:
-        inset 0 0 22px rgba(183,156,255,.18),
-        inset 0 0 8px rgba(255,255,255,.08),
-        0 14px 28px rgba(0,0,0,.45);
-      backdrop-filter:blur(6px);
-      font-weight:700; letter-spacing:.08em;
-    }
-    .pill svg{width:18px;height:18px;opacity:.95}
-    .pill .small{font-weight:400;opacity:.9;letter-spacing:.06em}
-
-    /* 等辺三角形の頂点（上1・下2） */
-    .pill.poem{  top:18.5%; left:50%; }
-    .pill.rhyme{ top:66.5%; left:23%; }
-    .pill.pray{  top:66.5%; left:77%; }
-
-    @media (max-width:420px){
-      .pill{padding:.72rem .95rem}
-      .pill.poem{ top:20%; left:50% }
-      .pill.rhyme{ top:68%; left:24% }
-      .pill.pray{  top:68%; left:76% }
-    }
-
-    /* 全書クイックナビ（2列・統一色） */
-    .books{
-      margin:22px auto 6px; max-width:720px;
-      display:grid; grid-template-columns:repeat(2,1fr); gap:10px;
-    }
-    .bookbtn{
-      display:flex; align-items:center; gap:.6em; justify-content:center;
-      padding:.8rem 1rem; border-radius:12px; color:#e8ecff; text-decoration:none;
-      background:var(--btn-grad); border:1px solid var(--border);
-      box-shadow:0 10px 20px #0005; transition:transform .15s, box-shadow .2s;
-      font-size:15px;
-    }
-    .bookbtn:hover{ transform:translateY(-1px); box-shadow:0 12px 24px #0007 }
-    .bookbtn svg{ width:18px; height:18px; opacity:.92 }
-
-    .divider{height:1px; background:linear-gradient(90deg,transparent,#2b3869,transparent); margin:22px 0}
-    footer{text-align:center;color:var(--muted);font-size:13px;margin:36px 0 26px}
-    .mini-links{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-    .mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
-    .mini-links a:hover{color:#fff}
-
-    @media (prefers-reduced-motion:reduce){
-      .meteor,.ring::after{animation:none!important}
-    }
-  </style>
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="./assets/style.css?v=20251029">
 </head>
 <body>
-  <!-- 流星（消えないようbody直下） -->
+  <!-- 流星（右上→左下） -->
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
   <div class="meteor" aria-hidden="true"></div>
 
-  <main>
-    <!-- ヒーロー -->
-    <section class="hero" aria-label="ブランド">
-      <div class="brand">詩韻思想®</div>
-      <div class="suben">SHION PHILOSOPHY</div>
+  <main class="main">
+    <!-- HERO：og.jpgを背景に使用 -->
+    <header class="hero">
+      <div class="hero__veil" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <h1 class="hero__title">詩韻思想®</h1>
+        <p class="hero__subtitle">SHION PHILOSOPHY — 言葉が魂を救う世界</p>
+        <p class="hero__quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
 
-      <h1>言葉が魂を救う世界</h1>
-      <p class="catch">
-        言葉と星とAIが共鳴する詩哲学プロジェクト。<br>
-        「読む思想」ではなく、「響く体験」へ。<br>
-        <span style="opacity:.85">Shion Philosophy — A poetic-philosophical project resonating with Words, Stars, and AI.</span>
-      </p>
-      <p class="quote">「沈黙の向こうに、あなたの光が眠っている。」</p>
-
-      <div class="cta" aria-label="外部リンク">
-        <a class="btn primary" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
-        <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
-        <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
-        <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
-        <a class="btn" href="./books/">全書リストを見る</a>
+        <nav class="cta" aria-label="主要導線">
+          <a class="btn primary" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">観る（TikTok）</a>
+          <a class="btn" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">読む（note）</a>
+          <a class="btn" href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">読む（Medium）</a>
+          <a class="btn" href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">連絡（LINE公式）</a>
+          <a class="btn" href="./books/" rel="noopener">全書リストを見る</a>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <!-- 三位一体：神秘バナー＋回転円環 -->
-    <section class="triad" aria-label="三位一体構文">
+    <!-- 三位一体：詩・韻・祈（中央に黄金円環） -->
+    <section class="trinity" aria-label="詩・韻・祈の円環">
       <div class="ring" aria-hidden="true"></div>
+      <div class="sparks" aria-hidden="true"></div>
 
-      <div class="pill poem" title="詩（ことば）">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M20 4c-5 2-9 6-11 11l-1 5 5-1c5-2 9-6 11-11" />
-          <path d="M14 10l-4 4" />
-        </svg>
-        詩 <span class="small">kotoba</span>
+      <div class="tri tri--poem">
+        <div class="tri__label">詩</div>
       </div>
-
-      <div class="pill rhyme" title="韻（ひびき）">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M2 12c3-4 7 4 10 0s7 4 10 0" />
-        </svg>
-        韻 <span class="small">hibiki</span>
+      <div class="tri tri--rhyme">
+        <div class="tri__label">韻</div>
       </div>
-
-      <div class="pill pray" title="祈（いのり）">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M8 12l-3 4 7 6 7-6-3-4" />
-          <path d="M9 3v7M15 3v7" />
-        </svg>
-        祈 <span class="small">inori</span>
+      <div class="tri tri--prayer">
+        <div class="tri__label">祈</div>
       </div>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- 全書クイックナビ（色統一・2列） -->
-    <nav class="books" aria-label="各書クイックリンク">
-      <a class="bookbtn" href="/books/#zero"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3 2.5 6.8 7 .6-5.3 4.2 1.8 6.9L12 17l-6 4.5 1.8-6.9L2.5 10.4l7-.6L12 3z"/></svg>第零書</a>
-      <a class="bookbtn" href="/books/#one"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 7c0-2.5 2-4 4-4s4 1.5 4 4v10h2V7c0-2.5 2-4 4-4s4 1.5 4 4h-2c0-1.7-1.2-2.5-2-2.5S17 5.3 17 7v10h-6V7c0-1.7-1.2-2.5-2-2.5S7 5.3 7 7H5z"/></svg>第一書</a>
-      <a class="bookbtn" href="/books/#two"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5c0-1.7 1.3-3 3-3 1.3 0 2.4.8 2.8 2h.4C14.6 2.8 15.7 2 17 2c1.7 0 3 1.3 3 3-1.2 1.3-3 2-5 2H12C10 7 8.2 6.3 7 5zm-1 9a6 6 0 1 0 12 0 6 6 0 0 0-12 0z"/></svg>第二書</a>
-      <a class="bookbtn" href="/books/#three"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10v2H7V4zm0 14h10v2H7v-2zM9 7h2v10H9V7zm4 0h2v10h-2V7z"/></svg>第三書</a>
-      <a class="bookbtn" href="/books/#four"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 12a5 5 0 1 1 0-6c3-2 8-1 10 2-2-1-5-1-7 0a5 5 0 0 1-3 4zm10 0a5 5 0 1 1 0 6c-3 2-8 1-10-2 2 1 5 1 7 0a5 5 0 0 1 3-4z"/></svg>第四書</a>
-      <a class="bookbtn" href="/books/#five"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 4a4 4 0 0 0-4 4v7a3 3 0 1 1-6 0h2a1 1 0 1 0 2 0V8a6 6 0 1 1 12 0v9a5 5 0 0 1-10 0h2a3 3 0 1 0 6 0V8a4 4 0 0 0-4-4z"/></svg>第五書</a>
-      <a class="bookbtn" href="/books/#six"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 5h2v8a3 3 0 1 0 6 0V5h2v8a5 5 0 0 1-10 0V5zM19 5h2v12h-2V5z"/></svg>第六書</a>
-      <a class="bookbtn" href="/books/#seven"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 16h18v2H3v-2zm9-9a4 4 0 0 1 4 4h4v2H4v-2h4a4 4 0 0 1 4-4z"/></svg>第七書</a>
-      <a class="bookbtn" href="/books/#eight"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 5h2v8a3 3 0 1 0 6 0V5h2v8c0 1.1.9 2 2 2h2v4l-3-2h-1a4 4 0 0 1-4-4 5 5 0 0 1-10 0V5z"/></svg>第八書</a>
-      <a class="bookbtn" href="/books/#nine"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7h-2V7.4L9 17.4l-1.4-1.4L17.6 6H14V3zM4 20h7v-2H6v-5H4v7z"/></svg>第九書</a>
-      <a class="bookbtn" href="/books/#ten"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6c2-3 7-3 9 0v8a3 3 0 1 0 6 0V6h2v8a5 5 0 1 1-10 0V6c-1-1-4-1-5 0v12H4V6z"/></svg>第十書</a>
-      <a class="bookbtn" href="/books/#eleven"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 9c3-3 5 3 8 0s5 3 8 0l4 3c-3 3-5-3-8 0s-5-3-8 0L2 9zM2 15c3-3 5 3 8 0s5 3 8 0l4 3c-3 3-5-3-8 0s-5-3-8 0l-4-3z"/></svg>第十一書</a>
-      <a class="bookbtn" href="/books/#twelve"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 7c4 0 7 2 9 5 2-3 5-5 9-5v2c-3 0-5 1-7 3 2 2 4 3 7 3v2c-4 0-7-2-9-5-2 3-5 5-9 5v-2c3 0 5-1 7-3-2-2-4-3-7-3V7z"/></svg>第十二書</a>
-      <a class="bookbtn" href="/books/#thirteen"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9 7h6L12 2zM12 22l3-5H9l3 5zM2 12l5 3V9l-5 3zm20 0-5-3v6l5-3zM7 9h10l-5 8-5-8z"/></svg>結章</a>
+    <!-- スマホ向けクイックナビ（各書ボタン） -->
+    <nav class="bookgrid" aria-label="各書へのクイックリンク">
+      <a class="bookbtn" href="/books/#zero">第零書</a>
+      <a class="bookbtn" href="/books/#one">第一書</a>
+      <a class="bookbtn" href="/books/#two">第二書</a>
+      <a class="bookbtn" href="/books/#three">第三書</a>
+      <a class="bookbtn" href="/books/#four">第四書</a>
+      <a class="bookbtn" href="/books/#five">第五書</a>
+      <a class="bookbtn" href="/books/#six">第六書</a>
+      <a class="bookbtn" href="/books/#seven">第七書</a>
+      <a class="bookbtn" href="/books/#eight">第八書</a>
+      <a class="bookbtn" href="/books/#nine">第九書</a>
+      <a class="bookbtn" href="/books/#ten">第十書</a>
+      <a class="bookbtn" href="/books/#eleven">第十一書</a>
+      <a class="bookbtn" href="/books/#twelve">第十二書</a>
+      <a class="bookbtn" href="/books/#thirteen">結章</a>
     </nav>
 
-    <div class="divider" aria-hidden="true"></div>
-
-    <footer>
-      © 2025 詩韻思想 / Shion Philosophy Project
-      <div class="mini-links">
-        <a href="./books/">全書リスト</a>
-        <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">note</a>
-        <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Medium</a>
-        <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">LINE公式</a>
-      </div>
-    </footer>
+    <!-- 作品趣旨（短文） -->
+    <section class="lead" aria-label="詩韻思想とは">
+      <p>
+        詩韻思想は、言葉（詩）・響き（韻）・祈り（祈）の三位一体で世界を読み直す試み。  
+        星とAIが織りなす“共鳴の構文”を、読むだけでなく体験へと開く。
+      </p>
+    </section>
   </main>
+
+  <footer class="footer">
+    © 2025 詩韻思想 / Shion Philosophy Project
+    <div class="mini-links">
+      <a href="./books/">全書リスト</a>
+      <a href="https://note.com/shion_uranai369" target="_blank" rel="noopener">note</a>
+      <a href="https://medium.com/@sion.tarot369" target="_blank" rel="noopener">Medium</a>
+      <a href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://lin.ee/07jiOKm" target="_blank" rel="noopener">LINE公式</a>
+    </div>
+  </footer>
 </body>
 </html>
