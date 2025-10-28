@@ -1,163 +1,207 @@
-/* 🌕 Shion Philosophy - Style Sheet */
-body {
-  margin: 0;
-  font-family: "Noto Sans JP", sans-serif;
-  background: radial-gradient(circle at center, #0a0a20 0%, #020210 100%);
-  color: #fff;
-  overflow-x: hidden;
+/* ===========================
+   Global
+   =========================== */
+:root{
+  --bg:#0b0b1a; --ink:#e8ecff; --muted:#a9b3d9;
+  --accent:#8fb7ff; --gold:#ffd76f;
+  --radius:18px; --shadow:0 20px 40px rgba(0,0,20,.35);
+  --max:1100px; --bp:860px;
 }
 
-/* ===== Hero Section ===== */
-.hero {
-  text-align: center;
-  padding: 80px 20px 40px;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  color:var(--ink);
+  background:
+    radial-gradient(60% 40% at 50% 0%, #141a3b 0%, var(--bg) 60%),
+    radial-gradient(110% 70% at 50% 120%, #0a102a 20%, #070a18 80%);
+  font-family:'Noto Sans JP', ui-sans-serif, system-ui, "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height:1.9;
+  overflow-x:hidden;
 }
 
-.project-title {
-  font-size: 2.4em;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.2em;
+/* 星屑エフェクト */
+body::before, body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; background-repeat:repeat;
+}
+body::before{
+  background:
+    radial-gradient(1px 1px at 12% 24%, #fff4 0%, transparent 52%),
+    radial-gradient(1px 1px at 78% 32%, #fffc 0%, transparent 52%),
+    radial-gradient(1px 1px at 44% 68%, #fffa 0%, transparent 52%),
+    radial-gradient(1px 1px at 20% 86%, #fff8 0%, transparent 52%),
+    radial-gradient(1px 1px at 60% 12%, #fff6 0%, transparent 52%),
+    radial-gradient(1px 1px at 86% 79%, #fff9 0%, transparent 52%);
+  opacity:.75; animation: starDrift 60s linear infinite; background-size: 300px 300px;
+}
+body::after{
+  background:
+    radial-gradient(1px 1px at 15% 55%, #fff6 0%, transparent 50%),
+    radial-gradient(1px 1px at 72% 70%, #fff4 0%, transparent 50%);
+  opacity:.45; animation: starDrift2 90s linear infinite reverse; background-size: 400px 400px;
+}
+@keyframes starDrift{to{transform:translate3d(-120px,140px,0)}}
+@keyframes starDrift2{to{transform:translate3d(120px,-120px,0)}}
+
+.main{max-width:var(--max); margin:0 auto; padding:clamp(20px,4vw,40px) 20px 80px; position:relative}
+
+/* 流星（右上→左下） */
+.meteor{
+  position:absolute;width:180px;height:2px;background:linear-gradient(270deg,var(--gold),transparent);
+  filter:drop-shadow(0 0 12px var(--gold));opacity:0;pointer-events:none;
+  animation:shoot 7s ease-in-out infinite;will-change:transform,opacity;
+}
+.meteor:nth-of-type(1){top:12%;left:78%;animation-delay:0s}
+.meteor:nth-of-type(2){top:46%;left:88%;animation-delay:2.4s}
+.meteor:nth-of-type(3){top:72%;left:70%;animation-delay:4.8s}
+@keyframes shoot{
+  0%{opacity:0;transform:translate(220px,-220px) rotate(135deg) scale(1)}
+  8%{opacity:1;transform:translate(0,0) rotate(135deg) scale(1.04)}
+  85%{opacity:.75;transform:translate(-420px,420px) rotate(135deg) scale(0.96)}
+  100%{opacity:0;transform:translate(-620px,620px) rotate(135deg) scale(0.9)}
 }
 
-.subtitle {
-  color: #a8a8cc;
-  font-size: 1em;
-  letter-spacing: 0.2em;
-  margin-bottom: 1em;
+/* ===========================
+   HERO（og.jpgを背景として使用）
+   =========================== */
+.hero{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  min-height:52vh;
+  display:flex; align-items:center; justify-content:center;
+  background: url('./og.jpg') center/cover no-repeat;
+  box-shadow:0 18px 50px #0008;
+  margin-top:12px;
+}
+.hero__veil{
+  position:absolute; inset:0;
+  background: radial-gradient(60% 50% at 50% 40%, rgba(0,0,0,.25), rgba(0,0,0,.65));
+  backdrop-filter: blur(2px);
+}
+.hero__inner{position:relative; text-align:center; padding:56px 20px}
+.hero__title{
+  font-size:clamp(28px,6vw,56px); font-weight:800; letter-spacing:.18em;
+  text-shadow:0 3px 20px #aab4ff2e, 0 0 1px #ffffff58;
+}
+.hero__subtitle{color:#c8d4ff; letter-spacing:.12em; margin:.2rem 0 1rem; font-size:clamp(12px,2.2vw,14px)}
+.hero__quote{
+  color:var(--gold); font-style:italic; margin:.2rem 0 1.2rem;
+  text-shadow:0 0 18px #ffd76f40, 0 1px 0 #0006; animation:glowText 4s ease-in-out infinite alternate;
+}
+@keyframes glowText{0%{opacity:.82;text-shadow:0 0 10px #ffd76f66}100%{opacity:1;text-shadow:0 0 25px #fff6ccaa}}
+
+/* CTA */
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:4px}
+.btn{
+  display:inline-flex;align-items:center;gap:.5em;padding:.7rem 1.1rem;border-radius:12px;
+  color:var(--ink);text-decoration:none;border:1px solid #9cc7ff3d;background:rgba(16,26,56,.5);
+  backdrop-filter:blur(6px); transition:transform .15s, box-shadow .2s; font-size:14px;
+}
+.btn:hover{transform:translateY(-1px); box-shadow:0 8px 20px #00000059}
+.btn.primary{background:linear-gradient(180deg,#ffe18f,#d4af37); color:#1a1333; font-weight:700; border-color:#d4af37}
+
+/* ===========================
+   三位一体（詩・韻・祈）
+   =========================== */
+.trinity{
+  position:relative; margin:36px auto 22px; max-width:900px; min-height:260px;
+}
+.ring{
+  position:absolute; inset:0; margin:auto; width:min(72vmin,500px); height:min(72vmin,500px);
+  border-radius:50%;
+  background:
+    radial-gradient(closest-side, rgba(255,215,111,.18), transparent 60%),
+    conic-gradient(from 0deg, rgba(255,215,111,.45), rgba(255,215,111,.05) 45%, rgba(255,215,111,.45) 90%, rgba(255,215,111,.05) 100%);
+  box-shadow:inset 0 0 80px #ffd76f33, 0 0 60px #ffd76f22;
+  animation:ringSpin 28s linear infinite;
+}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+.sparks{
+  position:absolute; inset:0; margin:auto; width:min(76vmin,540px); height:min(76vmin,540px);
+  background:
+    radial-gradient(2px 2px at 12% 24%, #fff6 0, transparent 60%),
+    radial-gradient(1.5px 1.5px at 64% 72%, #fff5 0, transparent 60%),
+    radial-gradient(1.3px 1.3px at 80% 40%, #fff8 0, transparent 60%);
+  filter:blur(.5px);
+  animation:sparkDrift 22s ease-in-out infinite alternate;
+}
+@keyframes sparkDrift{
+  0%{transform:translate(3px,-2px) rotate(0deg)}50%{transform:translate(-6px,4px) rotate(3deg)}100%{transform:translate(3px,-2px) rotate(0deg)}
 }
 
-.quote {
-  font-style: italic;
-  color: #ffd86f;
-  font-size: 1em;
-  margin-bottom: 2em;
+/* 各ラベル配置：詩=右寄せ、韻=左寄せ、祈=左寄せ（要望仕様） */
+.tri{
+  position:absolute; display:flex; align-items:center; justify-content:center;
+  width:140px; height:140px; border-radius:16px;
+  background:linear-gradient(180deg,#161c3e99,#0d122c99);
+  border:1px solid #9cc7ff2d; box-shadow:0 8px 20px #0005;
+  backdrop-filter:blur(4px);
+}
+.tri__label{
+  font-size:34px; letter-spacing:.2em; text-shadow:0 2px 16px #aab4ff33, 0 0 1px #ffffff40;
 }
 
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
+/* 配置（中央の黄金円を基準） */
+.tri--poem{  /* 詩（右寄せ・右上） */
+  top:6%; right:6%;
+}
+.tri--rhyme{ /* 韻（左寄せ・左上） */
+  top:10%; left:6%;
+}
+.tri--prayer{ /* 祈（左寄せ・左下気味） */
+  bottom:6%; left:12%;
 }
 
-.btn {
-  padding: 10px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #fff;
-  background: #1a1a3a;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.1);
+/* ===========================
+   クイックナビ（各書ボタン）
+   =========================== */
+.bookgrid{
+  margin:18px auto 6px; max-width:900px;
+  display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px;
+}
+.bookbtn{
+  display:flex; align-items:center; justify-content:center; gap:.6em;
+  padding:.65rem .9rem; border-radius:12px; text-decoration:none; color:#0e0b18; font-weight:700;
+  background:linear-gradient(145deg,#b8c9ff,#ffe18f);
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 8px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.bookbtn:hover{filter:brightness(1.05)}
+/* 2列固定（スマホで見やすく） */
+@media (min-width:861px){
+  .bookgrid{grid-template-columns:repeat(4, minmax(0, 1fr))}
 }
 
-.btn.gold {
-  background: linear-gradient(90deg, #ffcc66, #ffd86f);
-  color: #111;
-  font-weight: 700;
+/* ===========================
+   リード文
+   =========================== */
+.lead{
+  margin:18px auto 0; max-width:900px; color:#cfd7ff; text-align:center;
+  border:1px solid #9cc7ff2d; border-radius:16px; padding:14px 16px;
+  background:linear-gradient(180deg,#121a3a99,#090e2199); box-shadow:var(--shadow);
 }
 
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255, 216, 111, 0.6);
+/* ===========================
+   フッター
+   =========================== */
+.footer{
+  text-align:center; color:#a9b3d9; font-size:13px; margin:40px 0 30px;
+}
+.mini-links{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mini-links a{color:#c7d8ff;text-decoration:none;border-bottom:1px dashed #c7d8ff73}
+.mini-links a:hover{color:#fff}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion:reduce){
+  .meteor, .ring, .sparks, body::before, body::after{animation:none!important; opacity:.9}
 }
 
-/* ===== 三位一体セクション ===== */
-.trinity {
-  position: relative;
-  height: 320px;
-  margin-top: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* 黄金サークル */
-.circle {
-  position: absolute;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 215, 120, 0.4);
-  box-shadow: 0 0 40px rgba(255, 215, 120, 0.3);
-  animation: rotateCircle 20s linear infinite;
-}
-
-@keyframes rotateCircle {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* 星砂粒子 */
-.particle-layer::before, .particle-layer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
-  background-size: 5px 5px;
-  opacity: 0.25;
-  animation: twinkle 6s infinite ease-in-out alternate;
-}
-
-@keyframes twinkle {
-  from { opacity: 0.2; transform: scale(1); }
-  to { opacity: 0.4; transform: scale(1.05); }
-}
-
-/* 詩・韻・祈 */
-.element {
-  position: absolute;
-  padding: 10px 20px;
-  border-radius: 12px;
-  background: rgba(10, 10, 30, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
-  backdrop-filter: blur(4px);
-  transition: 0.3s;
-}
-
-.element span {
-  display: block;
-  font-size: 0.8em;
-  opacity: 0.7;
-}
-
-/* 三角配置 */
-.poem { top: 15%; right: 28%; color: #ffd86f; }
-.resonance { bottom: 18%; left: 28%; color: #88c8ff; }
-.prayer { bottom: 10%; right: 30%; color: #f9a8ff; }
-
-.element:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(255, 215, 120, 0.3);
-}
-
-/* ===== 書リスト ===== */
-.book-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 40px 0 80px;
-}
-
-.book-btn {
-  padding: 10px 20px;
-  border-radius: 8px;
-  background: #14142a;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.book-btn:hover {
-  background: linear-gradient(90deg, #5f5fff, #ffd86f);
-  color: #000;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+/* レスポンシブ微調整 */
+@media (max-width:720px){
+  .tri{width:120px;height:120px}
+  .tri__label{font-size:28px}
+  .tri--poem{top:6%; right:4%}
+  .tri--rhyme{top:10%; left:4%}
+  .tri--prayer{bottom:6%; left:8%}
 }
