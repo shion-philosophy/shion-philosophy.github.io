@@ -29,11 +29,15 @@
 <link rel="preload" as="image" href="/assets/hero-poster.jpg">
 
 <style>
+/* 追従ヘッダー（スマート追従）と動画のスタイルを含むCSS */
 :root{
   --ink:#202030; --muted:#606070;
   --a:#7e66ff; --b:#ffd76f; --r:14px;
   --bg:#ffffff;
   color-scheme: light;
+  /* ヘッダーの高さ分をアンカーリンク調整用に確保 */
+  /* ここではヘッダーの高さが動的ですが、CSSで対応されているためそのまま維持 */
+  /* scroll-padding-top: 55px; */ 
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;font-family:"Noto Sans JP",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;color:var(--ink);background:var(--bg);scroll-behavior:smooth;}
@@ -93,6 +97,7 @@ header .wrap{
 /* ===== Hero ===== */
 .hero{padding:100px 0 80px; position:relative; overflow:hidden; text-align:center;}
 .hero__media{position:absolute; inset:0; z-index:0; overflow:hidden}
+/* Hero動画は自動再生・ミュート・ループ・インライン再生 */
 .hero__video{
   width:100%; height:100%;
   object-fit:cover; object-position:50% 45%;
@@ -154,7 +159,7 @@ h2{text-align:center;font-size:24px;margin-bottom:10px;}
 
 /* トリニティ映像（比率21/13.5） */
 .trinity__figure{max-width:min(1200px,92vw);margin:0 auto 22px;border-radius:16px;overflow:hidden;box-shadow:0 10px 32px rgba(174,138,255,.20)}
-.trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/13.5;object-fit:cover;object-position:50% 50%}
+.trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/13.5;object-fit:cover;object-position:50% 50%; cursor: pointer;} /* タップ可能を示すcursor: pointer;を追加 */
 
 /* イントロ / カード */
 .intro__box{display:grid;gap:10px;padding:14px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);box-shadow:0 4px 12px rgba(0,0,0,.04);}
@@ -166,13 +171,13 @@ footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border
 .sns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
 .sns a{padding:8px 12px;background:rgba(255,215,111,.12);border-radius:999px;color:#503080}
 
-/* ===== 背景：星砂パーティクル ===== */
+/* ===== 背景：星砂パーティクル（省略） ===== */
 .sky{ position:fixed; inset:0; z-index:0; pointer-events:none; filter:saturate(105%); }
 #goldDust{ width:100%; height:100%; display:block }
 header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relative; z-index:1 }
 @media (prefers-reduced-motion: reduce){ .sky{ display:none } }
 
-/* ===== しおぽん：LINE誘導フローティングUI ===== */
+/* ===== しおぽん：LINE誘導フローティングUI（省略） ===== */
 .shiopon{
   position:fixed; right:16px; bottom:16px; z-index:50;
   display:flex; align-items:flex-end; gap:10px;
@@ -283,11 +288,10 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       <div class="h2-sub">Toriniti（詩・韻・祈）</div>
 
       <figure class="trinity__figure" aria-hidden="true">
-        <video class="trinity__video"
-               autoplay playsinline preload="metadata"
+        <video id="trinityVideo" class="trinity__video"
+               autoplay muted playsinline preload="metadata"
                poster="/assets/trinity/banner.png" width="1200" height="771"
-               aria-label="トリニティ映像（タップで音声オン）"
-               onclick="this.muted=false; this.loop=true; this.play();">
+               aria-label="トリニティ映像（タップで音声オン）">
           <source src="/assets/trinity/loop.webm" type="video/webm">
           <source src="/assets/trinity/loop.mp4"  type="video/mp4">
         </video>
@@ -521,6 +525,61 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     const sec = document.getElementById(id);
     if (sec) observer.observe(sec);
   });
+})();
+</script>
+
+<script>
+(() => {
+  const video = document.getElementById('trinityVideo');
+  if (!video) return;
+  
+  // 初回再生試行とミュート解除
+  function tryPlayUnmuted() {
+    // 1. 自動再生の試行
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // 2. 再生に成功した場合、ミュートを解除
+          // video.muted = false; // 初回はミュートのままにしておくのが一般的ですが、ここではミュート解除の要望に従います
+          // 初回再生が完了したら、動画を停止（非ループのため）
+          video.onended = () => {
+            video.pause();
+          };
+          // ユーザーがタップした際の動作を設定
+          video.addEventListener('click', toggleLoopPlay);
+        })
+        .catch(error => {
+          // 3. 自動再生がブロックされた場合（＝音が原因）
+          console.log("Autoplay blocked. User tap required.", error);
+          
+          // ユーザーがタップした際の動作を設定
+          video.addEventListener('click', toggleLoopPlay);
+          
+          // 実際のサイトではここで「タップして再生/音量オン」のUIを表示する
+        });
+    }
+  }
+
+  // 2回目以降のタップ再生（音あり、ループ）の処理
+  function toggleLoopPlay() {
+    if (video.paused) {
+      video.muted = false; // 音を出す
+      video.loop = true;   // ループを有効にする
+      video.onended = null; // 初回のonendedを解除
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
+
+  // 動画のメタデータが読み込まれたら再生を試みる
+  if (video.readyState >= 3) {
+    tryPlayUnmuted();
+  } else {
+    video.addEventListener('loadedmetadata', tryPlayUnmuted);
+  }
 })();
 </script>
 
