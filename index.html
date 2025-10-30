@@ -27,27 +27,20 @@ html,body{margin:0;height:100%;font-family:"Noto Sans JP",ui-sans-serif,system-u
 a{text-decoration:none;color:var(--a)}
 .wrap{width:min(94vw,1120px);margin-inline:auto}
 
-/* ===== Header (修正済み) ===== */
+/* ===== Header ===== */
 header{
   position:sticky;top:0;backdrop-filter:blur(10px);
-  /* 背景を半透明の暗い色に変え、固定ヘッダーの視認性を向上 */
-  background:rgba(20,20,30,0.85);
-  border-bottom:1px solid rgba(255,255,255,.1); /* ボーダーも明るい色に */
-  z-index:20;
+  background:rgba(255,255,255,0.85);border-bottom:1px solid rgba(0,0,0,.06);z-index:20;
 }
 header .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;
-  /* ブランド名の色を明るくし、視認性を高めるシャドウを追加 */
-  color:rgba(255,255,255,0.9);
-  text-shadow: 0 0 4px rgba(255,215,111,.4);
-}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink);}
 .brand__logo{width:34px;height:34px;border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
   box-shadow:0 0 14px rgba(174,138,255,.4);}
-.nav a{padding:6px 10px;color:rgba(255,255,255,0.9);border-radius:10px} /* ナビリンクの色も明るく */
+.nav a{padding:6px 10px;color:var(--ink);border-radius:10px}
 .nav a:hover{background:rgba(255,215,111,.12)}
 
-/* ===== Hero - 神秘的なデザイン変更を適用 (h1を修正) ===== */
+/* ===== Hero - 神秘的なデザイン変更を適用 ===== */
 .hero{padding:100px 0 80px; /* 上下のパディングを増やし、スペースを確保 */
   position:relative;overflow:hidden;text-align:center;}
 /* ★ 追加：動画を背面に敷くレイヤー */
@@ -82,7 +75,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 @keyframes shine{to{background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%);}}
 .hero > .wrap{position:relative;z-index:1}
 
-/* ★ 変更: h1のフォント、色、影を神秘的に装飾 (修正済み) */
+/* ★ 変更: h1のフォント、色、影を神秘的に装飾 */
 .hero h1{
   font-size: 38px; /* 少し大きく */
   margin: 0 0 16px; /* 下に少しスペースを追加 */
@@ -90,11 +83,11 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
   color: #fff; /* 白に変更してコントラストを強く */
   letter-spacing: 0.05em;
   font-family: "Zen Old Mincho", "Noto Sans JP", serif; /* 神秘的な明朝体を採用 */
-  /* 繊細な多層シャドウで光の表現（神秘的で美しい色） */
+  /* 繊細な多層シャドウで光の表現 */
   text-shadow:
-    0 0 8px rgba(255,255,255,0.7), /* 強い内側の光 */
-    0 0 18px rgba(255,215,111,0.5), /* 黄金の輝き */
-    0 0 30px rgba(174,138,255,0.6); /* 紫のオーラを強調 */
+    0 0 10px rgba(255,255,255,0.7),
+    0 0 20px rgba(255,215,111,0.5),
+    0 0 30px rgba(174,138,255,0.4);
 }
 
 /* ★ 変更: サブテキストの色とサイズ調整 */
@@ -127,7 +120,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 .btn--ghost{
   background: rgba(255,255,255,0.1); /* 透過率を上げて背景動画が透けるように */
   color: #fff; /* 白に変更 */
-  border: 1px solid rgba(255,255,255,.6); /* ボーダー色も明るく */
+  border: 1px solid rgba(255,215,111,.6); /* ボーダー色も明るく */
   backdrop-filter: blur(5px); /* 背景を少しぼかして、ボタンを際立たせる */
 }
 .btn--ghost:hover{
@@ -278,7 +271,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
 
     <div class="wrap">
-      <h1>言葉は祈りの構文。物語は、その実演</h1>
+      <h1>言葉は祈りの構文。物語は、その実演。</h1>
       <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する。<br><strong>「言葉が魂を救う、その瞬間へ。」</strong></p>
       <div class="cta-row">
         <a class="btn btn--primary" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">🌠 星の言葉を受け取る（無料）</a>
