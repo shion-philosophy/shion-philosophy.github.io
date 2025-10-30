@@ -224,6 +224,71 @@ details[open] .codex__caret{transform:rotate(180deg)}
 .codex__list a:hover{color:#7e66ff}
 .badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
 .badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
+  /* === Codex：縦幅を綺麗に統一（2行まで・レスポンシブ） === */
+:root{
+  --codex-item-h: 88px;           /* デフォ（スマホ） */
+  --codex-item-h-md: 96px;        /* タブレット～ */
+  --codex-item-h-lg: 104px;       /* PC広め */
+}
+
+.codex__list{
+  /* 既存grid指定そのまま活かしつつ行高の基準を固定 */
+  align-items: stretch;
+}
+
+/* カード本体をフレックスで整形し、固定高＋内側で2行までに収める */
+.codex__list li{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--codex-item-h);      /* ← 統一高さ */
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.04);
+  transition: transform .15s, box-shadow .2s;
+  overflow: hidden;                  /* はみ出し防止 */
+}
+
+/* バッジは折り返さず高さを揃える */
+.codex__list .badge{
+  white-space: nowrap;
+  line-height: 1;
+  padding: 4px 10px;                /* 視覚的中央に近づける */
+  border-radius: 999px;
+  align-self: center;               /* 垂直中央 */
+}
+
+/* タイトル（リンク）を2行固定＋3点リーダー。行間を少し詰めて均整良く */
+.codex__list a{
+  flex: 1 1 auto;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;            /* 2行まで表示 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;                     /* 省略記号の効きを良くする */
+}
+.codex__list a:hover{ color:#7e66ff }
+
+/* ブレークポイントで高さだけ微調整（タイトルが長い書名でも均整） */
+@media (min-width: 720px){
+  .codex__list li{ height: var(--codex-item-h-md); }
+}
+@media (min-width: 980px){
+  .codex__list li{ height: var(--codex-item-h-lg); }
+}
+
+/* ホバー効果は既存を踏襲 */
+.codex__list li:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(255,215,111,.22);
+}
 
 /* Footer */
 footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
