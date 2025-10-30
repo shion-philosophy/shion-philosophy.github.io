@@ -29,39 +29,52 @@
 <link rel="preload" as="image" href="/assets/hero-poster.jpg">
 
 <style>
-/* 追従ヘッダー（スマート追従）と動画のスタイルを含むCSS */
+/* ----------------------------------------------------- */
+/* ★重要★ CSSの修正点 */
+/* ----------------------------------------------------- */
 :root{
   --ink:#202030; --muted:#606070;
   --a:#7e66ff; --b:#ffd76f; --r:14px;
   --bg:#ffffff;
   color-scheme: light;
-  /* ヘッダーの高さ分をアンカーリンク調整用に確保 */
-  /* ここではヘッダーの高さが動的ですが、CSSで対応されているためそのまま維持 */
-  /* scroll-padding-top: 55px; */ 
+  /* ★修正1-A: ヘッダーの高さを定義 (padding込み約55px) */
+  --header-h: 55px; 
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;font-family:"Noto Sans JP",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;color:var(--ink);background:var(--bg);scroll-behavior:smooth;}
+html{ 
+    /* ★修正1-B: アンカーリンクのずれ対策をhtmlに設定 */
+    scroll-padding-top: var(--header-h); 
+    scroll-behavior: smooth; 
+}
+body{
+    margin:0;height:100%;
+    font-family:"Noto Sans JP",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+    color:var(--ink);background:var(--bg);
+}
 a{text-decoration:none;color:var(--a)}
 img{height:auto}
 .wrap{width:min(94vw,1120px);margin-inline:auto}
 
 /* ===== Header（浮遊型：フェード＋ブラー＋スマート追従） ===== */
 header{
+  /* ★修正1-C: ヘッダーの高さが動的であるため、最低限の高さを確保 */
+  min-height: var(--header-h);
   position:sticky; top:0; z-index:20;
   display:block;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   background:rgba(255,255,255,0.70);
   border-bottom:1px solid rgba(0,0,0,.06);
   transform: translateY(0);
-  opacity: 0;                    /* 入口は透明 */
+  opacity: 0;                    
   transition:
     transform .24s ease,
     opacity .32s ease,
     background-color .28s ease,
     box-shadow .28s ease;
 }
-header.is-visible{ opacity:1 }   /* 少しスクロールしたらふわっと出現 */
-header.header--hidden{ transform: translateY(-100%) } /* 下スクロールで隠す */
+header.is-visible{ opacity:1 }
+/* header.header--hidden{ transform: translateY(-100%) }  */
+/* スムーズ追従を安定させるため、header--hiddenのスタイルをコメントアウト（または削除） */
 header.header--compact{
   background: rgba(255,255,255,.88);
   box-shadow: 0 8px 22px rgba(0,0,0,.06);
@@ -97,7 +110,6 @@ header .wrap{
 /* ===== Hero ===== */
 .hero{padding:100px 0 80px; position:relative; overflow:hidden; text-align:center;}
 .hero__media{position:absolute; inset:0; z-index:0; overflow:hidden}
-/* Hero動画は自動再生・ミュート・ループ・インライン再生 */
 .hero__video{
   width:100%; height:100%;
   object-fit:cover; object-position:50% 45%;
@@ -159,7 +171,7 @@ h2{text-align:center;font-size:24px;margin-bottom:10px;}
 
 /* トリニティ映像（比率21/13.5） */
 .trinity__figure{max-width:min(1200px,92vw);margin:0 auto 22px;border-radius:16px;overflow:hidden;box-shadow:0 10px 32px rgba(174,138,255,.20)}
-.trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/13.5;object-fit:cover;object-position:50% 50%; cursor: pointer;} /* タップ可能を示すcursor: pointer;を追加 */
+.trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/13.5;object-fit:cover;object-position:50% 50%; cursor: pointer;}
 
 /* イントロ / カード */
 .intro__box{display:grid;gap:10px;padding:14px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);box-shadow:0 4px 12px rgba(0,0,0,.04);}
@@ -490,13 +502,16 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     if (y > compactAt) headerEl.classList.add('header--compact');
     else headerEl.classList.remove('header--compact');
 
-    // スマート追従：下で隠す／上で出す
+    // ★修正1-D: 下スクロールで隠すロジックはヘッダーが正しく動作しない原因になることがあるため、一旦無効化
+    /*
     const dy = y - lastY;
     if (Math.abs(dy) > 6) {
       if (dy > 0 && y > compactAt) headerEl.classList.add('header--hidden');
       else headerEl.classList.remove('header--hidden');
       lastY = y;
     }
+    */
+    lastY = y; // Y座標は常に更新
     ticking = false;
   }
   window.addEventListener('scroll', () => {
@@ -519,7 +534,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         if (links[id]) links[id].classList.add('is-active');
       }
     });
-  }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+  }, { rootMargin: "calc(-1 * var(--header-h)) 0px -55% 0px", threshold: 0.01 }); // rootMarginをヘッダー高さに調整
 
   ['trinity','writings','join'].forEach(id=>{
     const sec = document.getElementById(id);
@@ -533,52 +548,57 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   const video = document.getElementById('trinityVideo');
   if (!video) return;
   
-  // 初回再生試行とミュート解除
-  function tryPlayUnmuted() {
-    // 1. 自動再生の試行
-    const playPromise = video.play();
+  // ★修正2-A: フラグを使って、初回の処理済みかどうかを判断
+  let isControlled = false;
 
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // 2. 再生に成功した場合、ミュートを解除
-          // video.muted = false; // 初回はミュートのままにしておくのが一般的ですが、ここではミュート解除の要望に従います
-          // 初回再生が完了したら、動画を停止（非ループのため）
-          video.onended = () => {
-            video.pause();
-          };
-          // ユーザーがタップした際の動作を設定
-          video.addEventListener('click', toggleLoopPlay);
-        })
-        .catch(error => {
-          // 3. 自動再生がブロックされた場合（＝音が原因）
-          console.log("Autoplay blocked. User tap required.", error);
-          
-          // ユーザーがタップした際の動作を設定
-          video.addEventListener('click', toggleLoopPlay);
-          
-          // 実際のサイトではここで「タップして再生/音量オン」のUIを表示する
-        });
-    }
-  }
-
-  // 2回目以降のタップ再生（音あり、ループ）の処理
+  // タップ再生（音あり、ループ）の処理
   function toggleLoopPlay() {
     if (video.paused) {
       video.muted = false; // 音を出す
       video.loop = true;   // ループを有効にする
       video.onended = null; // 初回のonendedを解除
       video.play();
+      isControlled = true;
     } else {
       video.pause();
     }
   }
 
+  // 自動再生が成功し、ユーザーが初めて動画をタップした際の動作を設定
+  function setupVideoControls() {
+    if (isControlled) return; // 既に設定済みなら何もしない
+
+    // 1. 初回再生完了時（非ループ）の動作
+    video.onended = () => {
+      video.pause();
+    };
+    
+    // 2. タップイベントのリスナーを設定
+    video.addEventListener('click', toggleLoopPlay);
+  }
+
   // 動画のメタデータが読み込まれたら再生を試みる
+  video.addEventListener('loadedmetadata', () => {
+      // ユーザー操作なしでautoplay muted playsinlineは可能
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+                // 自動再生成功後、コントロール設定
+                setupVideoControls();
+            })
+            .catch(error => {
+                // 自動再生がブロックされた場合（通常はミュートされていない場合のみ）
+                console.log("Autoplay blocked. User tap required.", error);
+                setupVideoControls();
+            });
+      }
+  });
+  
+  // ページロード時に、ブラウザが許可するミュート自動再生を試行
   if (video.readyState >= 3) {
-    tryPlayUnmuted();
-  } else {
-    video.addEventListener('loadedmetadata', tryPlayUnmuted);
+      video.play().catch(e => console.log('Initial play failed:', e));
+      setupVideoControls();
   }
 })();
 </script>
