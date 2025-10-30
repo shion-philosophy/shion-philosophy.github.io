@@ -289,6 +289,59 @@ details[open] .codex__caret{transform:rotate(180deg)}
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(255,215,111,.22);
 }
+  /* === Codex：バッジ列を固定してタイトルの開始位置を完全揃え === */
+:root{
+  --codex-badge-col: 108px;   /* スマホ時のバッジ列の固定幅 */
+  --codex-badge-col-md: 124px;/* タブレット */
+  --codex-badge-col-lg: 140px;/* PC */
+}
+
+/* liを2カラムGrid化：左=バッジ（固定幅）／右=タイトル（可変） */
+.codex__list li{
+  display: grid !important;
+  grid-template-columns: var(--codex-badge-col) 1fr; /* ←ここで開始位置が揃う */
+  align-items: center;
+  gap: 12px;
+  height: var(--codex-item-h);       /* 既出の縦幅統一があればそのまま活きる */
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+/* ブレークポイントでバッジ列幅を少し広げて可読性UP */
+@media (min-width: 720px){
+  .codex__list li{ grid-template-columns: var(--codex-badge-col-md) 1fr;
+                   height: var(--codex-item-h-md); }
+}
+@media (min-width: 980px){
+  .codex__list li{ grid-template-columns: var(--codex-badge-col-lg) 1fr;
+                   height: var(--codex-item-h-lg); }
+}
+
+/* バッジは左カラムに固定＆中央寄せ（縦はセンター） */
+.codex__list .badge{
+  grid-column: 1;
+  justify-self: start;
+  align-self: center;
+  white-space: nowrap;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* タイトルは右カラムに固定。2行までで省略（三点リーダー） */
+.codex__list a{
+  grid-column: 2;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;          /* 2行固定 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--ink);
+}
+.codex__list a:hover{ color:#7e66ff }
 
 /* Footer */
 footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
