@@ -11,7 +11,6 @@
 <link rel="canonical" href="https://shion-philosophy.github.io/" />
 <meta http-equiv="Content-Language" content="ja" />
 <meta name="author" content="（著者名または団体名）" /> 
-
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="Re:verse Shion — 詩韻思想 × TAROT BREAKER">
@@ -73,7 +72,6 @@
   ]
 }
 </script>
-
 <style>
 /* ----------------------------------------------------- */
 /* 基本設定 */
@@ -101,9 +99,8 @@ img{height:auto}
 :focus-visible{ outline:2px solid rgba(255,215,111,.85); outline-offset:2px; }
 
 /* ----------------------------------------------------- */
-/* Header, Hero, Sections (既存のスタイルは変更なし) */
+/* Header */
 /* ----------------------------------------------------- */
-
 header[role="banner"]{
   min-height: var(--header-h);
   position:sticky; top:0; z-index:20;
@@ -124,41 +121,114 @@ header .wrap{
   display:flex; flex-direction: column; align-items: center; justify-content:center;
   padding:10px 0;
 }
+/* ★★★ ブランド表示（Re:verse Shion 2行化＆ロゴ再配置） ★★★ */
 .brand{
-  display:flex; align-items: center; justify-content:center; gap:8px; text-align:left; font-weight:700; color:var(--ink); margin-bottom: 8px;
+  display:flex;
+  align-items: center; /* 中央に揃える */
+  justify-content:center;
+  gap:8px; /* ロゴとテキスト間の間隔を調整 */
+  text-align:left;
+  font-weight:700; color:var(--ink);
+  margin-bottom: 8px;
 }
-.brand__logo{ width:24px; height:24px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%); box-shadow:0 0 8px rgba(174,138,255,.3); flex-shrink: 0; margin-top: 0; }
-.brand-text-group { display: flex; flex-direction: column; line-height: 1.2; }
+.brand__logo{
+  /* Re:verse Shionのテキストサイズに合わせて微調整（小さくする） */
+  width:24px; height:24px; 
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
+  box-shadow:0 0 8px rgba(174,138,255,.3);
+  flex-shrink: 0;
+  margin-top: 0; 
+}
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+/* 1行目: メインブランド名 */
 .brand__text1{font-size:1.05em; line-height:1.2; font-weight: 700;}
+/* 2行目: サブタイトル統合版（詩韻思想 × TAROT BREAKER） */
 .brand__text2_sub{font-size:.9em; line-height:1.2; font-weight: 500; color:var(--muted); margin-top: 1px;}
+
+/* 不要になった旧3行スタイルを非表示 */
 .brand__text2, .brand__text-sub{ display:none !important; }
 
+/* PC/タブレット（ロゴとテキストを1行に横並び） */
 @media (min-width: 720px) {
-  .brand{ align-items: center; text-align: center; margin-bottom: 5px; }
-  .brand__logo{ width:34px; height:34px; }
-  .brand-text-group{ display: block; }
+  .brand{
+    align-items: center;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .brand__logo{ /* PCではロゴを少し大きく戻す */
+    width:34px; height:34px;
+  }
+  .brand-text-group{ /* PCではテキストを元の1行表示に戻す */
+    display: block; 
+  }
+  /* PC時はサブタイトル統合版を非表示にし、元の1行表示に切り替える */
   .brand__text1{ display:inline; font-size:1.05em; line-height:1.2; margin-top:0;}
-  .brand__text1::after{content:" — ";}
-  .brand__text2_sub{ display:inline; font-size:1.02em; line-height:1.2; font-weight: 700; color:var(--ink); margin-top:0;}
+  .brand__text1::after{content:" — ";} /* PC表示ではハイフンを復活 */
+  .brand__text2_sub{ display:inline; font-size:1.02em; line-height:1.2; font-weight: 700; color:var(--ink); margin-top:0;} /* PCではサブタイトルをブランドテキストの続きとして表示 */
+}
+/* ★★★ /ブランド表示 ★★★ */
+
+
+/* ★★★ ナビゲーション（チップデザイン化・アイコン削除） ★★★ */
+.nav{
+  display:flex; gap:10px;
+  font-size:.9em; justify-content:center; /* 中央揃えのプロパティ */
+  flex-wrap: wrap;
+  font-weight: 700;
 }
 
-.nav{ display:flex; gap:10px; font-size:.9em; justify-content:center; flex-wrap: wrap; font-weight: 700; }
 .nav a{
-  padding: 8px 14px; color: var(--ink); border-radius: 999px; transition: background-color .2s, box-shadow .2s, transform .2s;
-  background: rgba(255,215,111,.1); border: 1px solid rgba(255,215,111,.4); box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  /* タップ領域を広げ、ボタン化する */
+  padding: 8px 14px;
+  color: var(--ink);
+  border-radius: 999px;
+  transition: background-color .2s, box-shadow .2s, transform .2s;
+  
+  /* チップデザインのベース */
+  background: rgba(255,215,111,.1); 
+  border: 1px solid rgba(255,215,111,.4);
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  
+  /* アイコン関連のスタイルを削除（純粋なチップデザイン） */
   white-space: nowrap;
 }
-.nav a:hover{ background: rgba(255,215,111,.2); transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,.1); }
-.nav a.is-active{
-  background: var(--b); color: var(--ink); border-color: var(--b);
-  box-shadow: 0 4px 10px rgba(255,215,111,.5); transform: none;
+
+.nav a:hover{
+  background: rgba(255,215,111,.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
 }
 
+.nav a.is-active{
+  background: var(--b); /* メインのゴールドカラー */
+  color: var(--ink);
+  border-color: var(--b);
+  box-shadow: 0 4px 10px rgba(255,215,111,.5);
+  transform: none;
+}
+/* ★★★ /ナビゲーション ★★★ */
+
+/* ----------------------------------------------------- */
+/* Hero */
+/* ----------------------------------------------------- */
 .hero{padding:100px 0 80px; position:relative; overflow:hidden; text-align:center;}
 .hero__media{position:absolute; inset:0; z-index:0; overflow:hidden}
-.hero__video{ width:100%; height:100%; object-fit:cover; object-position:50% 45%; filter:brightness(1.05) contrast(1.02); transform:translateZ(0); }
+.hero__video{
+  width:100%; height:100%;
+  object-fit:cover; object-position:50% 45%;
+  filter:brightness(1.05) contrast(1.02);
+  transform:translateZ(0);
+}
 .hero__veil{position:absolute; inset:0; pointer-events:none;
-  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.7) 100%), radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.7) 100%),
+    radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%);
 }
 @media (prefers-reduced-motion: reduce){ .hero__media{display:none} }
 .hero::before{
@@ -168,6 +238,7 @@ header .wrap{
 }
 @keyframes shine{ to{ background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%) } }
 .hero > .wrap{ position:relative; z-index:1 }
+
 .hero h1{
   font-size: 38px; margin: 0 0 16px; line-height: 1.3; color: #fff; letter-spacing: .05em;
   font-family: "Zen Old Mincho", "Noto Sans JP", serif;
@@ -177,6 +248,8 @@ header .wrap{
   color: rgba(255,255,255,.9); font-size: 18px; max-width: 720px; margin: 0 auto 36px; line-height: 1.8;
   text-shadow: 0 1px 4px rgba(0,0,0,.6);
 }
+
+/* CTA */
 .cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
 .btn{padding:12px 22px;border-radius:999px;font-weight:800;transition:.2s}
 .btn--primary{
@@ -189,115 +262,242 @@ header .wrap{
 }
 .btn--ghost:hover{ background: rgba(0,0,0,.5); transform: translateY(-1px); }
 .hero__image{display:none}
+
+/* ----------------------------------------------------- */
+/* Sections */
+/* ----------------------------------------------------- */
 section{padding:60px 0;border-top:1px solid rgba(0,0,0,.05);}
 h2{text-align:center;font-size:24px;margin-bottom:10px;}
 .h2-sub{ text-align:center; font-size:14px; color:var(--muted); margin:6px 0 26px; letter-spacing:.06em; }
+
+/* Trinity */
 .tri-grid{display:grid;gap:18px;width:min(92vw,860px);margin:0 auto;}
 @media(min-width:720px){.tri-grid{grid-template-columns:repeat(3,1fr);}}
 .tri{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .15s, box-shadow .2s}
 .tri:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(255,215,111,.25);}
 .tri h3{margin:0 0 8px;font-size:18px;color:#503080;}
 .tri p{margin:0;font-size:15px;color:var(--muted);}
+
+/* Trinity動画（21/13.5） */
 .trinity__figure{max-width:min(1200px,92vw);margin:0 auto 22px;border-radius:16px;overflow:hidden;box-shadow:0 10px 32px rgba(174,138,255,.20)}
 .trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/13.5;object-fit:cover;object-position:50% 50%; cursor: pointer; position:relative;}
-.trinity__hint{ margin:8px auto 0;text-align:center;font-size:13px;color:#503080;opacity:.92;user-select:none; }
+
+/* 音声ヒント */
+.trinity__hint{
+  margin:8px auto 0;text-align:center;font-size:13px;color:#503080;opacity:.92;user-select:none;
+}
 .trinity__video::after{
-  content:"タップで音声ON / もう一度で停止"; position:absolute; inset:auto 12px 12px auto;
-  padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700;
-  background:rgba(0,0,0,.45); color:#fff; border:1px solid rgba(255,215,111,.55);
-  backdrop-filter: blur(4px); opacity:.0; transform: translateY(4px);
-  transition: opacity .25s, transform .25s; pointer-events:none;
+  content:"タップで音声ON / もう一度で停止";
+  position:absolute; inset:auto 12px 12px auto;
+  padding:6px 10px; border-radius:999px;
+  font-size:12px; font-weight:700;
+  background:rgba(0,0,0,.45); color:#fff;
+  border:1px solid rgba(255,215,111,.55);
+  backdrop-filter: blur(4px);
+  opacity:.0; transform: translateY(4px);
+  transition: opacity .25s, transform .25s;
+  pointer-events:none;
 }
 .trinity__video:hover::after, .trinity__video:focus-visible::after{ opacity:1; transform: translateY(0); }
+
+/* Intro / Cards */
 .intro__box{display:grid;gap:10px;padding:14px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);box-shadow:0 4px 12px rgba(0,0,0,.04);}
 .card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.04)}
 .badge{display:inline-flex;gap:.4em;background:rgba(255,215,111,.18);border:1px solid rgba(255,215,111,.35);padding:2px 8px;border-radius:999px;font-size:12px}
+
+/* === Codex Accordion（<details>版） === */
 .codex{width:min(94vw,1120px);margin:0 auto}
-.codex details{ border:1px solid rgba(0,0,0,.08); border-radius:14px; background:#fff; box-shadow:0 10px 24px rgba(174,138,255,.18); overflow:hidden; }
-.codex summary{ list-style:none; cursor:pointer; padding:14px 16px; font-weight:800; color:#503080; background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.8)); display:flex; align-items:center; justify-content:center; gap:.6em; }
+.codex details{
+  border:1px solid rgba(0,0,0,.08); border-radius:14px; background:#fff;
+  box-shadow:0 10px 24px rgba(174,138,255,.18); overflow:hidden;
+}
+.codex summary{
+  list-style:none; cursor:pointer; padding:14px 16px; font-weight:800; color:#503080;
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.8));
+  display:flex; align-items:center; justify-content:center; gap:.6em;
+}
 .codex summary::-webkit-details-marker{display:none}
 .codex__caret{transition:transform .25s ease}
 details[open] .codex__caret{transform:rotate(180deg)}
-.codex__panel{padding:14px 12px; background: radial-gradient(80% 120% at 50% 0%, rgba(255,215,111,.14), rgba(255,255,255,.92) 40%, #fff 100%); border-top:1px solid rgba(0,0,0,.06); }
+.codex__panel{padding:14px 12px; background:
+  radial-gradient(80% 120% at 50% 0%, rgba(255,215,111,.14), rgba(255,255,255,.92) 40%, #fff 100%);
+  border-top:1px solid rgba(0,0,0,.06);
+}
 .codex__list{list-style:none; margin:0; padding:0; display:grid; gap:10px}
 @media(min-width:720px){.codex__list{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:980px){.codex__list{grid-template-columns:repeat(3,1fr)}}
-:root{ --codex-badge-col: 108px; --codex-badge-col-md: 124px; --codex-badge-col-lg: 140px; --codex-item-h: 88px; --codex-item-h-md: 96px; --codex-item-h-lg: 104px; }
+
+  /* === Codex：バッジ列を固定してタイトルの開始位置を完全揃え === */
+:root{
+  --codex-badge-col: 108px;
+  --codex-badge-col-md: 124px;
+  --codex-badge-col-lg: 140px;
+  --codex-item-h: 88px;
+  --codex-item-h-md: 96px;
+  --codex-item-h-lg: 104px;
+}
 .codex__list{ align-items: stretch; }
 .codex__list li{
-  display: grid !important; grid-template-columns: var(--codex-badge-col) 1fr; align-items: center; gap: 12px;
-  height: var(--codex-item-h); padding: 12px 14px; border: 1px solid rgba(0,0,0,.06);
-  border-radius: 12px; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.04);
-  transition: transform .15s, box-shadow .2s; overflow: hidden;
+  display: grid !important;
+  grid-template-columns: var(--codex-badge-col) 1fr;
+  align-items: center;
+  gap: 12px;
+  height: var(--codex-item-h);
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.04);
+  transition: transform .15s, box-shadow .2s;
+  overflow: hidden;
 }
-@media (min-width: 720px){ .codex__list li{ grid-template-columns: var(--codex-badge-col-md) 1fr; height: var(--codex-item-h-md); } }
-@media (min-width: 980px){ .codex__list li{ grid-template-columns: var(--codex-badge-col-lg) 1fr; height: var(--codex-item-h-lg); } }
-.codex__list li:hover{ transform: translateY(-2px); box-shadow: 0 10px 22px rgba(255,215,111,.22); }
-.codex__list .badge{ grid-column: 1; justify-self: start; align-self: center; white-space: nowrap; line-height: 1; padding: 4px 10px; border-radius: 999px; }
-.codex__list a{ grid-column: 2; min-width: 0; display: flex; flex-direction: column; justify-content: center; line-height: 1.4; font-weight: 700; color: var(--ink); text-decoration: none; }
+
+@media (min-width: 720px){
+  .codex__list li{ grid-template-columns: var(--codex-badge-col-md) 1fr;
+                   height: var(--codex-item-h-md); }
+}
+@media (min-width: 980px){
+  .codex__list li{ grid-template-columns: var(--codex-badge-col-lg) 1fr;
+                   height: var(--codex-item-h-lg); }
+}
+
+.codex__list li:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(255,215,111,.22);
+}
+
+.codex__list .badge{
+  grid-column: 1;
+  justify-self: start;
+  align-self: center;
+  white-space: nowrap;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.codex__list a{
+  grid-column: 2;
+  min-width: 0;
+  display: flex; /* Flexboxに変更して縦方向に揃える */
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  /* 複数行表示の制御はCSSを削除（Flexboxで対応） */
+}
+
 .codex__list a:hover{ color:#7e66ff }
+  /* 英題を下行に・整列 */
 .codex__list a .en{font-size:.9em;font-weight:500;color:#6b6b6b;letter-spacing:.02em;margin-top:3px}
 .badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
 .badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
+  /* === /Codex Accordion === */
+
+
+/* Footer */
 footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
 .sns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
 .sns a{padding:8px 12px;background:rgba(255,215,111,.12);border-radius:999px;color:#503080}
+
+/* 背景：星砂パーティクル */
 .sky{ position:fixed; inset:0; z-index:0; pointer-events:none; filter:saturate(105%); }
 #goldDust{ width:100%; height:100%; display:block }
 header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relative; z-index:1 }
 @media (prefers-reduced-motion: reduce){ .sky{ display:none } }
 
-
-/* ----------------------------------------------------- */
-/* ★★★ しおぽん：UX改善 & 安全域 CSS ★★★ */
-/* ----------------------------------------------------- */
-.shiopon{ 
-  position:fixed; 
+/* ===== Shiopon Perfect CSS (置き換え) ===== */
+.shiopon{
+  position: fixed;
   /* iOS安全域対応 */
-  right: calc(16px + env(safe-area-inset-right, 0px)); 
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px)); 
-  z-index:50; 
-  display:flex; align-items:flex-end; gap:10px; 
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
   filter: drop-shadow(0 12px 28px rgba(0,0,0,.12));
-  
-  /* UX改善：ふわっと出現アニメーションの初期値 */
-  opacity: 0; 
-  transform: translateY(8px) scale(.985); 
+  /* 出現アニメ（初期は透明・わずかに下） */
+  opacity: 0; transform: translateY(8px) scale(.985);
   transition: opacity .28s ease, transform .28s ease;
 }
-.shiopon.is-visible{ /* 出現時クラス */
-  opacity:1; 
-  transform: translateY(0) scale(1);
+.shiopon.is-hidden{ display: none; }
+.shiopon.is-visible{ opacity: 1; transform: translateY(0) scale(1); }
+
+.shiopon__avatar{
+  width:64px; height:64px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%);
+  box-shadow: 0 0 0 3px rgba(255,215,111,.25);
+  position: relative; overflow: hidden; flex: none;
+  animation: shioponFloat 3.6s ease-in-out infinite;
 }
-.shiopon.is-hidden{ display:none; }
-.shiopon__avatar{ width:64px; height:64px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%); box-shadow: 0 0 0 3px rgba(255,215,111,.25); position:relative; overflow:hidden; flex:none; animation: shioponFloat 3.6s ease-in-out infinite;}
-.shiopon__avatar img{width:100%; height:100%; object-fit:cover; display:block;}
 @keyframes shioponFloat{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-4px) } }
-.shiopon__bubble{ max-width:min(78vw, 320px); background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:12px 14px; box-shadow: 0 8px 24px rgba(255,215,111,.22); position:relative;}
-.shiopon__bubble::after{ content:""; position:absolute; right:-8px; bottom:18px; width:12px; height:12px; background:#fff; border:1px solid rgba(0,0,0,.06); transform: rotate(45deg); box-shadow: 4px 4px 12px rgba(255,215,111,.18);}
+.shiopon__avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.shiopon__bubble{
+  max-width: min(78vw, 340px);
+  background:#fff; border:1px solid rgba(0,0,0,.08);
+  border-radius:16px; padding:12px 14px;
+  box-shadow: 0 8px 24px rgba(255,215,111,.22);
+  position: relative;
+}
+.shiopon__bubble::after{
+  content:""; position:absolute; right:-8px; bottom:18px;
+  width:12px; height:12px; background:#fff;
+  border:1px solid rgba(0,0,0,.06); transform: rotate(45deg);
+  box-shadow: 4px 4px 12px rgba(255,215,111,.18);
+}
 .shiopon__hello{ margin:0 0 10px; color:#503080; font-weight:700; font-size:15px; }
-.shiopon__cta{ display:inline-flex; align-items:center; justify-content:center; gap:.5em; padding:10px 14px; border-radius:999px; font-weight:800; text-decoration:none; background: linear-gradient(180deg, #ffd76f, #ffb6ff); color:#2a1030; box-shadow: 0 8px 18px rgba(255,215,111,.35);}
+.shiopon__cta{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5em;
+  padding:10px 14px; border-radius:999px; font-weight:800; text-decoration:none;
+  background: linear-gradient(180deg, #ffd76f, #ffb6ff); color:#2a1030;
+  box-shadow: 0 8px 18px rgba(255,215,111,.35);
+}
 .shiopon__cta:hover{ transform: translateY(-1px); }
+
 .shiopon__note{ display:block; margin-top:8px; color:#666; font-size:12px; opacity:.9 }
-.shiopon__close{ position:absolute; top:-8px; right:-8px; width:28px; height:28px; border-radius:50%; border:0; color:#333; background:#fff; box-shadow: 0 4px 10px rgba(0,0,0,.08); cursor:pointer; font-size:16px; line-height:1; }
+.shiopon__close{
+  position:absolute; top:-8px; right:-8px; width:28px; height:28px; border-radius:50%;
+  border:0; color:#333; background:#fff; box-shadow: 0 4px 10px rgba(0,0,0,.08);
+  cursor:pointer; font-size:16px; line-height:1;
+}
 .shiopon__close:hover{ filter:brightness(1.05) }
-.shiopon-dock{ position:fixed; right:16px; bottom:16px; z-index:49; padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.08); background:#fff; color:#503080; font-weight:800; box-shadow: 0 8px 18px rgba(0,0,0,.08); cursor:pointer;}
+
+.shiopon__opts{
+  margin-top:8px; display:flex; gap:10px; font-size:12px;
+}
+.shiopon__opts button{
+  background:transparent; border:0; color:#6b6b6b; text-decoration: underline; cursor:pointer;
+}
+.shiopon__opts button:hover{ color:#503080; }
+
+.shiopon-dock{
+  position: fixed;
+  /* iOS安全域対応 */
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 49;
+  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.08);
+  background:#fff; color:#503080; font-weight:800; box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  cursor: pointer;
+}
 .shiopon-dock.is-hidden{ display:none }
 
-@media (max-width:480px){ 
-  .shiopon__avatar{ width:56px; height:56px } 
-  .shiopon__bubble{ max-width:78vw; padding:10px 12px } 
-  /* iOS安全域の計算をモバイルにも適用 */
-  .shiopon-dock {
-    right: calc(16px + env(safe-area-inset-right, 0px)); 
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  }
+@media (max-width:480px){
+  .shiopon__avatar{ width:56px; height:56px }
+  .shiopon__bubble{ max-width:78vw; padding:10px 12px }
 }
-@media (prefers-reduced-motion: reduce){ 
-  .shiopon__avatar{ animation:none }
-  .shiopon{ transition: none; transform: none; } /* アニメーションオフ */
+/* ハイコントラスト/省モーション */
+@media (prefers-contrast: more){
+  .shiopon__bubble{ border-width:2px; box-shadow: none; }
 }
-@media (prefers-contrast: more){ .btn--ghost{ border-width:2px; } .hero p{ text-shadow:none; } }
+@media (prefers-reduced-motion: reduce){
+  .shiopon__avatar{ animation: none }
+  .shiopon{ transition: none; transform:none; } /* 省モーション時はアニメーションを完全にカット */
+}
 </style>
 </head>
 <body>
@@ -318,7 +518,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       <a href="#writings">書</a>
       <a href="#join">参加</a>
     </nav>
-  </div>
+    </div>
 </header>
 
 <main id="top">
@@ -341,6 +541,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         <a class="btn btn--ghost" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">📖 今日の“響き”を読む</a>
         <a class="btn btn--ghost" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">🎥 1分で観る/聴く</a>
       </div>
+
       <figure class="hero__image" aria-hidden="true">
         <img src="/assets/og.jpg" alt="詩韻思想 × TAROT BREAKER キービジュアル"
              width="1200" height="630" loading="lazy" decoding="async">
@@ -348,7 +549,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
   </section>
 
-  <section id="trinity" aria-labelledby="sec-trinity">
+  <section id="trinity" aria-labelledby="sec-trinity" data-shiopon="exclude">
     <div class="wrap">
       <h2 id="sec-trinity">詩韻思想</h2>
       <div class="h2-sub">Trinity（詩・韻・祈）</div>
@@ -382,9 +583,10 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
   </section>
 
-  <section id="writings" aria-labelledby="sec-writings">
+  <section id="writings" aria-labelledby="sec-writings" data-shiopon="exclude">
     <div class="wrap">
       <h2 id="sec-writings">📖 最新の書・物語</h2>
+
       <div class="codex" style="margin-top:12px;margin-bottom:18px">
         <details>
           <summary>
@@ -393,7 +595,90 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
           </summary>
           <div class="codex__panel">
             <ol class="codex__list">
-              </ol>
+  <li><span class="badge badge--zero">✡ 第零書</span>
+    <a href="/codex/zero.html">
+      無限構文序論<br><span class="en">The Zero Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第一書</span>
+    <a href="/codex/one.html">
+      言葉が魂を救う理由<br><span class="en">The Syntax of Salvation</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第二書</span>
+    <a href="/codex/two.html">
+      響きの構文論<br><span class="en">Re:Song Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第三書</span>
+    <a href="/codex/three.html">
+      祈りの構文<br><span class="en">Silent Grammar</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第四書</span>
+    <a href="/codex/four.html">
+      存在構文論<br><span class="en">The Onto-Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第五書</span>
+    <a href="/codex/five.html">
+      無限構文体系<br><span class="en">Infinite Syntax of Soul</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第六書</span>
+    <a href="/codex/six.html">
+      詩的因果論<br><span class="en">Poetic Causality</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第七書</span>
+    <a href="/codex/seven.html">
+      N・code理論<br><span class="en">Onto-Syntax of Being &amp; Resonant AI</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第八書</span>
+    <a href="/codex/eight.html">
+      人間構文論<br><span class="en">The Syntax of Humanity</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第九書</span>
+    <a href="/codex/nine.html">
+      詩的生成論<br><span class="en">Poetic Genesis — The Creation Syntax of Words &amp; Soul</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第十書</span>
+    <a href="/codex/ten.html">
+      沈黙の再生<br><span class="en">Silent Genesis — The Rebirth of Silence</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第十一書</span>
+    <a href="/codex/eleven.html">
+      神構文論<br><span class="en">The Divine Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第十二書</span>
+    <a href="/codex/twelve.html">
+      経済構文論<br><span class="en">The Soul Economy</span>
+    </a>
+  </li>
+
+  <li><span class="badge badge--final">◆ 結書</span>
+    <a href="/codex/epilogue.html">
+      終詩円環宣言<br><span class="en">Epilogue — The Re:Poetic Circle</span>
+    </a>
+  </li>
+</ol>
           </div>
         </details>
       </div>
@@ -403,7 +688,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
   </section>
 
-  <section id="join" aria-labelledby="sec-join">
+  <section id="join" aria-labelledby="sec-join" data-shiopon="exclude">
     <div class="wrap">
       <h2 id="sec-join">参加の扉</h2>
       <p style="text-align:center;color:var(--muted)">LINE登録で、毎週「星の言葉」と新着の書をお届けします</p>
@@ -429,10 +714,12 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   </div>
 </footer>
 
+<div id="a11y-live" class="sr-only" aria-live="polite"></div>
+
 <div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
   <button class="shiopon__close" aria-label="閉じる">×</button>
   <div class="shiopon__avatar" aria-hidden="true">
-    <img src="/assets/shiopon.png" alt="しおぽんのアバター">
+    <img src="/assets/shiopon.png" alt="">
   </div>
   <div class="shiopon__bubble">
     <p id="shiopon-title" class="shiopon__hello">
@@ -441,33 +728,113 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </p>
     <a class="shiopon__cta" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">💫 LINEで受け取る（無料）</a>
     <small class="shiopon__note">※ 毎週1回だけ。いつでも解除OKだよ！</small>
-  </div>
+    </div>
 </div>
 <button id="shiopon-dock" class="shiopon-dock is-hidden" aria-label="しおぽんを開く">🦊 しおぽん</button>
+
 <script>
-// Canvasロジックは省略（変更なし）
+(() => {
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  const canvas = document.getElementById('goldDust');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha:true });
+  let w,h,dpr = Math.min(devicePixelRatio||1,2), stars=[],rafId;
+
+  const density = () => {
+    const area = (w*h)/(dpr*dpr);
+    return Math.max(28, Math.min(75, Math.floor(area/22000)));
+  };
+  function spawn(){
+    const palette = [[255,215,111],[255,238,185],[212,189,255],[174,228,255]];
+    const c = palette[Math.floor(Math.random()*palette.length)];
+    return { x:Math.random()*w, y:Math.random()*h,
+      r:(Math.random()*1.2+0.8)*dpr,
+      vx:(Math.random()*0.15-0.075)*dpr,
+      vy:(Math.random()*0.20-0.02)*dpr,
+      tw:Math.random()*Math.PI*2, rgb:c };
+  }
+  function resize(){
+    canvas.style.width='100vw'; canvas.style.height='100vh';
+    w = canvas.width  = Math.floor(canvas.getBoundingClientRect().width*dpr);
+    h = canvas.height = Math.floor(canvas.getBoundingClientRect().height*dpr);
+    stars = new Array(density()).fill(0).map(spawn);
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for (let s of stars){
+      s.tw+=0.02; s.x+=s.vx; s.y+=s.vy;
+      if (s.x < -6*dpr) s.x = w + 6*dpr;
+      if (s.x > w+6*dpr) s.x = -6*dpr;
+      if (s.y > h+6*dpr) { s.y = -6*dpr; s.x = Math.random()*w; }
+      const g = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*4);
+      const a = 0.10 + 0.12*Math.sin(s.tw);
+      g.addColorStop(0, `rgba(${s.rgb[0]},${s.rgb[1]},${s.rgb[2]},${0.65+a})`);
+      g.addColorStop(1, `rgba(${s.rgb[0]},${s.rgb[1]},${s.rgb[2]},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+    }
+    rafId = requestAnimationFrame(draw);
+  }
+  const ro = new ResizeObserver(()=>{ requestAnimationFrame(resize) });
+  ro.observe(document.documentElement);
+  document.addEventListener('visibilitychange', ()=>{ if (document.hidden) cancelAnimationFrame(rafId); else draw(); });
+  resize(); draw();
+})();
 </script>
 
 <script>
 (() => {
   const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
-  const KEY_HIDE_UNTIL='shiopon.hideUntil', HIDE_DAYS=3;
+  const KEY_HIDE_UNTIL='shiopon.hideUntil';
+  const HIDE_DAYS_DEFAULT=3, HIDE_DAYS_LONG=30;
+
   const invite=document.getElementById(INVITE_ID);
   const dock=document.getElementById(DOCK_ID);
-  
-  // A. DOM要素が見つからない場合は処理を終了
+  const live=document.getElementById('a11y-live');
   if(!invite||!dock) return;
 
-  let lastFocus=null;
+  // アクセシビリティ: フォーカストラップ & inert管理
+  let lastFocus=null, inertedSiblings=[];
   const closeBtn = invite.querySelector('.shiopon__close');
   const ctaBtn   = invite.querySelector('.shiopon__cta');
+  const neverBtn = document.createElement('button');
+  const laterBtn = document.createElement('button');
 
-  // ARIA: 画面外の要素の操作をブロックする 'inert' の切り替え
-  function toggleInert(enable) {
-    const inertElements = ['header', 'main', 'footer'];
-    inertElements.forEach(selector => {
-      document.querySelector(selector)?.toggleAttribute('inert', enable);
+  // 追加オプション（30日表示しない / 後で）をDOMに挿入
+  const opts = document.createElement('div');
+  opts.className = 'shiopon__opts';
+  neverBtn.textContent = '30日間表示しない';
+  laterBtn.textContent = 'また後で';
+  opts.appendChild(neverBtn); opts.appendChild(laterBtn);
+  invite.querySelector('.shiopon__bubble').appendChild(opts);
+
+  function setLive(msg){
+    if (!live) return;
+    live.textContent = '';
+    setTimeout(()=>{ live.textContent = msg; }, 0);
+  }
+
+  function siblings(el){
+    const arr=[]; let n=el.parentNode.firstElementChild;
+    for (; n; n=n.nextElementSibling) if (n!==el) arr.push(n);
+    return arr;
+  }
+
+  function enableInert(root){
+    // 背景の要素リストを取得し、inertとaria-hiddenを付与
+    inertedSiblings = siblings(root);
+    inertedSiblings.forEach(n=>{
+      if ('inert' in n){ n.inert = true; }
+      n.setAttribute('aria-hidden','true');
     });
+  }
+  function disableInert(){
+    // 背景の要素のinertとaria-hiddenを解除
+    inertedSiblings.forEach(n=>{
+      if ('inert' in n){ n.inert = false; }
+      n.removeAttribute('aria-hidden');
+    });
+    inertedSiblings = [];
   }
 
   function trapFocus(e){
@@ -478,51 +845,62 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     if(e.key === 'Tab'){
       if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
       else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-    }else if(e.key === 'Escape'){ hideInvite(HIDE_DAYS, true); }
+    }else if(e.key === 'Escape'){ hideInvite(HIDE_DAYS_DEFAULT, true); }
   }
 
-  function _show() {
-    // 従来のshowInviteのコアロジック
-    lastFocus = document.activeElement;
-    invite.classList.remove('is-hidden');
-    dock.classList.add('is-hidden');
-    (ctaBtn||closeBtn)?.focus();
-    document.addEventListener('keydown', trapFocus);
-    toggleInert(true); // モーダル表示中は背景をinert
-  }
-
-  // ★ 修正：アニメーション用クラス付与のため showInvite を上書き（またはラッパー関数化）
-  let timerId = null;
-  const showInvite = function(){
-    _show();
-    invite.classList.add('is-visible'); // CSSのフェードインアニメーション用クラス
-    clearTimeout(timerId); // タイマーがあればクリア
-  };
-
-  function hideInvite(days=HIDE_DAYS, restoreFocus=false){
+  function canShow(){ return Date.now() > Number(localStorage.getItem(KEY_HIDE_UNTIL) || 0); }
+  function setHideDays(days){
     const until=Date.now()+days*24*60*60*1000;
     localStorage.setItem(KEY_HIDE_UNTIL, String(until));
+  }
+
+  function showInvite(){
+    lastFocus = document.activeElement;
+    invite.classList.remove('is-hidden');
+    invite.classList.add('is-visible'); // アニメーション開始
+    dock.classList.add('is-hidden');
+    enableInert(invite); // 背景をinert化
+    (ctaBtn||closeBtn)?.focus();
+    document.addEventListener('keydown', trapFocus);
+    setLive('しおぽんが開きました。LINEで星の言葉を受け取れます。');
+    startCollisionWatch();
+  }
+  function hideInvite(days=HIDE_DAYS_DEFAULT, restoreFocus=false){
+    setHideDays(days);
     
-    // アニメーション用クラスを削除し、その後 display:none の is-hidden を付与
-    invite.classList.remove('is-visible'); 
+    // is-visibleを削除し、アニメーション後に is-hidden を付与
+    invite.classList.remove('is-visible');
+    // 300msのCSSアニメーション時間に合わせて遅延
     setTimeout(() => {
       invite.classList.add('is-hidden');
-    }, 300); // CSSアニメーションの時間に合わせて少し遅延
+    }, 300); 
 
     dock.classList.remove('is-hidden');
     document.removeEventListener('keydown', trapFocus);
-    toggleInert(false); // 背景のinertを解除
+    disableInert(); // 背景のinertを解除
+    stopCollisionWatch();
     if(restoreFocus) { (lastFocus||dock)?.focus?.(); }
+    setLive('しおぽんを閉じました。');
   }
-  function canShow(){ return Date.now() > Number(localStorage.getItem(KEY_HIDE_UNTIL) || 0); }
 
+  // クリック・ボタン動作
+  invite.querySelector('.shiopon__close')?.addEventListener('click', ()=> hideInvite(HIDE_DAYS_DEFAULT, true));
+  dock.addEventListener('click', showInvite);
+  invite.querySelector('.shiopon__cta')?.addEventListener('click', ()=>{
+    hideInvite(HIDE_DAYS_DEFAULT, true);
+    dock.classList.add('is-hidden'); // CTA後はしばらくドックも非表示
+  });
+  laterBtn.addEventListener('click', ()=> hideInvite(HIDE_DAYS_DEFAULT, true));
+  neverBtn.addEventListener('click', ()=> hideInvite(HIDE_DAYS_LONG, true));
+
+  // ===== 出現ロジック（到達観測＋フォールバック群） =====
   if (canShow()){
     let alreadyShown = false;
 
-    // A. IntersectionObserverでセクション到達をトリガー
-    const targets = ['writings','trinity']
-      .map(id => document.getElementById(id))
-      .filter(Boolean);
+    // A) IntersectionObserverでセクション到達（自然）
+    const targetIds = ['trinity','writings','join'];
+    const targets = targetIds.map(id => document.getElementById(id)).filter(Boolean);
+    let timerId = null; // C)で使うタイマーをここで定義
 
     const io = ('IntersectionObserver' in window)
       ? new IntersectionObserver((entries) => {
@@ -532,14 +910,14 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
               setTimeout(showInvite, 350); // そっと出現 (350ms遅延)
               io.disconnect();
               window.removeEventListener('scroll', onScrollOnce);
+              clearTimeout(timerId);
             }
           });
         }, { rootMargin: '0px 0px -45% 0px', threshold: 0.01 }) // 画面の45%が隠れたら発火
       : null;
-
     targets.forEach(sec => io && io.observe(sec));
 
-    // B. フォールバック：スクロール量（25vh or 200px）を超えたら一度だけ出現
+    // B) フォールバック：スクロール量（25vh/200pxの大きい方）
     const thresholdPx = Math.max(200, Math.floor(window.innerHeight * 0.25));
     function onScrollOnce(){
       if (alreadyShown) return;
@@ -551,9 +929,9 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         clearTimeout(timerId);
       }
     }
-    window.addEventListener('scroll', onScrollOnce, { passive: true });
+    window.addEventListener('scroll', onScrollOnce, { passive:true });
 
-    // C. ページ滞在フォールバック：15秒見続けたら出す（動かないユーザー向け）
+    // C) ページ滞在フォールバック（15秒）
     timerId = setTimeout(() => {
       if (!alreadyShown){
         alreadyShown = true;
@@ -562,26 +940,172 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         io && io.disconnect();
       }
     }, 15000); // 15秒後に発火
-
   } else {
+    // 非表示期間中の場合、ドックを表示
     dock.classList.remove('is-hidden');
   }
 
-  // イベントリスナー
-  invite.querySelector('.shiopon__close')?.addEventListener('click', ()=> hideInvite(HIDE_DAYS, true));
-  dock.addEventListener('click', showInvite);
-  invite.querySelector('.shiopon__cta')?.addEventListener('click', ()=>{
-    hideInvite(HIDE_DAYS, true);
-    dock.classList.add('is-hidden');
-  });
+  // ===== 衝突回避（CTA/重要要素と重なりそうなときに自動で少し上へ避ける） =====
+  const avoidSelector = [
+    '[data-shiopon="exclude"] .cta-row', // セクション内の主要CTA
+    '[data-avoid="shiopon"]', // カスタムで避けたい要素
+    'footer .sns', // フッター内のソーシャルリンク
+  ].join(',');
+
+  let colRaf = null;
+  function rect(el){ return el.getBoundingClientRect(); }
+  function overlap(a,b){
+    return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+  }
+
+  function nudgePosition(){
+    // 非表示中は処理しない
+    if (invite.classList.contains('is-hidden')) return;
+
+    // 基準位置にリセット（CSSの right/bottom/safe-area-inset を利用）
+    invite.style.right = `calc(16px + env(safe-area-inset-right, 0px))`;
+    invite.style.bottom = `calc(16px + env(safe-area-inset-bottom, 0px))`;
+
+    const avoidNodes = document.querySelectorAll(avoidSelector);
+    if (!avoidNodes.length) return;
+
+    const invRect = rect(invite);
+    let maxNudge = 0;
+    avoidNodes.forEach(n=>{
+      const r = rect(n);
+      // 要素が画面外（上側）にスクロールアウトしていなければチェック
+      if (r.bottom > 0 && overlap(invRect, r)){
+        // 重なっていたら、その分だけ上に避ける（12pxのバッファ込み）
+        const needed = Math.ceil((invRect.bottom - r.top) + 12);
+        if (needed > maxNudge) maxNudge = needed;
+      }
+    });
+
+    if (maxNudge > 0){
+      // CSS変数のbottom計算を上書きして、避ける分 (maxNudge) を加算
+      invite.style.bottom = `calc(${16 + maxNudge}px + env(safe-area-inset-bottom, 0px))`;
+    }
+    colRaf = requestAnimationFrame(nudgePosition); // 次のフレームでも実行
+  }
+
+  function onScrollResize(){
+    // スクロール・リサイズ時は、次のフレームで位置調整を実行
+    if (colRaf) cancelAnimationFrame(colRaf);
+    colRaf = requestAnimationFrame(nudgePosition);
+  }
+
+  function startCollisionWatch(){
+    window.addEventListener('scroll', onScrollResize, { passive:true });
+    window.addEventListener('resize', onScrollResize, { passive:true });
+    nudgePosition(); // 初回実行
+  }
+  function stopCollisionWatch(){
+    window.removeEventListener('scroll', onScrollResize);
+    window.removeEventListener('resize', onScrollResize);
+    if (colRaf) cancelAnimationFrame(colRaf);
+  }
 })();
-</script>
-<script>
-// ... 省略（変更なし）
 </script>
 
 <script>
-// ... 省略（変更なし）
+(() => {
+  const headerEl = document.querySelector('header[role="banner"]');
+  if (!headerEl) return;
+
+  const revealAt = 8;
+  const compactAt = 88;
+  let ticking = false;
+
+  function onScroll() {
+    const y = window.scrollY;
+    if (y > revealAt) headerEl.classList.add('is-visible');
+    else headerEl.classList.remove('is-visible');
+    if (y > compactAt) headerEl.classList.add('header--compact');
+    else headerEl.classList.remove('header--compact');
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive:true });
+  onScroll();
+
+  // 現在地ハイライト
+  const links = {
+    trinity: document.querySelector('.nav a[href="#trinity"]'),
+    writings: document.querySelector('.nav a[href="#writings"]'),
+    join: document.querySelector('.nav a[href="#join"]'),
+  };
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach((e)=>{
+      if (e.isIntersecting){
+        Object.values(links).forEach(a=>a && a.classList.remove('is-active'));
+        const id = e.target.getAttribute('id');
+        if (links[id]) links[id].classList.add('is-active');
+      }
+    });
+  }, { rootMargin: "calc(-1 * var(--header-h)) 0px -55% 0px", threshold: 0.01 });
+
+  ['trinity','writings','join'].forEach(id=>{
+    const sec = document.getElementById(id);
+    if (sec) observer.observe(sec);
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const video = document.getElementById('trinityVideo');
+  if (!video) return;
+
+  let isControlled = false;
+
+  function toggleLoopPlay() {
+    if (video.paused) {
+      try { video.muted = false; } catch(e){}
+      video.loop = true;
+      video.onended = null;
+      video.play().catch(()=>{});
+      isControlled = true;
+    } else {
+      video.pause();
+    }
+  }
+
+  function setupVideoControls() {
+    if (isControlled) return;
+    video.onended = () => { video.pause(); };
+    video.addEventListener('click', toggleLoopPlay);
+    video.addEventListener('touchend', toggleLoopPlay, { passive:true });
+    video.setAttribute('tabindex','0');
+    video.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.code === 'Space' || e.key === ' '){
+        e.preventDefault(); toggleLoopPlay();
+      }
+    });
+  }
+
+  video.addEventListener('loadedmetadata', () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.then(setupVideoControls).catch(()=>{ setupVideoControls(); });
+    }
+  });
+
+  if (video.readyState >= 3) {
+    video.play().catch(()=>{});
+    setupVideoControls();
+  }
+
+  // 初回ヒントのフェード
+  let hintShown = false;
+  video.addEventListener('play', ()=>{
+    if (!hintShown) {
+      const hint = document.querySelector('.trinity__hint');
+      if (hint){ hint.style.opacity = '.6'; setTimeout(()=>hint.style.opacity='.3', 1500); }
+      hintShown = true;
+    }
+  }, { once: true });
+})();
 </script>
 </body>
 </html>
