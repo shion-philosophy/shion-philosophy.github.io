@@ -6,7 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#ffffff" />
 <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演">
+<meta name="keywords" content="詩韻思想, TAROT BREAKER, シオン, 哲学, 言葉, 構文, 物語, LINE占い" />
 
+<link rel="canonical" href="https://shion-philosophy.github.io/" />
+<meta http-equiv="Content-Language" content="ja" />
+<meta name="author" content="（著者名または団体名）" /> 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="Re:verse Shion — 詩韻思想 × TAROT BREAKER">
@@ -26,8 +30,48 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-<link rel="preload" as="image" href="/assets/hero-poster.jpg">
+<link rel="preload" as="image" href="/assets/hero-poster.jpg" fetchpriority="high">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://shion-philosophy.github.io/#organization",
+      "name": "Re:verse Shion",
+      "url": "https://shion-philosophy.github.io/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://shion-philosophy.github.io/assets/logo.png"
+      },
+      "sameAs": [
+        "https://x.com/TaroBure",
+        "https://note.com/shion_uranai369",
+        "https://www.tiktok.com/@tarotbreaker"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://shion-philosophy.github.io/#website",
+      "url": "https://shion-philosophy.github.io/",
+      "name": "Re:verse Shion — 詩韻思想 × TAROT BREAKER",
+      "publisher": { "@id": "https://shion-philosophy.github.io/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ホーム",
+          "item": "https://shion-philosophy.github.io/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 /* ----------------------------------------------------- */
 /* 基本設定 */
@@ -134,7 +178,7 @@ header .wrap{
 /* ★★★ 2. ナビゲーション（チップデザイン化・アイコン削除）の修正CSS ★★★ */
 .nav{
   display:flex; gap:10px;
-  font-size:.9em; justify-content:center;
+  font-size:.9em; justify-content:center; /* 中央揃えのプロパティ */
   flex-wrap: wrap;
   font-weight: 700;
 }
@@ -282,29 +326,20 @@ details[open] .codex__caret{transform:rotate(180deg)}
 .codex__list{list-style:none; margin:0; padding:0; display:grid; gap:10px}
 @media(min-width:720px){.codex__list{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:980px){.codex__list{grid-template-columns:repeat(3,1fr)}}
-.codex__list li{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px; border:1px solid rgba(0,0,0,.06); border-radius:12px; background:#fff;
-  box-shadow:0 4px 12px rgba(0,0,0,.04); transition:transform .15s, box-shadow .2s;
-}
-.codex__list li:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(255,215,111,.22)}
-.codex__list a{flex:1; color:var(--ink); font-weight:700; text-decoration:none}
-.codex__list a:hover{color:#7e66ff}
-.badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
-.badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
-  /* === Codex：縦幅を綺麗に統一（2行まで・レスポンシブ） === */
+
+  /* === Codex：バッジ列を固定してタイトルの開始位置を完全揃え === */
 :root{
+  --codex-badge-col: 108px;
+  --codex-badge-col-md: 124px;
+  --codex-badge-col-lg: 140px;
   --codex-item-h: 88px;
   --codex-item-h-md: 96px;
   --codex-item-h-lg: 104px;
 }
-
-.codex__list{
-  align-items: stretch;
-}
-
+.codex__list{ align-items: stretch; }
 .codex__list li{
-  display: flex;
+  display: grid !important;
+  grid-template-columns: var(--codex-badge-col) 1fr;
   align-items: center;
   gap: 12px;
   height: var(--codex-item-h);
@@ -317,57 +352,6 @@ details[open] .codex__caret{transform:rotate(180deg)}
   overflow: hidden;
 }
 
-.codex__list .badge{
-  white-space: nowrap;
-  line-height: 1;
-  padding: 4px 10px;
-  border-radius: 999px;
-  align-self: center;
-}
-
-.codex__list a{
-  flex: 1 1 auto;
-  font-weight: 700;
-  color: var(--ink);
-  text-decoration: none;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-.codex__list a:hover{ color:#7e66ff }
-
-@media (min-width: 720px){
-  .codex__list li{ height: var(--codex-item-h-md); }
-}
-@media (min-width: 980px){
-  .codex__list li{ height: var(--codex-item-h-lg); }
-}
-
-.codex__list li:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(255,215,111,.22);
-}
-  /* === Codex：バッジ列を固定してタイトルの開始位置を完全揃え === */
-:root{
-  --codex-badge-col: 108px;
-  --codex-badge-col-md: 124px;
-  --codex-badge-col-lg: 140px;
-}
-
-.codex__list li{
-  display: grid !important;
-  grid-template-columns: var(--codex-badge-col) 1fr;
-  align-items: center;
-  gap: 12px;
-  height: var(--codex-item-h);
-  padding: 12px 14px;
-  overflow: hidden;
-}
-
 @media (min-width: 720px){
   .codex__list li{ grid-template-columns: var(--codex-badge-col-md) 1fr;
                    height: var(--codex-item-h-md); }
@@ -375,6 +359,11 @@ details[open] .codex__caret{transform:rotate(180deg)}
 @media (min-width: 980px){
   .codex__list li{ grid-template-columns: var(--codex-badge-col-lg) 1fr;
                    height: var(--codex-item-h-lg); }
+}
+
+.codex__list li:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(255,215,111,.22);
 }
 
 .codex__list .badge{
@@ -390,19 +379,23 @@ details[open] .codex__caret{transform:rotate(180deg)}
 .codex__list a{
   grid-column: 2;
   min-width: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.35;
+  display: flex; /* Flexboxに変更して縦方向に揃える */
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.4;
   font-weight: 700;
   color: var(--ink);
+  text-decoration: none;
+  /* 複数行表示の制御はCSSを削除（Flexboxで対応） */
 }
+
 .codex__list a:hover{ color:#7e66ff }
   /* 英題を下行に・整列 */
-.codex__list a{display:flex;flex-direction:column;justify-content:center;line-height:1.4}
 .codex__list a .en{font-size:.9em;font-weight:500;color:#6b6b6b;letter-spacing:.02em;margin-top:3px}
+.badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
+.badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
+  /* === /Codex Accordion === */
+
 
 /* Footer */
 footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
@@ -448,7 +441,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         <div class="brand__text1">Re:verse Shion</div>
         <div class="brand__text2_sub">詩韻思想 × TAROT BREAKER</div>
       </div>
-      </div>
+    </div>
     <nav class="nav" aria-label="主要ナビゲーション">
       <a href="#trinity">詩韻思想</a>
       <a href="#writings">書</a>
