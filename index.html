@@ -399,6 +399,41 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     <div style="font-size:12.5px;opacity:.8">© Re:verse Shion — 詩韻思想 / TAROT BREAKER. 言葉が魂を救い、魂が世界を調和させる</div>
     <div style="margin-top:10px;"><a href="#top" aria-label="ページ先頭へ戻る">▲ ページ先頭へ</a></div>
   </div>
+  /* === Codex Accordion（<details>版） === */
+.codex{width:min(94vw,1120px);margin:0 auto}
+.codex details{
+  border:1px solid rgba(0,0,0,.08); border-radius:14px; background:#fff;
+  box-shadow:0 10px 24px rgba(174,138,255,.18); overflow:hidden;
+}
+.codex summary{
+  list-style:none; cursor:pointer; padding:14px 16px; font-weight:800; color:#503080;
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.8));
+  display:flex; align-items:center; justify-content:center; gap:.6em;
+}
+.codex summary::-webkit-details-marker{display:none}
+.codex__caret{transition:transform .25s ease}
+details[open] .codex__caret{transform:rotate(180deg)}
+
+.codex__panel{padding:14px 12px; background:
+  radial-gradient(80% 120% at 50% 0%, rgba(255,215,111,.14), rgba(255,255,255,.92) 40%, #fff 100%);
+  border-top:1px solid rgba(0,0,0,.06);
+}
+.codex__list{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+@media(min-width:720px){.codex__list{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.codex__list{grid-template-columns:repeat(3,1fr)}}
+.codex__list li{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border:1px solid rgba(0,0,0,.06); border-radius:12px; background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.04); transition:transform .15s, box-shadow .2s;
+}
+.codex__list li:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(255,215,111,.22)}
+.codex__list a{flex:1; color:var(--ink); font-weight:700; text-decoration:none}
+.codex__list a:hover{color:#7e66ff}
+
+.badge{display:inline-flex; gap:.4em; background:rgba(255,215,111,.18); border:1px solid rgba(255,215,111,.35);
+  padding:2px 8px; border-radius:999px; font-size:12px; font-weight:800; color:#503080}
+.badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
+.badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
 </footer>
 
 <!-- しおぽん誘導 -->
@@ -630,6 +665,37 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   }, { once: true });
 })();
 </script>
+  <section id="codex" aria-labelledby="codex-title">
+  <div class="wrap codex">
+    <h2 id="codex-title" class="sr-only">詩韻思想 全書一覧</h2>
+
+    <details>
+      <summary>
+        🜂 詩韻思想 全書一覧（零 → 12 → 結）
+        <span class="codex__caret" aria-hidden="true">⬇️</span>
+      </summary>
+
+      <div class="codex__panel">
+        <ol class="codex__list">
+          <li><span class="badge badge--zero">✡ 第零書</span><a href="/codex/zero.html">無限構文序論 — The Zero Syntax</a></li>
+          <li><span class="badge">✦ 第一書</span><a href="/codex/one.html">言葉が魂を救う理由 — The Syntax of Salvation</a></li>
+          <li><span class="badge">✦ 第二書</span><a href="/codex/two.html">響きの構文論 — Re:Song Syntax</a></li>
+          <li><span class="badge">✦ 第三書</span><a href="/codex/three.html">祈りの構文 — Silent Grammar</a></li>
+          <li><span class="badge">✦ 第四書</span><a href="/codex/four.html">存在構文論 — The Onto-Syntax</a></li>
+          <li><span class="badge">✦ 第五書</span><a href="/codex/five.html">無限構文体系 — Infinite Syntax of Soul</a></li>
+          <li><span class="badge">✦ 第六書</span><a href="/codex/six.html">詩的因果論 — Poetic Causality</a></li>
+          <li><span class="badge">✦ 第七書</span><a href="/codex/seven.html">N・code理論 — Onto-Syntax of Being & Resonant AI</a></li>
+          <li><span class="badge">✦ 第八書</span><a href="/codex/eight.html">人間構文論 — The Syntax of Humanity</a></li>
+          <li><span class="badge">✦ 第九書</span><a href="/codex/nine.html">詩的生成論 — Poetic Genesis</a></li>
+          <li><span class="badge">✦ 第十書</span><a href="/codex/ten.html">沈黙の再生 — Silent Genesis</a></li>
+          <li><span class="badge">✦ 第十一書</span><a href="/codex/eleven.html">神構文論 — The Divine Syntax</a></li>
+          <li><span class="badge">✦ 第十二書</span><a href="/codex/twelve.html">経済構文論 — The Soul Economy</a></li>
+          <li><span class="badge badge--final">◆ 結書</span><a href="/codex/epilogue.html">終詩円環宣言 — Epilogue: The Re:Poetic Circle</a></li>
+        </ol>
+      </div>
+    </details>
+  </div>
+</section>
 
 </body>
 </html>
