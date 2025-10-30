@@ -32,11 +32,45 @@ header{
   position:sticky;top:0;backdrop-filter:blur(10px);
   background:rgba(255,255,255,0.85);border-bottom:1px solid rgba(0,0,0,.06);z-index:20;
 }
-header .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink);}
-.brand__logo{width:34px;height:34px;border-radius:50%;
+header .wrap{
+  display:flex;
+  flex-direction: column; /* 縦並びにする */
+  align-items: center; /* 中央揃え */
+  justify-content:center; /* 中央揃え */
+  padding:10px 0;
+}
+/* ★ 変更: ブランド名とナビゲーションの構造変更 */
+.brand{
+  display:block; /* Flexboxアイテムではなくブロック要素として扱う */
+  text-align:center; /* テキスト中央揃え */
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom: 5px; /* ナビゲーションとの間に少しスペース */
+}
+.brand__logo{
+  width:34px;height:34px;border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
-  box-shadow:0 0 14px rgba(174,138,255,.4);}
+  box-shadow:0 0 14px rgba(174,138,255,.4);
+  display: inline-block; /* ロゴとテキストを同じ行に表示しないため */
+  vertical-align: middle; /* ロゴの垂直位置を調整 */
+  margin-right: 10px; /* ロゴとテキストの間にスペース */
+}
+.brand__text1 {
+    font-size: 1.1em; /* 最初の行を少し大きく */
+    font-weight: 700;
+    line-height: 1.2;
+}
+.brand__text2 {
+    font-size: 1em; /* 2行目を通常のサイズに */
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.nav {
+  display: flex; /* ナビゲーションを横並びにする */
+  gap: 15px; /* 間隔を広げる */
+  font-size: 0.9em; /* 少し小さく */
+}
 .nav a{padding:6px 10px;color:var(--ink);border-radius:10px}
 .nav a:hover{background:rgba(255,215,111,.12)}
 
@@ -56,11 +90,11 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 .hero__veil{position:absolute;inset:0;pointer-events:none;
   background:
     /* 上から下に濃くなるグラデーションを追加 */
-    linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.35) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.7) 100%), /* 全体を暗めに調整 */
     /* 中央の明るさを残しつつ、神秘的な色合いを少し加える */
-    radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.25), rgba(255,255,255,0) 60%);
-  mix-blend-mode: overlay;
-  opacity: 0.85;
+    radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%);
+  mix-blend-mode: normal; /* overlayからnormalに変更して、純粋なオーバーレイに */
+  opacity: 1; /* 透明度を調整して、背景動画が適度に見えるように */
 }
 /* 省エネ・配慮：動きを避けたい人用 */
 @media (prefers-reduced-motion: reduce){
@@ -75,29 +109,29 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 @keyframes shine{to{background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%);}}
 .hero > .wrap{position:relative;z-index:1}
 
-/* ★ 変更: h1のフォント、色、影を神秘的に装飾 */
+/* ★ 変更: h1のフォント、色、影を神秘的に装飾し、視認性を向上 */
 .hero h1{
-  font-size: 38px; /* 少し大きく */
-  margin: 0 0 16px; /* 下に少しスペースを追加 */
+  font-size: 38px;
+  margin: 0 0 16px;
   line-height: 1.3;
   color: #fff; /* 白に変更してコントラストを強く */
   letter-spacing: 0.05em;
-  font-family: "Zen Old Mincho", "Noto Sans JP", serif; /* 神秘的な明朝体を採用 */
+  font-family: "Zen Old Mincho", "Noto Sans JP", serif;
   /* 繊細な多層シャドウで光の表現 */
   text-shadow:
-    0 0 10px rgba(255,255,255,0.7),
-    0 0 20px rgba(255,215,111,0.5),
-    0 0 30px rgba(174,138,255,0.4);
+    0 0 10px rgba(255,255,255,0.9), /* よりはっきりした白い光 */
+    0 0 20px rgba(255,215,111,0.7), /* 強いゴールドの輝き */
+    0 0 30px rgba(174,138,255,0.6); /* 強いパープルの輝き */
 }
 
 /* ★ 変更: サブテキストの色とサイズ調整 */
 .hero p{
-  color: rgba(255,255,255,0.85); /* 白に近い色に変更 */
-  font-size: 18px; /* 少し大きく */
+  color: rgba(255,255,255,0.9); /* より白く、視認性を向上 */
+  font-size: 18px;
   max-width: 720px;
-  margin: 0 auto 36px; /* CTAボタンとの間隔を広げる */
+  margin: 0 auto 36px;
   line-height: 1.8;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4); /* 読みやすさのための軽い影 */
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6); /* より濃い影で読みやすく */
 }
 
 /* ★ 変更: CTAボタンの強化 */
@@ -106,25 +140,24 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 .btn--primary{
   background:linear-gradient(180deg,#ffd76f,#ffb6ff);
   color:#2a0f26;
-  /* 強い輝きと内側の軽い光 */
   box-shadow:
     0 8px 25px rgba(255,215,111,.6),
     0 0 0 2px rgba(255,215,111,.3) inset;
 }
 .btn--primary:hover{
-  transform: translateY(-3px) scale(1.02); /* ホバー時の動きを大きく */
+  transform: translateY(-3px) scale(1.02);
   box-shadow:
     0 12px 30px rgba(255,215,111,.8),
     0 0 0 2px rgba(255,215,111,.5) inset;
 }
 .btn--ghost{
-  background: rgba(255,255,255,0.1); /* 透過率を上げて背景動画が透けるように */
+  background: rgba(0,0,0,0.3); /* より濃い半透明の背景色に変更し、視認性を向上 */
   color: #fff; /* 白に変更 */
-  border: 1px solid rgba(255,215,111,.6); /* ボーダー色も明るく */
-  backdrop-filter: blur(5px); /* 背景を少しぼかして、ボタンを際立たせる */
+  border: 1px solid rgba(255,215,111,.6);
+  backdrop-filter: blur(5px);
 }
 .btn--ghost:hover{
-  background: rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5); /* ホバー時にもっと濃く */
   transform: translateY(-1px);
 }
 
@@ -247,10 +280,10 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 
 <header>
   <div class="wrap">
-    <a class="brand" href="#">
-      <div class="brand__logo" aria-hidden="true"></div>
-      <div>Re:verse Shion — 詩韻思想 × TAROT BREAKER</div>
-    </a>
+    <div class="brand"> <div class="brand__logo" aria-hidden="true"></div>
+      <div class="brand__text1">Re:verse Shion —</div>
+      <div class="brand__text2">詩韻思想 × TAROT BREAKER</div>
+    </div>
     <nav class="nav" aria-label="主要ナビゲーション">
       <a href="#trinity">詩韻思想</a>
       <a href="#writings">書</a>
@@ -271,8 +304,8 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
 
     <div class="wrap">
-      <h1>言葉は祈りの構文。物語は、その実演。</h1>
-      <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する。<br><strong>「言葉が魂を救う、その瞬間へ。」</strong></p>
+      <h1>言葉は祈りの構文。物語は、その実演</h1>
+      <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する<br><strong>「言葉が魂を救う、その瞬間へ」</strong></p>
       <div class="cta-row">
         <a class="btn btn--primary" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">🌠 星の言葉を受け取る（無料）</a>
         <a class="btn btn--ghost" href="https://ncode.syosetu.com/n5806lb/" target="_blank" rel="noopener">📘 小説を読む</a>
@@ -300,9 +333,9 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         </figure>
 
       <div class="tri-grid">
-        <div class="tri"><h3>🪶 詩 ― 形を与える</h3><p>痛みと希望に形を与える最初の息。</p></div>
-        <div class="tri"><h3>🎵 韻 ― 響きを重ねる</h3><p>響きによって魂に届く。共鳴を編む構文。</p></div>
-        <div class="tri"><h3>💫 祈 ― 光へ帰す</h3><p>沈黙と意味を往復する呼吸。思い出された言葉は光になる。</p></div>
+        <div class="tri"><h3>🪶 詩 ― 形を与える</h3><p>痛みと希望に形を与える最初の息</p></div>
+        <div class="tri"><h3>🎵 韻 ― 響きを重ねる</h3><p>響きによって魂に届く。共鳴を編む構文</p></div>
+        <div class="tri"><h3>💫 祈 ― 光へ帰す</h3><p>沈黙と意味を往復する呼吸。思い出された言葉は光になる</p></div>
       </div>
     </div>
   </section>
@@ -311,8 +344,8 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     <div class="wrap">
       <h2 id="sec-intro">初めての方へ</h2>
       <div class="intro__box">
-        <p><strong>詩韻思想とは？</strong> ― <em>言葉が魂を救い、魂が世界を調和させ、沈黙が祈りに変わる</em>という円環を生きる“体験型・詩的哲学”。</p>
-        <p>① <strong>読む</strong>（note） → ② <strong>聴く</strong>（TikTok） → ③ <strong>受け取る</strong>（LINE） → ④ <strong>物語で体験</strong>（TAROT BREAKER）。</p>
+        <p><strong>詩韻思想とは？</strong> ― <em>言葉が魂を救い、魂が世界を調和させ、沈黙が祈りに変わる</em>という円環を生きる“体験型・詩的哲学”</p>
+        <p>① <strong>読む</strong>（note） → ② <strong>聴く</strong>（TikTok） → ③ <strong>受け取る</strong>（LINE） → ④ <strong>物語で体験</strong>（TAROT BREAKER）</p>
       </div>
     </div>
   </section>
@@ -329,7 +362,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   <section id="join" aria-labelledby="sec-join">
     <div class="wrap">
       <h2 id="sec-join">参加の扉</h2>
-      <p style="text-align:center;color:var(--muted)">LINE登録で、毎週「星の言葉」と新着の書をお届けします。</p>
+      <p style="text-align:center;color:var(--muted)">LINE登録で、毎週「星の言葉」と新着の書をお届けします</p>
       <div class="cta-row">
         <a class="btn btn--primary" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">💫 無料で受け取る</a>
         <a class="btn btn--ghost" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">🎥 1分リールを観る</a>
@@ -347,7 +380,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       <a href="https://ncode.syosetu.com/n5806lb/" target="_blank" rel="noopener">小説（なろう）</a>
       <a href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">LINE</a>
     </div>
-    <div style="font-size:12.5px;opacity:.8">© Re:verse Shion — 詩韻思想 / TAROT BREAKER. 言葉が魂を救い、魂が世界を調和させる。</div>
+    <div style="font-size:12.5px;opacity:.8">© Re:verse Shion — 詩韻思想 / TAROT BREAKER. 言葉が魂を救い、魂が世界を調和させる</div>
   </div>
 </footer>
 
