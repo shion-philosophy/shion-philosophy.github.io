@@ -408,7 +408,7 @@ footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border
 header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relative; z-index:1 }
 @media (prefers-reduced-motion: reduce){ .sky{ display:none } }
 
-/* ===== Shiopon Perfect CSS (置き換え) ===== */
+/* ===== Shiopon Perfect CSS (修正版) ===== */
 .shiopon{
   position: fixed;
   right: calc(16px + env(safe-area-inset-right, 0px));
@@ -430,9 +430,14 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   background: radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%);
   box-shadow: 0 0 0 3px rgba(255,215,111,.25);
   position: relative; overflow: hidden; flex: none;
+  /* アニメーションを再適用・再確認 */
   animation: shioponFloat 3.6s ease-in-out infinite;
 }
-@keyframes shioponFloat{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-4px) } }
+/* キーフレームアニメーションの再確認 */
+@keyframes shioponFloat{ 
+  0%,100%{ transform: translateY(0) } 
+  50%{ transform: translateY(-4px) } 
+}
 .shiopon__avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
 
 .shiopon__bubble{
