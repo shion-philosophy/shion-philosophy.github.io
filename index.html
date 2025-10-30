@@ -7,7 +7,6 @@
 <meta name="theme-color" content="#ffffff" />
 <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演">
 <meta name="keywords" content="詩韻思想, TAROT BREAKER, シオン, 哲学, 言葉, 構文, 物語, LINE占い" />
-
 <link rel="canonical" href="https://shion-philosophy.github.io/" />
 <meta http-equiv="Content-Language" content="ja" />
 <meta name="author" content="（著者名または団体名）" /> 
@@ -19,19 +18,14 @@
 <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TaroBure">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
-
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-
 <link rel="preload" as="image" href="/assets/hero-poster.jpg" fetchpriority="high">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -99,7 +93,7 @@ img{height:auto}
 :focus-visible{ outline:2px solid rgba(255,215,111,.85); outline-offset:2px; }
 
 /* ----------------------------------------------------- */
-/* Header (最終修正版) */
+/* Header */
 /* ----------------------------------------------------- */
 header[role="banner"]{
   min-height: var(--header-h);
@@ -447,7 +441,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       <a href="#writings">書</a>
       <a href="#join">参加</a>
     </nav>
-    </div>
+  </div>
 </header>
 
 <main id="top">
@@ -649,7 +643,10 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     <img src="/assets/shiopon.png" alt="">
   </div>
   <div class="shiopon__bubble">
-    <p id="shiopon-title" class="shiopon__hello">シオン〜！星の言葉、受け取ってほしいの！</p>
+    <p id="shiopon-title" class="shiopon__hello">
+      セレフィーズのみんな〜！<br>
+      星の言葉、受け取ってほしいの！
+    </p>
     <a class="shiopon__cta" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">💫 LINEで受け取る（無料）</a>
     <small class="shiopon__note">※ 毎週1回だけ。いつでも解除OKだよ！</small>
   </div>
@@ -657,6 +654,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 <button id="shiopon-dock" class="shiopon-dock is-hidden" aria-label="しおぽんを開く">🦊 しおぽん</button>
 
 <script>
+// ... 星砂JSは省略（変更なし） ...
 (() => {
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
@@ -747,10 +745,21 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   function canShow(){ return Date.now() > Number(localStorage.getItem(KEY_HIDE_UNTIL) || 0); }
 
   if (canShow()){
-    setTimeout(()=>{ if (window.innerHeight>640 && window.scrollY<80) showInvite(); }, 4000);
-    let shown=false;
-    const onScroll=()=>{ if(!shown && window.innerHeight>640 && window.scrollY<80){ showInvite(); shown=true; window.removeEventListener('scroll',onScroll); } };
-    window.addEventListener('scroll', onScroll, { passive:true });
+    let scrolledToShow = false;
+    const scrollThreshold = 120; // 120px以上スクロールしたら表示
+    
+    const onScroll = () => {
+      // ユーザーが120px以上スクロールし、かつまだ表示されていない場合
+      if (!scrolledToShow && window.scrollY > scrollThreshold) {
+        // 画面高さが十分な場合（モバイルでも小さすぎる画面ではない場合）
+        if (window.innerHeight > 640) { 
+            setTimeout(() => { showInvite(); }, 400); // 0.4秒後に表示
+            scrolledToShow = true;
+            window.removeEventListener('scroll', onScroll);
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
   }else{
     dock.classList.remove('is-hidden');
   }
@@ -765,6 +774,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 </script>
 
 <script>
+// ... ヘッダー挙動JSは省略（変更なし） ...
 (() => {
   const headerEl = document.querySelector('header[role="banner"]');
   if (!headerEl) return;
@@ -810,6 +820,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 </script>
 
 <script>
+// ... 動画制御JSは省略（変更なし） ...
 (() => {
   const video = document.getElementById('trinityVideo');
   if (!video) return;
