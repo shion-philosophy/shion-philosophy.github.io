@@ -55,7 +55,7 @@ img{height:auto}
 :focus-visible{ outline:2px solid rgba(255,215,111,.85); outline-offset:2px; }
 
 /* ----------------------------------------------------- */
-/* Header (修正適用済み) */
+/* Header (最終修正版) */
 /* ----------------------------------------------------- */
 header[role="banner"]{
   min-height: var(--header-h);
@@ -77,55 +77,61 @@ header .wrap{
   display:flex; flex-direction: column; align-items: center; justify-content:center;
   padding:10px 0;
 }
-/* ★ 1. ブランド表示（Re:verse Shion 3行化）の修正CSS ★ */
+/* ★★★ 1. ブランド表示（Re:verse Shion 2行化＆ロゴ再配置）の修正CSS ★★★ */
 .brand{
   display:flex;
-  align-items:flex-start; /* 縦方向の揃えを左上に変更 */
+  align-items: center; /* 中央に揃える */
   justify-content:center;
-  gap:10px;
-  text-align:left; /* テキストの揃えを左寄せに変更 */
+  gap:8px; /* ロゴとテキスト間の間隔を調整 */
+  text-align:left;
   font-weight:700; color:var(--ink);
-  margin-bottom: 8px; /* ナビとの間隔を少し空ける */
+  margin-bottom: 8px;
 }
 .brand__logo{
-  width:34px;height:34px;border-radius:50%;
+  /* Re:verse Shionのテキストサイズに合わせて微調整（小さくする） */
+  width:24px; height:24px; 
+  border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
-  box-shadow:0 0 14px rgba(174,138,255,.4);
+  box-shadow:0 0 8px rgba(174,138,255,.3);
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 0; 
 }
-.brand__text1, .brand__text2, .brand__text-sub{display:block}
-
-.brand__text1::after{content:none;} /* ハイフン（—）の生成を削除 */
-
-.brand__text1{font-size:1.05em;line-height:1.2; margin-top: -2px;}
-.brand__text2{font-size:1.02em;line-height:1.2; font-weight: 700;}
-.brand__text-sub{font-size:.9em;line-height:1.2; font-weight: 500; color:var(--muted); margin-top: 1px;}
-
 .brand-text-group {
   display: flex;
   flex-direction: column;
   line-height: 1.2;
 }
 
-/* PC/タブレットでは現状の1行に戻す */
+/* 1行目: メインブランド名 */
+.brand__text1{font-size:1.05em; line-height:1.2; font-weight: 700;}
+/* 2行目: サブタイトル統合版（詩韻思想 × TAROT BREAKER） */
+.brand__text2_sub{font-size:.9em; line-height:1.2; font-weight: 500; color:var(--muted); margin-top: 1px;}
+
+/* 不要になった旧3行スタイルを非表示 */
+.brand__text2, .brand__text-sub{ display:none !important; }
+
+/* PC/タブレット（ロゴとテキストを1行に横並び） */
 @media (min-width: 720px) {
   .brand{
     align-items: center;
     text-align: center;
     margin-bottom: 5px;
   }
-  .brand__logo{ margin-top: 0; }
+  .brand__logo{ /* PCではロゴを少し大きく戻す */
+    width:34px; height:34px;
+  }
+  .brand-text-group{ /* PCではテキストを元の1行表示に戻す */
+    display: block; 
+  }
+  /* PC時はサブタイトル統合版を非表示にし、元の1行表示に切り替える */
   .brand__text1{ display:inline; font-size:1.05em; line-height:1.2; margin-top:0;}
-  .brand__text1::after{content:" — ";}
-  .brand__text2{ display:inline; font-size:1.02em; line-height:1.2; font-weight: 700;}
-  .brand__text-sub{ display:none; }
-  .brand-text-group{ display: block; }
+  .brand__text1::after{content:" — ";} /* PC表示ではハイフンを復活 */
+  .brand__text2_sub{ display:inline; font-size:1.02em; line-height:1.2; font-weight: 700; color:var(--ink); margin-top:0;} /* PCではサブタイトルをブランドテキストの続きとして表示 */
 }
-/* ★ /1. ブランド表示の修正CSS ★ */
+/* ★★★ /1. ブランド表示の修正CSS ★★★ */
 
 
-/* ★ 2. ナビゲーション（チップデザイン化・アイコン対応）の修正CSS ★ */
+/* ★★★ 2. ナビゲーション（チップデザイン化・アイコン削除）の修正CSS ★★★ */
 .nav{
   display:flex; gap:10px;
   font-size:.9em; justify-content:center;
@@ -134,6 +140,7 @@ header .wrap{
 }
 
 .nav a{
+  /* タップ領域を広げ、ボタン化する */
   padding: 8px 14px;
   color: var(--ink);
   border-radius: 999px;
@@ -143,11 +150,8 @@ header .wrap{
   background: rgba(255,215,111,.1); 
   border: 1px solid rgba(255,215,111,.4);
   box-shadow: 0 1px 3px rgba(0,0,0,.08);
-
-  /* アイコン対応 */
-  display: flex;
-  align-items: center;
-  gap: .3em;
+  
+  /* アイコン関連のスタイルを削除（純粋なチップデザイン） */
   white-space: nowrap;
 }
 
@@ -164,7 +168,7 @@ header .wrap{
   box-shadow: 0 4px 10px rgba(255,215,111,.5);
   transform: none;
 }
-/* ★ /2. ナビゲーションの修正CSS ★ */
+/* ★★★ /2. ナビゲーションの修正CSS ★★★ */
 
 /* ----------------------------------------------------- */
 /* Hero */
@@ -442,14 +446,13 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       <div class="brand__logo" aria-hidden="true"></div>
       <div class="brand-text-group">
         <div class="brand__text1">Re:verse Shion</div>
-        <div class="brand__text2">詩韻思想 ×</div>
-        <div class="brand__text-sub">TAROT BREAKER</div>
+        <div class="brand__text2_sub">詩韻思想 × TAROT BREAKER</div>
       </div>
-    </div>
+      </div>
     <nav class="nav" aria-label="主要ナビゲーション">
-      <a href="#trinity">💫 詩韻思想</a>
-      <a href="#writings">📚 書</a>
-      <a href="#join">🤝 参加</a>
+      <a href="#trinity">詩韻思想</a>
+      <a href="#writings">書</a>
+      <a href="#join">参加</a>
     </nav>
     </div>
 </header>
