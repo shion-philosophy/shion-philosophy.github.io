@@ -39,26 +39,6 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 
 /* ===== Hero ===== */
 .hero{padding:80px 0 56px;position:relative;overflow:hidden;text-align:center;}
-/* ★ 追加：動画を背面に敷くレイヤー */
-.hero__media{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero__video{
-  width:100%;height:100%;
-  object-fit:cover;            /* 縦長9:16でも全画面に美しくトリミング */
-  object-position:50% 45%;     /* 主役がやや上なら45%が◎。必要に応じて微調整 */
-  filter:brightness(1.05) contrast(1.02);
-  transform:translateZ(0);
-}
-.hero__veil{position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.38), rgba(255,255,255,0) 60%),
-    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0));
-  mix-blend-mode:screen;
-}
-/* 省エネ・配慮：動きを避けたい人用 */
-@media (prefers-reduced-motion: reduce){
-  .hero__media{display:none}
-}
-/* 既存の放射演出はそのまま活かす（動画の上に薄く重なる） */
 .hero::before{
   content:"";position:absolute;inset:0;z-index:0;
   background:radial-gradient(circle at 50% 30%,rgba(255,215,111,.15),transparent 70%);
@@ -74,13 +54,16 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
 .btn--primary:hover{transform:translateY(-2px);}
 .btn--ghost{background:rgba(255,215,111,.12);color:var(--ink);border:1px solid rgba(255,215,111,.4);}
 
-/* Hero image with prism overlay（既存） */
+/* Hero image with prism overlay */
 .hero__image{
   width:min(90vw,760px);margin:36px auto 0;position:relative;border-radius:18px;overflow:hidden;
   box-shadow:0 12px 36px rgba(174,138,255,.22), 0 0 0 1px rgba(0,0,0,.06) inset;
+
+  /* ▼ 追加：高さ制御（動画/画像どちらでも適用） */
+  aspect-ratio: 16 / 9;
+  max-height: 72vh;
+  min-height: 420px;
 }
-/* ★ 追加：動画がある場合はサブに回す（レイアウトは保持） */
-.hero__image{display:none}
 .hero__image img{width:100%;display:block;border-radius:18px;object-fit:cover;object-position:center;}
 .hero__image .prism{
   position:absolute; inset:-25%; pointer-events:none; mix-blend-mode:screen;
@@ -88,12 +71,24 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;paddi
     radial-gradient(120px 60px at 30% 40%, rgba(255,215,111,.28), transparent 60%),
     radial-gradient(160px 80px at 70% 60%, rgba(174,228,255,.28), transparent 60%),
     linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.22) 50%, rgba(255,255,255,0) 100%);
-  filter: blur(12px) saturate(120%); animation: sweep 6s linear infinite; opacity:.55;
+  filter: blur(12px) saturate(120%);
+  animation: sweep 6s linear infinite; opacity:.55;
 }
 @keyframes sweep{
   0%{ transform: translateX(-30%) translateY(-10%) rotate(8deg) }
   50%{ transform: translateX(20%) translateY(10%) rotate(6deg) }
   100%{ transform: translateX(60%) translateY(-12%) rotate(10deg) }
+}
+
+/* ▼ 追加：HERO内の<video>をフレームにフィット */
+.hero__image video{
+  width:100%; height:100%; display:block;
+  object-fit:cover; object-position:center; border-radius:18px;
+}
+
+/* スマホは縦比率に寄せて神秘感をキープ */
+@media (max-width:520px){
+  .hero__image{ aspect-ratio: 9 / 16; max-height:78vh; min-height:360px; }
 }
 
 /* ===== Sections ===== */
@@ -107,12 +102,6 @@ h2{text-align:center;font-size:24px;margin-bottom:26px;}
 .tri h3{margin:0 0 8px;font-size:18px;color:#503080;}
 .tri p{margin:0;font-size:15px;color:var(--muted);}
 
-/* ★ 追加：トリニティの映像/画像フレーム */
-.trinity__figure{max-width:min(1200px,92vw);margin:0 auto 22px;border-radius:16px;overflow:hidden;box-shadow:0 10px 32px rgba(174,138,255,.20)}
-.trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/9;object-fit:cover;object-position:50% 50%}
-.trinity__img{width:100%;height:auto;display:block}
-
-/* 既存 */
 .intro__box{display:grid;gap:10px;padding:14px;background:rgba(255,255,255,.8);
   border:1px solid rgba(0,0,0,.08);border-radius:var(--r);box-shadow:0 4px 12px rgba(0,0,0,.04);}
 .card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.04)}
@@ -185,6 +174,25 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   .shiopon__bubble{ max-width:78vw; padding:10px 12px }
 }
 @media (prefers-reduced-motion: reduce){ .shiopon__avatar{ animation:none } }
+
+/* ===== ▼ 追加：TRINITYバナーのフレーム ===== */
+.trinity__banner{
+  width:min(94vw, 980px);
+  margin: 18px auto 18px;
+  border-radius:24px;
+  overflow:hidden;
+  background: radial-gradient(120% 120% at 50% 10%, rgba(255,215,111,.10), rgba(126,102,255,.06) 60%, transparent 100%);
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+  padding: 0;
+}
+.trinity__banner img{
+  width:100%;
+  height: clamp(180px, 30vh, 340px); /* 文字欠け防止の安全帯 */
+  object-fit: contain;                /* 見切れないように */
+  display:block;
+  background:#fff;
+}
+#trinity .wrap{ padding-top: 6px; }
 </style>
 </head>
 <body>
@@ -209,16 +217,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 <main>
   <!-- ===== HERO ===== -->
   <section class="hero" aria-label="ヒーロー">
-    <!-- ★ 追加：トップ背景動画レイヤー（縦長でもOK） -->
-    <div class="hero__media" aria-hidden="true">
-      <video class="hero__video" autoplay muted loop playsinline preload="metadata"
-             poster="/assets/hero-poster.jpg">
-        <source src="/assets/video/top.webm" type="video/webm">
-        <source src="/assets/video/top.mp4"  type="video/mp4">
-      </video>
-      <div class="hero__veil"></div>
-    </div>
-
     <div class="wrap">
       <h1>言葉は祈りの構文。物語は、その実演。</h1>
       <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する。<br><strong>「言葉が魂を救う、その瞬間へ。」</strong></p>
@@ -229,10 +227,15 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         <a class="btn btn--ghost" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">🎥 1分で観る/聴く</a>
       </div>
 
-      <!-- 既存の静止キービジュアルは保持（動画優先のため非表示CSS済） -->
+      <!-- ▼ 置換：HEROビジュアルを動画に（画像→動画）。prismは従来どおり重ねる -->
       <figure class="hero__image" aria-hidden="true">
-        <img src="/assets/og.jpg" alt="詩韻思想 × TAROT BREAKER キービジュアル" loading="eager" decoding="async">
-        <span class="prism"></span>
+        <video class="hero__video"
+               autoplay muted loop playsinline preload="metadata"
+               poster="/assets/hero-poster.jpg">
+          <source src="/assets/video/top.webm" type="video/webm">
+          <source src="/assets/video/top.mp4"  type="video/mp4">
+        </video>
+        <span class="prism" aria-hidden="true"></span>
       </figure>
     </div>
   </section>
@@ -242,15 +245,9 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     <div class="wrap">
       <h2 id="sec-trinity">詩韻思想 ― 三位一体（詩・韻・祈）</h2>
 
-      <!-- ★ 追加：トリニティの象徴映像（横長21:9に最適化） -->
-      <figure class="trinity__figure" aria-hidden="true">
-        <video class="trinity__video" autoplay muted loop playsinline preload="metadata"
-               poster="/assets/trinity/banner.png">
-          <source src="/assets/trinity/loop.webm" type="video/webm">
-          <source src="/assets/trinity/loop.mp4"  type="video/mp4">
-        </video>
-        <!-- 静止画像にしたい場合は上のvideoをコメントアウトし、下のimgを活かす -->
-        <!-- <img class="trinity__img" src="/assets/trinity/banner.png" alt="" loading="lazy" decoding="async"> -->
+      <!-- ▼ 追加：トリニティのバナー画像（高さ最適化済み） -->
+      <figure class="trinity__banner" aria-hidden="true">
+        <img src="/assets/img/trinity-banner.jpg" alt="">
       </figure>
 
       <div class="tri-grid">
@@ -377,25 +374,8 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 })();
 </script>
 
-<!-- ===== しおぽん：表示制御JS ===== -->
+<!-- ===== しおぽん：表示制御JS（タイポ修正版） ===== -->
 <script>
-(() => {
-  const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
-  const KEY_HIDE_UNTIL='shiopon.hideUntil', HIDE_DAYS=3;
-  const invite=document.getElementById(INVITE_ID);
-  const dock=document.getElementById(DOCK_ID);
-  if(!invite||!dock) return;
-  const now=Date.now(), hideUntil=Number(localStorage.getItem(KEY_HIDE_UNTIL)||0);
-
-  const showInvite=()=>{ invite.classList.remove('is-hidden'); dock.classList.add('is-hidden'); };
-  const hideInviteAndDock=(days=HIDE_DAYS)=>{
-    const until=Date.now()+days*24*60*60*1000;
-    localStorage.setItem(KEY_HIDE_UNTIL', String(until)); // typo fixed below
-  };
-})();
-</script>
-<script>
-/* ↑上のスニペットの1行を安全に差し替え（タイプミス修正／分離） */
 (() => {
   const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
   const KEY_HIDE_UNTIL='shiopon.hideUntil', HIDE_DAYS=3;
