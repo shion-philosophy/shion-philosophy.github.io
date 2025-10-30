@@ -465,9 +465,13 @@ header, .hero, section, footer { position:relative; z-index:1 }
 
 .shiopon__note{ display:block; margin-top:8px; color:#666; font-size:12px; opacity:.9 }
 .shiopon__close{
-  position:absolute; top:-8px; right:-8px; width:28px; height:28px; border-radius:50%;
+  position:absolute;
+  top: -12px; /* ★修正点: 上に移動 */
+  right: -12px; /* ★修正点: 右に移動 */
+  width:28px; height:28px; border-radius:50%;
   border:0; color:#333; background:#fff; box-shadow: 0 4px 10px rgba(0,0,0,.08);
   cursor:pointer; font-size:16px; line-height:1;
+  z-index: 10; /* ★修正点: z-indexを追加して前面に表示 */
 }
 .shiopon__close:hover{ filter:brightness(1.05) }
 
@@ -493,6 +497,11 @@ header, .hero, section, footer { position:relative; z-index:1 }
 @media (max-width:480px){
   .shiopon__avatar{ width:56px; height:56px }
   .shiopon__bubble{ max-width:78vw; padding:10px 12px }
+  /* スマートフォンでのバツボタンの位置調整 */
+  .shiopon__close {
+    top: -8px;
+    right: -8px;
+  }
 }
 /* ハイコントラスト/省モーション */
 @media (prefers-contrast: more){
