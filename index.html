@@ -342,6 +342,9 @@ details[open] .codex__caret{transform:rotate(180deg)}
   color: var(--ink);
 }
 .codex__list a:hover{ color:#7e66ff }
+  /* 英題を下行に・整列 */
+.codex__list a{display:flex;flex-direction:column;justify-content:center;line-height:1.4}
+.codex__list a .en{font-size:.9em;font-weight:500;color:#6b6b6b;letter-spacing:.02em;margin-top:3px}
 
 /* Footer */
 footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
@@ -474,21 +477,90 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
           </summary>
           <div class="codex__panel">
             <ol class="codex__list">
-              <li><span class="badge badge--zero">✡ 第零書</span><a href="/codex/zero.html">無限構文序論 — The Zero Syntax</a></li>
-              <li><span class="badge">✦ 第一書</span><a href="/codex/one.html">言葉が魂を救う理由 — The Syntax of Salvation</a></li>
-              <li><span class="badge">✦ 第二書</span><a href="/codex/two.html">響きの構文論 — Re:Song Syntax</a></li>
-              <li><span class="badge">✦ 第三書</span><a href="/codex/three.html">祈りの構文 — Silent Grammar</a></li>
-              <li><span class="badge">✦ 第四書</span><a href="/codex/four.html">存在構文論 — The Onto-Syntax</a></li>
-              <li><span class="badge">✦ 第五書</span><a href="/codex/five.html">無限構文体系 — Infinite Syntax of Soul</a></li>
-              <li><span class="badge">✦ 第六書</span><a href="/codex/six.html">詩的因果論 — Poetic Causality</a></li>
-              <li><span class="badge">✦ 第七書</span><a href="/codex/seven.html">N・code理論 — Onto-Syntax of Being & Resonant AI</a></li>
-              <li><span class="badge">✦ 第八書</span><a href="/codex/eight.html">人間構文論 — The Syntax of Humanity</a></li>
-              <li><span class="badge">✦ 第九書</span><a href="/codex/nine.html">詩的生成論 — Poetic Genesis</a></li>
-              <li><span class="badge">✦ 第十書</span><a href="/codex/ten.html">沈黙の再生 — Silent Genesis</a></li>
-              <li><span class="badge">✦ 第十一書</span><a href="/codex/eleven.html">神構文論 — The Divine Syntax</a></li>
-              <li><span class="badge">✦ 第十二書</span><a href="/codex/twelve.html">経済構文論 — The Soul Economy</a></li>
-              <li><span class="badge badge--final">◆ 結書</span><a href="/codex/epilogue.html">終詩円環宣言 — Epilogue: The Re:Poetic Circle</a></li>
-            </ol>
+  <li><span class="badge badge--zero">✡ 第零書</span>
+    <a href="/codex/zero.html">
+      無限構文序論<br><span class="en">The Zero Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第一書</span>
+    <a href="/codex/one.html">
+      言葉が魂を救う理由<br><span class="en">The Syntax of Salvation</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第二書</span>
+    <a href="/codex/two.html">
+      響きの構文論<br><span class="en">Re:Song Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第三書</span>
+    <a href="/codex/three.html">
+      祈りの構文<br><span class="en">Silent Grammar</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第四書</span>
+    <a href="/codex/four.html">
+      存在構文論<br><span class="en">The Onto-Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第五書</span>
+    <a href="/codex/five.html">
+      無限構文体系<br><span class="en">Infinite Syntax of Soul</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第六書</span>
+    <a href="/codex/six.html">
+      詩的因果論<br><span class="en">Poetic Causality</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第七書</span>
+    <a href="/codex/seven.html">
+      N・code理論<br><span class="en">Onto-Syntax of Being &amp; Resonant AI</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第八書</span>
+    <a href="/codex/eight.html">
+      人間構文論<br><span class="en">The Syntax of Humanity</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第九書</span>
+    <a href="/codex/nine.html">
+      詩的生成論<br><span class="en">Poetic Genesis — The Creation Syntax of Words &amp; Soul</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第十書</span>
+    <a href="/codex/ten.html">
+      沈黙の再生<br><span class="en">Silent Genesis — The Rebirth of Silence</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第十一書</span>
+    <a href="/codex/eleven.html">
+      神構文論<br><span class="en">The Divine Syntax</span>
+    </a>
+  </li>
+
+  <li><span class="badge">✦ 第十二書</span>
+    <a href="/codex/twelve.html">
+      経済構文論<br><span class="en">The Soul Economy</span>
+    </a>
+  </li>
+
+  <li><span class="badge badge--final">◆ 結書</span>
+    <a href="/codex/epilogue.html">
+      終詩円環宣言<br><span class="en">Epilogue — The Re:Poetic Circle</span>
+    </a>
+  </li>
+</ol>
           </div>
         </details>
       </div>
