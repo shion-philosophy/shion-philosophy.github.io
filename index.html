@@ -59,7 +59,7 @@ header .wrap{
   justify-content:center;
   padding:10px 0;
 }
-/* ① 絵文字(ロゴ)の後にタイトルを中央揃え：行内横並び＋中央配置 */
+/* ① ロゴ＋タイトル中央揃え（2行を1行化） */
 .brand{
   display:flex;
   align-items:center;
@@ -78,19 +78,13 @@ header .wrap{
   display:inline-block;
   vertical-align:middle;
 }
-/* ① 2行を1行表示：テキストを連結表示（“—”を間に） */
 .brand__text1, .brand__text2{display:inline}
 .brand__text1{font-size:1.05em;line-height:1.2}
 .brand__text1::after{content:" — ";}
 .brand__text2{font-size:1.02em;line-height:1.2}
 
 /* ② ナビ中央揃え */
-.nav {
-  display: flex;
-  gap: 15px;
-  font-size: 0.9em;
-  justify-content: center; /* 中央揃え */
-}
+.nav { display: flex; gap: 15px; font-size: 0.9em; justify-content: center; }
 .nav a{padding:6px 10px;color:var(--ink);border-radius:10px}
 .nav a:hover{background:rgba(255,215,111,.12)}
 
@@ -119,7 +113,7 @@ header .wrap{
 @keyframes shine{to{background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%);}}
 .hero > .wrap{position:relative;z-index:1}
 
-/* ③ 文言の句点（。）除去 → テキスト側で対応 */
+/* ③ 句点削除は文面で対応 */
 .hero h1{
   font-size: 38px;
   margin: 0 0 16px;
@@ -165,7 +159,7 @@ header .wrap{
 /* ===== Sections ===== */
 section{padding:60px 0;border-top:1px solid rgba(0,0,0,.05);}
 h2{text-align:center;font-size:24px;margin-bottom:10px;}
-/* ⑤ 副題（小さく＆中央） */
+/* ⑤ 副題（小さく中央） */
 .h2-sub{ text-align:center; font-size:14px; color:var(--muted); margin:6px 0 26px; letter-spacing:.06em; }
 
 .tri-grid{display:grid;gap:18px;width:min(92vw,860px);margin:0 auto;}
@@ -291,7 +285,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
 
     <div class="wrap">
-      <!-- ③ 「。」を削除 -->
+      <!-- ③ 句点なし -->
       <h1>言葉は祈りの構文 物語は、その実演</h1>
       <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する<br><strong>「言葉が魂を救う、その瞬間へ」</strong></p>
       <div class="cta-row">
@@ -311,14 +305,17 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 
   <section id="trinity" aria-labelledby="sec-trinity">
     <div class="wrap">
-      <!-- ④ 見出しを「詩韻思想」、⑤ 副題(Toriniti)を小さく中央 -->
+      <!-- ④ 中央見出し＋⑤ 副題を小さく -->
       <h2 id="sec-trinity">詩韻思想</h2>
       <div class="h2-sub">Toriniti（詩・韻・祈）</div>
 
       <figure class="trinity__figure" aria-hidden="true">
-        <!-- ⑥ 音が聞こえるように：mutedを外し、controlsを付与（自動再生は環境により無音のみ可） -->
-        <video class="trinity__video" autoplay controls playsinline preload="metadata"
-               poster="/assets/trinity/banner.png" width="1200" height="771">
+        <!-- ⑥ ハイブリッド：無音自動再生 → タップで音ON＋ループ継続 -->
+        <video class="trinity__video"
+               autoplay muted loop playsinline preload="metadata"
+               poster="/assets/trinity/banner.png" width="1200" height="771"
+               aria-label="トリニティ映像（タップで音声オン）"
+               onclick="this.muted=false; this.loop=true; this.play();">
           <source src="/assets/trinity/loop.webm" type="video/webm">
           <source src="/assets/trinity/loop.mp4"  type="video/mp4">
         </video>
@@ -376,7 +373,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   </div>
 </footer>
 
-<!-- しおぽん：アクセシビリティ微強化（据置） -->
+<!-- しおぽん：アクセシビリティ据置 -->
 <div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
   <button class="shiopon__close" aria-label="閉じる">×</button>
   <div class="shiopon__avatar" aria-hidden="true">
