@@ -261,7 +261,85 @@ header .wrap{
   background: rgba(0,0,0,0.3); color:#fff; border:1px solid rgba(255,215,111,.6); backdrop-filter: blur(5px);
 }
 .btn--ghost:hover{ background: rgba(0,0,0,.5); transform: translateY(-1px); }
-.hero__image{display:none}
+/* 修正：hero__imageを非表示から中央配置のコンテナに切り替える */
+.hero__image{
+  display: block; /* display:none;から変更 */
+  margin: 30px auto 0;
+  max-width: 330px; /* 画像サイズに合わせて調整 */
+  position: relative;
+  z-index: 1;
+}
+
+/* ★★★ 追加CSS 2: shiopon-container (ヒーローセクション専用) ★★★ */
+.shiopon-container {
+  position: relative;
+  width: 100%;
+  height: 0; /* padding-topで高さを確保 */
+  padding-top: 100%; /* 1:1のアスペクト比を確保 (400px/400pxに合わせて) */
+  max-width: 330px; /* Hero__imageに合わせる */
+  margin: 30px auto 0;
+  z-index: 1;
+}
+
+/* 光輪（共通設定） */
+.halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotateHalo 28s linear infinite, pulseHalo 8s ease-in-out infinite;
+  filter: blur(12px);
+  z-index: 0;
+}
+
+/* 内側の柔光 */
+.halo-inner {
+  width: 100%; /* .shiopon-containerの幅基準 */
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 230, 255, 0.9) 0%, rgba(240, 180, 255, 0.3) 50%, transparent 100%);
+  /* 360px / 330px = 109% */
+  transform: translate(-50%, -50%) scale(1.09); 
+}
+
+/* 外側の環 */
+.halo-outer {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(180, 120, 255, 0.3) 0%, rgba(120, 80, 255, 0.15) 70%, transparent 100%);
+  animation-duration: 40s;
+  animation-direction: reverse;
+  /* 420px / 330px = 127% */
+  transform: translate(-50%, -50%) scale(1.27); 
+}
+
+@keyframes rotateHalo {
+  from { transform: translate(-50%, -50%) rotate(0deg) scaleX(var(--s,1)) scaleY(var(--s,1)); }
+  to { transform: translate(-50%, -50%) rotate(360deg) scaleX(var(--s,1)) scaleY(var(--s,1)); }
+}
+
+@keyframes pulseHalo {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+/* rotateHalo/pulseHaloはscaleも操作するため、上記アニメーションを再定義する際は注意 */
+.halo-inner { --s: 1.09; }
+.halo-outer { --s: 1.27; }
+
+.shiopon-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* .shiopon-containerの幅に合わせる */
+  max-width: 330px;
+  z-index: 2;
+  filter:
+    drop-shadow(0 0 20px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 40px rgba(255, 215, 255, 0.6));
+}
+/* ★★★ /追加CSS 2 ★★★ */
+
 
 /* ----------------------------------------------------- */
 /* Sections */
@@ -562,17 +640,21 @@ header, .hero, section, footer { position:relative; z-index:1 }
     <div class="wrap">
       <h1>言葉は祈りの構文 物語は、その実演</h1>
       <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する<br><strong>「言葉が魂を救う、その瞬間へ」</strong></p>
+      
+      <figure class="hero__image" aria-hidden="true">
+        <div class="shiopon-container">
+          <div class="halo halo-inner"></div>
+          <div class="halo halo-outer"></div>
+          <img src="shiopon_transparent.png" alt="しおぽん" class="shiopon-image" />
+        </div>
+        </figure>
+
       <div class="cta-row" role="navigation" aria-label="主要CTA">
         <a class="btn btn--primary" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">🌠 星の言葉を受け取る（無料）</a>
         <a class="btn btn--ghost" href="https://ncode.syosetu.com/n5806lb/" target="_blank" rel="noopener">📘 小説を読む</a>
         <a class="btn btn--ghost" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">📖 今日の“響き”を読む</a>
         <a class="btn btn--ghost" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">🎥 1分で観る/聴く</a>
       </div>
-
-      <figure class="hero__image" aria-hidden="true">
-        <img src="/assets/og.jpg" alt="詩韻思想 × TAROT BREAKER キービジュアル"
-             width="1200" height="630" loading="lazy" decoding="async">
-      </figure>
     </div>
   </section>
 
