@@ -405,7 +405,8 @@ footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border
 /* 背景：星砂パーティクル */
 .sky{ position:fixed; inset:0; z-index:0; pointer-events:none; filter:saturate(105%); }
 #goldDust{ width:100%; height:100%; display:block }
-header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relative; z-index:1 }
+/* ★修正点1: shioponのIDをここから削除。position: fixedを機能させるため */
+header, .hero, section, footer { position:relative; z-index:1 }
 @media (prefers-reduced-motion: reduce){ .sky{ display:none } }
 
 /* ===== Shiopon Perfect CSS (修正版) ===== */
@@ -500,6 +501,20 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 @media (prefers-reduced-motion: reduce){
   .shiopon__avatar{ animation: none }
   .shiopon{ transition: none }
+}
+
+/* ★修正点2: Shiopon 強制固定（保険）を追記 */
+#shiopon-invite.shiopon{
+  position: fixed !important;
+  right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 60 !important;
+}
+#shiopon-dock.shiopon-dock{
+  position: fixed !important;
+  right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 59 !important;
 }
 </style>
 </head>
