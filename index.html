@@ -77,7 +77,7 @@ header .wrap{
   display:flex; flex-direction: column; align-items: center; justify-content:center;
   padding:10px 0;
 }
-/* ★ 修正/追加 CSSここから ★ */
+/* ★ 1. ブランド表示（Re:verse Shion 3行化）の修正CSS ★ */
 .brand{
   display:flex;
   align-items:flex-start; /* 縦方向の揃えを左上に変更 */
@@ -85,36 +85,33 @@ header .wrap{
   gap:10px;
   text-align:left; /* テキストの揃えを左寄せに変更 */
   font-weight:700; color:var(--ink);
-  margin-bottom: 5px;
+  margin-bottom: 8px; /* ナビとの間隔を少し空ける */
 }
 .brand__logo{
   width:34px;height:34px;border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
   box-shadow:0 0 14px rgba(174,138,255,.4);
-  flex-shrink: 0; /* ロゴが縮小しないように固定 */
-  margin-top: 2px; /* 3行の中央に近づけるための微調整 */
+  flex-shrink: 0;
+  margin-top: 2px;
 }
-.brand__text1, .brand__text2, .brand__text-sub{display:block} /* 全てのテキストを行分割 */
+.brand__text1, .brand__text2, .brand__text-sub{display:block}
 
-/* 1. ハイフン（—）を削除 */
-.brand__text1::after{content:none;} /* ハイフンの生成を削除 */
+.brand__text1::after{content:none;} /* ハイフン（—）の生成を削除 */
 
-.brand__text1{font-size:1.05em;line-height:1.2; margin-top: -2px;} /* 微調整 */
-.brand__text2{font-size:1.02em;line-height:1.2; font-weight: 700;} /* メインタイトルの強調を維持 */
-/* 新しい3行目のスタイル */
+.brand__text1{font-size:1.05em;line-height:1.2; margin-top: -2px;}
+.brand__text2{font-size:1.02em;line-height:1.2; font-weight: 700;}
 .brand__text-sub{font-size:.9em;line-height:1.2; font-weight: 500; color:var(--muted); margin-top: 1px;}
 
-/* 2. & 3. 3行表示とロゴ配置を制御するグループ */
 .brand-text-group {
   display: flex;
-  flex-direction: column; /* 縦に並べる */
-  line-height: 1.2; /* 行間調整 */
+  flex-direction: column;
+  line-height: 1.2;
 }
 
-/* レスポンシブ調整: PC/タブレットでは現状の1行に戻す */
+/* PC/タブレットでは現状の1行に戻す */
 @media (min-width: 720px) {
   .brand{
-    align-items: center; /* 垂直中央揃えに戻す */
+    align-items: center;
     text-align: center;
     margin-bottom: 5px;
   }
@@ -122,18 +119,52 @@ header .wrap{
   .brand__text1{ display:inline; font-size:1.05em; line-height:1.2; margin-top:0;}
   .brand__text1::after{content:" — ";}
   .brand__text2{ display:inline; font-size:1.02em; line-height:1.2; font-weight: 700;}
-  .brand__text-sub{ display:none; } /* 3行目を非表示 */
-  .brand-text-group{ display: block; } /* グループ化解除 */
+  .brand__text-sub{ display:none; }
+  .brand-text-group{ display: block; }
 }
-/* ★ 修正/追加 CSSここまで ★ */
+/* ★ /1. ブランド表示の修正CSS ★ */
 
-.nav{ display:flex; gap:15px; font-size:.9em; justify-content:center; }
-.nav a{ padding:6px 10px; color:var(--ink); border-radius:10px; transition: background-color .2s }
-.nav a:hover{ background:rgba(255,215,111,.12) }
-.nav a.is-active{
-  background: rgba(255,215,111,.18);
-  box-shadow: 0 0 0 1px rgba(255,215,111,.28) inset;
+
+/* ★ 2. ナビゲーション（チップデザイン化・アイコン対応）の修正CSS ★ */
+.nav{
+  display:flex; gap:10px;
+  font-size:.9em; justify-content:center;
+  flex-wrap: wrap;
+  font-weight: 700;
 }
+
+.nav a{
+  padding: 8px 14px;
+  color: var(--ink);
+  border-radius: 999px;
+  transition: background-color .2s, box-shadow .2s, transform .2s;
+  
+  /* チップデザインのベース */
+  background: rgba(255,215,111,.1); 
+  border: 1px solid rgba(255,215,111,.4);
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+
+  /* アイコン対応 */
+  display: flex;
+  align-items: center;
+  gap: .3em;
+  white-space: nowrap;
+}
+
+.nav a:hover{
+  background: rgba(255,215,111,.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+}
+
+.nav a.is-active{
+  background: var(--b); /* メインのゴールドカラー */
+  color: var(--ink);
+  border-color: var(--b);
+  box-shadow: 0 4px 10px rgba(255,215,111,.5);
+  transform: none;
+}
+/* ★ /2. ナビゲーションの修正CSS ★ */
 
 /* ----------------------------------------------------- */
 /* Hero */
@@ -259,41 +290,37 @@ details[open] .codex__caret{transform:rotate(180deg)}
 .badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
   /* === Codex：縦幅を綺麗に統一（2行まで・レスポンシブ） === */
 :root{
-  --codex-item-h: 88px;           /* デフォ（スマホ） */
-  --codex-item-h-md: 96px;        /* タブレット～ */
-  --codex-item-h-lg: 104px;       /* PC広め */
+  --codex-item-h: 88px;
+  --codex-item-h-md: 96px;
+  --codex-item-h-lg: 104px;
 }
 
 .codex__list{
-  /* 既存grid指定そのまま活かしつつ行高の基準を固定 */
   align-items: stretch;
 }
 
-/* カード本体をフレックスで整形し、固定高＋内側で2行までに収める */
 .codex__list li{
   display: flex;
   align-items: center;
   gap: 12px;
-  height: var(--codex-item-h);      /* ← 統一高さ */
+  height: var(--codex-item-h);
   padding: 12px 14px;
   border: 1px solid rgba(0,0,0,.06);
   border-radius: 12px;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,.04);
   transition: transform .15s, box-shadow .2s;
-  overflow: hidden;                  /* はみ出し防止 */
+  overflow: hidden;
 }
 
-/* バッジは折り返さず高さを揃える */
 .codex__list .badge{
   white-space: nowrap;
   line-height: 1;
-  padding: 4px 10px;                /* 視覚的中央に近づける */
+  padding: 4px 10px;
   border-radius: 999px;
-  align-self: center;               /* 垂直中央 */
+  align-self: center;
 }
 
-/* タイトル（リンク）を2行固定＋3点リーダー。行間を少し詰めて均整良く */
 .codex__list a{
   flex: 1 1 auto;
   font-weight: 700;
@@ -301,15 +328,14 @@ details[open] .codex__caret{transform:rotate(180deg)}
   text-decoration: none;
   line-height: 1.35;
   display: -webkit-box;
-  -webkit-line-clamp: 2;            /* 2行まで表示 */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 0;                     /* 省略記号の効きを良くする */
+  min-width: 0;
 }
 .codex__list a:hover{ color:#7e66ff }
 
-/* ブレークポイントで高さだけ微調整（タイトルが長い書名でも均整） */
 @media (min-width: 720px){
   .codex__list li{ height: var(--codex-item-h-md); }
 }
@@ -317,30 +343,27 @@ details[open] .codex__caret{transform:rotate(180deg)}
   .codex__list li{ height: var(--codex-item-h-lg); }
 }
 
-/* ホバー効果は既存を踏襲 */
 .codex__list li:hover{
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(255,215,111,.22);
 }
   /* === Codex：バッジ列を固定してタイトルの開始位置を完全揃え === */
 :root{
-  --codex-badge-col: 108px;   /* スマホ時のバッジ列の固定幅 */
-  --codex-badge-col-md: 124px;/* タブレット */
-  --codex-badge-col-lg: 140px;/* PC */
+  --codex-badge-col: 108px;
+  --codex-badge-col-md: 124px;
+  --codex-badge-col-lg: 140px;
 }
 
-/* liを2カラムGrid化：左=バッジ（固定幅）／右=タイトル（可変） */
 .codex__list li{
   display: grid !important;
-  grid-template-columns: var(--codex-badge-col) 1fr; /* ←ここで開始位置が揃う */
+  grid-template-columns: var(--codex-badge-col) 1fr;
   align-items: center;
   gap: 12px;
-  height: var(--codex-item-h);       /* 既出の縦幅統一があればそのまま活きる */
+  height: var(--codex-item-h);
   padding: 12px 14px;
   overflow: hidden;
 }
 
-/* ブレークポイントでバッジ列幅を少し広げて可読性UP */
 @media (min-width: 720px){
   .codex__list li{ grid-template-columns: var(--codex-badge-col-md) 1fr;
                    height: var(--codex-item-h-md); }
@@ -350,7 +373,6 @@ details[open] .codex__caret{transform:rotate(180deg)}
                    height: var(--codex-item-h-lg); }
 }
 
-/* バッジは左カラムに固定＆中央寄せ（縦はセンター） */
 .codex__list .badge{
   grid-column: 1;
   justify-self: start;
@@ -361,12 +383,11 @@ details[open] .codex__caret{transform:rotate(180deg)}
   border-radius: 999px;
 }
 
-/* タイトルは右カラムに固定。2行までで省略（三点リーダー） */
 .codex__list a{
   grid-column: 2;
   min-width: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;          /* 2行固定 */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -426,11 +447,11 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       </div>
     </div>
     <nav class="nav" aria-label="主要ナビゲーション">
-      <a href="#trinity">詩韻思想</a>
-      <a href="#writings">書</a>
-      <a href="#join">参加</a>
+      <a href="#trinity">💫 詩韻思想</a>
+      <a href="#writings">📚 書</a>
+      <a href="#join">🤝 参加</a>
     </nav>
-  </div>
+    </div>
 </header>
 
 <main id="top">
@@ -489,7 +510,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     <div class="wrap">
       <h2 id="sec-intro">初めての方へ</h2>
       <div class="intro__box">
-        <p><strong>詩韻思想とは？</strong> ― <em>言葉が魂を救い、魂が世界を調和させ、沈黙が祈りに変わる</em>という円環を生きる“体験型・詩的哲学”</p>
+        <p><strong>詩韻思想とは？</strong> — <em>言葉が魂を救い、魂が世界を調和させ、沈黙が祈りに変わる</em>という円環を生きる“体験型・詩的哲学”</p>
         <p>① <strong>読む</strong>（note） → ② <strong>聴く</strong>（TikTok） → ③ <strong>受け取る</strong>（LINE） → ④ <strong>物語で体験</strong>（TAROT BREAKER）</p>
       </div>
     </div>
@@ -752,8 +773,8 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   const headerEl = document.querySelector('header[role="banner"]');
   if (!headerEl) return;
 
-  const revealAt = 8;   // 8px超で表示
-  const compactAt = 88; // 88px超でコンパクト化
+  const revealAt = 8;
+  const compactAt = 88;
   let ticking = false;
 
   function onScroll() {
