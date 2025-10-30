@@ -7,7 +7,6 @@
 <meta name="theme-color" content="#ffffff" />
 <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演">
 
-<!-- OGP -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="Re:verse Shion — 詩韻思想 × TAROT BREAKER">
@@ -17,20 +16,16 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TaroBure">
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- Icons -->
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-<!-- Preload poster -->
 <link rel="preload" as="image" href="/assets/hero-poster.jpg">
 
 <style>
@@ -60,7 +55,7 @@ img{height:auto}
 :focus-visible{ outline:2px solid rgba(255,215,111,.85); outline-offset:2px; }
 
 /* ----------------------------------------------------- */
-/* Header */
+/* Header (修正適用済み) */
 /* ----------------------------------------------------- */
 header[role="banner"]{
   min-height: var(--header-h);
@@ -82,17 +77,55 @@ header .wrap{
   display:flex; flex-direction: column; align-items: center; justify-content:center;
   padding:10px 0;
 }
-.brand{ display:flex; align-items:center; justify-content:center; gap:10px;
-  text-align:center; font-weight:700; color:var(--ink); margin-bottom: 5px; }
+/* ★ 修正/追加 CSSここから ★ */
+.brand{
+  display:flex;
+  align-items:flex-start; /* 縦方向の揃えを左上に変更 */
+  justify-content:center;
+  gap:10px;
+  text-align:left; /* テキストの揃えを左寄せに変更 */
+  font-weight:700; color:var(--ink);
+  margin-bottom: 5px;
+}
 .brand__logo{
   width:34px;height:34px;border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
   box-shadow:0 0 14px rgba(174,138,255,.4);
+  flex-shrink: 0; /* ロゴが縮小しないように固定 */
+  margin-top: 2px; /* 3行の中央に近づけるための微調整 */
 }
-.brand__text1, .brand__text2{display:inline}
-.brand__text1{font-size:1.05em;line-height:1.2}
-.brand__text1::after{content:" — ";}
-.brand__text2{font-size:1.02em;line-height:1.2}
+.brand__text1, .brand__text2, .brand__text-sub{display:block} /* 全てのテキストを行分割 */
+
+/* 1. ハイフン（—）を削除 */
+.brand__text1::after{content:none;} /* ハイフンの生成を削除 */
+
+.brand__text1{font-size:1.05em;line-height:1.2; margin-top: -2px;} /* 微調整 */
+.brand__text2{font-size:1.02em;line-height:1.2; font-weight: 700;} /* メインタイトルの強調を維持 */
+/* 新しい3行目のスタイル */
+.brand__text-sub{font-size:.9em;line-height:1.2; font-weight: 500; color:var(--muted); margin-top: 1px;}
+
+/* 2. & 3. 3行表示とロゴ配置を制御するグループ */
+.brand-text-group {
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+  line-height: 1.2; /* 行間調整 */
+}
+
+/* レスポンシブ調整: PC/タブレットでは現状の1行に戻す */
+@media (min-width: 720px) {
+  .brand{
+    align-items: center; /* 垂直中央揃えに戻す */
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .brand__logo{ margin-top: 0; }
+  .brand__text1{ display:inline; font-size:1.05em; line-height:1.2; margin-top:0;}
+  .brand__text1::after{content:" — ";}
+  .brand__text2{ display:inline; font-size:1.02em; line-height:1.2; font-weight: 700;}
+  .brand__text-sub{ display:none; } /* 3行目を非表示 */
+  .brand-text-group{ display: block; } /* グループ化解除 */
+}
+/* ★ 修正/追加 CSSここまで ★ */
 
 .nav{ display:flex; gap:15px; font-size:.9em; justify-content:center; }
 .nav a{ padding:6px 10px; color:var(--ink); border-radius:10px; transition: background-color .2s }
@@ -380,15 +413,17 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 </head>
 <body>
 
-<!-- 背景：星砂 -->
 <div class="sky" aria-hidden="true"><canvas id="goldDust"></canvas></div>
 
 <header role="banner">
   <div class="wrap">
     <div class="brand" aria-label="サイトブランド">
       <div class="brand__logo" aria-hidden="true"></div>
-      <div class="brand__text1">Re:verse Shion</div>
-      <div class="brand__text2">詩韻思想 × TAROT BREAKER</div>
+      <div class="brand-text-group">
+        <div class="brand__text1">Re:verse Shion</div>
+        <div class="brand__text2">詩韻思想 ×</div>
+        <div class="brand__text-sub">TAROT BREAKER</div>
+      </div>
     </div>
     <nav class="nav" aria-label="主要ナビゲーション">
       <a href="#trinity">詩韻思想</a>
@@ -399,7 +434,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 </header>
 
 <main id="top">
-  <!-- Hero -->
   <section class="hero" aria-label="ヒーロー">
     <div class="hero__media" aria-hidden="true">
       <video class="hero__video" autoplay muted loop playsinline preload="metadata"
@@ -427,7 +461,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
   </section>
 
-  <!-- Trinity -->
   <section id="trinity" aria-labelledby="sec-trinity">
     <div class="wrap">
       <h2 id="sec-trinity">詩韻思想</h2>
@@ -452,7 +485,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
   </section>
 
-  <!-- Intro -->
   <section class="intro" aria-labelledby="sec-intro">
     <div class="wrap">
       <h2 id="sec-intro">初めての方へ</h2>
@@ -463,12 +495,10 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
   </section>
 
-  <!-- Writings -->
   <section id="writings" aria-labelledby="sec-writings">
     <div class="wrap">
       <h2 id="sec-writings">📖 最新の書・物語</h2>
 
-      <!-- ★★★ 全書アコーディオン（最適位置：最新ブロック直下） ★★★ -->
       <div class="codex" style="margin-top:12px;margin-bottom:18px">
         <details>
           <summary>
@@ -564,15 +594,12 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
           </div>
         </details>
       </div>
-      <!-- ★★★ /全書アコーディオン ★★★ -->
-
       <div class="card"><div class="badge">✡ 第零書</div><h4>無限構文序論 — The Zero Syntax</h4></div>
       <div class="card"><div class="badge">✦ 第一書</div><h4>言葉が魂を救う理由 — The Syntax of Salvation</h4></div>
       <div class="card"><div class="badge">✦ TAROT BREAKER</div><h4>第1話から読む</h4></div>
     </div>
   </section>
 
-  <!-- Join -->
   <section id="join" aria-labelledby="sec-join">
     <div class="wrap">
       <h2 id="sec-join">参加の扉</h2>
@@ -599,7 +626,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   </div>
 </footer>
 
-<!-- しおぽん誘導（現状維持） -->
 <div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
   <button class="shiopon__close" aria-label="閉じる">×</button>
   <div class="shiopon__avatar" aria-hidden="true">
@@ -613,7 +639,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 </div>
 <button id="shiopon-dock" class="shiopon-dock is-hidden" aria-label="しおぽんを開く">🦊 しおぽん</button>
 
-<!-- 星砂Canvas -->
 <script>
 (() => {
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -664,7 +689,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 })();
 </script>
 
-<!-- しおぽんUI -->
 <script>
 (() => {
   const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
@@ -723,7 +747,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 })();
 </script>
 
-<!-- ヘッダー挙動 & セクション現在地 -->
 <script>
 (() => {
   const headerEl = document.querySelector('header[role="banner"]');
@@ -769,7 +792,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 })();
 </script>
 
-<!-- Trinity動画制御 -->
 <script>
 (() => {
   const video = document.getElementById('trinityVideo');
