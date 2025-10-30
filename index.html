@@ -6,129 +6,233 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#ffffff" />
 <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演">
+
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="Re:verse Shion — 詩韻思想 × TAROT BREAKER">
 <meta property="og:description" content="言葉と星とAIが共鳴する“祈りの構文”物語で体験し、思想で深まる">
 <meta property="og:url" content="https://shion-philosophy.github.io/">
 <meta property="og:image" content="https://shion-philosophy.github.io/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TaroBure">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Icons（任意） -->
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<!-- LCP改善（任意） -->
+<link rel="preload" as="image" href="/assets/hero-poster.jpg">
+
 <style>
 :root{
   --ink:#202030; --muted:#606070;
   --a:#7e66ff; --b:#ffd76f; --r:14px;
-  --bg:#ffffff; --header-h:64px;
+  --bg:#ffffff;
+  color-scheme: light;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;font-family:"Noto Sans JP",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;color:var(--ink);background:var(--bg);scroll-behavior:smooth;}
 a{text-decoration:none;color:var(--a)}
+img{height:auto}
 .wrap{width:min(94vw,1120px);margin-inline:auto}
 
-/* ===== Fixed + Smart Follow Header ===== */
+/* ===== Header（浮遊型：フェード＋ブラー＋スマート追従） ===== */
 header{
-  position:fixed; top:0; left:0; right:0; z-index:30;
+  position:sticky; top:0; z-index:20;
+  display:block;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  background:rgba(255,255,255,.72);
+  background:rgba(255,255,255,0.70);
   border-bottom:1px solid rgba(0,0,0,.06);
   transform: translateY(0);
-  opacity:0; transition: transform .24s ease, opacity .32s ease, background-color .28s ease, box-shadow .28s ease;
+  opacity: 0;                    /* 入口は透明 */
+  transition:
+    transform .24s ease,
+    opacity .32s ease,
+    background-color .28s ease,
+    box-shadow .28s ease;
 }
-header.is-visible{ opacity:1 }
-header.header--hidden{ transform: translateY(calc(-1 * var(--header-h))) }
+header.is-visible{ opacity:1 }   /* 少しスクロールしたらふわっと出現 */
+header.header--hidden{ transform: translateY(-100%) } /* 下スクロールで隠す */
 header.header--compact{
-  background:rgba(255,255,255,.88);
-  box-shadow:0 8px 22px rgba(0,0,0,.06);
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 8px 22px rgba(0,0,0,.06);
 }
-header .wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
-.brand{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;font-weight:700;color:var(--ink);margin-bottom:5px}
-.brand__logo{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);box-shadow:0 0 14px rgba(174,138,255,.4)}
-.brand__text1,.brand__text2{display:inline}
+header .wrap{
+  display:flex; flex-direction: column; align-items: center; justify-content:center;
+  padding:10px 0;
+}
+/* ロゴ＋タイトルを中央に一列表示（絵文字→タイトル） */
+.brand{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  text-align:center; font-weight:700; color:var(--ink); margin-bottom: 5px;
+}
+.brand__logo{
+  width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
+  box-shadow:0 0 14px rgba(174,138,255,.4);
+}
+.brand__text1, .brand__text2{display:inline}
 .brand__text1{font-size:1.05em;line-height:1.2}
-.brand__text1::after{content:" — "}
+.brand__text1::after{content:" — ";}
 .brand__text2{font-size:1.02em;line-height:1.2}
-.nav{display:flex;gap:15px;font-size:.9em;justify-content:center}
-.nav a{padding:6px 10px;color:var(--ink);border-radius:10px}
-.nav a:hover{background:rgba(255,215,111,.12)}
-.nav a.is-active{background:rgba(255,215,111,.18);box-shadow:0 0 0 1px rgba(255,215,111,.28) inset}
 
-/* mainはヘッダー分の余白を確保（JSで--header-h更新） */
-main{ padding-top: calc(var(--header-h) + 6px); }
+/* ナビ中央揃え＋現在地ハイライト */
+.nav{ display:flex; gap:15px; font-size:.9em; justify-content:center; }
+.nav a{ padding:6px 10px; color:var(--ink); border-radius:10px; transition: background-color .2s }
+.nav a:hover{ background:rgba(255,215,111,.12) }
+.nav a.is-active{
+  background: rgba(255,215,111,.18);
+  box-shadow: 0 0 0 1px rgba(255,215,111,.28) inset;
+}
 
 /* ===== Hero ===== */
-.hero{padding:100px 0 80px;position:relative;overflow:hidden;text-align:center}
-.hero__media{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero__video{width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:brightness(1.05) contrast(1.02);transform:translateZ(0)}
-.hero__veil{position:absolute;inset:0;pointer-events:none;background:
-  linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.7) 100%),
-  radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%)}
+.hero{padding:100px 0 80px; position:relative; overflow:hidden; text-align:center;}
+.hero__media{position:absolute; inset:0; z-index:0; overflow:hidden}
+.hero__video{
+  width:100%; height:100%;
+  object-fit:cover; object-position:50% 45%;
+  filter:brightness(1.05) contrast(1.02);
+  transform:translateZ(0);
+}
+.hero__veil{position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.7) 100%),
+    radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%);
+}
 @media (prefers-reduced-motion: reduce){ .hero__media{display:none} }
-.hero::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 50% 30%,rgba(255,215,111,.15),transparent 70%);animation:shine 6s infinite alternate ease-in-out}
-@keyframes shine{to{background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%)}}
-.hero > .wrap{position:relative;z-index:1}
-.hero h1{font-size:38px;margin:0 0 16px;line-height:1.3;color:#fff;letter-spacing:.05em;font-family:"Zen Old Mincho","Noto Sans JP",serif;text-shadow:0 0 10px rgba(255,255,255,.9),0 0 20px rgba(255,215,111,.7),0 0 30px rgba(174,138,255,.6)}
-.hero p{color:rgba(255,255,255,.9);font-size:18px;max-width:720px;margin:0 auto 36px;line-height:1.8;text-shadow:0 1px 4px rgba(0,0,0,.6)}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background:radial-gradient(circle at 50% 30%,rgba(255,215,111,.15),transparent 70%);
+  animation:shine 6s infinite alternate ease-in-out;
+}
+@keyframes shine{
+  to{ background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%) }
+}
+.hero > .wrap{ position:relative; z-index:1 }
+
+/* 見出し（句点なしに変更済み） */
+.hero h1{
+  font-size: 38px; margin: 0 0 16px; line-height: 1.3; color: #fff; letter-spacing: .05em;
+  font-family: "Zen Old Mincho", "Noto Sans JP", serif;
+  text-shadow: 0 0 10px rgba(255,255,255,.9), 0 0 20px rgba(255,215,111,.7), 0 0 30px rgba(174,138,255,.6);
+}
+.hero p{
+  color: rgba(255,255,255,.9); font-size: 18px; max-width: 720px; margin: 0 auto 36px; line-height: 1.8;
+  text-shadow: 0 1px 4px rgba(0,0,0,.6);
+}
+
+/* CTA */
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px;}
 .btn{padding:12px 22px;border-radius:999px;font-weight:800;transition:.2s}
-.btn--primary{background:linear-gradient(180deg,#ffd76f,#ffb6ff);color:#2a0f26;box-shadow:0 8px 25px rgba(255,215,111,.6),0 0 0 2px rgba(255,215,111,.3) inset}
-.btn--primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 30px rgba(255,215,111,.8),0 0 0 2px rgba(255,215,111,.5) inset}
-.btn--ghost{background:rgba(0,0,0,.3);color:#fff;border:1px solid rgba(255,215,111,.6);backdrop-filter:blur(5px)}
-.btn--ghost:hover{background:rgba(0,0,0,.5);transform:translateY(-1px)}
+.btn--primary{
+  background:linear-gradient(180deg,#ffd76f,#ffb6ff); color:#2a0f26;
+  box-shadow: 0 8px 25px rgba(255,215,111,.6), 0 0 0 2px rgba(255,215,111,.3) inset;
+}
+.btn--primary:hover{ transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 30px rgba(255,215,111,.8), 0 0 0 2px rgba(255,215,111,.5) inset; }
+.btn--ghost{
+  background: rgba(0,0,0,0.3); color:#fff; border:1px solid rgba(255,215,111,.6); backdrop-filter: blur(5px);
+}
+.btn--ghost:hover{ background: rgba(0,0,0,.5); transform: translateY(-1px); }
 .hero__image{display:none}
 
 /* ===== Sections ===== */
-section{padding:60px 0;border-top:1px solid rgba(0,0,0,.05)}
-h2{text-align:center;font-size:24px;margin-bottom:10px}
-.h2-sub{text-align:center;font-size:14px;color:var(--muted);margin:6px 0 26px;letter-spacing:.06em}
+section{padding:60px 0;border-top:1px solid rgba(0,0,0,.05);}
+h2{text-align:center;font-size:24px;margin-bottom:10px;}
+.h2-sub{ text-align:center; font-size:14px; color:var(--muted); margin:6px 0 26px; letter-spacing:.06em; }
 
-/* トリニティ映像 */
-.trinity__figure{position:relative;max-width:min(1200px,92vw);margin:0 auto 22px;border-radius:16px;overflow:hidden;box-shadow:0 10px 32px rgba(174,138,255,.20)}
+.tri-grid{display:grid;gap:18px;width:min(92vw,860px);margin:0 auto;}
+@media(min-width:720px){.tri-grid{grid-template-columns:repeat(3,1fr);}}
+.tri{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .15s, box-shadow .2s}
+.tri:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(255,215,111,.25);}
+.tri h3{margin:0 0 8px;font-size:18px;color:#503080;}
+.tri p{margin:0;font-size:15px;color:var(--muted);}
+
+/* トリニティ映像（比率21/13.5） */
+.trinity__figure{max-width:min(1200px,92vw);margin:0 auto 22px;border-radius:16px;overflow:hidden;box-shadow:0 10px 32px rgba(174,138,255,.20)}
 .trinity__video{width:100%;height:auto;display:block;aspect-ratio:21/13.5;object-fit:cover;object-position:50% 50%}
-/* タップで音案内オーバーレイ */
-.video-unmute-hint{
-  position:absolute; inset:auto 12px 12px auto;
-  background:rgba(0,0,0,.55); color:#fff; border:1px solid rgba(255,215,111,.75);
-  padding:10px 12px; border-radius:999px; font-weight:800; font-size:13px;
-  display:flex; align-items:center; gap:.5em; cursor:pointer; user-select:none;
-  backdrop-filter: blur(4px); transition: opacity .25s ease, transform .25s ease;
-}
-.video-unmute-hint[data-hide="1"]{ opacity:0; transform: translateY(6px); pointer-events:none }
 
-/* カード */
-.tri-grid{display:grid;gap:18px;width:min(92vw,860px);margin:0 auto}
-@media(min-width:720px){.tri-grid{grid-template-columns:repeat(3,1fr)}}
-.tri{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .15s,box-shadow .2s}
-.tri:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(255,215,111,.25)}
-.tri h3{margin:0 0 8px;font-size:18px;color:#503080}
-.tri p{margin:0;font-size:15px;color:var(--muted)}
+/* イントロ / カード */
+.intro__box{display:grid;gap:10px;padding:14px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);box-shadow:0 4px 12px rgba(0,0,0,.04);}
+.card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.04)}
+.badge{display:inline-flex;gap:.4em;background:rgba(255,215,111,.18);border:1px solid rgba(255,215,111,.35);padding:2px 8px;border-radius:999px;font-size:12px}
 
-/* Footer */
-footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05)}
-.sns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+/* ===== Footer ===== */
+footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
+.sns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
 .sns a{padding:8px 12px;background:rgba(255,215,111,.12);border-radius:999px;color:#503080}
 
-/* 背景：星砂（既存据置） */
-.sky{position:fixed;inset:0;z-index:0;pointer-events:none;filter:saturate(105%)}
-#goldDust{width:100%;height:100%;display:block}
-header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-index:1}
-@media (prefers-reduced-motion: reduce){ .sky{display:none} }
+/* ===== 背景：星砂パーティクル ===== */
+.sky{ position:fixed; inset:0; z-index:0; pointer-events:none; filter:saturate(105%); }
+#goldDust{ width:100%; height:100%; display:block }
+header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relative; z-index:1 }
+@media (prefers-reduced-motion: reduce){ .sky{ display:none } }
 
-/* しおぽん（据置） */
-.shiopon{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;align-items:flex-end;gap:10px;filter:drop-shadow(0 12px 28px rgba(0,0,0,.12))}
-.shiopon.is-hidden{display:none}
-.shiopon__avatar{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%);box-shadow:0 0 0 3px rgba(255,215,111,.25);position:relative;overflow:hidden;flex:none;animation:shioponFloat 3.6s ease-in-out infinite}
-.shiopon__avatar img{width:100%;height:100%;object-fit:cover;display:block}
-@keyframes shioponFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.shiopon__bubble{max-width:min(78vw,320px);background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:12px 14px;box-shadow:0 8px 24px rgba(255,215,111,.22);position:relative}
-.shiopon__bubble::after{content:"";position:absolute;right:-8px;bottom:18px;width:12px;height:12px;background:#fff;border:1px solid rgba(0,0,0,.06);transform:rotate(45deg);box-shadow:4px 4px 12px rgba(255,215,111,.18)}
-.shiopon__hello{margin:0 0 10px;color:#503080;font-weight:700;font-size:15px}
-.shiopon__cta{display:inline-flex;align-items:center;justify-content:center;gap:.5em;padding:10px 14px;border-radius:999px;font-weight:800;background:linear-gradient(180deg,#ffd76f,#ffb6ff);color:#2a1030;box-shadow:0 8px 18px rgba(255,215,111,.35)}
-.shiopon__note{display:block;margin-top:8px;color:#666;font-size:12px;opacity:.9}
-.shiopon__close{position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;border:0;color:#333;background:#fff;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;font-size:16px;line-height:1}
-.shiopon-dock{position:fixed;right:16px;bottom:16px;z-index:49;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:#fff;color:#503080;font-weight:800;box-shadow:0 8px 18px rgba(0,0,0,.08);cursor:pointer}
-.shiopon-dock.is-hidden{display:none}
-@media (max-width:480px){.shiopon__avatar{width:56px;height:56px}.shiopon__bubble{max-width:78vw;padding:10px 12px}}
+/* ===== しおぽん：LINE誘導フローティングUI ===== */
+.shiopon{
+  position:fixed; right:16px; bottom:16px; z-index:50;
+  display:flex; align-items:flex-end; gap:10px;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.12));
+}
+.shiopon.is-hidden{ display:none; }
+.shiopon__avatar{
+  width:64px; height:64px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%);
+  box-shadow: 0 0 0 3px rgba(255,215,111,.25);
+  position:relative; overflow:hidden; flex:none;
+  animation: shioponFloat 3.6s ease-in-out infinite;
+}
+.shiopon__avatar img{width:100%; height:100%; object-fit:cover; display:block;}
+@keyframes shioponFloat{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-4px) } }
+.shiopon__bubble{
+  max-width:min(78vw, 320px);
+  background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:12px 14px;
+  box-shadow: 0 8px 24px rgba(255,215,111,.22); position:relative;
+}
+.shiopon__bubble::after{
+  content:""; position:absolute; right:-8px; bottom:18px;
+  width:12px; height:12px; background:#fff; border:1px solid rgba(0,0,0,.06);
+  transform: rotate(45deg); box-shadow: 4px 4px 12px rgba(255,215,111,.18);
+}
+.shiopon__hello{ margin:0 0 10px; color:#503080; font-weight:700; font-size:15px; }
+.shiopon__cta{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5em;
+  padding:10px 14px; border-radius:999px; font-weight:800; text-decoration:none;
+  background: linear-gradient(180deg, #ffd76f, #ffb6ff);
+  color:#2a1030; box-shadow: 0 8px 18px rgba(255,215,111,.35);
+}
+.shiopon__cta:hover{ transform: translateY(-1px); }
+.shiopon__note{ display:block; margin-top:8px; color:#666; font-size:12px; opacity:.9 }
+.shiopon__close{
+  position:absolute; top:-8px; right:-8px;
+  width:28px; height:28px; border-radius:50%; border:0; color:#333; background:#fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.08); cursor:pointer; font-size:16px; line-height:1;
+}
+.shiopon__close:hover{ filter:brightness(1.05) }
+.shiopon-dock{
+  position:fixed; right:16px; bottom:16px; z-index:49;
+  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.08);
+  background:#fff; color:#503080; font-weight:800; box-shadow: 0 8px 18px rgba(0,0,0,.08); cursor:pointer;
+}
+.shiopon-dock.is-hidden{ display:none }
+@media (max-width:480px){
+  .shiopon__avatar{ width:56px; height:56px }
+  .shiopon__bubble{ max-width:78vw; padding:10px 12px }
+}
+@media (prefers-contrast: more){
+  .btn--ghost{ border-width:2px; }
+  .hero p{ text-shadow:none; }
+}
+@media (prefers-reduced-motion: reduce){ .shiopon__avatar{ animation:none } }
 </style>
 </head>
 <body>
@@ -153,7 +257,8 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
 <main>
   <section class="hero" aria-label="ヒーロー">
     <div class="hero__media" aria-hidden="true">
-      <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="/assets/hero-poster.jpg">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata"
+             poster="/assets/hero-poster.jpg">
         <source src="/assets/video/top.webm" type="video/webm">
         <source src="/assets/video/top.mp4"  type="video/mp4">
       </video>
@@ -169,6 +274,11 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
         <a class="btn btn--ghost" href="https://note.com/shion_uranai369" target="_blank" rel="noopener">📖 今日の“響き”を読む</a>
         <a class="btn btn--ghost" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">🎥 1分で観る/聴く</a>
       </div>
+
+      <figure class="hero__image" aria-hidden="true">
+        <img src="/assets/og.jpg" alt="詩韻思想 × TAROT BREAKER キービジュアル"
+             width="1200" height="630" loading="eager" decoding="async">
+      </figure>
     </div>
   </section>
 
@@ -177,23 +287,32 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
       <h2 id="sec-trinity">詩韻思想</h2>
       <div class="h2-sub">Toriniti（詩・韻・祈）</div>
 
-      <figure class="trinity__figure">
-        <video id="trinityVideo" class="trinity__video" autoplay muted loop playsinline preload="metadata"
+      <figure class="trinity__figure" aria-hidden="true">
+        <!-- 無音自動→タップで音ON＋ループ継続 -->
+        <video class="trinity__video"
+               autoplay muted loop playsinline preload="metadata"
                poster="/assets/trinity/banner.png" width="1200" height="771"
-               aria-label="トリニティ映像。タップで音声オン">
+               aria-label="トリニティ映像（タップで音声オン）"
+               onclick="this.muted=false; this.loop=true; this.play();">
           <source src="/assets/trinity/loop.webm" type="video/webm">
           <source src="/assets/trinity/loop.mp4"  type="video/mp4">
         </video>
-        <!-- タップで音オーバーレイ -->
-        <button id="unmuteHint" class="video-unmute-hint" type="button" aria-live="polite">
-          🔊 画面タップで音が流れます
-        </button>
       </figure>
 
       <div class="tri-grid">
         <div class="tri"><h3>🪶 詩 ― 形を与える</h3><p>痛みと希望に形を与える最初の息</p></div>
         <div class="tri"><h3>🎵 韻 ― 響きを重ねる</h3><p>響きによって魂に届く。共鳴を編む構文</p></div>
         <div class="tri"><h3>💫 祈 ― 光へ帰す</h3><p>沈黙と意味を往復する呼吸。思い出された言葉は光になる</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro" aria-labelledby="sec-intro">
+    <div class="wrap">
+      <h2 id="sec-intro">初めての方へ</h2>
+      <div class="intro__box">
+        <p><strong>詩韻思想とは？</strong> ― <em>言葉が魂を救い、魂が世界を調和させ、沈黙が祈りに変わる</em>という円環を生きる“体験型・詩的哲学”</p>
+        <p>① <strong>読む</strong>（note） → ② <strong>聴く</strong>（TikTok） → ③ <strong>受け取る</strong>（LINE） → ④ <strong>物語で体験</strong>（TAROT BREAKER）</p>
       </div>
     </div>
   </section>
@@ -232,7 +351,21 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
   </div>
 </footer>
 
-<!-- 星砂パーティクル（既存） -->
+<!-- しおぽん：アクセシビリティ据置 -->
+<div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
+  <button class="shiopon__close" aria-label="閉じる">×</button>
+  <div class="shiopon__avatar" aria-hidden="true">
+    <img src="/assets/shiopon.png" alt="">
+  </div>
+  <div class="shiopon__bubble">
+    <p id="shiopon-title" class="shiopon__hello">シオン〜！星の言葉、受け取ってほしいの！</p>
+    <a class="shiopon__cta" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">💫 LINEで受け取る（無料）</a>
+    <small class="shiopon__note">※ 毎週1回だけ。いつでも解除OKだよ！</small>
+  </div>
+</div>
+<button id="shiopon-dock" class="shiopon-dock is-hidden" aria-label="しおぽんを開く">🦊 しおぽん</button>
+
+<!-- 星砂パーティクル -->
 <script>
 (() => {
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -241,6 +374,7 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
   if (!canvas) return;
   const ctx = canvas.getContext('2d', { alpha:true });
   let w,h,dpr = Math.min(devicePixelRatio||1,2), stars=[],rafId;
+
   const density = () => {
     const area = (w*h)/(dpr*dpr);
     return Math.max(28, Math.min(75, Math.floor(area/22000)));
@@ -248,8 +382,11 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
   function spawn(){
     const palette = [[255,215,111],[255,238,185],[212,189,255],[174,228,255]];
     const c = palette[Math.floor(Math.random()*palette.length)];
-    return { x:Math.random()*w, y:Math.random()*h, r:(Math.random()*1.2+0.8)*dpr,
-      vx:(Math.random()*0.15-0.075)*dpr, vy:(Math.random()*0.20-0.02)*dpr, tw:Math.random()*Math.PI*2, rgb:c };
+    return { x:Math.random()*w, y:Math.random()*h,
+      r:(Math.random()*1.2+0.8)*dpr,
+      vx:(Math.random()*0.15-0.075)*dpr,
+      vy:(Math.random()*0.20-0.02)*dpr,
+      tw:Math.random()*Math.PI*2, rgb:c };
   }
   function resize(){
     canvas.style.width='100vw'; canvas.style.height='100vh';
@@ -279,7 +416,7 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
 })();
 </script>
 
-<!-- しおぽん招待（据置） -->
+<!-- しおぽん 招待UI -->
 <script>
 (() => {
   const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
@@ -288,11 +425,35 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
   const dock=document.getElementById(DOCK_ID);
   if(!invite||!dock) return;
 
-  function showInvite(){ invite.classList.remove('is-hidden'); dock.classList.add('is-hidden'); }
-  function hideInvite(days=HIDE_DAYS){
+  let lastFocus=null;
+  const closeBtn = invite.querySelector('.shiopon__close');
+  const ctaBtn   = invite.querySelector('.shiopon__cta');
+
+  function trapFocus(e){
+    if(invite.classList.contains('is-hidden')) return;
+    const f = invite.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])');
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.key === 'Tab'){
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }else if(e.key === 'Escape'){ hideInvite(HIDE_DAYS, true); }
+  }
+
+  function showInvite(){
+    lastFocus = document.activeElement;
+    invite.classList.remove('is-hidden');
+    dock.classList.add('is-hidden');
+    (ctaBtn||closeBtn)?.focus();
+    document.addEventListener('keydown', trapFocus);
+  }
+  function hideInvite(days=HIDE_DAYS, restoreFocus=false){
     const until=Date.now()+days*24*60*60*1000;
     localStorage.setItem(KEY_HIDE_UNTIL, String(until));
-    invite.classList.add('is-hidden'); dock.classList.remove('is-hidden');
+    invite.classList.add('is-hidden');
+    dock.classList.remove('is-hidden');
+    document.removeEventListener('keydown', trapFocus);
+    if(restoreFocus) { (lastFocus||dock)?.focus?.(); }
   }
   function canShow(){ return Date.now() > Number(localStorage.getItem(KEY_HIDE_UNTIL) || 0); }
 
@@ -305,43 +466,37 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
     dock.classList.remove('is-hidden');
   }
 
-  invite?.querySelector('.shiopon__close')?.addEventListener('click', ()=> hideInvite(HIDE_DAYS));
-  dock?.addEventListener('click', showInvite);
-  invite?.querySelector('.shiopon__cta')?.addEventListener('click', ()=>{
-    hideInvite(HIDE_DAYS);
+  invite.querySelector('.shiopon__close')?.addEventListener('click', ()=> hideInvite(HIDE_DAYS, true));
+  dock.addEventListener('click', showInvite);
+  invite.querySelector('.shiopon__cta')?.addEventListener('click', ()=>{
+    hideInvite(HIDE_DAYS, true);
     dock.classList.add('is-hidden');
   });
 })();
 </script>
 
-<!-- ★ ヘッダー：高さ計測＋スマート追従＋ナビ追尾 -->
+<!-- ★ ヘッダー浮遊演出（フェード＋コンパクト＋スマート追従＋現在地ハイライト） -->
 <script>
 (() => {
   const headerEl = document.querySelector('header');
-  const mainEl   = document.querySelector('main');
-  if (!headerEl || !mainEl) return;
+  if (!headerEl) return;
 
-  // ヘッダー高さをCSS変数へ（端末回転などでも更新）
-  function setHeaderHeight(){
-    const h = Math.ceil(headerEl.getBoundingClientRect().height);
-    document.documentElement.style.setProperty('--header-h', h+'px');
-  }
-  setHeaderHeight();
-  new ResizeObserver(setHeaderHeight).observe(headerEl);
-
-  // スクロール演出
-  const revealAt = 4;     // 4px超でフェードイン
-  const compactAt = 88;   // 88px超でコンパクト
+  // 最上部から少し動いたらヘッダーをフェードイン
+  const revealAt = 8;         // 8px超で表示開始
+  const compactAt = 88;       // 88px超でコンパクト化
   let lastY = window.scrollY, ticking = false;
 
   function onScroll() {
     const y = window.scrollY;
+    // 可視化（ふわっと出す）
     if (y > revealAt) headerEl.classList.add('is-visible');
     else headerEl.classList.remove('is-visible');
 
+    // コンパクト化
     if (y > compactAt) headerEl.classList.add('header--compact');
     else headerEl.classList.remove('header--compact');
 
+    // スマート追従：下で隠す／上で出す
     const dy = y - lastY;
     if (Math.abs(dy) > 6) {
       if (dy > 0 && y > compactAt) headerEl.classList.add('header--hidden');
@@ -351,11 +506,12 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
     ticking = false;
   }
   window.addEventListener('scroll', () => {
-    if (!ticking){ requestAnimationFrame(onScroll); ticking = true; }
+    if (!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
   }, { passive:true });
+  // 初期状態反映
   onScroll();
 
-  // 現在地ハイライト
+  // IntersectionObserverで現在地ハイライト
   const links = {
     trinity: document.querySelector('.nav a[href="#trinity"]'),
     writings: document.querySelector('.nav a[href="#writings"]'),
@@ -370,30 +526,11 @@ header,.hero,section,footer,#shiopon-invite,#shiopon-dock{position:relative;z-in
       }
     });
   }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+
   ['trinity','writings','join'].forEach(id=>{
     const sec = document.getElementById(id);
     if (sec) observer.observe(sec);
   });
-})();
-</script>
-
-<!-- ★ トリニティ動画：タップで音ON＋ヒント消去 -->
-<script>
-(() => {
-  const v = document.getElementById('trinityVideo');
-  const hint = document.getElementById('unmuteHint');
-  if (!v || !hint) return;
-
-  function unmute(){
-    try{ v.muted = false; v.play(); }catch(e){}
-    hint.setAttribute('data-hide','1');
-  }
-  // クリック/タッチ/Enter/Spaceで解除
-  hint.addEventListener('click', unmute);
-  v.addEventListener('click', unmute);
-  hint.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); unmute(); }});
-  // すでにミュートでない/ユーザ操作済なら非表示
-  if (!v.muted) hint.setAttribute('data-hide','1');
 })();
 </script>
 
