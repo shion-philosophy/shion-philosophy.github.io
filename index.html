@@ -411,7 +411,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 /* ===== Shiopon Perfect CSS (置き換え) ===== */
 .shiopon{
   position: fixed;
-  /* iOS安全域対応 */
   right: calc(16px + env(safe-area-inset-right, 0px));
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   z-index: 50;
@@ -476,7 +475,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 
 .shiopon-dock{
   position: fixed;
-  /* iOS安全域対応 */
   right: calc(16px + env(safe-area-inset-right, 0px));
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   z-index: 49;
@@ -496,7 +494,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 }
 @media (prefers-reduced-motion: reduce){
   .shiopon__avatar{ animation: none }
-  .shiopon{ transition: none; transform:none; } /* 省モーション時はアニメーションを完全にカット */
+  .shiopon{ transition: none }
 }
 </style>
 </head>
@@ -728,7 +726,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </p>
     <a class="shiopon__cta" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">💫 LINEで受け取る（無料）</a>
     <small class="shiopon__note">※ 毎週1回だけ。いつでも解除OKだよ！</small>
-    </div>
+  </div>
 </div>
 <button id="shiopon-dock" class="shiopon-dock is-hidden" aria-label="しおぽんを開く">🦊 しおぽん</button>
 
@@ -779,231 +777,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   ro.observe(document.documentElement);
   document.addEventListener('visibilitychange', ()=>{ if (document.hidden) cancelAnimationFrame(rafId); else draw(); });
   resize(); draw();
-})();
-</script>
-
-<script>
-(() => {
-  const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
-  const KEY_HIDE_UNTIL='shiopon.hideUntil';
-  const HIDE_DAYS_DEFAULT=3, HIDE_DAYS_LONG=30;
-
-  const invite=document.getElementById(INVITE_ID);
-  const dock=document.getElementById(DOCK_ID);
-  const live=document.getElementById('a11y-live');
-  if(!invite||!dock) return;
-
-  // アクセシビリティ: フォーカストラップ & inert管理
-  let lastFocus=null, inertedSiblings=[];
-  const closeBtn = invite.querySelector('.shiopon__close');
-  const ctaBtn   = invite.querySelector('.shiopon__cta');
-  const neverBtn = document.createElement('button');
-  const laterBtn = document.createElement('button');
-
-  // 追加オプション（30日表示しない / 後で）をDOMに挿入
-  const opts = document.createElement('div');
-  opts.className = 'shiopon__opts';
-  neverBtn.textContent = '30日間表示しない';
-  laterBtn.textContent = 'また後で';
-  opts.appendChild(neverBtn); opts.appendChild(laterBtn);
-  invite.querySelector('.shiopon__bubble').appendChild(opts);
-
-  function setLive(msg){
-    if (!live) return;
-    live.textContent = '';
-    setTimeout(()=>{ live.textContent = msg; }, 0);
-  }
-
-  function siblings(el){
-    const arr=[]; let n=el.parentNode.firstElementChild;
-    for (; n; n=n.nextElementSibling) if (n!==el) arr.push(n);
-    return arr;
-  }
-
-  function enableInert(root){
-    // 背景の要素リストを取得し、inertとaria-hiddenを付与
-    inertedSiblings = siblings(root);
-    inertedSiblings.forEach(n=>{
-      if ('inert' in n){ n.inert = true; }
-      n.setAttribute('aria-hidden','true');
-    });
-  }
-  function disableInert(){
-    // 背景の要素のinertとaria-hiddenを解除
-    inertedSiblings.forEach(n=>{
-      if ('inert' in n){ n.inert = false; }
-      n.removeAttribute('aria-hidden');
-    });
-    inertedSiblings = [];
-  }
-
-  function trapFocus(e){
-    if(invite.classList.contains('is-hidden')) return;
-    const f = invite.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])');
-    if(!f.length) return;
-    const first=f[0], last=f[f.length-1];
-    if(e.key === 'Tab'){
-      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
-      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-    }else if(e.key === 'Escape'){ hideInvite(HIDE_DAYS_DEFAULT, true); }
-  }
-
-  function canShow(){ return Date.now() > Number(localStorage.getItem(KEY_HIDE_UNTIL) || 0); }
-  function setHideDays(days){
-    const until=Date.now()+days*24*60*60*1000;
-    localStorage.setItem(KEY_HIDE_UNTIL, String(until));
-  }
-
-  function showInvite(){
-    lastFocus = document.activeElement;
-    invite.classList.remove('is-hidden');
-    invite.classList.add('is-visible'); // アニメーション開始
-    dock.classList.add('is-hidden');
-    enableInert(invite); // 背景をinert化
-    (ctaBtn||closeBtn)?.focus();
-    document.addEventListener('keydown', trapFocus);
-    setLive('しおぽんが開きました。LINEで星の言葉を受け取れます。');
-    startCollisionWatch();
-  }
-  function hideInvite(days=HIDE_DAYS_DEFAULT, restoreFocus=false){
-    setHideDays(days);
-    
-    // is-visibleを削除し、アニメーション後に is-hidden を付与
-    invite.classList.remove('is-visible');
-    // 300msのCSSアニメーション時間に合わせて遅延
-    setTimeout(() => {
-      invite.classList.add('is-hidden');
-    }, 300); 
-
-    dock.classList.remove('is-hidden');
-    document.removeEventListener('keydown', trapFocus);
-    disableInert(); // 背景のinertを解除
-    stopCollisionWatch();
-    if(restoreFocus) { (lastFocus||dock)?.focus?.(); }
-    setLive('しおぽんを閉じました。');
-  }
-
-  // クリック・ボタン動作
-  invite.querySelector('.shiopon__close')?.addEventListener('click', ()=> hideInvite(HIDE_DAYS_DEFAULT, true));
-  dock.addEventListener('click', showInvite);
-  invite.querySelector('.shiopon__cta')?.addEventListener('click', ()=>{
-    hideInvite(HIDE_DAYS_DEFAULT, true);
-    dock.classList.add('is-hidden'); // CTA後はしばらくドックも非表示
-  });
-  laterBtn.addEventListener('click', ()=> hideInvite(HIDE_DAYS_DEFAULT, true));
-  neverBtn.addEventListener('click', ()=> hideInvite(HIDE_DAYS_LONG, true));
-
-  // ===== 出現ロジック（到達観測＋フォールバック群） =====
-  if (canShow()){
-    let alreadyShown = false;
-
-    // A) IntersectionObserverでセクション到達（自然）
-    const targetIds = ['trinity','writings','join'];
-    const targets = targetIds.map(id => document.getElementById(id)).filter(Boolean);
-    let timerId = null; // C)で使うタイマーをここで定義
-
-    const io = ('IntersectionObserver' in window)
-      ? new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting && !alreadyShown){
-              alreadyShown = true;
-              setTimeout(showInvite, 350); // そっと出現 (350ms遅延)
-              io.disconnect();
-              window.removeEventListener('scroll', onScrollOnce);
-              clearTimeout(timerId);
-            }
-          });
-        }, { rootMargin: '0px 0px -45% 0px', threshold: 0.01 }) // 画面の45%が隠れたら発火
-      : null;
-    targets.forEach(sec => io && io.observe(sec));
-
-    // B) フォールバック：スクロール量（25vh/200pxの大きい方）
-    const thresholdPx = Math.max(200, Math.floor(window.innerHeight * 0.25));
-    function onScrollOnce(){
-      if (alreadyShown) return;
-      if (window.scrollY > thresholdPx){
-        alreadyShown = true;
-        setTimeout(showInvite, 350);
-        window.removeEventListener('scroll', onScrollOnce);
-        io && io.disconnect();
-        clearTimeout(timerId);
-      }
-    }
-    window.addEventListener('scroll', onScrollOnce, { passive:true });
-
-    // C) ページ滞在フォールバック（15秒）
-    timerId = setTimeout(() => {
-      if (!alreadyShown){
-        alreadyShown = true;
-        showInvite();
-        window.removeEventListener('scroll', onScrollOnce);
-        io && io.disconnect();
-      }
-    }, 15000); // 15秒後に発火
-  } else {
-    // 非表示期間中の場合、ドックを表示
-    dock.classList.remove('is-hidden');
-  }
-
-  // ===== 衝突回避（CTA/重要要素と重なりそうなときに自動で少し上へ避ける） =====
-  const avoidSelector = [
-    '[data-shiopon="exclude"] .cta-row', // セクション内の主要CTA
-    '[data-avoid="shiopon"]', // カスタムで避けたい要素
-    'footer .sns', // フッター内のソーシャルリンク
-  ].join(',');
-
-  let colRaf = null;
-  function rect(el){ return el.getBoundingClientRect(); }
-  function overlap(a,b){
-    return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
-  }
-
-  function nudgePosition(){
-    // 非表示中は処理しない
-    if (invite.classList.contains('is-hidden')) return;
-
-    // 基準位置にリセット（CSSの right/bottom/safe-area-inset を利用）
-    invite.style.right = `calc(16px + env(safe-area-inset-right, 0px))`;
-    invite.style.bottom = `calc(16px + env(safe-area-inset-bottom, 0px))`;
-
-    const avoidNodes = document.querySelectorAll(avoidSelector);
-    if (!avoidNodes.length) return;
-
-    const invRect = rect(invite);
-    let maxNudge = 0;
-    avoidNodes.forEach(n=>{
-      const r = rect(n);
-      // 要素が画面外（上側）にスクロールアウトしていなければチェック
-      if (r.bottom > 0 && overlap(invRect, r)){
-        // 重なっていたら、その分だけ上に避ける（12pxのバッファ込み）
-        const needed = Math.ceil((invRect.bottom - r.top) + 12);
-        if (needed > maxNudge) maxNudge = needed;
-      }
-    });
-
-    if (maxNudge > 0){
-      // CSS変数のbottom計算を上書きして、避ける分 (maxNudge) を加算
-      invite.style.bottom = `calc(${16 + maxNudge}px + env(safe-area-inset-bottom, 0px))`;
-    }
-    colRaf = requestAnimationFrame(nudgePosition); // 次のフレームでも実行
-  }
-
-  function onScrollResize(){
-    // スクロール・リサイズ時は、次のフレームで位置調整を実行
-    if (colRaf) cancelAnimationFrame(colRaf);
-    colRaf = requestAnimationFrame(nudgePosition);
-  }
-
-  function startCollisionWatch(){
-    window.addEventListener('scroll', onScrollResize, { passive:true });
-    window.addEventListener('resize', onScrollResize, { passive:true });
-    nudgePosition(); // 初回実行
-  }
-  function stopCollisionWatch(){
-    window.removeEventListener('scroll', onScrollResize);
-    window.removeEventListener('resize', onScrollResize);
-    if (colRaf) cancelAnimationFrame(colRaf);
-  }
 })();
 </script>
 
@@ -1105,6 +878,215 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       hintShown = true;
     }
   }, { once: true });
+})();
+</script>
+
+<script>
+/* ===== Shiopon Perfect JS (置き換え) ===== */
+(() => {
+  const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
+  const KEY_HIDE_UNTIL='shiopon.hideUntil';
+  const HIDE_DAYS_DEFAULT=3, HIDE_DAYS_LONG=30;
+
+  const invite=document.getElementById(INVITE_ID);
+  const dock=document.getElementById(DOCK_ID);
+  const live=document.getElementById('a11y-live');
+  if(!invite||!dock) return;
+
+  // アクセシビリティ: フォーカストラップ & inert管理
+  let lastFocus=null, inertedSiblings=[];
+  const closeBtn = invite.querySelector('.shiopon__close');
+  const ctaBtn   = invite.querySelector('.shiopon__cta');
+  const neverBtn = document.createElement('button');
+  const laterBtn = document.createElement('button');
+
+  // 追加オプション（30日表示しない / 後で）
+  const opts = document.createElement('div');
+  opts.className = 'shiopon__opts';
+  neverBtn.textContent = '30日間表示しない';
+  laterBtn.textContent = 'また後で';
+  opts.appendChild(neverBtn); opts.appendChild(laterBtn);
+  invite.querySelector('.shiopon__bubble').appendChild(opts);
+
+  function setLive(msg){
+    if (!live) return;
+    live.textContent = '';
+    setTimeout(()=>{ live.textContent = msg; }, 0);
+  }
+
+  function siblings(el){
+    const arr=[]; let n=el.parentNode.firstElementChild;
+    for (; n; n=n.nextElementSibling) if (n!==el) arr.push(n);
+    return arr;
+  }
+
+  function enableInert(root){
+    inertedSiblings = siblings(root);
+    inertedSiblings.forEach(n=>{
+      if ('inert' in n){ n.inert = true; }
+      n.setAttribute('aria-hidden','true');
+    });
+  }
+  function disableInert(){
+    inertedSiblings.forEach(n=>{
+      if ('inert' in n){ n.inert = false; }
+      n.removeAttribute('aria-hidden');
+    });
+    inertedSiblings = [];
+  }
+
+  function trapFocus(e){
+    if(invite.classList.contains('is-hidden')) return;
+    const f = invite.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])');
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.key === 'Tab'){
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }else if(e.key === 'Escape'){ hideInvite(HIDE_DAYS_DEFAULT, true); }
+  }
+
+  function canShow(){ return Date.now() > Number(localStorage.getItem(KEY_HIDE_UNTIL) || 0); }
+  function setHideDays(days){
+    const until=Date.now()+days*24*60*60*1000;
+    localStorage.setItem(KEY_HIDE_UNTIL, String(until));
+  }
+
+  function showInvite(){
+    lastFocus = document.activeElement;
+    invite.classList.remove('is-hidden');
+    invite.classList.add('is-visible');
+    dock.classList.add('is-hidden');
+    enableInert(invite);
+    (ctaBtn||closeBtn)?.focus();
+    document.addEventListener('keydown', trapFocus);
+    setLive('しおぽんが開きました。LINEで星の言葉を受け取れます。');
+    startCollisionWatch();
+  }
+  function hideInvite(days=HIDE_DAYS_DEFAULT, restoreFocus=false){
+    setHideDays(days);
+    invite.classList.remove('is-visible');
+    invite.classList.add('is-hidden');
+    dock.classList.remove('is-hidden');
+    document.removeEventListener('keydown', trapFocus);
+    disableInert();
+    stopCollisionWatch();
+    if(restoreFocus) { (lastFocus||dock)?.focus?.(); }
+    setLive('しおぽんを閉じました。');
+  }
+
+  // クリック・ボタン動作
+  invite.querySelector('.shiopon__close')?.addEventListener('click', ()=> hideInvite(HIDE_DAYS_DEFAULT, true));
+  dock.addEventListener('click', showInvite);
+  invite.querySelector('.shiopon__cta')?.addEventListener('click', ()=>{
+    hideInvite(HIDE_DAYS_DEFAULT, true);
+    dock.classList.add('is-hidden'); // CTA後はしばらくドックも非表示
+  });
+  laterBtn.addEventListener('click', ()=> hideInvite(HIDE_DAYS_DEFAULT, true));
+  neverBtn.addEventListener('click', ()=> hideInvite(HIDE_DAYS_LONG, true));
+
+  // ===== 出現ロジック（到達観測＋フォールバック群） =====
+  if (canShow()){
+    let alreadyShown = false;
+
+    // A) セクション到達（自然）
+    const targetIds = ['trinity','writings','join'];
+    const targets = targetIds.map(id => document.getElementById(id)).filter(Boolean);
+    const io = ('IntersectionObserver' in window)
+      ? new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting && !alreadyShown){
+              alreadyShown = true;
+              setTimeout(showInvite, 350);
+              io.disconnect();
+              window.removeEventListener('scroll', onScrollOnce);
+              clearTimeout(timerId);
+            }
+          });
+        }, { rootMargin: '0px 0px -45% 0px', threshold: 0.01 })
+      : null;
+    targets.forEach(sec => io && io.observe(sec));
+
+    // B) スクロール量（25vh/200pxの大きい方）
+    const thresholdPx = Math.max(200, Math.floor(window.innerHeight * 0.25));
+    function onScrollOnce(){
+      if (alreadyShown) return;
+      if (window.scrollY > thresholdPx){
+        alreadyShown = true;
+        setTimeout(showInvite, 350);
+        window.removeEventListener('scroll', onScrollOnce);
+        io && io.disconnect();
+        clearTimeout(timerId);
+      }
+    }
+    window.addEventListener('scroll', onScrollOnce, { passive:true });
+
+    // C) ページ滞在フォールバック（15秒）
+    const timerId = setTimeout(() => {
+      if (!alreadyShown){
+        alreadyShown = true;
+        showInvite();
+        window.removeEventListener('scroll', onScrollOnce);
+        io && io.disconnect();
+      }
+    }, 15000);
+  } else {
+    dock.classList.remove('is-hidden');
+  }
+
+  // ===== 衝突回避（CTA/重要要素と重なりそうなときに自動で少し上へ避ける） =====
+  const avoidSelector = [
+    '[data-shiopon="exclude"] .cta-row',
+    '[data-avoid="shiopon"]',
+    'footer .sns',
+  ].join(',');
+
+  let colRaf = null;
+  function rect(el){ return el.getBoundingClientRect(); }
+  function overlap(a,b){
+    return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+  }
+
+  function nudgePosition(){
+    if (invite.classList.contains('is-hidden')) return;
+    // 基準：右下
+    invite.style.right = `calc(16px + env(safe-area-inset-right, 0px))`;
+    invite.style.bottom = `calc(16px + env(safe-area-inset-bottom, 0px))`;
+
+    const avoidNodes = document.querySelectorAll(avoidSelector);
+    if (!avoidNodes.length) return;
+
+    const invRect = rect(invite);
+    let maxNudge = 0;
+    avoidNodes.forEach(n=>{
+      const r = rect(n);
+      if (overlap(invRect, r)){
+        // 重なっていたら、その分だけ上に避ける（12pxバッファ込み）
+        const needed = Math.ceil((invRect.bottom - r.top) + 12);
+        if (needed > maxNudge) maxNudge = needed;
+      }
+    });
+
+    if (maxNudge > 0){
+      invite.style.bottom = `calc(${16 + maxNudge}px + env(safe-area-inset-bottom, 0px))`;
+    }
+  }
+
+  function onScrollResize(){
+    if (colRaf) cancelAnimationFrame(colRaf);
+    colRaf = requestAnimationFrame(nudgePosition);
+  }
+
+  function startCollisionWatch(){
+    window.addEventListener('scroll', onScrollResize, { passive:true });
+    window.addEventListener('resize', onScrollResize, { passive:true });
+    nudgePosition();
+  }
+  function stopCollisionWatch(){
+    window.removeEventListener('scroll', onScrollResize);
+    window.removeEventListener('resize', onScrollResize);
+    if (colRaf) cancelAnimationFrame(colRaf);
+  }
 })();
 </script>
 </body>
