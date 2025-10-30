@@ -21,16 +21,16 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TaroBure">
 
-<!-- Fonts: @import をやめて <link> 最適化 -->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- Icons（任意：存在すれば活用） -->
+<!-- Icons（任意） -->
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-<!-- LCP改善（任意：存在する場合） -->
+<!-- LCP改善（任意） -->
 <link rel="preload" as="image" href="/assets/hero-poster.jpg">
 
 <style>
@@ -39,12 +39,12 @@
   --a:#7e66ff; --b:#ffd76f; --r:14px;
   --glow:0 0 25px rgba(255,215,111,.28);
   --bg:#ffffff;
-  color-scheme: light; /* UA配色の最適化 */
+  color-scheme: light;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;font-family:"Noto Sans JP",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;color:var(--ink);background:var(--bg);scroll-behavior:smooth;}
 a{text-decoration:none;color:var(--a)}
-img{height:auto} /* CLSの安全策 */
+img{height:auto}
 .wrap{width:min(94vw,1120px);margin-inline:auto}
 
 /* ===== Header ===== */
@@ -59,8 +59,13 @@ header .wrap{
   justify-content:center;
   padding:10px 0;
 }
+/* ① 絵文字(ロゴ)の後にタイトルを中央揃え：行内横並び＋中央配置 */
 .brand{
-  display:block;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
   text-align:center;
   font-weight:700;
   color:var(--ink);
@@ -70,13 +75,22 @@ header .wrap{
   width:34px;height:34px;border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
   box-shadow:0 0 14px rgba(174,138,255,.4);
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
+  display:inline-block;
+  vertical-align:middle;
 }
-.brand__text1 { font-size: 1.1em; font-weight: 700; line-height: 1.2; }
-.brand__text2 { font-size: 1em; font-weight: 700; line-height: 1.2; }
-.nav { display: flex; gap: 15px; font-size: 0.9em; }
+/* ① 2行を1行表示：テキストを連結表示（“—”を間に） */
+.brand__text1, .brand__text2{display:inline}
+.brand__text1{font-size:1.05em;line-height:1.2}
+.brand__text1::after{content:" — ";}
+.brand__text2{font-size:1.02em;line-height:1.2}
+
+/* ② ナビ中央揃え */
+.nav {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9em;
+  justify-content: center; /* 中央揃え */
+}
 .nav a{padding:6px 10px;color:var(--ink);border-radius:10px}
 .nav a:hover{background:rgba(255,215,111,.12)}
 
@@ -96,9 +110,7 @@ header .wrap{
     radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%);
   mix-blend-mode: normal; opacity: 1;
 }
-@media (prefers-reduced-motion: reduce){
-  .hero__media{display:none}
-}
+@media (prefers-reduced-motion: reduce){ .hero__media{display:none} }
 .hero::before{
   content:"";position:absolute;inset:0;z-index:0;
   background:radial-gradient(circle at 50% 30%,rgba(255,215,111,.15),transparent 70%);
@@ -107,7 +119,7 @@ header .wrap{
 @keyframes shine{to{background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%);}}
 .hero > .wrap{position:relative;z-index:1}
 
-/* h1視認性 */
+/* ③ 文言の句点（。）除去 → テキスト側で対応 */
 .hero h1{
   font-size: 38px;
   margin: 0 0 16px;
@@ -152,7 +164,10 @@ header .wrap{
 
 /* ===== Sections ===== */
 section{padding:60px 0;border-top:1px solid rgba(0,0,0,.05);}
-h2{text-align:center;font-size:24px;margin-bottom:26px;}
+h2{text-align:center;font-size:24px;margin-bottom:10px;}
+/* ⑤ 副題（小さく＆中央） */
+.h2-sub{ text-align:center; font-size:14px; color:var(--muted); margin:6px 0 26px; letter-spacing:.06em; }
+
 .tri-grid{display:grid;gap:18px;width:min(92vw,860px);margin:0 auto;}
 @media(min-width:720px){.tri-grid{grid-template-columns:repeat(3,1fr);}}
 .tri{background:#fff;border:1px solid rgba(0,0,0,.08);
@@ -253,7 +268,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   <div class="wrap">
     <div class="brand"> 
       <div class="brand__logo" aria-hidden="true"></div>
-      <div class="brand__text1">Re:verse Shion —</div>
+      <div class="brand__text1">Re:verse Shion</div>
       <div class="brand__text2">詩韻思想 × TAROT BREAKER</div>
     </div>
     <nav class="nav" aria-label="主要ナビゲーション">
@@ -276,7 +291,8 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     </div>
 
     <div class="wrap">
-      <h1>言葉は祈りの構文。物語は、その実演</h1>
+      <!-- ③ 「。」を削除 -->
+      <h1>言葉は祈りの構文 物語は、その実演</h1>
       <p>詩韻思想®（Shion Philosophy）で“響き”を学び、TAROT BREAKERで“響き”を体験する<br><strong>「言葉が魂を救う、その瞬間へ」</strong></p>
       <div class="cta-row">
         <a class="btn btn--primary" href="https://lin.ee/LYnlU0f" target="_blank" rel="noopener">🌠 星の言葉を受け取る（無料）</a>
@@ -295,10 +311,13 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 
   <section id="trinity" aria-labelledby="sec-trinity">
     <div class="wrap">
-      <h2 id="sec-trinity">詩韻思想 ― 三位一体（詩・韻・祈）</h2>
+      <!-- ④ 見出しを「詩韻思想」、⑤ 副題(Toriniti)を小さく中央 -->
+      <h2 id="sec-trinity">詩韻思想</h2>
+      <div class="h2-sub">Toriniti（詩・韻・祈）</div>
 
       <figure class="trinity__figure" aria-hidden="true">
-        <video class="trinity__video" autoplay muted loop playsinline preload="metadata"
+        <!-- ⑥ 音が聞こえるように：mutedを外し、controlsを付与（自動再生は環境により無音のみ可） -->
+        <video class="trinity__video" autoplay controls playsinline preload="metadata"
                poster="/assets/trinity/banner.png" width="1200" height="771">
           <source src="/assets/trinity/loop.webm" type="video/webm">
           <source src="/assets/trinity/loop.mp4"  type="video/mp4">
@@ -357,7 +376,7 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   </div>
 </footer>
 
-<!-- しおぽん：アクセシビリティ微強化（aria-modal/フォーカストラップ） -->
+<!-- しおぽん：アクセシビリティ微強化（据置） -->
 <div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
   <button class="shiopon__close" aria-label="閉じる">×</button>
   <div class="shiopon__avatar" aria-hidden="true">
@@ -433,7 +452,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   const dock=document.getElementById(DOCK_ID);
   if(!invite||!dock) return;
 
-  // 追加：フォーカス管理とESCクローズ
   let lastFocus=null;
   const closeBtn = invite.querySelector('.shiopon__close');
   const ctaBtn   = invite.querySelector('.shiopon__cta');
