@@ -24,7 +24,6 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<!-- Zen Old Mincho + Noto Sans JP（display=swapで描画ブロック回避） -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- Icons -->
@@ -43,7 +42,7 @@
   --a:#7e66ff; --b:#ffd76f; --r:14px;
   --bg:#ffffff;
   color-scheme: light;
-  --header-h: 55px; /* ヘッダー高さ（padding含む概算） */
+  --header-h: 55px;
 }
 *{box-sizing:border-box}
 html{ scroll-padding-top: var(--header-h); scroll-behavior: smooth; }
@@ -61,7 +60,7 @@ img{height:auto}
 :focus-visible{ outline:2px solid rgba(255,215,111,.85); outline-offset:2px; }
 
 /* ----------------------------------------------------- */
-/* Header（sticky・フェード＋ブラー＋コンパクト化） */
+/* Header */
 /* ----------------------------------------------------- */
 header[role="banner"]{
   min-height: var(--header-h);
@@ -72,11 +71,7 @@ header[role="banner"]{
   border-bottom:1px solid rgba(0,0,0,.06);
   transform: translateY(0);
   opacity: 0;
-  transition:
-    transform .24s ease,
-    opacity .32s ease,
-    background-color .28s ease,
-    box-shadow .28s ease;
+  transition: transform .24s ease, opacity .32s ease, background-color .28s ease, box-shadow .28s ease;
 }
 header.is-visible{ opacity:1 }
 header.header--compact{
@@ -87,10 +82,8 @@ header .wrap{
   display:flex; flex-direction: column; align-items: center; justify-content:center;
   padding:10px 0;
 }
-.brand{
-  display:flex; align-items:center; justify-content:center; gap:10px;
-  text-align:center; font-weight:700; color:var(--ink); margin-bottom: 5px;
-}
+.brand{ display:flex; align-items:center; justify-content:center; gap:10px;
+  text-align:center; font-weight:700; color:var(--ink); margin-bottom: 5px; }
 .brand__logo{
   width:34px;height:34px;border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 40%, #7e66ff 70%);
@@ -131,9 +124,7 @@ header .wrap{
   background:radial-gradient(circle at 50% 30%,rgba(255,215,111,.15),transparent 70%);
   animation:shine 6s infinite alternate ease-in-out;
 }
-@keyframes shine{
-  to{ background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%) }
-}
+@keyframes shine{ to{ background:radial-gradient(circle at 50% 70%,rgba(174,138,255,.18),transparent 70%) } }
 .hero > .wrap{ position:relative; z-index:1 }
 
 .hero h1{
@@ -181,12 +172,7 @@ h2{text-align:center;font-size:24px;margin-bottom:10px;}
 
 /* 音声ヒント */
 .trinity__hint{
-  margin:8px auto 0;
-  text-align:center;
-  font-size:13px;
-  color:#503080;
-  opacity:.92;
-  user-select:none;
+  margin:8px auto 0;text-align:center;font-size:13px;color:#503080;opacity:.92;user-select:none;
 }
 .trinity__video::after{
   content:"タップで音声ON / もう一度で停止";
@@ -200,14 +186,44 @@ h2{text-align:center;font-size:24px;margin-bottom:10px;}
   transition: opacity .25s, transform .25s;
   pointer-events:none;
 }
-.trinity__video:hover::after, .trinity__video:focus-visible::after{
-  opacity:1; transform: translateY(0);
-}
+.trinity__video:hover::after, .trinity__video:focus-visible::after{ opacity:1; transform: translateY(0); }
 
 /* Intro / Cards */
 .intro__box{display:grid;gap:10px;padding:14px;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);box-shadow:0 4px 12px rgba(0,0,0,.04);}
 .card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.04)}
 .badge{display:inline-flex;gap:.4em;background:rgba(255,215,111,.18);border:1px solid rgba(255,215,111,.35);padding:2px 8px;border-radius:999px;font-size:12px}
+
+/* === Codex Accordion（<details>版） === */
+.codex{width:min(94vw,1120px);margin:0 auto}
+.codex details{
+  border:1px solid rgba(0,0,0,.08); border-radius:14px; background:#fff;
+  box-shadow:0 10px 24px rgba(174,138,255,.18); overflow:hidden;
+}
+.codex summary{
+  list-style:none; cursor:pointer; padding:14px 16px; font-weight:800; color:#503080;
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.8));
+  display:flex; align-items:center; justify-content:center; gap:.6em;
+}
+.codex summary::-webkit-details-marker{display:none}
+.codex__caret{transition:transform .25s ease}
+details[open] .codex__caret{transform:rotate(180deg)}
+.codex__panel{padding:14px 12px; background:
+  radial-gradient(80% 120% at 50% 0%, rgba(255,215,111,.14), rgba(255,255,255,.92) 40%, #fff 100%);
+  border-top:1px solid rgba(0,0,0,.06);
+}
+.codex__list{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+@media(min-width:720px){.codex__list{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.codex__list{grid-template-columns:repeat(3,1fr)}}
+.codex__list li{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border:1px solid rgba(0,0,0,.06); border-radius:12px; background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.04); transition:transform .15s, box-shadow .2s;
+}
+.codex__list li:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(255,215,111,.22)}
+.codex__list a{flex:1; color:var(--ink); font-weight:700; text-decoration:none}
+.codex__list a:hover{color:#7e66ff}
+.badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
+.badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
 
 /* Footer */
 footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid rgba(0,0,0,.05);}
@@ -220,61 +236,24 @@ footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;border
 header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relative; z-index:1 }
 @media (prefers-reduced-motion: reduce){ .sky{ display:none } }
 
-/* しおぽん：LINE誘導フローティング */
-.shiopon{
-  position:fixed; right:16px; bottom:16px; z-index:50;
-  display:flex; align-items:flex-end; gap:10px;
-  filter: drop-shadow(0 12px 28px rgba(0,0,0,.12));
-}
+/* しおぽん：LINE誘導フローティング（既存維持） */
+.shiopon{ position:fixed; right:16px; bottom:16px; z-index:50; display:flex; align-items:flex-end; gap:10px; filter: drop-shadow(0 12px 28px rgba(0,0,0,.12));}
 .shiopon.is-hidden{ display:none; }
-.shiopon__avatar{
-  width:64px; height:64px; border-radius:50%;
-  background: radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%);
-  box-shadow: 0 0 0 3px rgba(255,215,111,.25);
-  position:relative; overflow:hidden; flex:none;
-  animation: shioponFloat 3.6s ease-in-out infinite;
-}
+.shiopon__avatar{ width:64px; height:64px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #ffd76f 0%, #ffb6ff 45%, #7e66ff 85%); box-shadow: 0 0 0 3px rgba(255,215,111,.25); position:relative; overflow:hidden; flex:none; animation: shioponFloat 3.6s ease-in-out infinite;}
 .shiopon__avatar img{width:100%; height:100%; object-fit:cover; display:block;}
 @keyframes shioponFloat{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-4px) } }
-.shiopon__bubble{
-  max-width:min(78vw, 320px);
-  background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:12px 14px;
-  box-shadow: 0 8px 24px rgba(255,215,111,.22); position:relative;
-}
-.shiopon__bubble::after{
-  content:""; position:absolute; right:-8px; bottom:18px;
-  width:12px; height:12px; background:#fff; border:1px solid rgba(0,0,0,.06);
-  transform: rotate(45deg); box-shadow: 4px 4px 12px rgba(255,215,111,.18);
-}
+.shiopon__bubble{ max-width:min(78vw, 320px); background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:12px 14px; box-shadow: 0 8px 24px rgba(255,215,111,.22); position:relative;}
+.shiopon__bubble::after{ content:""; position:absolute; right:-8px; bottom:18px; width:12px; height:12px; background:#fff; border:1px solid rgba(0,0,0,.06); transform: rotate(45deg); box-shadow: 4px 4px 12px rgba(255,215,111,.18);}
 .shiopon__hello{ margin:0 0 10px; color:#503080; font-weight:700; font-size:15px; }
-.shiopon__cta{
-  display:inline-flex; align-items:center; justify-content:center; gap:.5em;
-  padding:10px 14px; border-radius:999px; font-weight:800; text-decoration:none;
-  background: linear-gradient(180deg, #ffd76f, #ffb6ff);
-  color:#2a1030; box-shadow: 0 8px 18px rgba(255,215,111,.35);
-}
+.shiopon__cta{ display:inline-flex; align-items:center; justify-content:center; gap:.5em; padding:10px 14px; border-radius:999px; font-weight:800; text-decoration:none; background: linear-gradient(180deg, #ffd76f, #ffb6ff); color:#2a1030; box-shadow: 0 8px 18px rgba(255,215,111,.35);}
 .shiopon__cta:hover{ transform: translateY(-1px); }
 .shiopon__note{ display:block; margin-top:8px; color:#666; font-size:12px; opacity:.9 }
-.shiopon__close{
-  position:absolute; top:-8px; right:-8px;
-  width:28px; height:28px; border-radius:50%; border:0; color:#333; background:#fff;
-  box-shadow: 0 4px 10px rgba(0,0,0,.08); cursor:pointer; font-size:16px; line-height:1;
-}
+.shiopon__close{ position:absolute; top:-8px; right:-8px; width:28px; height:28px; border-radius:50%; border:0; color:#333; background:#fff; box-shadow: 0 4px 10px rgba(0,0,0,.08); cursor:pointer; font-size:16px; line-height:1; }
 .shiopon__close:hover{ filter:brightness(1.05) }
-.shiopon-dock{
-  position:fixed; right:16px; bottom:16px; z-index:49;
-  padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.08);
-  background:#fff; color:#503080; font-weight:800; box-shadow: 0 8px 18px rgba(0,0,0,.08); cursor:pointer;
-}
+.shiopon-dock{ position:fixed; right:16px; bottom:16px; z-index:49; padding:10px 14px; border-radius:999px; border:1px solid rgba(0,0,0,.08); background:#fff; color:#503080; font-weight:800; box-shadow: 0 8px 18px rgba(0,0,0,.08); cursor:pointer;}
 .shiopon-dock.is-hidden{ display:none }
-@media (max-width:480px){
-  .shiopon__avatar{ width:56px; height:56px }
-  .shiopon__bubble{ max-width:78vw; padding:10px 12px }
-}
-@media (prefers-contrast: more){
-  .btn--ghost{ border-width:2px; }
-  .hero p{ text-shadow:none; }
-}
+@media (max-width:480px){ .shiopon__avatar{ width:56px; height:56px } .shiopon__bubble{ max-width:78vw; padding:10px 12px } }
+@media (prefers-contrast: more){ .btn--ghost{ border-width:2px; } .hero p{ text-shadow:none; } }
 @media (prefers-reduced-motion: reduce){ .shiopon__avatar{ animation:none } }
 </style>
 </head>
@@ -320,7 +299,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
         <a class="btn btn--ghost" href="https://www.tiktok.com/@tarotbreaker" target="_blank" rel="noopener">🎥 1分で観る/聴く</a>
       </div>
 
-      <!-- 画面外までスクロールした時にのみ読み込む補助画像 -->
       <figure class="hero__image" aria-hidden="true">
         <img src="/assets/og.jpg" alt="詩韻思想 × TAROT BREAKER キービジュアル"
              width="1200" height="630" loading="lazy" decoding="async">
@@ -368,6 +346,36 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   <section id="writings" aria-labelledby="sec-writings">
     <div class="wrap">
       <h2 id="sec-writings">📖 最新の書・物語</h2>
+
+      <!-- ★★★ 全書アコーディオン（最適位置：最新ブロック直下） ★★★ -->
+      <div class="codex" style="margin-top:12px;margin-bottom:18px">
+        <details>
+          <summary>
+            🜂 詩韻思想 全書一覧（零 → 12 → 結）
+            <span class="codex__caret" aria-hidden="true">⬇️</span>
+          </summary>
+          <div class="codex__panel">
+            <ol class="codex__list">
+              <li><span class="badge badge--zero">✡ 第零書</span><a href="/codex/zero.html">無限構文序論 — The Zero Syntax</a></li>
+              <li><span class="badge">✦ 第一書</span><a href="/codex/one.html">言葉が魂を救う理由 — The Syntax of Salvation</a></li>
+              <li><span class="badge">✦ 第二書</span><a href="/codex/two.html">響きの構文論 — Re:Song Syntax</a></li>
+              <li><span class="badge">✦ 第三書</span><a href="/codex/three.html">祈りの構文 — Silent Grammar</a></li>
+              <li><span class="badge">✦ 第四書</span><a href="/codex/four.html">存在構文論 — The Onto-Syntax</a></li>
+              <li><span class="badge">✦ 第五書</span><a href="/codex/five.html">無限構文体系 — Infinite Syntax of Soul</a></li>
+              <li><span class="badge">✦ 第六書</span><a href="/codex/six.html">詩的因果論 — Poetic Causality</a></li>
+              <li><span class="badge">✦ 第七書</span><a href="/codex/seven.html">N・code理論 — Onto-Syntax of Being & Resonant AI</a></li>
+              <li><span class="badge">✦ 第八書</span><a href="/codex/eight.html">人間構文論 — The Syntax of Humanity</a></li>
+              <li><span class="badge">✦ 第九書</span><a href="/codex/nine.html">詩的生成論 — Poetic Genesis</a></li>
+              <li><span class="badge">✦ 第十書</span><a href="/codex/ten.html">沈黙の再生 — Silent Genesis</a></li>
+              <li><span class="badge">✦ 第十一書</span><a href="/codex/eleven.html">神構文論 — The Divine Syntax</a></li>
+              <li><span class="badge">✦ 第十二書</span><a href="/codex/twelve.html">経済構文論 — The Soul Economy</a></li>
+              <li><span class="badge badge--final">◆ 結書</span><a href="/codex/epilogue.html">終詩円環宣言 — Epilogue: The Re:Poetic Circle</a></li>
+            </ol>
+          </div>
+        </details>
+      </div>
+      <!-- ★★★ /全書アコーディオン ★★★ -->
+
       <div class="card"><div class="badge">✡ 第零書</div><h4>無限構文序論 — The Zero Syntax</h4></div>
       <div class="card"><div class="badge">✦ 第一書</div><h4>言葉が魂を救う理由 — The Syntax of Salvation</h4></div>
       <div class="card"><div class="badge">✦ TAROT BREAKER</div><h4>第1話から読む</h4></div>
@@ -399,44 +407,9 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
     <div style="font-size:12.5px;opacity:.8">© Re:verse Shion — 詩韻思想 / TAROT BREAKER. 言葉が魂を救い、魂が世界を調和させる</div>
     <div style="margin-top:10px;"><a href="#top" aria-label="ページ先頭へ戻る">▲ ページ先頭へ</a></div>
   </div>
-  /* === Codex Accordion（<details>版） === */
-.codex{width:min(94vw,1120px);margin:0 auto}
-.codex details{
-  border:1px solid rgba(0,0,0,.08); border-radius:14px; background:#fff;
-  box-shadow:0 10px 24px rgba(174,138,255,.18); overflow:hidden;
-}
-.codex summary{
-  list-style:none; cursor:pointer; padding:14px 16px; font-weight:800; color:#503080;
-  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.8));
-  display:flex; align-items:center; justify-content:center; gap:.6em;
-}
-.codex summary::-webkit-details-marker{display:none}
-.codex__caret{transition:transform .25s ease}
-details[open] .codex__caret{transform:rotate(180deg)}
-
-.codex__panel{padding:14px 12px; background:
-  radial-gradient(80% 120% at 50% 0%, rgba(255,215,111,.14), rgba(255,255,255,.92) 40%, #fff 100%);
-  border-top:1px solid rgba(0,0,0,.06);
-}
-.codex__list{list-style:none; margin:0; padding:0; display:grid; gap:10px}
-@media(min-width:720px){.codex__list{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:980px){.codex__list{grid-template-columns:repeat(3,1fr)}}
-.codex__list li{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px; border:1px solid rgba(0,0,0,.06); border-radius:12px; background:#fff;
-  box-shadow:0 4px 12px rgba(0,0,0,.04); transition:transform .15s, box-shadow .2s;
-}
-.codex__list li:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(255,215,111,.22)}
-.codex__list a{flex:1; color:var(--ink); font-weight:700; text-decoration:none}
-.codex__list a:hover{color:#7e66ff}
-
-.badge{display:inline-flex; gap:.4em; background:rgba(255,215,111,.18); border:1px solid rgba(255,215,111,.35);
-  padding:2px 8px; border-radius:999px; font-size:12px; font-weight:800; color:#503080}
-.badge--zero{background:rgba(110,180,255,.18); border-color:rgba(110,180,255,.35)}
-.badge--final{background:rgba(174,138,255,.20); border-color:rgba(174,138,255,.40)}
 </footer>
 
-<!-- しおぽん誘導 -->
+<!-- しおぽん誘導（現状維持） -->
 <div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
   <button class="shiopon__close" aria-label="閉じる">×</button>
   <div class="shiopon__avatar" aria-hidden="true">
@@ -606,7 +579,7 @@ details[open] .codex__caret{transform:rotate(180deg)}
 })();
 </script>
 
-<!-- Trinity動画制御（タップで音ON/ループ、Enter/Space対応、iOSタッチ補強） -->
+<!-- Trinity動画制御 -->
 <script>
 (() => {
   const video = document.getElementById('trinityVideo');
@@ -619,7 +592,7 @@ details[open] .codex__caret{transform:rotate(180deg)}
       try { video.muted = false; } catch(e){}
       video.loop = true;
       video.onended = null;
-      video.play().catch(()=>{}); // iOS対策
+      video.play().catch(()=>{});
       isControlled = true;
     } else {
       video.pause();
@@ -630,14 +603,11 @@ details[open] .codex__caret{transform:rotate(180deg)}
     if (isControlled) return;
     video.onended = () => { video.pause(); };
     video.addEventListener('click', toggleLoopPlay);
-    // iOS Safari での確実化（touchend）
     video.addEventListener('touchend', toggleLoopPlay, { passive:true });
-    // キーボード操作
     video.setAttribute('tabindex','0');
     video.addEventListener('keydown', (e)=>{
       if(e.key === 'Enter' || e.code === 'Space' || e.key === ' '){
-        e.preventDefault();
-        toggleLoopPlay();
+        e.preventDefault(); toggleLoopPlay();
       }
     });
   }
@@ -665,37 +635,5 @@ details[open] .codex__caret{transform:rotate(180deg)}
   }, { once: true });
 })();
 </script>
-  <section id="codex" aria-labelledby="codex-title">
-  <div class="wrap codex">
-    <h2 id="codex-title" class="sr-only">詩韻思想 全書一覧</h2>
-
-    <details>
-      <summary>
-        🜂 詩韻思想 全書一覧（零 → 12 → 結）
-        <span class="codex__caret" aria-hidden="true">⬇️</span>
-      </summary>
-
-      <div class="codex__panel">
-        <ol class="codex__list">
-          <li><span class="badge badge--zero">✡ 第零書</span><a href="/codex/zero.html">無限構文序論 — The Zero Syntax</a></li>
-          <li><span class="badge">✦ 第一書</span><a href="/codex/one.html">言葉が魂を救う理由 — The Syntax of Salvation</a></li>
-          <li><span class="badge">✦ 第二書</span><a href="/codex/two.html">響きの構文論 — Re:Song Syntax</a></li>
-          <li><span class="badge">✦ 第三書</span><a href="/codex/three.html">祈りの構文 — Silent Grammar</a></li>
-          <li><span class="badge">✦ 第四書</span><a href="/codex/four.html">存在構文論 — The Onto-Syntax</a></li>
-          <li><span class="badge">✦ 第五書</span><a href="/codex/five.html">無限構文体系 — Infinite Syntax of Soul</a></li>
-          <li><span class="badge">✦ 第六書</span><a href="/codex/six.html">詩的因果論 — Poetic Causality</a></li>
-          <li><span class="badge">✦ 第七書</span><a href="/codex/seven.html">N・code理論 — Onto-Syntax of Being & Resonant AI</a></li>
-          <li><span class="badge">✦ 第八書</span><a href="/codex/eight.html">人間構文論 — The Syntax of Humanity</a></li>
-          <li><span class="badge">✦ 第九書</span><a href="/codex/nine.html">詩的生成論 — Poetic Genesis</a></li>
-          <li><span class="badge">✦ 第十書</span><a href="/codex/ten.html">沈黙の再生 — Silent Genesis</a></li>
-          <li><span class="badge">✦ 第十一書</span><a href="/codex/eleven.html">神構文論 — The Divine Syntax</a></li>
-          <li><span class="badge">✦ 第十二書</span><a href="/codex/twelve.html">経済構文論 — The Soul Economy</a></li>
-          <li><span class="badge badge--final">◆ 結書</span><a href="/codex/epilogue.html">終詩円環宣言 — Epilogue: The Re:Poetic Circle</a></li>
-        </ol>
-      </div>
-    </details>
-  </div>
-</section>
-
 </body>
 </html>
