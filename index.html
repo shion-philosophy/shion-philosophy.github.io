@@ -7,7 +7,6 @@
 <meta name="theme-color" content="#ffffff" />
 <meta name="description" content="Re:verse Shion ― 詩韻思想（言葉が魂を救う世界）と物語TAROT BREAKERの統合ハブ。読む・聴く・学ぶ・受け取るをひとつに。言葉は祈りの構文。物語はその実演">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="Re:verse Shion — 詩韻思想 × TAROT BREAKER">
@@ -17,20 +16,16 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TaroBure">
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- Icons（任意） -->
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-<!-- LCP改善（任意） -->
 <link rel="preload" as="image" href="/assets/hero-poster.jpg">
 
 <style>
@@ -288,9 +283,8 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
       <div class="h2-sub">Toriniti（詩・韻・祈）</div>
 
       <figure class="trinity__figure" aria-hidden="true">
-        <!-- 無音自動→タップで音ON＋ループ継続 -->
         <video class="trinity__video"
-               autoplay muted loop playsinline preload="metadata"
+               autoplay playsinline preload="metadata"
                poster="/assets/trinity/banner.png" width="1200" height="771"
                aria-label="トリニティ映像（タップで音声オン）"
                onclick="this.muted=false; this.loop=true; this.play();">
@@ -351,7 +345,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
   </div>
 </footer>
 
-<!-- しおぽん：アクセシビリティ据置 -->
 <div id="shiopon-invite" class="shiopon is-hidden" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="shiopon-title">
   <button class="shiopon__close" aria-label="閉じる">×</button>
   <div class="shiopon__avatar" aria-hidden="true">
@@ -365,7 +358,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 </div>
 <button id="shiopon-dock" class="shiopon-dock is-hidden" aria-label="しおぽんを開く">🦊 しおぽん</button>
 
-<!-- 星砂パーティクル -->
 <script>
 (() => {
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -416,7 +408,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 })();
 </script>
 
-<!-- しおぽん 招待UI -->
 <script>
 (() => {
   const INVITE_ID='shiopon-invite', DOCK_ID='shiopon-dock';
@@ -475,7 +466,6 @@ header, .hero, section, footer, #shiopon-invite, #shiopon-dock{ position:relativ
 })();
 </script>
 
-<!-- ★ ヘッダー浮遊演出（フェード＋コンパクト＋スマート追従＋現在地ハイライト） -->
 <script>
 (() => {
   const headerEl = document.querySelector('header');
